@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Design System · V 0.1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand:#2778E2; --brand-hv:#1D62C0; --brand-lt:#A9CAF5; --brand-bg:#EEF4FD;
+      --bg:#ffffff; --surface:#F8FAFC;
+      --text:#1C2333; --text-dim:#8A94A6; --text-sub:#C0CAD4;
+      --border:#E8ECF0; --card-bg:#ffffff;
+      --r-xl:16px; --r-md:8px;
+    }
+    .dark {
+      --bg:#0D1117; --surface:#161B22; --card-bg:#161B22;
+      --text:#E6EDF3; --text-dim:#7D8590; --text-sub:#3D4450;
+      --border:#30363D; --brand-bg:#0D2444; --brand-lt:#2D5FA0;
+    }
+
+    html, body { height: 100%; }
+    body {
+      font-family: 'Poppins', system-ui, sans-serif;
+      background: var(--bg); color: var(--text);
+      transition: background 0.2s, color 0.2s;
+      display: flex; flex-direction: column;
+    }
+
+    /* ── Nav ─────────────────────────────────────────── */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 60px; flex-shrink: 0;
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--text);
+    }
+    .logo-icon {
+      width: 30px; height: 30px; border-radius: 50%;
+      border: 1.5px solid var(--text);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: border-color 0.2s;
+    }
+    .logo-icon svg { width: 14px; height: 14px; stroke: var(--text); fill: none; stroke-width: 2; stroke-linecap: round; transition: stroke 0.2s; }
+    .logo-wordmark { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; transition: color 0.2s; }
+
+    .nav-links { display: flex; align-items: center; gap: 40px; }
+    .nav-links a {
+      font-size: 14px; font-weight: 400; color: var(--text-dim);
+      text-decoration: none; transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .theme-btn {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1.5px solid var(--border); background: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-dim); transition: background 0.15s, border-color 0.15s;
+    }
+    .theme-btn:hover { background: var(--surface); border-color: var(--text-dim); }
+    .theme-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; }
+
+    /* ── Hero ────────────────────────────────────────── */
+    .hero {
+      flex: 1;
+      display: flex; flex-direction: column;
+    }
+
+    .hero-body {
+      flex: 1; position: relative; overflow: hidden;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 0 48px;
+    }
+
+    /* ── Ambient colour orbs ─────────────────────────── */
+    .orb {
+      position: absolute; border-radius: 50%;
+      pointer-events: none; will-change: transform;
+    }
+    .orb-1 {
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(39,120,226,0.18) 0%, transparent 70%);
+      top: -160px; left: -120px;
+      animation: drift1 14s ease-in-out infinite;
+    }
+    .orb-2 {
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(16,185,129,0.13) 0%, transparent 70%);
+      bottom: -100px; right: 8%;
+      animation: drift2 18s ease-in-out infinite;
+    }
+    .orb-3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(249,115,22,0.10) 0%, transparent 70%);
+      top: 30%; right: 22%;
+      animation: drift3 22s ease-in-out infinite;
+    }
+    .dark .orb-1 { background: radial-gradient(circle, rgba(39,120,226,0.22) 0%, transparent 70%); }
+    .dark .orb-2 { background: radial-gradient(circle, rgba(16,185,129,0.16) 0%, transparent 70%); }
+    .dark .orb-3 { background: radial-gradient(circle, rgba(249,115,22,0.12) 0%, transparent 70%); }
+
+    @keyframes drift1 {
+      0%,100% { transform: translate(0,0); }
+      30%      { transform: translate(48px, 36px); }
+      65%      { transform: translate(-24px, 60px); }
+    }
+    @keyframes drift2 {
+      0%,100% { transform: translate(0,0); }
+      40%      { transform: translate(-56px, -32px); }
+      75%      { transform: translate(28px, -52px); }
+    }
+    @keyframes drift3 {
+      0%,100% { transform: translate(0,0); }
+      25%      { transform: translate(40px, -30px); }
+      60%      { transform: translate(-30px, 40px); }
+    }
+
+    /* ── Entrance animations ─────────────────────────── */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-version {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-dim); margin-bottom: 10px;
+      animation: fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.05s both;
+    }
+
+    .hero-title {
+      font-size: clamp(100px, 18vw, 220px);
+      font-weight: 700; line-height: 0.88;
+      letter-spacing: -0.04em; color: var(--text);
+      transition: color 0.2s;
+      animation: fade-up 0.9s cubic-bezier(0.22,1,0.36,1) 0.15s both;
+    }
+
+    .hero-sub {
+      font-size: clamp(28px, 5vw, 68px);
+      font-weight: 300; letter-spacing: -0.02em;
+      color: var(--text-sub); line-height: 1.2;
+      margin-top: 14px; transition: color 0.2s;
+      animation: fade-up 0.9s cubic-bezier(0.22,1,0.36,1) 0.28s both;
+    }
+
+    /* ── Cards ───────────────────────────────────────── */
+    .hero-cards {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px; padding: 32px 48px 48px;
+    }
+
+    .hcard {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: var(--r-xl); padding: 24px 28px 28px;
+      cursor: pointer; text-align: left;
+      text-decoration: none; display: block;
+      transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s, background 0.2s;
+    }
+    .hcard:hover {
+      border-color: var(--brand-lt);
+      box-shadow: 0 8px 32px rgba(39,120,226,0.08);
+      transform: translateY(-2px);
+    }
+    .dark .hcard:hover { border-color: var(--brand); box-shadow: 0 8px 32px rgba(39,120,226,0.15); }
+
+    .hcard-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .hcard-num {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .hcard-arrow {
+      width: 18px; height: 18px; flex-shrink: 0;
+      stroke: var(--text-sub); fill: none;
+      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+      transition: stroke 0.15s, transform 0.2s;
+    }
+    .hcard:hover .hcard-arrow { stroke: var(--brand); transform: translate(3px, -3px); }
+
+    .hcard-name {
+      font-size: 22px; font-weight: 600;
+      letter-spacing: -0.02em; color: var(--text);
+      margin-bottom: 8px; transition: color 0.2s;
+    }
+    .hcard-desc {
+      font-size: 13px; color: var(--text-dim);
+      line-height: 1.65;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ─────────────────────────────────────────── -->
+  <nav>
+    <a class="logo" href="#">
+      <div class="logo-icon">
+        <svg viewBox="0 0 14 14"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg>
+      </div>
+      <span class="logo-wordmark">ai design system</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="foundations.html">Foundations</a>
+      <a href="components.html">Components</a>
+      <a href="#">Patterns</a>
+    </div>
+
+    <button class="theme-btn" id="theme-btn" aria-label="Toggle dark mode">
+      <svg id="icon-sun" viewBox="0 0 24 24" style="display:none;">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/>
+        <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/>
+        <line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/>
+      </svg>
+      <svg id="icon-moon" viewBox="0 0 24 24">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- ── Hero ─────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-body">
+      <!-- ambient colour orbs -->
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+
+      <p class="hero-version">V&nbsp;0.1</p>
+      <h1 class="hero-title">ai</h1>
+      <p class="hero-sub">design system</p>
+    </div>
+
+    <div class="hero-cards">
+      <a class="hcard" href="foundations.html">
+        <div class="hcard-header">
+          <span class="hcard-num">01 / Foundations</span>
+          <svg class="hcard-arrow" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </div>
+        <p class="hcard-name">Foundations</p>
+        <p class="hcard-desc">The essential building blocks including colour tokens, typography, spacing, and radius principles.</p>
+      </a>
+
+      <a class="hcard" href="components.html">
+        <div class="hcard-header">
+          <span class="hcard-num">02 / Components</span>
+          <svg class="hcard-arrow" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </div>
+        <p class="hcard-name">Components</p>
+        <p class="hcard-desc">Reusable interface elements like buttons, inputs, and modals built directly from Figma.</p>
+      </a>
+
+      <a class="hcard" href="#">
+        <div class="hcard-header">
+          <span class="hcard-num">03 / Patterns</span>
+          <svg class="hcard-arrow" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </div>
+        <p class="hcard-name">Patterns</p>
+        <p class="hcard-desc">Best practices and common user flows for solving recurring design problems consistently.</p>
+      </a>
+    </div>
+  </section>
+
+  <script>
+    const btn = document.getElementById('theme-btn');
+    const sun = document.getElementById('icon-sun');
+    const moon = document.getElementById('icon-moon');
+    let dark = localStorage.getItem('ds-dark') === '1';
+
+    function apply() {
+      document.documentElement.classList.toggle('dark', dark);
+      sun.style.display  = dark ? 'block' : 'none';
+      moon.style.display = dark ? 'none'  : 'block';
+    }
+    apply();
+    btn.addEventListener('click', () => { dark = !dark; localStorage.setItem('ds-dark', dark ? '1' : '0'); apply(); });
+  </script>
+</body>
+</html>
