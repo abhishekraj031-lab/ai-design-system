@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patterns · AI Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand:#2778E2; --brand-hv:#1D62C0; --brand-lt:#A9CAF5; --brand-bg:#EEF4FD;
+      --bg:#ffffff; --surface:#F8FAFC;
+      --text:#1C2333; --text-dim:#8A94A6; --text-sub:#C0CAD4;
+      --border:#E8ECF0; --card-bg:#ffffff;
+      --r-xl:16px; --r-md:8px;
+    }
+    .dark {
+      --bg:#0D1117; --surface:#161B22; --card-bg:#161B22;
+      --text:#E6EDF3; --text-dim:#7D8590; --text-sub:#3D4450;
+      --border:#30363D; --brand-bg:#0D2444; --brand-lt:#2D5FA0;
+    }
+
+    html, body { height: 100%; }
+    body {
+      font-family: 'Poppins', system-ui, sans-serif;
+      background: var(--bg); color: var(--text);
+      transition: background 0.2s, color 0.2s;
+      display: flex; flex-direction: column;
+    }
+
+    /* ── Nav ─────────────────────────────────────────── */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 60px; flex-shrink: 0;
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--text);
+    }
+    .logo-icon {
+      width: 30px; height: 30px; border-radius: 50%;
+      border: 1.5px solid var(--text);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: border-color 0.2s;
+    }
+    .logo-icon svg { width: 14px; height: 14px; stroke: var(--text); fill: none; stroke-width: 2; stroke-linecap: round; transition: stroke 0.2s; }
+    .logo-wordmark { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; transition: color 0.2s; }
+
+    .nav-links { display: flex; align-items: center; gap: 40px; }
+    .nav-links a {
+      font-size: 14px; font-weight: 400; color: var(--text-dim);
+      text-decoration: none; transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--text); font-weight: 500; }
+
+    .theme-btn {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1.5px solid var(--border); background: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-dim); transition: background 0.15s, border-color 0.15s;
+    }
+    .theme-btn:hover { background: var(--surface); border-color: var(--text-dim); }
+    .theme-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; }
+
+    /* ── Main ─────────────────────────────────────────── */
+    main {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      padding: 48px;
+    }
+
+    .cs-wrap {
+      text-align: center;
+      max-width: 520px;
+    }
+
+    /* Animated badge */
+    .cs-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--brand-bg); color: var(--brand);
+      font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; padding: 6px 14px;
+      border-radius: 100px;
+      border: 1px solid var(--brand-lt);
+      margin-bottom: 32px;
+    }
+    .cs-badge-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--brand);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.75); }
+    }
+
+    /* Illustration */
+    .cs-illustration {
+      margin: 0 auto 36px;
+      width: 140px; height: 140px;
+      position: relative;
+    }
+    .cs-ring {
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      border: 1.5px dashed var(--border);
+      animation: spin 18s linear infinite;
+    }
+    .cs-ring-inner {
+      position: absolute; inset: 20px;
+      border-radius: 50%;
+      border: 1.5px dashed var(--brand-lt);
+      animation: spin 10s linear infinite reverse;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .cs-icon-wrap {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cs-icon-box {
+      width: 64px; height: 64px;
+      background: var(--brand-bg);
+      border: 1.5px solid var(--brand-lt);
+      border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cs-icon-box svg {
+      width: 28px; height: 28px;
+      stroke: var(--brand); fill: none;
+      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    /* Orbit dots */
+    .cs-orbit-dot {
+      position: absolute;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--brand);
+    }
+    .cs-orbit-dot:nth-child(1) { top: 4px; left: 50%; transform: translateX(-50%); }
+    .cs-orbit-dot:nth-child(2) { bottom: 4px; left: 50%; transform: translateX(-50%); background: var(--brand-lt); }
+    .cs-orbit-dot:nth-child(3) { left: 4px; top: 50%; transform: translateY(-50%); background: var(--text-sub); }
+
+    /* Text */
+    .cs-title {
+      font-size: 32px; font-weight: 700;
+      letter-spacing: -0.03em; line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .cs-title span { color: var(--brand); }
+
+    .cs-desc {
+      font-size: 15px; color: var(--text-dim);
+      line-height: 1.7; margin-bottom: 40px;
+    }
+
+    /* Pattern cards preview */
+    .cs-cards {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-bottom: 40px;
+    }
+    .cs-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 20px 16px;
+      text-align: left;
+      position: relative; overflow: hidden;
+    }
+    .cs-card::after {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 60px; height: 60px;
+      background: radial-gradient(circle at top right, var(--brand-bg), transparent 70%);
+    }
+    .cs-card-icon {
+      width: 32px; height: 32px;
+      background: var(--brand-bg);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 12px;
+    }
+    .cs-card-icon svg {
+      width: 16px; height: 16px;
+      stroke: var(--brand); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .cs-card-title {
+      font-size: 12px; font-weight: 600;
+      color: var(--text); margin-bottom: 4px;
+    }
+    .cs-card-sub {
+      font-size: 11px; color: var(--text-dim);
+    }
+    .cs-card-soon {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      color: var(--brand); background: var(--brand-bg);
+      padding: 2px 8px; border-radius: 100px;
+    }
+
+    /* Notify row */
+    .cs-notify {
+      display: flex; gap: 10px; max-width: 380px; margin: 0 auto;
+    }
+    .cs-input {
+      flex: 1; padding: 10px 16px;
+      border: 1.5px solid var(--border); border-radius: var(--r-md);
+      background: var(--surface); color: var(--text);
+      font-family: 'Poppins', sans-serif; font-size: 13px;
+      outline: none; transition: border-color 0.15s;
+    }
+    .cs-input::placeholder { color: var(--text-dim); }
+    .cs-input:focus { border-color: var(--brand); }
+    .cs-btn {
+      padding: 10px 20px;
+      background: var(--brand); color: #fff;
+      border: none; border-radius: var(--r-md);
+      font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: background 0.15s; white-space: nowrap;
+    }
+    .cs-btn:hover { background: var(--brand-hv); }
+    .cs-success {
+      display: none; margin-top: 12px;
+      font-size: 13px; color: #16a34a; font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ─────────────────────────────────────────── -->
+  <nav>
+    <a class="logo" href="index.html">
+      <div class="logo-icon">
+        <svg viewBox="0 0 14 14"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg>
+      </div>
+      <span class="logo-wordmark">ai design system</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="foundations.html">Foundations</a>
+      <a href="components.html">Components</a>
+      <a href="patterns.html" class="active">Patterns</a>
+    </div>
+
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode">
+      <svg id="icon-sun" viewBox="0 0 24 24" style="display:none;">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/>
+        <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/>
+        <line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/>
+      </svg>
+      <svg id="icon-moon" viewBox="0 0 24 24">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- ── Coming Soon ─────────────────────────────────── -->
+  <main>
+    <div class="cs-wrap">
+
+      <div class="cs-badge">
+        <div class="cs-badge-dot"></div>
+        In Progress
+      </div>
+
+      <!-- Animated illustration -->
+      <div class="cs-illustration">
+        <div class="cs-ring"></div>
+        <div class="cs-ring-inner"></div>
+        <div class="cs-orbit-dot"></div>
+        <div class="cs-orbit-dot"></div>
+        <div class="cs-orbit-dot"></div>
+        <div class="cs-icon-wrap">
+          <div class="cs-icon-box">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="3" width="7" height="7" rx="1"/>
+              <rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/>
+              <rect x="14" y="14" width="7" height="7" rx="1"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <h1 class="cs-title">Patterns are <span>coming soon</span></h1>
+      <p class="cs-desc">
+        We're crafting reusable UI patterns — forms, navigation flows, data tables,
+        and more — built on top of the component library. Check back soon.
+      </p>
+
+      <!-- Pattern preview cards -->
+      <div class="cs-cards">
+        <div class="cs-card">
+          <div class="cs-card-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="4" rx="1"/><rect x="3" y="10" width="11" height="3" rx="1"/><rect x="3" y="16" width="14" height="3" rx="1"/></svg>
+          </div>
+          <div class="cs-card-title">Forms</div>
+          <div class="cs-card-sub">Input groups, validation states</div>
+          <span class="cs-card-soon">Soon</span>
+        </div>
+        <div class="cs-card">
+          <div class="cs-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div class="cs-card-title">Navigation</div>
+          <div class="cs-card-sub">Sidebars, breadcrumbs, tabs</div>
+          <span class="cs-card-soon">Soon</span>
+        </div>
+        <div class="cs-card">
+          <div class="cs-card-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="9" x2="9" y2="21"/></svg>
+          </div>
+          <div class="cs-card-title">Data Tables</div>
+          <div class="cs-card-sub">Sortable, filterable lists</div>
+          <span class="cs-card-soon">Soon</span>
+        </div>
+        <div class="cs-card">
+          <div class="cs-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          </div>
+          <div class="cs-card-title">Empty States</div>
+          <div class="cs-card-sub">Zero-data screens, onboarding</div>
+          <span class="cs-card-soon">Soon</span>
+        </div>
+        <div class="cs-card">
+          <div class="cs-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 0h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.53a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div class="cs-card-title">Modals</div>
+          <div class="cs-card-sub">Dialogs, drawers, sheets</div>
+          <span class="cs-card-soon">Soon</span>
+        </div>
+        <div class="cs-card">
+          <div class="cs-card-icon">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="cs-card-title">Dashboards</div>
+          <div class="cs-card-sub">Metrics, charts, KPI cards</div>
+          <span class="cs-card-soon">Soon</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    // Theme toggle
+    const btn = document.getElementById('themeBtn');
+    const sun = document.getElementById('icon-sun');
+    const moon = document.getElementById('icon-moon');
+    let dark = localStorage.getItem('ds-dark') === '1';
+    const applyTheme = () => {
+      document.documentElement.classList.toggle('dark', dark);
+      sun.style.display  = dark ? 'block' : 'none';
+      moon.style.display = dark ? 'none'  : 'block';
+    };
+    applyTheme();
+    btn.addEventListener('click', () => {
+      dark = !dark;
+      localStorage.setItem('ds-dark', dark ? '1' : '0');
+      applyTheme();
+    });
+  </script>
+</body>
+</html>
