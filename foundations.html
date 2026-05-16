@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foundations · AI Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand-bg:#EEF4FD; --brand-subtle:#D4E5FA; --brand-lt:#A9CAF5;
+      --brand:#2778E2;    --brand-hv:#1D62C0;     --brand-ac:#154D9E;
+      --brand-text:#06225B;
+      --success-bg:#ECFDF5; --success:#10B981; --success-hv:#059669; --success-text:#064E3B;
+      --warning-bg:#FFF7ED; --warning:#F97316; --warning-hv:#EA580C; --warning-text:#7C2D12;
+      --error-bg:#FFF5F5;   --error:#EF4444;   --error-hv:#DC2626;   --error-ac:#B91C1C; --error-text:#7F1D1D;
+      --caution-bg:#FFFBEB; --caution:#F59E0B; --caution-text:#78350F;
+      --info-bg:#EBF8FE;    --info:#1CA3FD;    --info-text:#01436F;
+      --purple-bg:#FAF5FF;  --purple:#8B5CF6;  --purple-text:#4C1D95;
+      --magenta-bg:#FDF4FF; --magenta:#D946EF; --magenta-text:#701A75;
+      --teal-bg:#F0FDFA;    --teal:#14B8A6;    --teal-text:#134E4A;
+      --neutral-bg:#F8FAFC; --neutral-lt:#E2E8F0; --neutral:#64748B; --neutral-hv:#475569; --neutral-text:#0F172A;
+
+      --bg:#ffffff; --surface:#F1F5F9; --canvas:#F8FAFC; --text:#0F172A;
+      --muted:#64748B; --hint:#94A3B8; --border:#E2E8F0;
+      --r-sm:6px; --r-md:8px; --r-lg:12px; --r-xl:16px;
+    }
+
+    .dark {
+      --bg:#0F172A; --surface:#1E293B; --canvas:#0A1120; --text:#F1F5F9;
+      --muted:#94A3B8; --hint:#475569; --border:#334155;
+      --brand-bg:#0D2444; --brand-text:#A9CAF5;
+      --success-bg:#022C22; --success-text:#6EE7B7;
+      --warning-bg:#431407; --warning-text:#FED7AA;
+      --error-bg:#2D0A0A;   --error-text:#FECACA;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Poppins', system-ui, sans-serif;
+      background: var(--canvas); color: var(--text);
+      transition: background 0.2s, color 0.2s;
+      min-height: 100vh;
+    }
+
+    /* ── Nav ─────────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 32px; height: 56px;
+      background: var(--bg); border-bottom: 1px solid var(--border);
+    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-dot {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--brand); display: flex; align-items: center; justify-content: center;
+      font-size: 9px; font-weight: 700; color: #fff; letter-spacing: -0.02em;
+    }
+    .logo-name { font-size: 14px; font-weight: 600; color: var(--text); }
+    .logo-dim  { font-size: 14px; font-weight: 400; color: var(--muted); }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a {
+      font-size: 13px; color: var(--muted); text-decoration: none;
+      transition: color 0.15s; font-weight: 500;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--brand); }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .theme-btn {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1px solid var(--border); background: none; cursor: pointer;
+      font-size: 15px; display: flex; align-items: center; justify-content: center;
+      color: var(--muted); transition: background 0.15s;
+    }
+    .theme-btn:hover { background: var(--surface); }
+
+    /* ── Layout ─────────────────────────────────────── */
+    .page-shell {
+      display: flex;
+      min-height: calc(100vh - 56px);
+    }
+
+    /* ── Sidebar ─────────────────────────────────────── */
+    .sidebar {
+      width: 220px;
+      flex-shrink: 0;
+      padding: 28px 16px;
+      position: sticky;
+      top: 56px;
+      height: calc(100vh - 56px);
+      overflow-y: auto;
+    }
+
+    .sidebar-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 8px;
+      overflow: hidden;
+    }
+
+    .sidebar-section-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--hint);
+      padding: 8px 12px 6px;
+    }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: var(--r-md);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      transition: background 0.12s, color 0.12s;
+      cursor: pointer;
+    }
+    .sidebar-link:hover {
+      background: var(--canvas);
+      color: var(--text);
+    }
+    .sidebar-link.active {
+      background: var(--brand-bg);
+      color: var(--brand);
+      font-weight: 600;
+    }
+    .dark .sidebar-link.active {
+      background: rgba(39,120,226,0.15);
+      color: var(--brand-lt);
+    }
+    .sidebar-icon {
+      width: 18px; height: 18px; flex-shrink: 0; opacity: 0.7;
+    }
+    .sidebar-divider {
+      height: 1px; background: var(--border); margin: 6px 0;
+    }
+
+    /* ── Main content ────────────────────────────────── */
+    .main {
+      flex: 1;
+      padding: 40px 48px 80px;
+      min-width: 0;
+    }
+
+    .page-header {
+      margin-bottom: 40px;
+    }
+
+    .page-title {
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .page-subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.6;
+    }
+
+    /* ── Card Grid ───────────────────────────────────── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 1100px) { .card-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 800px)  { .card-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .ds-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      text-decoration: none;
+      display: block;
+      transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+      cursor: pointer;
+    }
+    .ds-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      border-color: var(--brand-lt);
+    }
+    .dark .ds-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+
+    .card-preview {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-label {
+      padding: 14px 16px 16px;
+      border-top: 1px solid var(--border);
+    }
+    .card-label-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .card-label-meta {
+      font-size: 11px;
+      color: var(--hint);
+      margin-top: 2px;
+    }
+
+    /* ── Preview: Colours ────────────────────────────── */
+    .preview-colours {
+      background: linear-gradient(135deg, #EEF4FD 0%, #D4E5FA 50%, #A9CAF5 100%);
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;
+      padding: 20px;
+    }
+    .colour-swatch {
+      width: 32px; height: 32px; border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+
+    /* ── Preview: Icons ──────────────────────────────── */
+    .preview-icons {
+      background: var(--surface);
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 12px;
+      padding: 20px;
+    }
+    .icon-search-bar {
+      width: 100%; max-width: 140px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 6px 10px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .icon-search-bar span { font-size: 10px; color: var(--hint); }
+    .icon-grid-preview { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+    .icon-shape {
+      width: 20px; height: 20px;
+      background: var(--hint);
+      border-radius: 4px;
+      opacity: 0.5;
+    }
+    .icon-shape.circle { border-radius: 50%; }
+    .icon-shape.line { height: 3px; border-radius: 2px; }
+    .icon-shape.rect { height: 12px; }
+
+    /* ── Preview: Illustrations ──────────────────────── */
+    .preview-illustrations {
+      background: #F0F4F8;
+      width: 100%; height: 100%;
+      display: flex; align-items: flex-end; justify-content: center;
+      overflow: hidden;
+    }
+    .dark .preview-illustrations { background: #1A2535; }
+
+    /* ── Preview: Radius ─────────────────────────────── */
+    .preview-radius {
+      background: var(--surface);
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      padding: 20px;
+    }
+    .radius-shape {
+      background: var(--bg);
+      border: 2px solid var(--neutral-lt);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .r-none   { width: 36px; height: 36px; border-radius: 0px; }
+    .r-sm     { width: 36px; height: 36px; border-radius: 4px; }
+    .r-md     { width: 36px; height: 36px; border-radius: 8px; }
+    .r-lg     { width: 36px; height: 36px; border-radius: 12px; }
+    .r-full   { width: 36px; height: 36px; border-radius: 9999px; }
+
+    /* ── Preview: Spacing ────────────────────────────── */
+    .preview-spacing {
+      background: var(--surface);
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 8px;
+      padding: 20px;
+    }
+    .spacing-row {
+      display: flex; align-items: center; gap: 8px; width: 100%; max-width: 160px;
+    }
+    .spacing-label { font-size: 9px; color: var(--hint); font-family: monospace; width: 24px; flex-shrink: 0; }
+    .spacing-bar-wrap { flex: 1; height: 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 3px; overflow: hidden; }
+    .spacing-bar { height: 100%; background: var(--brand-subtle); border-radius: 3px; }
+
+    /* ── Preview: Typography ─────────────────────────── */
+    .preview-typography {
+      background: var(--surface);
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 4px;
+      padding: 16px;
+    }
+    .typo-aa {
+      font-size: 64px; font-weight: 700; color: var(--text);
+      letter-spacing: -0.04em; line-height: 1;
+      opacity: 0.12;
+    }
+    .typo-samples {
+      display: flex; flex-direction: column; gap: 4px; width: 100%;
+    }
+    .typo-sample {
+      height: 8px; background: var(--border); border-radius: 4px;
+    }
+
+    /* ── Sub-section inside a page ───────────────────── */
+    .section-block {
+      margin-top: 60px;
+    }
+    .section-block-title {
+      font-size: 22px; font-weight: 700; letter-spacing: -0.02em;
+      color: var(--text); margin-bottom: 4px;
+    }
+    .section-block-desc {
+      font-size: 13px; color: var(--muted); margin-bottom: 24px;
+    }
+
+    /* ── Colour detail page content ──────────────────── */
+    .colour-rows { display: flex; flex-direction: column; gap: 24px; }
+    .colour-role-label {
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.14em; color: var(--hint); margin-bottom: 10px;
+    }
+    .colour-strip { display: flex; gap: 4px; }
+    .colour-chip {
+      flex: 1; height: 48px; border-radius: 6px;
+      display: flex; align-items: flex-end; padding: 6px 8px;
+      font-size: 9px; font-weight: 600; letter-spacing: 0.04em;
+      font-family: monospace;
+      position: relative; overflow: hidden;
+    }
+
+    /* ── Active page indicator in sidebar ────────────── */
+    .page-indicator {
+      display: inline-block;
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--brand);
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════════════════════
+       CARD ANIMATIONS
+       ══════════════════════════════════════════════════ */
+
+    /* Typography: Aa float */
+    @keyframes aa-float {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-10px); }
+    }
+    .typo-aa-anim {
+      display: inline-block;
+      animation: aa-float 4s ease-in-out infinite;
+    }
+
+    /* Typography: shimmer sweep on text lines */
+    @keyframes shimmer-sweep {
+      0%   { background-position: -300% center; }
+      100% { background-position: 300% center; }
+    }
+    .shimmer-line {
+      border-radius: 4px;
+      background: linear-gradient(90deg,
+        rgba(148,163,184,0.15) 20%,
+        rgba(148,163,184,0.45) 50%,
+        rgba(148,163,184,0.15) 80%);
+      background-size: 300% 100%;
+      animation: shimmer-sweep 2.8s ease-in-out infinite;
+    }
+    .shimmer-line:nth-child(2) { animation-delay: 0.25s; }
+    .shimmer-line:nth-child(3) { animation-delay: 0.5s; }
+
+    /* Card lift on hover — stronger for animated cards */
+    .ds-card { cursor: pointer; }
+
+    /* ══════════════════════════════════════════════════
+       COLOUR PAGE — tabs, ramps, semantic cards
+       ══════════════════════════════════════════════════ */
+
+    .colour-tabs {
+      display: flex; gap: 4px; margin-bottom: 36px;
+    }
+    .colour-tab {
+      padding: 8px 20px; border-radius: var(--r-md);
+      border: 1px solid var(--border); background: none;
+      cursor: pointer; font-size: 13px; font-weight: 500;
+      color: var(--muted); font-family: 'Poppins', sans-serif;
+      transition: background 0.12s, color 0.12s, border-color 0.12s;
+    }
+    .colour-tab:hover { background: var(--surface); color: var(--text); }
+    .colour-tab.active {
+      background: var(--brand-bg); color: var(--brand);
+      border-color: var(--brand-lt); font-weight: 600;
+    }
+    .dark .colour-tab.active {
+      background: rgba(39,120,226,0.15); color: var(--brand-lt);
+      border-color: rgba(39,120,226,0.4);
+    }
+
+    /* ── Ramp v2 (card-style, matches reference) ── */
+    .ramp-section { margin-bottom: 40px; }
+    .ramp-section-title {
+      font-size: 18px; font-weight: 700; letter-spacing: -0.01em;
+      color: var(--text); margin-bottom: 14px;
+    }
+    .ramp-row-v2 { display: flex; gap: 8px; }
+    .ramp-chip-wrap {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 7px; flex: 1; min-width: 0;
+    }
+    .ramp-chip-v2 {
+      width: 100%; height: 88px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.18s, box-shadow 0.18s; cursor: default;
+      position: relative;
+    }
+    .ramp-chip-v2:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+      z-index: 1;
+    }
+    /* .ramp-default-v2 — outline removed per design feedback */
+    .chip-label-v2 {
+      font-size: 10px; font-weight: 600; font-family: monospace;
+      letter-spacing: 0.01em; line-height: 1;
+    }
+    .chip-hex-v2 {
+      font-size: 10px; color: var(--muted); font-family: monospace;
+      text-align: center; white-space: nowrap;
+    }
+
+    /* Legacy ramp (kept for fallback) */
+    .ramp-row { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+    .ramp-name { font-size: 12px; font-weight: 600; color: var(--text); width: 56px; flex-shrink: 0; }
+    .ramp-swatches { display: flex; gap: 3px; flex: 1; }
+    .ramp-chip { flex: 1; height: 68px; border-radius: 7px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; transition: transform 0.15s; cursor: default; }
+    .ramp-chip:hover { transform: scaleY(1.1); z-index: 1; }
+    .ramp-default { outline: 2.5px solid rgba(0,0,0,0.35); outline-offset: 2px; }
+    .chip-step { font-size: 9px; font-weight: 700; font-family: monospace; line-height: 1; }
+    .chip-hex  { font-size: 8px; font-family: monospace; opacity: 0.85; line-height: 1; }
+
+    /* Semantic section — wrapping grid of fixed-width chips */
+    .sem-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(82px, 1fr));
+      gap: 8px;
+    }
+    .sem-wrap {
+      display: flex; flex-direction: column; align-items: center; gap: 7px;
+    }
+    .sem-chip {
+      width: 100%; height: 88px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.18s, box-shadow 0.18s; cursor: default;
+    }
+    .sem-chip:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.14); }
+    .sem-label {
+      font-size: 8.5px; font-weight: 600; font-family: monospace;
+      letter-spacing: 0.01em; line-height: 1.4; text-align: center; padding: 0 4px;
+    }
+    .sem-hex {
+      font-size: 10px; color: var(--muted); font-family: monospace;
+      text-align: center; white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ─────────────────────────────────────────── -->
+  <nav>
+    <a href="foundations.html" class="logo">
+      <div class="logo-dot">AI</div>
+      <span class="logo-name">Design System</span>
+      <span class="logo-dim">&nbsp;·&nbsp;V 0.1</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="foundations.html" class="active">Foundations</a>
+      <a href="components.html">Components</a>
+      <a href="#">Patterns</a>
+    </div>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeBtn" title="Toggle dark mode">☀️</button>
+    </div>
+  </nav>
+
+  <!-- ── Two-column shell ──────────────────────────── -->
+  <div class="page-shell">
+
+    <!-- ── Left Sidebar ──────────────────────────────── -->
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-section-label">Foundations</div>
+
+        <a class="sidebar-link active" href="foundations.html">
+          <svg class="sidebar-icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="6" height="6" rx="1.5" fill="currentColor" opacity=".8"/>
+            <rect x="10" y="2" width="6" height="6" rx="1.5" fill="currentColor" opacity=".4"/>
+            <rect x="2" y="10" width="6" height="6" rx="1.5" fill="currentColor" opacity=".4"/>
+            <rect x="10" y="10" width="6" height="6" rx="1.5" fill="currentColor" opacity=".2"/>
+          </svg>
+          Foundations
+          <span class="page-indicator"></span>
+        </a>
+
+        <div class="sidebar-divider"></div>
+
+        <a class="sidebar-link" href="foundations.html#colours" onclick="switchPage('colours')">
+          <svg class="sidebar-icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="6" cy="6" r="4" fill="#2778E2"/>
+            <circle cx="12" cy="6" r="4" fill="#10B981"/>
+            <circle cx="9" cy="12" r="4" fill="#F97316"/>
+          </svg>
+          Colours
+        </a>
+
+        <a class="sidebar-link" href="foundations.html#icons" onclick="switchPage('icons')">
+          <svg class="sidebar-icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="14" height="14" rx="3" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            <path d="M5 9h8M9 5v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          Icons
+        </a>
+
+        <a class="sidebar-link" href="foundations.html#illustrations" onclick="switchPage('illustrations')">
+          <svg class="sidebar-icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="14" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M2 12l4-4 3 3 3-3 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="6" cy="6.5" r="1.5" fill="currentColor" opacity=".6"/>
+          </svg>
+          Illustrations
+        </a>
+
+        <a class="sidebar-link" href="foundations.html#radius" onclick="switchPage('radius')">
+          <svg class="sidebar-icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="12" height="12" rx="4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            <path d="M3 8V6a3 3 0 0 1 3-3h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          Radius
+        </a>
+
+        <a class="sidebar-link" href="foundations.html#spacing" onclick="switchPage('spacing')">
+          <svg class="sidebar-icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 9h14M6 5v8M12 5v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          Spacing
+        </a>
+
+        <a class="sidebar-link" href="foundations.html#typography" onclick="switchPage('typography')">
+          <svg class="sidebar-icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 4h12M9 4v10M6 14h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Typography
+        </a>
+      </div>
+    </aside>
+
+    <!-- ── Main ──────────────────────────────────────── -->
+    <main class="main" id="main-content">
+
+      <!-- Overview page (default) -->
+      <div id="page-overview">
+        <div class="page-header">
+          <h1 class="page-title">foundations</h1>
+          <p class="page-subtitle">The building blocks of the AI Design System — visual language, tokens, and primitives that inform every component.</p>
+        </div>
+
+        <div class="card-grid">
+
+          <!-- ── Colours card ──────────────────────────── -->
+          <a class="ds-card" href="#" onclick="switchPage('colours'); return false;">
+            <div class="card-preview" style="background: linear-gradient(135deg,#EEF4FD 0%,#D4E5FA 100%); overflow:hidden;">
+              <svg width="200" height="130" viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;">
+                <!-- Circle 1 — blue, floats up -->
+                <circle cx="68" cy="58" r="40" fill="#2778E2" opacity=".88">
+                  <animateTransform attributeName="transform" type="translate"
+                    values="0,0; 0,-7; 0,0" dur="3.2s" repeatCount="indefinite" calcMode="spline"
+                    keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+                </circle>
+                <!-- Circle 2 — green, floats mid -->
+                <circle cx="100" cy="58" r="40" fill="#10B981" opacity=".70">
+                  <animateTransform attributeName="transform" type="translate"
+                    values="0,0; 0,-7; 0,0" dur="3.2s" begin="0.6s" repeatCount="indefinite" calcMode="spline"
+                    keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+                </circle>
+                <!-- Circle 3 — orange, floats later -->
+                <circle cx="132" cy="58" r="40" fill="#F97316" opacity=".58">
+                  <animateTransform attributeName="transform" type="translate"
+                    values="0,0; 0,-7; 0,0" dur="3.2s" begin="1.2s" repeatCount="indefinite" calcMode="spline"
+                    keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+                </circle>
+
+                <!-- Toggle OFF (left) — knob slides right→left loop -->
+                <rect x="36" y="96" width="52" height="19" rx="9.5" fill="white" opacity=".92"/>
+                <circle cx="48" cy="105.5" r="6.5" fill="#CBD5E1">
+                  <animate attributeName="cx" values="48;74;74;48" keyTimes="0;0.35;0.65;1"
+                    dur="3.5s" repeatCount="indefinite" calcMode="spline"
+                    keySplines="0.4 0 0.6 1; 0 0 1 1; 0.4 0 0.6 1"/>
+                </circle>
+
+                <!-- Toggle ON (right) — knob slides left→right loop (offset) -->
+                <rect x="112" y="96" width="52" height="19" rx="9.5" fill="#2778E2" opacity=".9">
+                  <animate attributeName="fill" values="#2778E2;#CBD5E1;#CBD5E1;#2778E2"
+                    keyTimes="0;0.35;0.65;1" dur="3.5s" repeatCount="indefinite"/>
+                </rect>
+                <circle cx="152" cy="105.5" r="6.5" fill="white">
+                  <animate attributeName="cx" values="152;126;126;152" keyTimes="0;0.35;0.65;1"
+                    dur="3.5s" repeatCount="indefinite" calcMode="spline"
+                    keySplines="0.4 0 0.6 1; 0 0 1 1; 0.4 0 0.6 1"/>
+                </circle>
+              </svg>
+            </div>
+            <div class="card-label">
+              <div class="card-label-text">Colours</div>
+              <div class="card-label-meta">10 roles · 8 states each</div>
+            </div>
+          </a>
+
+          <!-- ── Icons card ────────────────────────────── -->
+          <a class="ds-card" href="#" onclick="switchPage('icons'); return false;">
+            <div class="card-preview" style="background: #F4F6F8;">
+              <svg width="180" height="120" viewBox="0 0 180 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Search bar -->
+                <rect x="26" y="14" width="128" height="26" rx="8" fill="white" stroke="#E2E8F0" stroke-width="1.5"/>
+                <circle cx="42" cy="27" r="5" stroke="#94A3B8" stroke-width="1.5"/>
+                <path d="M46 31l3.5 3.5" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"/>
+                <!-- Typing text bar -->
+                <rect x="55" y="23" width="0" height="8" rx="4" fill="#E2E8F0">
+                  <animate attributeName="width" values="0;18;30;48;30;18;0" keyTimes="0;0.2;0.4;0.6;0.7;0.85;1"
+                    dur="4s" repeatCount="indefinite" calcMode="spline"
+                    keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/>
+                </rect>
+                <!-- Blinking cursor -->
+                <rect x="55" y="22" width="1.5" height="10" rx="1" fill="#64748B">
+                  <animateTransform attributeName="transform" type="translate"
+                    values="0,0;18,0;30,0;48,0;30,0;18,0;0,0" keyTimes="0;0.2;0.4;0.6;0.7;0.85;1"
+                    dur="4s" repeatCount="indefinite"/>
+                  <animate attributeName="opacity" values="1;0;1;0;1;0;1" dur="0.9s" repeatCount="indefinite"/>
+                </rect>
+
+                <!-- Icon grid row 1 — staggered fade in -->
+                <rect x="26" y="52" width="22" height="22" rx="5" fill="white" stroke="#E2E8F0" stroke-width="1">
+                  <animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="0s" repeatCount="indefinite"/>
+                </rect>
+                <rect x="54" y="52" width="22" height="22" rx="5" fill="white" stroke="#E2E8F0" stroke-width="1">
+                  <animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="0.3s" repeatCount="indefinite"/>
+                </rect>
+                <rect x="82" y="52" width="22" height="22" rx="5" fill="white" stroke="#E2E8F0" stroke-width="1">
+                  <animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="0.6s" repeatCount="indefinite"/>
+                </rect>
+                <rect x="110" y="52" width="22" height="22" rx="5" fill="white" stroke="#E2E8F0" stroke-width="1">
+                  <animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="0.9s" repeatCount="indefinite"/>
+                </rect>
+                <rect x="138" y="52" width="16" height="22" rx="5" fill="white" stroke="#E2E8F0" stroke-width="1">
+                  <animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="1.2s" repeatCount="indefinite"/>
+                </rect>
+                <!-- Icon shapes inside cells -->
+                <circle cx="37" cy="63" r="5" fill="#94A3B8" opacity=".55"/>
+                <rect x="59" y="59" width="12" height="12" rx="2" fill="#94A3B8" opacity=".4"/>
+                <path d="M87 58l5 10 5-10" stroke="#94A3B8" stroke-width="1.5" fill="none" opacity=".45"/>
+                <path d="M115 59v12M110 65h10" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" opacity=".45"/>
+                <path d="M142 60l7 9M149 60l-7 9" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" opacity=".4"/>
+
+                <!-- Grid row 2 -->
+                <rect x="26" y="82" width="22" height="16" rx="4" fill="white" stroke="#E2E8F0" stroke-width="1" opacity=".6"/>
+                <rect x="54" y="82" width="22" height="16" rx="4" fill="white" stroke="#E2E8F0" stroke-width="1" opacity=".4"/>
+                <rect x="82" y="82" width="22" height="16" rx="4" fill="white" stroke="#E2E8F0" stroke-width="1" opacity=".2"/>
+              </svg>
+            </div>
+            <div class="card-label">
+              <div class="card-label-text">Icons</div>
+              <div class="card-label-meta">Lucide · 24×24 grid</div>
+            </div>
+          </a>
+
+          <!-- ── Illustrations card ─────────────────────── -->
+          <a class="ds-card" href="#" onclick="switchPage('illustrations'); return false;">
+            <div class="card-preview" style="padding:0; overflow:hidden;">
+              <svg width="100%" height="100%" viewBox="0 0 360 240" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Sky gradient -->
+                <defs>
+                  <linearGradient id="sky-grad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#C8D8E8"/>
+                    <stop offset="100%" stop-color="#E0EAF4"/>
+                  </linearGradient>
+                </defs>
+                <rect width="360" height="240" fill="url(#sky-grad)"/>
+
+                <!-- Cloud 1 — drifts right -->
+                <g opacity=".75">
+                  <animateTransform attributeName="transform" type="translate"
+                    values="-40,0; 380,0" dur="18s" repeatCount="indefinite"/>
+                  <ellipse cx="60" cy="48" rx="30" ry="14" fill="white"/>
+                  <ellipse cx="85" cy="44" rx="22" ry="12" fill="white"/>
+                  <ellipse cx="42" cy="52" rx="18" ry="10" fill="white"/>
+                </g>
+                <!-- Cloud 2 — drifts right, offset timing -->
+                <g opacity=".55">
+                  <animateTransform attributeName="transform" type="translate"
+                    values="100,0; 520,0" dur="24s" begin="-8s" repeatCount="indefinite"/>
+                  <ellipse cx="80" cy="30" rx="22" ry="10" fill="white"/>
+                  <ellipse cx="98" cy="27" rx="16" ry="9" fill="white"/>
+                  <ellipse cx="65" cy="34" rx="14" ry="8" fill="white"/>
+                </g>
+
+                <!-- Sun circle — pulses -->
+                <circle cx="295" cy="56" r="24" fill="#FFD066" opacity=".85">
+                  <animate attributeName="r" values="24;27;24" dur="3s" repeatCount="indefinite" calcMode="spline"
+                    keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+                  <animate attributeName="opacity" values="0.85;1;0.85" dur="3s" repeatCount="indefinite"/>
+                </circle>
+                <!-- Sun glow -->
+                <circle cx="295" cy="56" r="34" fill="#FFD066" opacity=".15">
+                  <animate attributeName="r" values="34;42;34" dur="3s" repeatCount="indefinite" calcMode="spline"
+                    keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+                  <animate attributeName="opacity" values="0.15;0.28;0.15" dur="3s" repeatCount="indefinite"/>
+                </circle>
+                <!-- Sun rays — spin -->
+                <g>
+                  <animateTransform attributeName="transform" type="rotate"
+                    from="0 295 56" to="360 295 56" dur="20s" repeatCount="indefinite"/>
+                  <line x1="295" y1="24" x2="295" y2="17" stroke="#FFD066" stroke-width="2.5" stroke-linecap="round" opacity=".7"/>
+                  <line x1="295" y1="88" x2="295" y2="95" stroke="#FFD066" stroke-width="2.5" stroke-linecap="round" opacity=".7"/>
+                  <line x1="263" y1="56" x2="256" y2="56" stroke="#FFD066" stroke-width="2.5" stroke-linecap="round" opacity=".7"/>
+                  <line x1="327" y1="56" x2="334" y2="56" stroke="#FFD066" stroke-width="2.5" stroke-linecap="round" opacity=".7"/>
+                  <line x1="272" y1="33" x2="267" y2="28" stroke="#FFD066" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+                  <line x1="318" y1="79" x2="323" y2="84" stroke="#FFD066" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+                  <line x1="272" y1="79" x2="267" y2="84" stroke="#FFD066" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+                  <line x1="318" y1="33" x2="323" y2="28" stroke="#FFD066" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+                </g>
+
+                <!-- Mountains back (subtle parallax hint — gentle sway) -->
+                <g>
+                  <animateTransform attributeName="transform" type="translate"
+                    values="0,0; -4,0; 0,0" dur="8s" repeatCount="indefinite" calcMode="spline"
+                    keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+                  <path d="M0 180 L80 80 L160 180Z" fill="#B0C4D8"/>
+                  <path d="M120 180 L220 60 L320 180Z" fill="#98B0C8"/>
+                </g>
+                <!-- Mountains front -->
+                <g>
+                  <animateTransform attributeName="transform" type="translate"
+                    values="0,0; 6,0; 0,0" dur="8s" repeatCount="indefinite" calcMode="spline"
+                    keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+                  <path d="M0 220 L100 130 L180 180 L260 110 L360 200 L360 240 L0 240Z" fill="#7A9AB5"/>
+                  <!-- Tree -->
+                  <rect x="40" y="186" width="8" height="24" rx="4" fill="#4A7A95"/>
+                  <path d="M44 180 L56 198 L32 198Z" fill="#3D6A82"/>
+                  <path d="M44 168 L58 188 L30 188Z" fill="#4A7A95"/>
+                </g>
+              </svg>
+            </div>
+            <div class="card-label">
+              <div class="card-label-text">Illustrations</div>
+              <div class="card-label-meta">Scene · Character · Abstract</div>
+            </div>
+          </a>
+
+          <!-- ── Radius card ────────────────────────────── -->
+          <a class="ds-card" href="#" onclick="switchPage('radius'); return false;">
+            <div class="card-preview" style="background: #F4F6F8;">
+              <svg width="180" height="120" viewBox="0 0 180 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Shape row — each shape has a subtle scale pulse on cycle -->
+                <rect x="12" y="36" width="30" height="30" rx="0" fill="white" stroke="#CBD5E1" stroke-width="1.5">
+                  <animate attributeName="stroke" values="#CBD5E1;#94A3B8;#CBD5E1" dur="4s" begin="0s" repeatCount="indefinite"/>
+                </rect>
+                <rect x="50" y="36" width="30" height="30" rx="4" fill="white" stroke="#94A3B8" stroke-width="1.5">
+                  <animate attributeName="stroke" values="#94A3B8;#64748B;#94A3B8" dur="4s" begin="0.5s" repeatCount="indefinite"/>
+                </rect>
+                <rect x="88" y="36" width="30" height="30" rx="8" fill="white" stroke="#64748B" stroke-width="1.5">
+                  <animate attributeName="stroke" values="#64748B;#2778E2;#64748B" dur="4s" begin="1s" repeatCount="indefinite"/>
+                </rect>
+                <!-- Last shape — highlighted, pulses -->
+                <rect x="126" y="36" width="30" height="30" rx="15" fill="white" stroke="#2778E2" stroke-width="2">
+                  <animate attributeName="stroke-width" values="2;3;2" dur="2s" repeatCount="indefinite"/>
+                </rect>
+                <!-- Fill pulse on highlighted -->
+                <rect x="126" y="36" width="30" height="30" rx="15" fill="#2778E2" opacity="0">
+                  <animate attributeName="opacity" values="0;0.08;0" dur="2s" repeatCount="indefinite"/>
+                </rect>
+
+                <!-- Labels -->
+                <text x="16" y="82" font-size="8" fill="#94A3B8" font-family="monospace">0px</text>
+                <text x="53" y="82" font-size="8" fill="#94A3B8" font-family="monospace">4px</text>
+                <text x="91" y="82" font-size="8" fill="#64748B" font-family="monospace">8px</text>
+                <text x="126" y="82" font-size="8" fill="#2778E2" font-family="monospace">14px</text>
+
+                <!-- Marching-ants arc indicator -->
+                <path d="M126 51 Q126 36 141 36" stroke="#2778E2" stroke-width="1.5" fill="none"
+                  stroke-dasharray="3 2.5">
+                  <animate attributeName="stroke-dashoffset" from="0" to="-22" dur="1s" repeatCount="indefinite"/>
+                </path>
+              </svg>
+            </div>
+            <div class="card-label">
+              <div class="card-label-text">Radius</div>
+              <div class="card-label-meta">0 · 4 · 8 · 12 · 9999</div>
+            </div>
+          </a>
+
+          <!-- ── Spacing card ───────────────────────────── -->
+          <a class="ds-card" href="#" onclick="switchPage('spacing'); return false;">
+            <div class="card-preview" style="background: #F4F6F8;">
+              <svg width="180" height="120" viewBox="0 0 180 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Bars grow from 0 → target → 0, looping with stagger -->
+                <rect x="30" y="18" height="10" rx="2" fill="#2778E2" opacity=".3" width="4">
+                  <animate attributeName="width" values="0;4;4;0" keyTimes="0;0.15;0.85;1" dur="3.6s" begin="0s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
+                </rect>
+                <text x="42" y="26" font-size="8" fill="#94A3B8" font-family="monospace">4px</text>
+
+                <rect x="30" y="34" height="10" rx="2" fill="#2778E2" opacity=".4" width="8">
+                  <animate attributeName="width" values="0;8;8;0" keyTimes="0;0.15;0.85;1" dur="3.6s" begin="0.25s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
+                </rect>
+                <text x="46" y="42" font-size="8" fill="#94A3B8" font-family="monospace">8px</text>
+
+                <rect x="30" y="50" height="10" rx="2" fill="#2778E2" opacity=".55" width="16">
+                  <animate attributeName="width" values="0;16;16;0" keyTimes="0;0.15;0.85;1" dur="3.6s" begin="0.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
+                </rect>
+                <text x="54" y="58" font-size="8" fill="#64748B" font-family="monospace">16px</text>
+
+                <rect x="30" y="66" height="10" rx="2" fill="#2778E2" opacity=".7" width="32">
+                  <animate attributeName="width" values="0;32;32;0" keyTimes="0;0.15;0.85;1" dur="3.6s" begin="0.75s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
+                </rect>
+                <text x="70" y="74" font-size="8" fill="#64748B" font-family="monospace">32px</text>
+
+                <rect x="30" y="82" height="10" rx="2" fill="#2778E2" opacity=".88" width="64">
+                  <animate attributeName="width" values="0;64;64;0" keyTimes="0;0.15;0.85;1" dur="3.6s" begin="1s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
+                </rect>
+                <text x="102" y="90" font-size="8" fill="#2778E2" font-family="monospace">64px</text>
+
+                <!-- Scale bracket -->
+                <path d="M152 28 L158 28 L158 88 L152 88" stroke="#E2E8F0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <text x="161" y="62" font-size="8" fill="#94A3B8" font-family="monospace" transform="rotate(90,161,62)">scale</text>
+              </svg>
+            </div>
+            <div class="card-label">
+              <div class="card-label-text">Spacing</div>
+              <div class="card-label-meta">4 · 8 · 16 · 32 · 64</div>
+            </div>
+          </a>
+
+          <!-- ── Typography card ───────────────────────── -->
+          <a class="ds-card" href="#" onclick="switchPage('typography'); return false;">
+            <div class="card-preview" style="background:#F4F6F8; flex-direction:column; gap:10px; padding:20px 24px; align-items:flex-start; justify-content:center; overflow:hidden;">
+              <!-- Floating Aa -->
+              <div class="typo-aa-anim" style="font-size:46px; font-weight:700; letter-spacing:-0.04em; line-height:1; color:var(--text); opacity:0.14; font-family:'Poppins',sans-serif; user-select:none;">Aa</div>
+              <!-- Shimmer sample lines -->
+              <div style="display:flex;flex-direction:column;gap:6px;width:100%;">
+                <div class="shimmer-line" style="height:10px;width:72%;"></div>
+                <div class="shimmer-line" style="height:8px;width:90%;"></div>
+                <div class="shimmer-line" style="height:7px;width:52%;"></div>
+              </div>
+            </div>
+            <div class="card-label">
+              <div class="card-label-text">Typography</div>
+              <div class="card-label-meta">Poppins · H1–H6 · B1–B2</div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- ── Colours sub-page ───────────────────────── -->
+      <div id="page-colours" style="display:none;">
+        <div class="page-header">
+          <h1 class="page-title">colours</h1>
+          <p class="page-subtitle">Role-mapped tokens — aliases to Color Palette primitives</p>
+        </div>
+
+        <!-- Tab switcher -->
+        <div class="colour-tabs">
+          <button class="colour-tab active" onclick="switchColourTab('base', this)">Base</button>
+          <button class="colour-tab" onclick="switchColourTab('semantic', this)">Semantic</button>
+        </div>
+
+        <!-- ════ BASE COLOURS ════ -->
+        <div id="colour-base">
+
+          <!-- Grey -->
+          <div class="ramp-section">
+            <h3 class="ramp-section-title">Grey</h3>
+            <div class="ramp-row-v2">
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#f8fafc; border:1px solid #e2e8f0;"><span class="chip-label-v2" style="color:#475569;">base-50</span></div><span class="chip-hex-v2">#F8FAFC</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#f1f5f9;"><span class="chip-label-v2" style="color:#475569;">base-100</span></div><span class="chip-hex-v2">#F1F5F9</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#e2e8f0;"><span class="chip-label-v2" style="color:#475569;">base-200</span></div><span class="chip-hex-v2">#E2E8F0</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#cbd5e1;"><span class="chip-label-v2" style="color:#475569;">base-300</span></div><span class="chip-hex-v2">#CBD5E1</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#94a3b8;"><span class="chip-label-v2" style="color:#fff;">base-400</span></div><span class="chip-hex-v2">#94A3B8</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2 ramp-default-v2" style="background:#64748b;"><span class="chip-label-v2" style="color:#fff;">base-500</span></div><span class="chip-hex-v2">#64748B</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#475569;"><span class="chip-label-v2" style="color:#fff;">base-600</span></div><span class="chip-hex-v2">#475569</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#334155;"><span class="chip-label-v2" style="color:#fff;">base-700</span></div><span class="chip-hex-v2">#334155</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#1e293b;"><span class="chip-label-v2" style="color:#fff;">base-800</span></div><span class="chip-hex-v2">#1E293B</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#0f172a;"><span class="chip-label-v2" style="color:#fff;">base-900</span></div><span class="chip-hex-v2">#0F172A</span></div>
+            </div>
+          </div>
+
+          <!-- Brand -->
+          <div class="ramp-section">
+            <h3 class="ramp-section-title">Brand</h3>
+            <div class="ramp-row-v2">
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#eef4fd;"><span class="chip-label-v2" style="color:#154d9e;">base-50</span></div><span class="chip-hex-v2">#EEF4FD</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#d4e5fa;"><span class="chip-label-v2" style="color:#154d9e;">base-100</span></div><span class="chip-hex-v2">#D4E5FA</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#a9caf5;"><span class="chip-label-v2" style="color:#154d9e;">base-200</span></div><span class="chip-hex-v2">#A9CAF5</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#7dafef;"><span class="chip-label-v2" style="color:#06225b;">base-300</span></div><span class="chip-hex-v2">#7DAFEF</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#5293ea;"><span class="chip-label-v2" style="color:#fff;">base-400</span></div><span class="chip-hex-v2">#5293EA</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2 ramp-default-v2" style="background:#2778e2;"><span class="chip-label-v2" style="color:#fff;">base-500</span></div><span class="chip-hex-v2">#2778E2</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#1d62c0;"><span class="chip-label-v2" style="color:#fff;">base-600</span></div><span class="chip-hex-v2">#1D62C0</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#154d9e;"><span class="chip-label-v2" style="color:#fff;">base-700</span></div><span class="chip-hex-v2">#154D9E</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#0d377d;"><span class="chip-label-v2" style="color:#fff;">base-800</span></div><span class="chip-hex-v2">#0D377D</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#06225b;"><span class="chip-label-v2" style="color:#fff;">base-900</span></div><span class="chip-hex-v2">#06225B</span></div>
+            </div>
+          </div>
+
+          <!-- Green -->
+          <div class="ramp-section">
+            <h3 class="ramp-section-title">Green</h3>
+            <div class="ramp-row-v2">
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#ecfdf5;"><span class="chip-label-v2" style="color:#047857;">base-50</span></div><span class="chip-hex-v2">#ECFDF5</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#d1fae5;"><span class="chip-label-v2" style="color:#047857;">base-100</span></div><span class="chip-hex-v2">#D1FAE5</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#a7f3d0;"><span class="chip-label-v2" style="color:#065f46;">base-200</span></div><span class="chip-hex-v2">#A7F3D0</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#6ee7b7;"><span class="chip-label-v2" style="color:#065f46;">base-300</span></div><span class="chip-hex-v2">#6EE7B7</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#34d399;"><span class="chip-label-v2" style="color:#fff;">base-400</span></div><span class="chip-hex-v2">#34D399</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2 ramp-default-v2" style="background:#10b981;"><span class="chip-label-v2" style="color:#fff;">base-500</span></div><span class="chip-hex-v2">#10B981</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#059669;"><span class="chip-label-v2" style="color:#fff;">base-600</span></div><span class="chip-hex-v2">#059669</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#047857;"><span class="chip-label-v2" style="color:#fff;">base-700</span></div><span class="chip-hex-v2">#047857</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#065f46;"><span class="chip-label-v2" style="color:#fff;">base-800</span></div><span class="chip-hex-v2">#065F46</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#064e3b;"><span class="chip-label-v2" style="color:#fff;">base-900</span></div><span class="chip-hex-v2">#064E3B</span></div>
+            </div>
+          </div>
+
+          <!-- Orange -->
+          <div class="ramp-section">
+            <h3 class="ramp-section-title">Orange</h3>
+            <div class="ramp-row-v2">
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fff7ed;"><span class="chip-label-v2" style="color:#c2410c;">base-50</span></div><span class="chip-hex-v2">#FFF7ED</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#ffedd5;"><span class="chip-label-v2" style="color:#c2410c;">base-100</span></div><span class="chip-hex-v2">#FFEDD5</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fed7aa;"><span class="chip-label-v2" style="color:#9a3412;">base-200</span></div><span class="chip-hex-v2">#FED7AA</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fdba74;"><span class="chip-label-v2" style="color:#7c2d12;">base-300</span></div><span class="chip-hex-v2">#FDBA74</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fb923c;"><span class="chip-label-v2" style="color:#fff;">base-400</span></div><span class="chip-hex-v2">#FB923C</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2 ramp-default-v2" style="background:#f97316;"><span class="chip-label-v2" style="color:#fff;">base-500</span></div><span class="chip-hex-v2">#F97316</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#ea580c;"><span class="chip-label-v2" style="color:#fff;">base-600</span></div><span class="chip-hex-v2">#EA580C</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#c2410c;"><span class="chip-label-v2" style="color:#fff;">base-700</span></div><span class="chip-hex-v2">#C2410C</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#9a3412;"><span class="chip-label-v2" style="color:#fff;">base-800</span></div><span class="chip-hex-v2">#9A3412</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#7c2d12;"><span class="chip-label-v2" style="color:#fff;">base-900</span></div><span class="chip-hex-v2">#7C2D12</span></div>
+            </div>
+          </div>
+
+          <!-- Red -->
+          <div class="ramp-section">
+            <h3 class="ramp-section-title">Red</h3>
+            <div class="ramp-row-v2">
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fef2f2;"><span class="chip-label-v2" style="color:#b91c1c;">base-50</span></div><span class="chip-hex-v2">#FEF2F2</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fee2e2;"><span class="chip-label-v2" style="color:#b91c1c;">base-100</span></div><span class="chip-hex-v2">#FEE2E2</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fecaca;"><span class="chip-label-v2" style="color:#991b1b;">base-200</span></div><span class="chip-hex-v2">#FECACA</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fca5a5;"><span class="chip-label-v2" style="color:#7f1d1d;">base-300</span></div><span class="chip-hex-v2">#FCA5A5</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#f87171;"><span class="chip-label-v2" style="color:#fff;">base-400</span></div><span class="chip-hex-v2">#F87171</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2 ramp-default-v2" style="background:#ef4444;"><span class="chip-label-v2" style="color:#fff;">base-500</span></div><span class="chip-hex-v2">#EF4444</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#dc2626;"><span class="chip-label-v2" style="color:#fff;">base-600</span></div><span class="chip-hex-v2">#DC2626</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#b91c1c;"><span class="chip-label-v2" style="color:#fff;">base-700</span></div><span class="chip-hex-v2">#B91C1C</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#991b1b;"><span class="chip-label-v2" style="color:#fff;">base-800</span></div><span class="chip-hex-v2">#991B1B</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#7f1d1d;"><span class="chip-label-v2" style="color:#fff;">base-900</span></div><span class="chip-hex-v2">#7F1D1D</span></div>
+            </div>
+          </div>
+
+          <!-- Blue -->
+          <div class="ramp-section">
+            <h3 class="ramp-section-title">Blue</h3>
+            <div class="ramp-row-v2">
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#ebf8ff;"><span class="chip-label-v2" style="color:#0277c5;">base-50</span></div><span class="chip-hex-v2">#EBF8FF</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#cdeefe;"><span class="chip-label-v2" style="color:#0277c5;">base-100</span></div><span class="chip-hex-v2">#CDEEFE</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#a4e0fe;"><span class="chip-label-v2" style="color:#025b97;">base-200</span></div><span class="chip-hex-v2">#A4E0FE</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#7cd2fe;"><span class="chip-label-v2" style="color:#025b97;">base-300</span></div><span class="chip-hex-v2">#7CD2FE</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#49c1fd;"><span class="chip-label-v2" style="color:#fff;">base-400</span></div><span class="chip-hex-v2">#49C1FD</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2 ramp-default-v2" style="background:#1ca3fd;"><span class="chip-label-v2" style="color:#fff;">base-500</span></div><span class="chip-hex-v2">#1CA3FD</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#028fed;"><span class="chip-label-v2" style="color:#fff;">base-600</span></div><span class="chip-hex-v2">#028FED</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#0277c5;"><span class="chip-label-v2" style="color:#fff;">base-700</span></div><span class="chip-hex-v2">#0277C5</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#025b97;"><span class="chip-label-v2" style="color:#fff;">base-800</span></div><span class="chip-hex-v2">#025B97</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#01436f;"><span class="chip-label-v2" style="color:#fff;">base-900</span></div><span class="chip-hex-v2">#01436F</span></div>
+            </div>
+          </div>
+
+          <!-- Yellow -->
+          <div class="ramp-section">
+            <h3 class="ramp-section-title">Yellow</h3>
+            <div class="ramp-row-v2">
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fffbeb;"><span class="chip-label-v2" style="color:#b45309;">base-50</span></div><span class="chip-hex-v2">#FFFBEB</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fef3c7;"><span class="chip-label-v2" style="color:#b45309;">base-100</span></div><span class="chip-hex-v2">#FEF3C7</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fde68a;"><span class="chip-label-v2" style="color:#92400e;">base-200</span></div><span class="chip-hex-v2">#FDE68A</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fcd34d;"><span class="chip-label-v2" style="color:#78350f;">base-300</span></div><span class="chip-hex-v2">#FCD34D</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fbbf24;"><span class="chip-label-v2" style="color:#78350f;">base-400</span></div><span class="chip-hex-v2">#FBBF24</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2 ramp-default-v2" style="background:#f59e0b;"><span class="chip-label-v2" style="color:#fff;">base-500</span></div><span class="chip-hex-v2">#F59E0B</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#d97706;"><span class="chip-label-v2" style="color:#fff;">base-600</span></div><span class="chip-hex-v2">#D97706</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#b45309;"><span class="chip-label-v2" style="color:#fff;">base-700</span></div><span class="chip-hex-v2">#B45309</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#92400e;"><span class="chip-label-v2" style="color:#fff;">base-800</span></div><span class="chip-hex-v2">#92400E</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#78350f;"><span class="chip-label-v2" style="color:#fff;">base-900</span></div><span class="chip-hex-v2">#78350F</span></div>
+            </div>
+          </div>
+
+          <!-- Teal -->
+          <div class="ramp-section">
+            <h3 class="ramp-section-title">Teal</h3>
+            <div class="ramp-row-v2">
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#f0fdfa;"><span class="chip-label-v2" style="color:#0f766e;">base-50</span></div><span class="chip-hex-v2">#F0FDFA</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#ccfbf1;"><span class="chip-label-v2" style="color:#0f766e;">base-100</span></div><span class="chip-hex-v2">#CCFBF1</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#99f6e4;"><span class="chip-label-v2" style="color:#115e59;">base-200</span></div><span class="chip-hex-v2">#99F6E4</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#5eead4;"><span class="chip-label-v2" style="color:#134e4a;">base-300</span></div><span class="chip-hex-v2">#5EEAD4</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#2dd4bf;"><span class="chip-label-v2" style="color:#fff;">base-400</span></div><span class="chip-hex-v2">#2DD4BF</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2 ramp-default-v2" style="background:#14b8a6;"><span class="chip-label-v2" style="color:#fff;">base-500</span></div><span class="chip-hex-v2">#14B8A6</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#0d9488;"><span class="chip-label-v2" style="color:#fff;">base-600</span></div><span class="chip-hex-v2">#0D9488</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#0f766e;"><span class="chip-label-v2" style="color:#fff;">base-700</span></div><span class="chip-hex-v2">#0F766E</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#115e59;"><span class="chip-label-v2" style="color:#fff;">base-800</span></div><span class="chip-hex-v2">#115E59</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#134e4a;"><span class="chip-label-v2" style="color:#fff;">base-900</span></div><span class="chip-hex-v2">#134E4A</span></div>
+            </div>
+          </div>
+
+        </div><!-- /colour-base -->
+
+        <!-- ════ SEMANTIC COLOURS — sourced directly from Figma variables ════ -->
+        <div id="colour-semantic" style="display:none;">
+
+          <!-- ── Typography (14 tokens) ──────────────────── -->
+          <div class="ramp-section">
+            <h3 class="ramp-section-title">Typography</h3>
+            <div class="sem-row">
+              <div class="sem-wrap"><div class="sem-chip" style="background:#334155;"><span class="sem-label" style="color:#fff;">primary</span></div><span class="sem-hex">#334155</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#64748b;"><span class="sem-label" style="color:#fff;">secondary</span></div><span class="sem-hex">#64748B</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#94a3b8;"><span class="sem-label" style="color:#fff;">disable</span></div><span class="sem-hex">#94A3B8</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#94a3b8;"><span class="sem-label" style="color:#fff;">placeholder</span></div><span class="sem-hex">#94A3B8</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#475569;"><span class="sem-label" style="color:#fff;">tag</span></div><span class="sem-hex">#475569</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#fff;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">on-surface</span></div><span class="sem-hex">#FFFFFF</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#0277c5;"><span class="sem-label" style="color:#fff;">information</span></div><span class="sem-hex">#0277C5</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#10b981;"><span class="sem-label" style="color:#fff;">success</span></div><span class="sem-hex">#10B981</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#f97316;"><span class="sem-label" style="color:#fff;">warning</span></div><span class="sem-hex">#F97316</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#ef4444;"><span class="sem-label" style="color:#fff;">error</span></div><span class="sem-hex">#EF4444</span></div>
+            </div>
+          </div>
+
+          <!-- ── Button Background (4 tokens) ──────────────── -->
+          <div class="ramp-section">
+            <h3 class="ramp-section-title">Button Background</h3>
+            <div class="sem-row">
+              <div class="sem-wrap"><div class="sem-chip" style="background:#2778e2;"><span class="sem-label" style="color:#fff;">brand-primary</span></div><span class="sem-hex">#2778E2</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#1d62c0;"><span class="sem-label" style="color:#fff;">brand-hover</span></div><span class="sem-hex">#1D62C0</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#154d9e;"><span class="sem-label" style="color:#fff;">brand-clicked</span></div><span class="sem-hex">#154D9E</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#eef4fd;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#2778e2;">brand-mute</span></div><span class="sem-hex">#EEF4FD</span></div>
+            </div>
+          </div>
+
+          <!-- ── Background (27 tokens) ───────────────────── -->
+          <div class="ramp-section">
+            <h3 class="ramp-section-title">Background</h3>
+            <div class="sem-row">
+              <div class="sem-wrap"><div class="sem-chip" style="background:#fff;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">white</span></div><span class="sem-hex">#FFFFFF</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#f8fafc;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">bg-subtle</span></div><span class="sem-hex">#F8FAFC</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#000;"><span class="sem-label" style="color:#fff;">black</span></div><span class="sem-hex">#000000</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#f1f5f9;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">disable</span></div><span class="sem-hex">#F1F5F9</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#cbd5e1;"><span class="sem-label" style="color:#334155;">disable-icon</span></div><span class="sem-hex">#CBD5E1</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#64748b;"><span class="sem-label" style="color:#fff;">default-icon</span></div><span class="sem-hex">#64748B</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#2778e2;"><span class="sem-label" style="color:#fff;">brand-primary</span></div><span class="sem-hex">#2778E2</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#1d62c0;"><span class="sem-label" style="color:#fff;">brand-hover</span></div><span class="sem-hex">#1D62C0</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#154d9e;"><span class="sem-label" style="color:#fff;">brand-clicked</span></div><span class="sem-hex">#154D9E</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#ebf8ff;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">info-subtle</span></div><span class="sem-hex">#EBF8FF</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#cdeefe;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">info-mute</span></div><span class="sem-hex">#CDEEFE</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#0277c5;"><span class="sem-label" style="color:#fff;">info-primary</span></div><span class="sem-hex">#0277C5</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#ecfdf5;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">suc-subtle</span></div><span class="sem-hex">#ECFDF5</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#d1fae5;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">suc-mute</span></div><span class="sem-hex">#D1FAE5</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#10b981;"><span class="sem-label" style="color:#fff;">suc-primary</span></div><span class="sem-hex">#10B981</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#059669;"><span class="sem-label" style="color:#fff;">suc-hover</span></div><span class="sem-hex">#059669</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#047857;"><span class="sem-label" style="color:#fff;">suc-clicked</span></div><span class="sem-hex">#047857</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#fff7ed;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">war-subtle</span></div><span class="sem-hex">#FFF7ED</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#ffedd5;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">war-mute</span></div><span class="sem-hex">#FFEDD5</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#f97316;"><span class="sem-label" style="color:#fff;">war-primary</span></div><span class="sem-hex">#F97316</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#ea580c;"><span class="sem-label" style="color:#fff;">war-hover</span></div><span class="sem-hex">#EA580C</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#c2410c;"><span class="sem-label" style="color:#fff;">war-clicked</span></div><span class="sem-hex">#C2410C</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#fef2f2;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">alert-subtle</span></div><span class="sem-hex">#FEF2F2</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#fee2e2;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">alert-mute</span></div><span class="sem-hex">#FEE2E2</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#ef4444;"><span class="sem-label" style="color:#fff;">error-primary</span></div><span class="sem-hex">#EF4444</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#dc2626;"><span class="sem-label" style="color:#fff;">alert-hover</span></div><span class="sem-hex">#DC2626</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#b91c1c;"><span class="sem-label" style="color:#fff;">alert-clicked</span></div><span class="sem-hex">#B91C1C</span></div>
+            </div>
+          </div>
+
+          <!-- ── Border (8 tokens) ────────────────────────── -->
+          <div class="ramp-section">
+            <h3 class="ramp-section-title">Border</h3>
+            <div class="sem-row">
+              <div class="sem-wrap"><div class="sem-chip" style="background:#e2e8f0;border:1px solid #cbd5e1;"><span class="sem-label" style="color:#475569;">default</span></div><span class="sem-hex">#E2E8F0</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#cbd5e1;border:1px solid #94a3b8;"><span class="sem-label" style="color:#475569;">disable</span></div><span class="sem-hex">#CBD5E1</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#2778e2;"><span class="sem-label" style="color:#fff;">brand-primary</span></div><span class="sem-hex">#2778E2</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#1d62c0;"><span class="sem-label" style="color:#fff;">brand-hover</span></div><span class="sem-hex">#1D62C0</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#154d9e;"><span class="sem-label" style="color:#fff;">brand-clicked</span></div><span class="sem-hex">#154D9E</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#10b981;"><span class="sem-label" style="color:#fff;">success-primary</span></div><span class="sem-hex">#10B981</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#ef4444;"><span class="sem-label" style="color:#fff;">error-primary</span></div><span class="sem-hex">#EF4444</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#f97316;"><span class="sem-label" style="color:#fff;">warning-primary</span></div><span class="sem-hex">#F97316</span></div>
+            </div>
+          </div>
+
+        </div><!-- /colour-semantic -->
+      </div>
+
+      <!-- ── Typography sub-page ──────────────────────── -->
+      <div id="page-typography" style="display:none;">
+        <div class="page-header">
+          <h1 class="page-title">typography</h1>
+          <p class="page-subtitle">Poppins · 15 styles · Heading H1–H6 · Body B1–B2 · Label L1–L3</p>
+        </div>
+
+        <div class="section-block" style="padding:0;">
+
+          <!-- Column headers -->
+          <div style="display:grid;grid-template-columns:220px 1fr;gap:0;padding:0 0 12px 0;border-bottom:1px solid var(--border);">
+            <span style="font-size:10px;font-weight:500;letter-spacing:0.05em;color:var(--hint);text-transform:uppercase;">Style</span>
+            <span style="font-size:10px;font-weight:500;letter-spacing:0.05em;color:var(--hint);text-transform:uppercase;">Sample</span>
+          </div>
+
+          <!-- ── HEADINGS ─────────────────────────────── -->
+          <div style="padding:20px 0 8px;border-bottom:1px solid var(--border);">
+            <span style="font-size:10px;font-weight:600;letter-spacing:0.05em;color:var(--muted);text-transform:uppercase;">Headings</span>
+          </div>
+
+          <!-- H1 -->
+          <div style="display:grid;grid-template-columns:220px 1fr;gap:0;align-items:start;padding:20px 0;border-bottom:1px solid var(--border);">
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">H1</div>
+              <div style="font-size:10px;color:var(--hint);margin-top:4px;">48px · Bold · 110% LH</div>
+            </div>
+            <div style="font-size:48px;font-weight:700;line-height:1.1;color:var(--text);font-family:'Poppins',sans-serif;">The Quick Brown Fox</div>
+          </div>
+
+          <!-- H2 -->
+          <div style="display:grid;grid-template-columns:220px 1fr;gap:0;align-items:start;padding:20px 0;border-bottom:1px solid var(--border);">
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">H2</div>
+              <div style="font-size:10px;color:var(--hint);margin-top:4px;">40px · Bold · 110% LH</div>
+            </div>
+            <div style="font-size:40px;font-weight:700;line-height:1.1;color:var(--text);font-family:'Poppins',sans-serif;">The Quick Brown Fox</div>
+          </div>
+
+          <!-- H3 -->
+          <div style="display:grid;grid-template-columns:220px 1fr;gap:0;align-items:start;padding:20px 0;border-bottom:1px solid var(--border);">
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">H3</div>
+              <div style="font-size:10px;color:var(--hint);margin-top:4px;">36px · Bold · 110% LH</div>
+            </div>
+            <div style="font-size:36px;font-weight:700;line-height:1.1;color:var(--text);font-family:'Poppins',sans-serif;">The Quick Brown Fox</div>
+          </div>
+
+          <!-- H4 -->
+          <div style="display:grid;grid-template-columns:220px 1fr;gap:0;align-items:start;padding:20px 0;border-bottom:1px solid var(--border);">
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">H4</div>
+              <div style="font-size:10px;color:var(--hint);margin-top:4px;">32px · Bold · 110% LH</div>
+            </div>
+            <div style="font-size:32px;font-weight:700;line-height:1.1;color:var(--text);font-family:'Poppins',sans-serif;">The Quick Brown Fox</div>
+          </div>
+
+          <!-- H5 -->
+          <div style="display:grid;grid-template-columns:220px 1fr;gap:0;align-items:start;padding:20px 0;border-bottom:1px solid var(--border);">
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">H5</div>
+              <div style="font-size:10px;color:var(--hint);margin-top:4px;">28px · Bold · 110% LH</div>
+            </div>
+            <div style="font-size:28px;font-weight:700;line-height:1.1;color:var(--text);font-family:'Poppins',sans-serif;">The Quick Brown Fox</div>
+          </div>
+
+          <!-- H6 -->
+          <div style="display:grid;grid-template-columns:220px 1fr;gap:0;align-items:start;padding:20px 0;border-bottom:1px solid var(--border);">
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">H6</div>
+              <div style="font-size:10px;color:var(--hint);margin-top:4px;">24px · Bold · 110% LH</div>
+            </div>
+            <div style="font-size:24px;font-weight:700;line-height:1.1;color:var(--text);font-family:'Poppins',sans-serif;">The Quick Brown Fox</div>
+          </div>
+
+          <!-- ── BODY ─────────────────────────────────── -->
+          <div style="padding:20px 0 8px;border-bottom:1px solid var(--border);">
+            <span style="font-size:10px;font-weight:600;letter-spacing:0.05em;color:var(--muted);text-transform:uppercase;">Body</span>
+          </div>
+
+          <!-- B1 -->
+          <div style="display:grid;grid-template-columns:220px 1fr;gap:0;align-items:start;padding:20px 0;border-bottom:1px solid var(--border);">
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">B1</div>
+              <div style="font-size:10px;color:var(--hint);margin-top:4px;">20px · Bold · 125% LH</div>
+            </div>
+            <div style="font-size:20px;font-weight:700;line-height:1.25;color:var(--text);font-family:'Poppins',sans-serif;">The quick brown fox jumps over the lazy dog.</div>
+          </div>
+
+          <!-- B2 -->
+          <div style="display:grid;grid-template-columns:220px 1fr;gap:0;align-items:start;padding:20px 0;border-bottom:1px solid var(--border);">
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">B2</div>
+              <div style="font-size:10px;color:var(--hint);margin-top:4px;">16px · Regular · 125% LH</div>
+            </div>
+            <div style="font-size:16px;font-weight:400;line-height:1.25;color:var(--text);font-family:'Poppins',sans-serif;">The quick brown fox jumps over the lazy dog.</div>
+          </div>
+
+          <!-- ── LABELS ───────────────────────────────── -->
+          <div style="padding:20px 0 8px;border-bottom:1px solid var(--border);">
+            <span style="font-size:10px;font-weight:600;letter-spacing:0.05em;color:var(--muted);text-transform:uppercase;">Labels</span>
+          </div>
+
+          <!-- L1 Regular -->
+          <div style="display:grid;grid-template-columns:220px 1fr;gap:0;align-items:start;padding:16px 0;border-bottom:1px solid var(--border);">
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">L1 Regular</div>
+              <div style="font-size:10px;color:var(--hint);margin-top:4px;">14px · Regular · 130% LH</div>
+            </div>
+            <div style="font-size:14px;font-weight:400;line-height:1.3;color:var(--text);font-family:'Poppins',sans-serif;">Button Label · Navigation · Status Indicator</div>
+          </div>
+
+          <!-- L1 Medium -->
+          <div style="display:grid;grid-template-columns:220px 1fr;gap:0;align-items:start;padding:16px 0;border-bottom:1px solid var(--border);">
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">L1 Medium</div>
+              <div style="font-size:10px;color:var(--hint);margin-top:4px;">14px · Medium · 130% LH</div>
+            </div>
+            <div style="font-size:14px;font-weight:500;line-height:1.3;color:var(--text);font-family:'Poppins',sans-serif;">Button Label · Navigation · Status Indicator</div>
+          </div>
+
+          <!-- L1 SemiBold -->
+          <div style="display:grid;grid-template-columns:220px 1fr;gap:0;align-items:start;padding:16px 0;border-bottom:1px solid var(--border);">
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">L1 SemiBold</div>
+              <div style="font-size:10px;color:var(--hint);margin-top:4px;">14px · SemiBold · 130% LH</div>
+            </div>
+            <div style="font-size:14px;font-weight:600;line-height:1.3;color:var(--text);font-family:'Poppins',sans-serif;">Button Label · Navigation · Status Indicator</div>
+          </div>
+
+          <!-- L2 Regular -->
+          <div style="display:grid;grid-template-columns:220px 1fr;gap:0;align-items:start;padding:16px 0;border-bottom:1px solid var(--border);">
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">L2 Regular</div>
+              <div style="font-size:10px;color:var(--hint);margin-top:4px;">12px · Regular · 140% LH</div>
+            </div>
+            <div style="font-size:12px;font-weight:400;line-height:1.4;color:var(--text);font-family:'Poppins',sans-serif;">Tag · Badge · Chip · Caption Text</div>
+          </div>
+
+          <!-- L2 Medium -->
+          <div style="display:grid;grid-template-columns:220px 1fr;gap:0;align-items:start;padding:16px 0;border-bottom:1px solid var(--border);">
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">L2 Medium</div>
+              <div style="font-size:10px;color:var(--hint);margin-top:4px;">12px · Medium · 140% LH</div>
+            </div>
+            <div style="font-size:12px;font-weight:500;line-height:1.4;color:var(--text);font-family:'Poppins',sans-serif;">Tag · Badge · Chip · Caption Text</div>
+          </div>
+
+          <!-- L2 SemiBold -->
+          <div style="display:grid;grid-template-columns:220px 1fr;gap:0;align-items:start;padding:16px 0;border-bottom:1px solid var(--border);">
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">L2 SemiBold</div>
+              <div style="font-size:10px;color:var(--hint);margin-top:4px;">12px · SemiBold · 140% LH</div>
+            </div>
+            <div style="font-size:12px;font-weight:600;line-height:1.4;color:var(--text);font-family:'Poppins',sans-serif;">Tag · Badge · Chip · Caption Text</div>
+          </div>
+
+          <!-- L3 Regular -->
+          <div style="display:grid;grid-template-columns:220px 1fr;gap:0;align-items:start;padding:16px 0;">
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">L3 Regular</div>
+              <div style="font-size:10px;color:var(--hint);margin-top:4px;">11px · Regular · 150% LH</div>
+            </div>
+            <div style="font-size:11px;font-weight:400;line-height:1.5;color:var(--text);font-family:'Poppins',sans-serif;">Helper text · Footnote · Placeholder · Error message</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── Radius sub-page ───────────────────────────── -->
+      <div id="page-radius" style="display:none;">
+        <div class="page-header">
+          <h1 class="page-title">radius</h1>
+          <p class="page-subtitle">Border radius scale used across all components. From sharp to pill.</p>
+        </div>
+
+        <div class="section-block">
+          <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-end;">
+            <div style="text-align:center;">
+              <div style="width:80px;height:80px;border-radius:0;background:var(--bg);border:2px solid var(--border);margin:0 auto 10px;"></div>
+              <div style="font-size:13px;font-weight:600;color:var(--text);">None</div>
+              <div style="font-size:11px;font-family:monospace;color:var(--hint);">0px</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="width:80px;height:80px;border-radius:4px;background:var(--bg);border:2px solid var(--border);margin:0 auto 10px;"></div>
+              <div style="font-size:13px;font-weight:600;color:var(--text);">XS</div>
+              <div style="font-size:11px;font-family:monospace;color:var(--hint);">4px</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="width:80px;height:80px;border-radius:6px;background:var(--bg);border:2px solid var(--neutral-lt);margin:0 auto 10px;"></div>
+              <div style="font-size:13px;font-weight:600;color:var(--text);">SM</div>
+              <div style="font-size:11px;font-family:monospace;color:var(--hint);">6px</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="width:80px;height:80px;border-radius:8px;background:var(--bg);border:2px solid var(--border);margin:0 auto 10px;"></div>
+              <div style="font-size:13px;font-weight:600;color:var(--text);">MD</div>
+              <div style="font-size:11px;font-family:monospace;color:var(--hint);">8px</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="width:80px;height:80px;border-radius:12px;background:var(--bg);border:2px solid var(--border);margin:0 auto 10px;"></div>
+              <div style="font-size:13px;font-weight:600;color:var(--text);">LG</div>
+              <div style="font-size:11px;font-family:monospace;color:var(--hint);">12px</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="width:80px;height:80px;border-radius:16px;background:var(--bg);border:2px solid var(--border);margin:0 auto 10px;"></div>
+              <div style="font-size:13px;font-weight:600;color:var(--text);">XL</div>
+              <div style="font-size:11px;font-family:monospace;color:var(--hint);">16px</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="width:80px;height:80px;border-radius:9999px;background:var(--bg);border:2px solid var(--border);margin:0 auto 10px;"></div>
+              <div style="font-size:13px;font-weight:600;color:var(--text);">Full</div>
+              <div style="font-size:11px;font-family:monospace;color:var(--hint);">9999px</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Spacing sub-page ──────────────────────────── -->
+      <div id="page-spacing" style="display:none;">
+        <div class="page-header">
+          <h1 class="page-title">spacing</h1>
+          <p class="page-subtitle">A 4px base grid. All spacing values are multiples of 4.</p>
+        </div>
+
+        <div class="section-block">
+          <div style="display:flex;flex-direction:column;gap:12px;max-width:600px;">
+            <div style="display:flex;align-items:center;gap:16px;">
+              <span style="font-size:10px;color:var(--hint);font-family:monospace;width:48px;">4px</span>
+              <div style="width:4px;height:28px;background:var(--brand);border-radius:2px;opacity:0.3;"></div>
+              <span style="font-size:12px;color:var(--muted);">Extra tight — icon gaps, badge padding</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;">
+              <span style="font-size:10px;color:var(--hint);font-family:monospace;width:48px;">8px</span>
+              <div style="width:8px;height:28px;background:var(--brand);border-radius:2px;opacity:0.4;"></div>
+              <span style="font-size:12px;color:var(--muted);">Tight — compact list items, inline spacing</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;">
+              <span style="font-size:10px;color:var(--hint);font-family:monospace;width:48px;">12px</span>
+              <div style="width:12px;height:28px;background:var(--brand);border-radius:2px;opacity:0.5;"></div>
+              <span style="font-size:12px;color:var(--muted);">Small — button padding, form row gaps</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;">
+              <span style="font-size:10px;color:var(--hint);font-family:monospace;width:48px;">16px</span>
+              <div style="width:16px;height:28px;background:var(--brand);border-radius:2px;opacity:0.6;"></div>
+              <span style="font-size:12px;color:var(--muted);">Base — card padding, section insets</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;">
+              <span style="font-size:10px;color:var(--hint);font-family:monospace;width:48px;">24px</span>
+              <div style="width:24px;height:28px;background:var(--brand);border-radius:2px;opacity:0.7;"></div>
+              <span style="font-size:12px;color:var(--muted);">Medium — card gaps, content blocks</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;">
+              <span style="font-size:10px;color:var(--hint);font-family:monospace;width:48px;">32px</span>
+              <div style="width:32px;height:28px;background:var(--brand);border-radius:2px;opacity:0.8;"></div>
+              <span style="font-size:12px;color:var(--muted);">Large — section spacing, page margins</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;">
+              <span style="font-size:10px;color:var(--hint);font-family:monospace;width:48px;">48px</span>
+              <div style="width:48px;height:28px;background:var(--brand);border-radius:2px;opacity:0.85;"></div>
+              <span style="font-size:12px;color:var(--muted);">XL — hero padding, nav height</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;">
+              <span style="font-size:10px;color:var(--hint);font-family:monospace;width:48px;">64px</span>
+              <div style="width:64px;height:28px;background:var(--brand);border-radius:2px;"></div>
+              <span style="font-size:12px;color:var(--muted);">2XL — section breaks, page segments</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;">
+              <span style="font-size:10px;color:var(--hint);font-family:monospace;width:48px;">80px</span>
+              <div style="width:80px;height:28px;background:var(--brand-subtle);border-radius:2px;border:1px solid var(--brand-lt);"></div>
+              <span style="font-size:12px;color:var(--muted);">3XL — full section vertical padding</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Icons sub-page ────────────────────────────── -->
+      <div id="page-icons" style="display:none;">
+        <div class="page-header">
+          <h1 class="page-title">icons</h1>
+          <p class="page-subtitle">Lucide — 18 categories · 200+ icons · 24×24 · 1.5px stroke</p>
+        </div>
+
+        <!-- Search + count -->
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+          <div style="flex:1;max-width:360px;display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px 14px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--hint);flex-shrink:0;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input id="icon-search" type="text" placeholder="Search icons…" style="border:none;outline:none;background:transparent;font-size:13px;color:var(--text);font-family:inherit;width:100%;" oninput="filterIcons(this.value)" />
+          </div>
+          <span id="icon-count" style="font-size:12px;color:var(--muted);"></span>
+        </div>
+
+        <!-- Icon categories rendered by JS -->
+        <div id="icon-sections"></div>
+
+        <script>
+        const ICON_CATEGORIES = [
+          { name: 'General', icons: ['home','search','settings','user','users','bell','calendar','clock','map-pin','globe','phone','mail','camera','image','video','music','mic','headphones','wifi','battery','monitor','smartphone','laptop','printer','tv','watch','compass','map','navigation','bookmark','star','heart','award','shield','key','tag','badge','flag','gift','package','layers','cube','box','database','server','cloud','cpu','code','terminal','git-branch','aperture'] },
+          { name: 'Actions', icons: ['plus','minus','x','check','edit','edit-2','edit-3','trash','trash-2','copy','clipboard','paste','cut','scissors','download','upload','share','share-2','refresh-cw','refresh-ccw','rotate-cw','rotate-ccw','undo','undo-2','redo','redo-2','save','send','eye','eye-off','lock','unlock','log-in','log-out','zoom-in','zoom-out','move','maximize','minimize','expand','shrink','filter','sort-asc','sort-desc','sliders','toggle-left','toggle-right','more-horizontal','more-vertical','menu'] },
+          { name: 'Charts', icons: ['bar-chart','bar-chart-2','bar-chart-3','bar-chart-4','line-chart','pie-chart','trending-up','trending-down','activity','percent','sigma'] },
+          { name: 'Communication', icons: ['mail','mail-open','inbox','send','message-circle','message-square','messages-square','phone','phone-call','phone-incoming','phone-outgoing','phone-missed','phone-off','voicemail','at-sign','rss','radio','megaphone','bell','bell-off','bell-ring','reply','reply-all','forward'] },
+          { name: 'Productivity', icons: ['check-square','square','list','list-ordered','list-checks','clipboard','clipboard-check','clipboard-list','clipboard-copy','notepad-text','pencil','pen','pen-tool','highlighter','type','bold','italic','underline','strikethrough','align-left','align-center','align-right','align-justify','indent','outdent','calendar','calendar-check','calendar-clock','calendar-days','calendar-x','timer','alarm-clock','hourglass','target','zap','flame','trophy','medal'] },
+          { name: 'Layout', icons: ['layout','layout-dashboard','layout-grid','layout-list','layout-panel-left','layout-panel-right','layout-template','grid','grid-2x2','grid-3x3','columns','rows','sidebar','sidebar-close','sidebar-open','panel-left','panel-right','panel-top','panel-bottom','table','table-2','kanban','trello','maximize-2','minimize-2','square-stack'] },
+          { name: 'Finance & Numbers', icons: ['dollar-sign','euro','pound-sterling','japanese-yen','bitcoin','credit-card','receipt','wallet','piggy-bank','banknote','coins','percent','calculator','hash','plus-circle','minus-circle','divide-circle','equal','infinity'] },
+          { name: 'Status', icons: ['check-circle','check-circle-2','x-circle','alert-circle','alert-triangle','alert-octagon','info','help-circle','ban','pause-circle','play-circle','stop-circle','circle','dot','loader','loader-2','shield-check','shield-x','shield-alert','thumbs-up','thumbs-down','smile','frown','meh','angry'] },
+          { name: 'Development', icons: ['code','code-2','code-xml','terminal','git-branch','git-commit','git-merge','git-pull-request','git-fork','github','gitlab','braces','brackets','bug','bug-off','webhook','api','cpu','binary','hash','variable','function-square','regex','package','package-check','package-open','box','boxes','blocks'] },
+          { name: 'Finance & E-Commerce', icons: ['shopping-cart','shopping-bag','store','package','truck','credit-card','gift','percent','tag','barcode','scan','scan-barcode','qr-code','receipt','wallet','badge-dollar-sign','badge-percent','ticket','coupon'] },
+          { name: 'App Info', icons: ['info','help-circle','book','book-open','book-marked','book-copy','newspaper','scroll','file-text','notebook','notebook-pen','library','graduation-cap','school','backpack','lamp-desk','lightbulb'] },
+          { name: 'Files', icons: ['file','file-2','file-text','file-image','file-video','file-audio','file-code','file-code-2','file-archive','file-check','file-x','file-plus','file-minus','file-search','file-symlink','folder','folder-open','folder-closed','folder-plus','folder-minus','folder-x','folder-check','folder-input','folder-output','folder-search','archive','archive-restore','hard-drive'] },
+          { name: 'Time', icons: ['clock','clock-1','clock-2','clock-3','clock-4','clock-5','clock-6','clock-7','clock-8','clock-9','clock-10','clock-11','calendar','alarm-clock','alarm-clock-off','timer','timer-off','watch','hourglass','calendar-clock','calendar-check-2','history'] },
+          { name: 'Finance In-world', icons: ['landmark','building','building-2','factory','hotel','store','warehouse','castle','vault','safe','diamond','gem','coins','scale','gavel'] },
+          { name: 'Weather', icons: ['sun','moon','cloud','cloud-sun','cloud-moon','cloud-rain','cloud-drizzle','cloud-snow','cloud-lightning','cloud-fog','wind','umbrella','thermometer','droplets','snowflake','tornado','rainbow','sunset','sunrise','eclipse','haze','zap'] },
+          { name: 'Others', icons: ['heart','star','bookmark','award','gift','smile','frown','meh','thumbs-up','thumbs-down','share','link','link-2','external-link','anchor','hash','at-sign','slash','minus','plus','circle-dot','dot','circle','square','triangle','hexagon','octagon','diamond','cross','asterisk','infinity','percent'] },
+          { name: 'Nav', icons: ['arrow-left','arrow-right','arrow-up','arrow-down','arrow-up-left','arrow-up-right','arrow-down-left','arrow-down-right','arrow-up-down','arrow-left-right','chevron-left','chevron-right','chevron-up','chevron-down','chevrons-left','chevrons-right','chevrons-up','chevrons-down','corner-down-right','corner-down-left','corner-up-right','corner-up-left','skip-back','skip-forward','move-left','move-right','move-up','move-down','home','navigation','navigation-2','locate','crosshair'] },
+          { name: 'Education', icons: ['book','book-open','book-marked','graduation-cap','school','backpack','pencil','pen','ruler','compass','calculator','flask-conical','microscope','atom','dna','brain','lightbulb','lamp','telescope','globe-2','map','planet','rocket','satellite'] }
+        ];
+
+        function toPascalCase(str) {
+          return str.split('-').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join('');
+        }
+
+        function buildIconTile(name) {
+          const div = document.createElement('div');
+          div.className = 'icon-tile';
+          div.dataset.name = name;
+          div.style.cssText = 'display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:12px 8px;background:var(--bg);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.12s;min-width:0;';
+          div.onmouseenter = () => { div.style.background='var(--brand-bg)'; div.style.borderColor='var(--brand-subtle)'; };
+          div.onmouseleave = () => { div.style.background='var(--bg)'; div.style.borderColor='var(--border)'; };
+          div.onclick = () => {
+            navigator.clipboard && navigator.clipboard.writeText(name);
+            const lbl = div.querySelector('.icon-lbl');
+            const orig = lbl.textContent;
+            lbl.textContent = 'copied!';
+            lbl.style.color = 'var(--brand)';
+            setTimeout(() => { lbl.textContent = orig; lbl.style.color = ''; }, 1200);
+          };
+          div.innerHTML = `<i data-lucide="${name}" style="width:20px;height:20px;stroke:var(--muted);flex-shrink:0;"></i><span class="icon-lbl" style="font-size:8.5px;color:var(--hint);font-family:monospace;text-align:center;line-height:1.3;word-break:break-all;">${name}</span>`;
+          return div;
+        }
+
+        function renderAll() {
+          const container = document.getElementById('icon-sections');
+          container.innerHTML = '';
+          let total = 0;
+          ICON_CATEGORIES.forEach(cat => {
+            const section = document.createElement('div');
+            section.className = 'icon-cat-section';
+            section.dataset.cat = cat.name;
+            section.style.marginBottom = '32px';
+
+            const header = document.createElement('div');
+            header.style.cssText = 'font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);padding-bottom:10px;border-bottom:1px solid var(--border);margin-bottom:12px;';
+            header.textContent = cat.name;
+            section.appendChild(header);
+
+            const grid = document.createElement('div');
+            grid.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:8px;';
+            grid.className = 'icon-cat-grid';
+
+            cat.icons.forEach(name => {
+              grid.appendChild(buildIconTile(name));
+              total++;
+            });
+
+            section.appendChild(grid);
+            container.appendChild(section);
+          });
+          document.getElementById('icon-count').textContent = total + ' icons';
+          if (window.lucide) lucide.createIcons();
+        }
+
+        function filterIcons(q) {
+          q = q.toLowerCase().trim();
+          let visible = 0;
+          document.querySelectorAll('.icon-cat-section').forEach(sec => {
+            let secVisible = 0;
+            sec.querySelectorAll('.icon-tile').forEach(tile => {
+              const match = !q || tile.dataset.name.includes(q);
+              tile.style.display = match ? '' : 'none';
+              if (match) secVisible++;
+            });
+            sec.style.display = secVisible ? '' : 'none';
+            visible += secVisible;
+          });
+          document.getElementById('icon-count').textContent = visible + ' icons';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+          renderAll();
+          // Load Lucide from CDN and re-render icons
+          const script = document.createElement('script');
+          script.src = 'https://unpkg.com/lucide@latest/dist/umd/lucide.js';
+          script.onload = () => lucide.createIcons();
+          document.head.appendChild(script);
+        });
+        </script>
+      </div>
+
+      <!-- ── Illustrations sub-page ────────────────────── -->
+      <div id="page-illustrations" style="display:none;">
+        <div class="page-header">
+          <h1 class="page-title">illustrations</h1>
+          <p class="page-subtitle">Scene, character, and abstract illustrations for onboarding, empty states, and marketing moments.</p>
+        </div>
+
+        <div class="section-block">
+          <div class="section-block-title">Empty States</div>
+          <div style="display:flex;gap:16px;flex-wrap:wrap;">
+
+            <div style="background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:40px 24px;text-align:center;flex:1;min-width:180px;max-width:240px;">
+              <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="20" width="60" height="44" rx="6" fill="var(--brand-bg)" stroke="var(--brand-lt)" stroke-width="1.5"/>
+                <path d="M24 42h32M24 50h20" stroke="var(--brand)" stroke-width="2" stroke-linecap="round" opacity=".4"/>
+                <circle cx="40" cy="36" r="8" fill="var(--brand-subtle)"/>
+                <path d="M37 36l2 2 4-4" stroke="var(--brand)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <div style="font-size:13px;font-weight:600;color:var(--text);margin-top:12px;">No items yet</div>
+              <div style="font-size:11px;color:var(--hint);margin-top:4px;">Create your first item</div>
+            </div>
+
+            <div style="background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:40px 24px;text-align:center;flex:1;min-width:180px;max-width:240px;">
+              <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="40" cy="34" r="20" fill="var(--surface)" stroke="var(--border)" stroke-width="1.5"/>
+                <circle cx="32" cy="30" r="3" fill="var(--hint)"/>
+                <circle cx="48" cy="30" r="3" fill="var(--hint)"/>
+                <path d="M32 42 Q40 36 48 42" stroke="var(--hint)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                <path d="M25 58h30" stroke="var(--border)" stroke-width="1.5" stroke-linecap="round"/>
+                <rect x="30" y="54" width="20" height="4" rx="2" fill="var(--surface)"/>
+              </svg>
+              <div style="font-size:13px;font-weight:600;color:var(--text);margin-top:12px;">Nothing found</div>
+              <div style="font-size:11px;color:var(--hint);margin-top:4px;">Try a different search</div>
+            </div>
+
+            <div style="background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:40px 24px;text-align:center;flex:1;min-width:180px;max-width:240px;">
+              <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 60 L40 20 L60 60Z" fill="var(--warning-bg)" stroke="var(--warning)" stroke-width="1.5" stroke-linejoin="round"/>
+                <line x1="40" y1="34" x2="40" y2="48" stroke="var(--warning)" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="40" cy="54" r="1.5" fill="var(--warning)"/>
+              </svg>
+              <div style="font-size:13px;font-weight:600;color:var(--text);margin-top:12px;">Something went wrong</div>
+              <div style="font-size:11px;color:var(--hint);margin-top:4px;">Please try again</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    // ── Dark mode ─────────────────────────────────────────
+    const btn = document.getElementById('themeBtn');
+    let dark = localStorage.getItem('ds-dark') === '1';
+    const applyTheme = () => {
+      document.documentElement.classList.toggle('dark', dark);
+      btn.textContent = dark ? '🌙' : '☀️';
+    };
+    applyTheme();
+    btn.addEventListener('click', () => {
+      dark = !dark;
+      localStorage.setItem('ds-dark', dark ? '1' : '0');
+      applyTheme();
+    });
+
+    // ── Colour tab switcher ────────────────────────────────
+    function switchColourTab(name, el) {
+      const base = document.getElementById('colour-base');
+      const sem  = document.getElementById('colour-semantic');
+      if (base) base.style.display = name === 'base'     ? 'block' : 'none';
+      if (sem)  sem.style.display  = name === 'semantic' ? 'block' : 'none';
+      document.querySelectorAll('.colour-tab').forEach(t => t.classList.remove('active'));
+      if (el) el.classList.add('active');
+    }
+
+    // ── Sub-page switching ────────────────────────────────
+    const pages = ['overview','colours','icons','illustrations','radius','spacing','typography'];
+    const links = document.querySelectorAll('.sidebar-link');
+
+    function switchPage(name) {
+      // Hide all pages
+      pages.forEach(p => {
+        const el = document.getElementById('page-' + p);
+        if (el) el.style.display = 'none';
+      });
+      // Show target
+      const target = document.getElementById('page-' + name);
+      if (target) target.style.display = 'block';
+
+      // Update sidebar active state
+      links.forEach(l => l.classList.remove('active'));
+      links.forEach(l => {
+        if (l.getAttribute('onclick') && l.getAttribute('onclick').includes("'" + name + "'")) {
+          l.classList.add('active');
+        }
+        if (name === 'overview' && l.href && l.href.endsWith('foundations.html') && !l.getAttribute('onclick')) {
+          l.classList.add('active');
+        }
+      });
+
+      // Scroll to top
+      document.getElementById('main-content').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      // Update page indicator visibility
+      document.querySelectorAll('.page-indicator').forEach(dot => {
+        dot.style.display = 'none';
+      });
+
+      // Update hash
+      if (name !== 'overview') {
+        history.replaceState(null, '', '#' + name);
+      } else {
+        history.replaceState(null, '', window.location.pathname);
+      }
+    }
+
+    // ── Restore from hash on load ─────────────────────────
+    const hash = window.location.hash.slice(1);
+    if (hash && pages.includes(hash)) {
+      switchPage(hash);
+    }
+  </script>
+</body>
+</html>
