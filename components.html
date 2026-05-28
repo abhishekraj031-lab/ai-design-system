@@ -2385,17 +2385,17 @@
 
               <div class="toggle-row">
                 <div><span class="toggle-name">showClose</span><span class="toggle-type">boolean</span></div>
-                <button class="toggle-switch active" id="al-showClose" onclick="alToggle(this,'showClose')" aria-pressed="true"></button>
+                <button class="toggle-switch on" id="al-showClose" onclick="alToggle(this,'showClose')" aria-pressed="true"></button>
               </div>
 
               <div class="toggle-row">
                 <div><span class="toggle-name">showActions</span><span class="toggle-type">boolean</span></div>
-                <button class="toggle-switch active" id="al-showActions" onclick="alToggle(this,'showActions')" aria-pressed="true"></button>
+                <button class="toggle-switch on" id="al-showActions" onclick="alToggle(this,'showActions')" aria-pressed="true"></button>
               </div>
 
               <div class="toggle-row">
                 <div><span class="toggle-name">showBody</span><span class="toggle-type">boolean</span></div>
-                <button class="toggle-switch active" id="al-showBody" onclick="alToggle(this,'showBody')" aria-pressed="true"></button>
+                <button class="toggle-switch on" id="al-showBody" onclick="alToggle(this,'showBody')" aria-pressed="true"></button>
               </div>
 
             </div>
@@ -3164,7 +3164,7 @@
 
     function alToggle(el, prop) {
       alState[prop] = !alState[prop];
-      el.classList.toggle('active', alState[prop]);
+      el.classList.toggle('on', alState[prop]);
       el.setAttribute('aria-pressed', alState[prop]);
       alRender();
     }
