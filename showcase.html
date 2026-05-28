@@ -197,6 +197,100 @@
       font-size: 13px; color: var(--text-dim);
       line-height: 1.65;
     }
+
+    /* ── Footer ──────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 48px 32px;
+      transition: border-color 0.2s;
+    }
+
+    .footer-links {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-sub);
+      transition: color 0.2s;
+    }
+
+    .footer-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      text-decoration: none;
+      width: fit-content;
+      transition: color 0.15s, gap 0.15s;
+    }
+    .footer-link svg {
+      width: 14px; height: 14px;
+      stroke: var(--text-dim); fill: none;
+      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+      flex-shrink: 0;
+      transition: stroke 0.15s, transform 0.2s;
+    }
+    .footer-link:hover { color: var(--brand); gap: 8px; }
+    .footer-link:hover svg { stroke: var(--brand); transform: translate(2px, -2px); }
+
+    .footer-divider {
+      width: 100%;
+      border: none;
+      border-top: 1px dashed var(--border);
+      margin-bottom: 20px;
+      transition: border-color 0.2s;
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-dim);
+      letter-spacing: 0;
+    }
+
+    .footer-ver {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-sub);
+      letter-spacing: 0.04em;
+    }
+    .footer-ver::before {
+      content: '';
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--brand);
+      opacity: 0.6;
+    }
+
+    @media (max-width: 680px) {
+      .footer-links { grid-template-columns: repeat(2, 1fr); gap: 28px 16px; }
+      footer { padding: 32px 24px 24px; }
+    }
   </style>
 </head>
 <body>
@@ -213,7 +307,7 @@
     <div class="nav-links">
       <a href="foundations.html">Foundations</a>
       <a href="components.html">Components</a>
-      <a href="#">Patterns</a>
+      <a href="patterns.html">Patterns</a>
     </div>
 
     <button class="theme-btn" id="theme-btn" aria-label="Toggle dark mode">
@@ -262,7 +356,7 @@
         <p class="hcard-desc">Reusable interface elements like buttons, inputs, and modals built directly from Figma.</p>
       </a>
 
-      <a class="hcard" href="#">
+      <a class="hcard" href="patterns.html">
         <div class="hcard-header">
           <span class="hcard-num">03 / Patterns</span>
           <svg class="hcard-arrow" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
@@ -272,6 +366,52 @@
       </a>
     </div>
   </section>
+
+  <!-- ── Footer ─────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-links">
+
+      <div class="footer-col">
+        <span class="footer-label">Twitter</span>
+        <a class="footer-link" href="https://twitter.com" target="_blank" rel="noopener">
+          @designerabhi
+          <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <span class="footer-label">Dribbble</span>
+        <a class="footer-link" href="https://dribbble.com" target="_blank" rel="noopener">
+          dribbble.com/abhi
+          <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <span class="footer-label">LinkedIn</span>
+        <a class="footer-link" href="https://linkedin.com" target="_blank" rel="noopener">
+          /in/abhishekraj
+          <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <span class="footer-label">Portfolio</span>
+        <a class="footer-link" href="#" target="_blank" rel="noopener">
+          abhishek.design
+          <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+
+    </div>
+
+    <hr class="footer-divider" />
+
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Abhishek Raj</span>
+      <span class="footer-ver">ai ds &nbsp;·&nbsp; v 0.1</span>
+    </div>
+  </footer>
 
   <script>
     const btn = document.getElementById('theme-btn');
