@@ -351,6 +351,10 @@
       display: grid; grid-template-columns: 1fr 320px;
       min-height: 240px;
     }
+    /* Narrower controls — wide preview variant */
+    .playground-body.wide-preview {
+      grid-template-columns: 1fr 220px;
+    }
     .pg-preview {
       display: flex; align-items: center; justify-content: center;
       padding: 40px;
@@ -2894,7 +2898,7 @@
             <span class="playground-title">Playground</span>
             <span style="font-size:11px;color:var(--hint);">Live preview · adjust props and copy code</span>
           </div>
-          <div class="playground-body">
+          <div class="playground-body wide-preview">
             <div class="pg-preview" id="tgl-preview-area"></div>
             <div class="pg-controls">
               <!-- State -->
