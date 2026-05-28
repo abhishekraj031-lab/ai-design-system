@@ -763,6 +763,40 @@
     }
     .av-overflow-sm { width:32px; height:32px; font-size:10px; }
     .av-overflow-md { width:40px; height:40px; font-size:11px; }
+    /* ── Toggle component ───────────────────────────── */
+    .ds-toggle {
+      position:relative; display:inline-flex; align-items:center;
+      width:28px; height:16px; border-radius:999px;
+      background:#f6f7f9; border:1px solid #e0e5eb;
+      cursor:pointer; transition:background 0.2s, border-color 0.2s;
+      flex-shrink:0; outline:none;
+    }
+    .dark .ds-toggle { background:var(--surface); border-color:var(--border); }
+    .ds-toggle.on { background:var(--brand); border-color:var(--brand); }
+    .ds-toggle-thumb {
+      position:absolute; left:2px;
+      width:12px; height:12px; border-radius:50%;
+      background:#fff; box-shadow:0 1px 3px rgba(0,0,0,0.22);
+      transition:transform 0.18s;
+      pointer-events:none;
+    }
+    .ds-toggle.on .ds-toggle-thumb { transform:translateX(12px); }
+    /* Disabled */
+    .ds-toggle.disabled { opacity:0.4; cursor:not-allowed; pointer-events:none; }
+    /* Size — MD */
+    .ds-toggle-md { width:36px; height:20px; }
+    .ds-toggle-md .ds-toggle-thumb { width:16px; height:16px; }
+    .ds-toggle-md.on .ds-toggle-thumb { transform:translateX(16px); }
+    /* Size — LG */
+    .ds-toggle-lg { width:44px; height:24px; }
+    .ds-toggle-lg .ds-toggle-thumb { width:20px; height:20px; }
+    .ds-toggle-lg.on .ds-toggle-thumb { transform:translateX(20px); }
+    /* With label wrapper */
+    .ds-toggle-wrap { display:inline-flex; align-items:center; gap:8px; cursor:pointer; }
+    .ds-toggle-label { font-size:14px; font-weight:500; color:var(--text); line-height:1.2; user-select:none; }
+    .ds-toggle-label.sm { font-size:12px; }
+    .ds-toggle-label.lg { font-size:15px; }
+
     /* Avatar variants grid */
     .av-grid {
       display:grid; grid-template-columns:80px repeat(3,1fr);
@@ -901,6 +935,15 @@
             <path d="M3 16c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
           Avatar
+          <span class="sidebar-dot"></span>
+        </a>
+
+        <a class="sidebar-link" href="#" onclick="switchPage('toggle'); return false;">
+          <svg class="sidebar-icon" viewBox="0 0 18 18" fill="none">
+            <rect x="2" y="6" width="14" height="6" rx="3" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            <circle cx="12" cy="9" r="2" fill="currentColor" opacity=".7"/>
+          </svg>
+          Toggle
           <span class="sidebar-dot"></span>
         </a>
       </div>
@@ -1077,6 +1120,32 @@
               <div>
                 <div class="card-name">Avatar</div>
                 <div class="card-meta">image · icon · initials · 4 sizes · group</div>
+              </div>
+              <span class="card-chip chip-built">Built</span>
+            </div>
+          </a>
+
+          <!-- Toggle card -->
+          <a class="comp-card" href="#" onclick="switchPage('toggle'); return false;">
+            <div class="card-preview" style="background:var(--surface);background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:24px 24px;">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
+                <!-- States row -->
+                <div style="display:flex;align-items:center;gap:16px;">
+                  <button class="ds-toggle"><span class="ds-toggle-thumb"></span></button>
+                  <button class="ds-toggle on"><span class="ds-toggle-thumb"></span></button>
+                  <button class="ds-toggle ds-toggle-md on"><span class="ds-toggle-thumb"></span></button>
+                </div>
+                <!-- With label -->
+                <div class="ds-toggle-wrap">
+                  <button class="ds-toggle on"><span class="ds-toggle-thumb"></span></button>
+                  <span class="ds-toggle-label">Available</span>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div>
+                <div class="card-name">Toggle</div>
+                <div class="card-meta">on · off · 3 sizes · with label</div>
               </div>
               <span class="card-chip chip-built">Built</span>
             </div>
@@ -2804,6 +2873,203 @@
 
       </div><!-- /#page-avatar -->
 
+      <!-- ════════════════════════════════════════════════
+           TOGGLE DETAIL PAGE
+           ════════════════════════════════════════════════ -->
+      <div id="page-toggle" style="display:none;">
+
+        <div class="detail-header">
+          <div class="detail-meta">
+            <span class="meta-tag figma">node 27-120</span>
+            <span class="meta-tag">CVA</span>
+            <span class="meta-tag">3 sizes</span>
+          </div>
+          <h1 class="detail-title">Toggle</h1>
+          <p class="detail-subtitle">A binary on/off control — available in three sizes with an optional inline label. Maps to the <code style="font-family:monospace;font-size:13px;background:var(--surface);padding:1px 5px;border-radius:4px;border:1px solid var(--border);">checked</code> boolean prop and fires an <code style="font-family:monospace;font-size:13px;background:var(--surface);padding:1px 5px;border-radius:4px;border:1px solid var(--border);">onChange</code> handler.</p>
+        </div>
+
+        <!-- Playground -->
+        <div class="playground">
+          <div class="playground-header">
+            <span class="playground-title">Playground</span>
+            <span style="font-size:11px;color:var(--hint);">Live preview · adjust props and copy code</span>
+          </div>
+          <div class="playground-body">
+            <div class="pg-preview" id="tgl-preview-area"></div>
+            <div class="pg-controls">
+              <!-- State -->
+              <div class="ctrl-row">
+                <span class="ctrl-label">checked</span>
+                <div class="seg-picker" id="tgl-state">
+                  <button class="seg-btn" onclick="tglSeg(this,'tgl-state')">false</button>
+                  <button class="seg-btn active" onclick="tglSeg(this,'tgl-state')">true</button>
+                </div>
+              </div>
+              <!-- Size -->
+              <div class="ctrl-row">
+                <span class="ctrl-label">size</span>
+                <div class="seg-picker" id="tgl-size">
+                  <button class="seg-btn active" onclick="tglSeg(this,'tgl-size')">SM</button>
+                  <button class="seg-btn" onclick="tglSeg(this,'tgl-size')">MD</button>
+                  <button class="seg-btn" onclick="tglSeg(this,'tgl-size')">LG</button>
+                </div>
+              </div>
+              <!-- Label toggle -->
+              <div class="toggle-row">
+                <span class="toggle-name">Show Label<span class="toggle-type">boolean</span></span>
+                <button class="toggle-switch on" id="tgl-showLabel" onclick="tglToggle(this,'showLabel')" aria-pressed="true"></button>
+              </div>
+              <!-- Disabled toggle -->
+              <div class="toggle-row">
+                <span class="toggle-name">Disabled<span class="toggle-type">boolean</span></span>
+                <button class="toggle-switch" id="tgl-disabled" onclick="tglToggle(this,'disabled')" aria-pressed="false"></button>
+              </div>
+              <!-- Label text -->
+              <div class="ctrl-row" id="tgl-label-row">
+                <span class="ctrl-label">label</span>
+                <input class="ctrl-input" id="tgl-label-val" type="text" value="Available" oninput="tglRender()" />
+              </div>
+            </div>
+          </div>
+          <div class="pg-code-wrap">
+            <div class="pg-code-header">
+              <span class="pg-code-lang">TSX</span>
+              <button class="copy-btn" id="tgl-copy-btn" onclick="tglCopy()">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <div class="pg-code"><pre id="tgl-code-block"></pre></div>
+          </div>
+        </div>
+
+        <hr class="section-divider" />
+
+        <!-- Variants: States -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">States</span>
+            <span class="variant-subtitle">Off · On · Disabled Off · Disabled On</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:40px;flex-wrap:wrap;">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+              <button class="ds-toggle"><span class="ds-toggle-thumb"></span></button>
+              <span style="font-size:11px;color:var(--hint);">Off</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+              <button class="ds-toggle on"><span class="ds-toggle-thumb"></span></button>
+              <span style="font-size:11px;color:var(--hint);">On</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+              <button class="ds-toggle disabled"><span class="ds-toggle-thumb"></span></button>
+              <span style="font-size:11px;color:var(--hint);">Disabled Off</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+              <button class="ds-toggle on disabled"><span class="ds-toggle-thumb"></span></button>
+              <span style="font-size:11px;color:var(--hint);">Disabled On</span>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider" />
+
+        <!-- Variants: Sizes -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Sizes</span>
+            <span class="variant-subtitle">SM 28×16 · MD 36×20 · LG 44×24</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:20px;">
+            <div style="display:flex;align-items:center;gap:20px;">
+              <span class="size-label">SM</span>
+              <button class="ds-toggle"><span class="ds-toggle-thumb"></span></button>
+              <button class="ds-toggle on"><span class="ds-toggle-thumb"></span></button>
+            </div>
+            <div style="display:flex;align-items:center;gap:20px;">
+              <span class="size-label">MD</span>
+              <button class="ds-toggle ds-toggle-md"><span class="ds-toggle-thumb"></span></button>
+              <button class="ds-toggle ds-toggle-md on"><span class="ds-toggle-thumb"></span></button>
+            </div>
+            <div style="display:flex;align-items:center;gap:20px;">
+              <span class="size-label">LG</span>
+              <button class="ds-toggle ds-toggle-lg"><span class="ds-toggle-thumb"></span></button>
+              <button class="ds-toggle ds-toggle-lg on"><span class="ds-toggle-thumb"></span></button>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider" />
+
+        <!-- Variants: With Label -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Toggle with Label</span>
+            <span class="variant-subtitle">Inline label for contextual use</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <div class="ds-toggle-wrap">
+              <button class="ds-toggle"><span class="ds-toggle-thumb"></span></button>
+              <span class="ds-toggle-label">Available</span>
+            </div>
+            <div class="ds-toggle-wrap">
+              <button class="ds-toggle on"><span class="ds-toggle-thumb"></span></button>
+              <span class="ds-toggle-label">Available</span>
+            </div>
+            <div class="ds-toggle-wrap">
+              <button class="ds-toggle ds-toggle-md on"><span class="ds-toggle-thumb"></span></button>
+              <span class="ds-toggle-label">Enable notifications</span>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider" />
+
+        <!-- Props table -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Props</span>
+          </div>
+          <table class="spec-table">
+            <thead>
+              <tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>checked</td>
+                <td><span class="spec-val">boolean</span></td>
+                <td><span class="token">false</span></td>
+                <td>Controls the on/off state</td>
+              </tr>
+              <tr>
+                <td>onChange</td>
+                <td><span class="spec-val">(checked: boolean) =&gt; void</span></td>
+                <td><span class="token">—</span></td>
+                <td>Callback fired when the user toggles</td>
+              </tr>
+              <tr>
+                <td>size</td>
+                <td><span class="spec-val">"sm" | "md" | "lg"</span></td>
+                <td><span class="token">sm</span></td>
+                <td>28×16 / 36×20 / 44×24px</td>
+              </tr>
+              <tr>
+                <td>label</td>
+                <td><span class="spec-val">string</span></td>
+                <td><span class="token">—</span></td>
+                <td>Inline label text. When provided renders a Toggle with Text layout</td>
+              </tr>
+              <tr>
+                <td>disabled</td>
+                <td><span class="spec-val">boolean</span></td>
+                <td><span class="token">false</span></td>
+                <td>Prevents interaction, reduces opacity to 40%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div><!-- /#page-toggle -->
+
     </main>
   </div>
 
@@ -2826,7 +3092,7 @@
     });
 
     // ── Page switching ────────────────────────────────────
-    const pages = ['overview','button','input','tag','tooltip','checkbox','radio','alert','avatar'];
+    const pages = ['overview','button','input','tag','tooltip','checkbox','radio','alert','avatar','toggle'];
 
     // ── Checkbox interactive ──────────────────────────────
     const cbState = { a: false, b: true };
@@ -2930,6 +3196,7 @@
       if (name === 'tooltip' && typeof ttUpdate   === 'function') ttUpdate();
       if (name === 'alert'   && typeof alRender   === 'function') alRender();
       if (name === 'avatar'  && typeof avRender   === 'function') avRender();
+      if (name === 'toggle'  && typeof tglRender  === 'function') tglRender();
     }
 
     // Restore from hash — deferred so all consts are initialised first
@@ -3599,6 +3866,82 @@
       }
     }
     // avRender is called by switchPage above whenever avatar page is activated
+
+    // ══════════════════════════════════════════════════
+    //  TOGGLE PLAYGROUND
+    // ══════════════════════════════════════════════════
+    const tglState = { checked: true, size: 'SM', showLabel: true, disabled: false };
+
+    function tglActiveVal(groupId) {
+      const a = document.querySelector('#' + groupId + ' .seg-btn.active');
+      return a ? a.textContent.trim() : '';
+    }
+
+    function tglSeg(btn, groupId) {
+      document.querySelectorAll('#' + groupId + ' .seg-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      if (groupId === 'tgl-state') tglState.checked = btn.textContent.trim() === 'true';
+      if (groupId === 'tgl-size')  tglState.size = btn.textContent.trim();
+      tglRender();
+    }
+
+    function tglToggle(el, prop) {
+      tglState[prop] = !tglState[prop];
+      el.classList.toggle('on', tglState[prop]);
+      el.setAttribute('aria-pressed', tglState[prop]);
+      // Show/hide label input
+      if (prop === 'showLabel') {
+        const row = document.getElementById('tgl-label-row');
+        if (row) row.style.display = tglState.showLabel ? 'flex' : 'none';
+      }
+      tglRender();
+    }
+
+    function tglRender() {
+      const { checked, size, showLabel, disabled } = tglState;
+      const labelText = (document.getElementById('tgl-label-val') || {}).value || 'Available';
+      const sizeClass = size === 'MD' ? ' ds-toggle-md' : size === 'LG' ? ' ds-toggle-lg' : '';
+      const onClass   = checked  ? ' on'       : '';
+      const disClass  = disabled ? ' disabled'  : '';
+      const thumb     = `<span class="ds-toggle-thumb"></span>`;
+      const toggle    = `<button class="ds-toggle${sizeClass}${onClass}${disClass}">${thumb}</button>`;
+
+      const preview = document.getElementById('tgl-preview-area');
+      if (preview) {
+        if (showLabel) {
+          preview.innerHTML = `<label class="ds-toggle-wrap">${toggle}<span class="ds-toggle-label">${labelText}</span></label>`;
+        } else {
+          preview.innerHTML = toggle;
+        }
+      }
+
+      // Code
+      const lines = [];
+      lines.push(`<span class="c-tag">&lt;Toggle</span>`);
+      if (checked)   lines.push(`  <span class="c-prop">checked</span>=<span class="c-bool">{true}</span>`);
+      if (size !== 'SM') lines.push(`  <span class="c-prop">size</span>=<span class="c-str">"${size.toLowerCase()}"</span>`);
+      if (showLabel) lines.push(`  <span class="c-prop">label</span>=<span class="c-str">"${labelText}"</span>`);
+      if (disabled)  lines.push(`  <span class="c-prop">disabled</span>`);
+      lines.push(`  <span class="c-prop">onChange</span>=<span class="c-bool">{handleChange}</span>`);
+      lines.push(`<span class="c-tag">/&gt;</span>`);
+      const codeBlock = document.getElementById('tgl-code-block');
+      if (codeBlock) codeBlock.innerHTML = lines.join('\n');
+    }
+
+    function tglCopy() {
+      const code = document.getElementById('tgl-code-block');
+      if (code) navigator.clipboard.writeText(code.innerText).catch(() => {});
+      const btn = document.getElementById('tgl-copy-btn');
+      if (btn) {
+        btn.classList.add('copied');
+        btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`;
+        }, 2000);
+      }
+    }
+    // tglRender is called by switchPage above whenever toggle page is activated
   </script>
 </body>
 </html>
