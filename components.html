@@ -486,44 +486,57 @@
     .inp-wrap {
       display:flex; height:40px; width:100%;
       align-items:center; overflow:hidden;
-      border:1px solid var(--border); border-radius:6px;
-      background:var(--bg);
-      transition:border-color 0.15s, box-shadow 0.15s;
+      border:1px solid #e0e5eb; border-radius:6px;
+      background:#ffffff;
+      transition:border-color 0.15s;
     }
-    .inp-wrap.inp-active  { border-color:#2778e2; box-shadow:0 0 0 3px rgba(39,120,226,0.12); }
-    .inp-wrap.inp-error   { border-color:#dc2626; }
+    .dark .inp-wrap { background:var(--surface); border-color:var(--border); }
+    .inp-wrap.inp-active  { border-color:#068ae9; }
+    .inp-wrap.inp-error   { border-color:#cc2f24; }
     .inp-wrap.inp-disabled,
-    .inp-wrap.inp-filled-disabled { background:#f8fafc; }
+    .inp-wrap.inp-filled-disabled { background:#eceff3; border-color:#e0e5eb; }
+    .dark .inp-wrap.inp-disabled,
+    .dark .inp-wrap.inp-filled-disabled { background:var(--surface); }
 
     /* Native input inside */
     .inp-field {
       flex:1; min-width:0; background:transparent;
       border:none; outline:none; padding:0 12px;
-      font-size:11px; font-family:'Poppins',sans-serif;
-      color:#334155; line-height:1.5;
+      font-size:12px; font-family:'Poppins',sans-serif;
+      color:#1d242b; line-height:1.2;
+    }
+    .inp-field.inp-filled {
+      font-size:14px; font-weight:500; color:#1d242b;
     }
     .dark .inp-field { color:var(--text); }
-    .inp-field::placeholder { color:#94a3b8; }
+    .inp-field::placeholder { color:#97a8b9; font-size:12px; font-weight:400; }
     .inp-field:disabled { cursor:not-allowed; }
     .inp-field.pad-l { padding-left:8px; }
     .inp-field.pad-r { padding-right:8px; }
 
+    /* Label above input */
+    .inp-label {
+      font-size:14px; font-weight:600; color:#1d242b;
+      line-height:1.2; display:block; margin-bottom:4px;
+    }
+    .dark .inp-label { color:var(--text); }
+
     /* Addon slot (text or icon) */
     .inp-addon {
       display:flex; align-items:center; justify-content:center;
-      width:40px; height:100%; flex-shrink:0;
-      background:#f8fafc;
-      font-size:11px; font-weight:500; color:#475569;
-      font-family:'Poppins',sans-serif;
+      min-width:40px; padding:0 10px; height:100%; flex-shrink:0;
+      background:transparent;
+      font-size:14px; font-weight:500; color:#52667a;
+      font-family:'Poppins',sans-serif; white-space:nowrap;
     }
-    .inp-addon.addon-first { border-right:1px solid var(--border); }
-    .inp-addon.addon-last  { border-left:1px solid var(--border); }
-    .inp-addon.addon-text  { background:#f1f5f9; }
-    .dark .inp-addon { background:var(--surface); color:var(--muted); }
+    .inp-addon.addon-first { border-right:1px solid #e0e5eb; }
+    .inp-addon.addon-last  { border-left:1px solid #e0e5eb; }
+    .inp-addon svg { width:16px; height:16px; stroke:#52667a; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+    .dark .inp-addon { color:var(--muted); }
 
     /* Help / error text */
-    .inp-help      { font-size:11px; line-height:1.5; color:var(--muted); }
-    .inp-help.err  { color:#dc2626; }
+    .inp-help      { font-size:12px; line-height:1.2; color:#52667a; margin-top:4px; }
+    .inp-help.err  { color:#cc2f24; }
 
     /* State / type section grids */
     .inp-states-grid {
@@ -1634,16 +1647,16 @@
         <div class="variant-section">
           <div class="variant-label">
             <span class="variant-title">States</span>
-            <span class="variant-subtitle">state axis · addonType="default"</span>
+            <span class="variant-subtitle">6 states · Default type</span>
           </div>
           <div class="inp-states-grid">
 
             <div>
               <p class="inp-row-label">Default</p>
               <div class="inp-group">
-                <label class="inp-label">Label</label>
+                <label class="inp-label">Title</label>
                 <div class="inp-wrap">
-                  <input class="inp-field" placeholder="Enter Text" />
+                  <input class="inp-field" placeholder="Enter" />
                 </div>
               </div>
             </div>
@@ -1651,9 +1664,9 @@
             <div>
               <p class="inp-row-label">Active</p>
               <div class="inp-group">
-                <label class="inp-label">Label</label>
+                <label class="inp-label">Title</label>
                 <div class="inp-wrap inp-active">
-                  <input class="inp-field" placeholder="Enter Text" />
+                  <input class="inp-field" placeholder="Enter" />
                 </div>
               </div>
             </div>
@@ -1661,9 +1674,9 @@
             <div>
               <p class="inp-row-label">Filled</p>
               <div class="inp-group">
-                <label class="inp-label">Label</label>
+                <label class="inp-label">Title</label>
                 <div class="inp-wrap">
-                  <input class="inp-field" value="Abhishek Gupta" />
+                  <input class="inp-field inp-filled" value="7838224516" readonly />
                 </div>
               </div>
             </div>
@@ -1671,9 +1684,9 @@
             <div>
               <p class="inp-row-label">Disabled</p>
               <div class="inp-group">
-                <label class="inp-label" style="opacity:.5;">Label</label>
+                <label class="inp-label" style="opacity:.5;">Title</label>
                 <div class="inp-wrap inp-disabled">
-                  <input class="inp-field" placeholder="Enter Text" disabled />
+                  <input class="inp-field" placeholder="Enter" disabled />
                 </div>
               </div>
             </div>
@@ -1681,9 +1694,9 @@
             <div>
               <p class="inp-row-label">Filled Disabled</p>
               <div class="inp-group">
-                <label class="inp-label" style="opacity:.5;">Label</label>
+                <label class="inp-label" style="opacity:.5;">Title</label>
                 <div class="inp-wrap inp-filled-disabled">
-                  <input class="inp-field" value="Abhishek Gupta" disabled />
+                  <input class="inp-field inp-filled" value="7838224516" disabled />
                 </div>
               </div>
             </div>
@@ -1691,11 +1704,11 @@
             <div>
               <p class="inp-row-label">Error</p>
               <div class="inp-group">
-                <label class="inp-label">Label</label>
+                <label class="inp-label">Title</label>
                 <div class="inp-wrap inp-error">
-                  <input class="inp-field" value="Abhishek Gupta" />
+                  <input class="inp-field inp-filled" value="7838224516" readonly />
                 </div>
-                <p class="inp-help err">This field is required</p>
+                <p class="inp-help err">Help text will be shown here</p>
               </div>
             </div>
 
@@ -1704,75 +1717,65 @@
 
         <hr class="section-divider" />
 
-        <!-- ── Addon Types ── -->
+        <!-- ── Types ── -->
         <div class="variant-section">
           <div class="variant-label">
-            <span class="variant-title">Addon Types</span>
-            <span class="variant-subtitle">addonType axis · state="default"</span>
+            <span class="variant-title">Types</span>
+            <span class="variant-subtitle">Default · Leading Text · Trailing Text · Leading Icon · Trailing Icon</span>
           </div>
-          <div style="display:flex;flex-direction:column;gap:20px;max-width:360px;">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;">
 
-            <div>
-              <p class="inp-row-label">Default</p>
-              <div class="inp-group">
-                <label class="inp-label">Label</label>
-                <div class="inp-wrap">
-                  <input class="inp-field" placeholder="Enter Text" />
-                </div>
-                <p class="inp-help">Help text will be shown here</p>
+            <!-- Default -->
+            <div class="inp-group">
+              <label class="inp-label">Title</label>
+              <div class="inp-wrap">
+                <input class="inp-field" placeholder="Enter" />
               </div>
+              <p class="inp-help">Help text will be shown here</p>
             </div>
 
-            <div>
-              <p class="inp-row-label">Text First</p>
-              <div class="inp-group">
-                <label class="inp-label">Phone Number</label>
-                <div class="inp-wrap">
-                  <div class="inp-addon addon-first addon-text">+91</div>
-                  <input class="inp-field pad-l" placeholder="Enter Mobile Number" />
-                </div>
-                <p class="inp-help">Help text will be shown here</p>
+            <!-- Leading Text (+91) -->
+            <div class="inp-group">
+              <label class="inp-label">Title</label>
+              <div class="inp-wrap">
+                <div class="inp-addon addon-first">+91</div>
+                <input class="inp-field pad-l" placeholder="Enter" />
               </div>
+              <p class="inp-help">Help text will be shown here</p>
             </div>
 
-            <div>
-              <p class="inp-row-label">Text Last</p>
-              <div class="inp-group">
-                <label class="inp-label">Day</label>
-                <div class="inp-wrap">
-                  <input class="inp-field pad-r" placeholder="Enter Days" />
-                  <div class="inp-addon addon-last addon-text">Day</div>
-                </div>
-                <p class="inp-help">Help text will be shown here</p>
+            <!-- Trailing Text (%) -->
+            <div class="inp-group">
+              <label class="inp-label">Title</label>
+              <div class="inp-wrap">
+                <input class="inp-field pad-r" placeholder="Enter" />
+                <div class="inp-addon addon-last">%</div>
               </div>
+              <p class="inp-help">Help text will be shown here</p>
             </div>
 
-            <div>
-              <p class="inp-row-label">Icon First</p>
-              <div class="inp-group">
-                <label class="inp-label">Email</label>
-                <div class="inp-wrap">
-                  <div class="inp-addon addon-first">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                  </div>
-                  <input class="inp-field pad-l" placeholder="Enter Email" />
+            <!-- Leading Icon (mail) -->
+            <div class="inp-group">
+              <label class="inp-label">Title</label>
+              <div class="inp-wrap">
+                <div class="inp-addon addon-first">
+                  <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                 </div>
-                <p class="inp-help">Help text will be shown here</p>
+                <input class="inp-field pad-l" placeholder="Enter" />
               </div>
+              <p class="inp-help">Help text will be shown here</p>
             </div>
 
-            <div>
-              <p class="inp-row-label">Icon Last</p>
-              <div class="inp-group">
-                <label class="inp-label">Password</label>
-                <div class="inp-wrap">
-                  <input class="inp-field pad-r" placeholder="Enter Password" type="password" />
-                  <div class="inp-addon addon-last">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
-                  </div>
+            <!-- Trailing Icon (eye-off) -->
+            <div class="inp-group">
+              <label class="inp-label">Title</label>
+              <div class="inp-wrap">
+                <input class="inp-field pad-r" placeholder="Enter" type="password" />
+                <div class="inp-addon addon-last">
+                  <svg viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
                 </div>
-                <p class="inp-help">Help text will be shown here</p>
               </div>
+              <p class="inp-help">Help text will be shown here</p>
             </div>
 
           </div>
