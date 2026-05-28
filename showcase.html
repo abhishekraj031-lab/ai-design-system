@@ -227,18 +227,36 @@
     .footer-links {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
+      gap: 16px;
       margin-bottom: 40px;
       position: relative; z-index: 1;
     }
 
-    .footer-col {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+    /* card style — mirrors .hcard but dark */
+    .footer-card {
+      background: #13181f;
+      border: 1px solid #1e2631;
+      border-radius: 16px;
+      padding: 22px 24px 26px;
+      text-decoration: none;
+      display: block;
+      transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s, background 0.18s;
+    }
+    .footer-card:hover {
+      border-color: #2778E2;
+      background: #161d28;
+      box-shadow: 0 8px 32px rgba(39,120,226,0.14);
+      transform: translateY(-2px);
     }
 
-    .footer-label {
+    .footer-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .footer-card-platform {
       font-size: 10px;
       font-weight: 500;
       letter-spacing: 0.14em;
@@ -246,27 +264,34 @@
       color: #3d4856;
     }
 
-    .footer-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      color: #c9d4e0;
-      text-decoration: none;
-      width: fit-content;
-      transition: color 0.15s, gap 0.15s;
-    }
-    .footer-link svg {
-      width: 13px; height: 13px;
+    .footer-card-arrow {
+      width: 16px; height: 16px;
       stroke: #3d4856; fill: none;
-      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
       flex-shrink: 0;
       transition: stroke 0.15s, transform 0.2s;
     }
-    .footer-link:hover { color: #ffffff; gap: 9px; }
-    .footer-link:hover svg { stroke: #2778E2; transform: translate(2px, -2px); }
+    .footer-card:hover .footer-card-arrow {
+      stroke: #2778E2;
+      transform: translate(3px, -3px);
+    }
+
+    .footer-card-name {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #c9d4e0;
+      margin-bottom: 6px;
+      transition: color 0.15s;
+    }
+    .footer-card:hover .footer-card-name { color: #ffffff; }
+
+    .footer-card-handle {
+      font-size: 12px;
+      font-weight: 400;
+      color: #3d4856;
+      line-height: 1.5;
+    }
 
     .footer-divider {
       width: 100%;
@@ -306,9 +331,12 @@
       flex-shrink: 0;
     }
 
-    @media (max-width: 680px) {
-      .footer-links { grid-template-columns: repeat(2, 1fr); gap: 28px 16px; }
+    @media (max-width: 760px) {
+      .footer-links { grid-template-columns: repeat(2, 1fr); }
       footer { padding: 36px 24px 28px; }
+    }
+    @media (max-width: 480px) {
+      .footer-links { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -390,37 +418,41 @@
   <footer>
     <div class="footer-links">
 
-      <div class="footer-col">
-        <span class="footer-label">Twitter</span>
-        <a class="footer-link" href="https://twitter.com" target="_blank" rel="noopener">
-          @designerabhi
-          <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-        </a>
-      </div>
+      <a class="footer-card" href="https://www.linkedin.com/in/abhidesigns/" target="_blank" rel="noopener">
+        <div class="footer-card-header">
+          <span class="footer-card-platform">LinkedIn</span>
+          <svg class="footer-card-arrow" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </div>
+        <p class="footer-card-name">Abhishek Raj</p>
+        <p class="footer-card-handle">/in/abhidesigns</p>
+      </a>
 
-      <div class="footer-col">
-        <span class="footer-label">Dribbble</span>
-        <a class="footer-link" href="https://dribbble.com" target="_blank" rel="noopener">
-          dribbble.com/abhi
-          <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-        </a>
-      </div>
+      <a class="footer-card" href="https://designerabhishek.framer.website/" target="_blank" rel="noopener">
+        <div class="footer-card-header">
+          <span class="footer-card-platform">Portfolio</span>
+          <svg class="footer-card-arrow" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </div>
+        <p class="footer-card-name">designerabhishek</p>
+        <p class="footer-card-handle">framer.website</p>
+      </a>
 
-      <div class="footer-col">
-        <span class="footer-label">LinkedIn</span>
-        <a class="footer-link" href="https://linkedin.com" target="_blank" rel="noopener">
-          /in/abhishekraj
-          <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-        </a>
-      </div>
+      <a class="footer-card" href="https://dribbble.com/abhishekraj031" target="_blank" rel="noopener">
+        <div class="footer-card-header">
+          <span class="footer-card-platform">Dribbble</span>
+          <svg class="footer-card-arrow" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </div>
+        <p class="footer-card-name">abhishekraj031</p>
+        <p class="footer-card-handle">dribbble.com</p>
+      </a>
 
-      <div class="footer-col">
-        <span class="footer-label">Portfolio</span>
-        <a class="footer-link" href="#" target="_blank" rel="noopener">
-          abhishek.design
-          <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-        </a>
-      </div>
+      <a class="footer-card" href="https://twitter.com/designerabhi" target="_blank" rel="noopener">
+        <div class="footer-card-header">
+          <span class="footer-card-platform">Twitter / X</span>
+          <svg class="footer-card-arrow" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </div>
+        <p class="footer-card-name">@designerabhi</p>
+        <p class="footer-card-handle">twitter.com</p>
+      </a>
 
     </div>
 
