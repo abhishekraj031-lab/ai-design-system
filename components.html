@@ -677,6 +677,36 @@
       font-size:10px; font-weight:600; text-transform:uppercase;
       letter-spacing:0.1em; color:var(--hint);
     }
+
+    /* ── Alert component ────────────────────────────── */
+    .ds-alert {
+      display:flex; align-items:flex-start; gap:12px;
+      padding:20px; border-radius:8px; border:1px solid;
+      position:relative;
+    }
+    .ds-alert-info    { background:#ebf4ff; border-color:#d7eafe; color:#0959ae; }
+    .ds-alert-alert   { background:#fef6f6; border-color:#fbe1df; color:#cc2f24; }
+    .ds-alert-success { background:#eefbf0; border-color:#e0f5e4; color:#2e8a3d; }
+    .ds-alert-warning { background:#fff7f0; border-color:#fdf5d8; color:#b86e00; }
+    .dark .ds-alert-info    { background:#0d2444; border-color:#1a3d70; color:#6badf5; }
+    .dark .ds-alert-alert   { background:#2d0e0c; border-color:#5c1c18; color:#f08079; }
+    .dark .ds-alert-success { background:#0c2b12; border-color:#1a4d22; color:#6dba7d; }
+    .dark .ds-alert-warning { background:#2b1a05; border-color:#5c380a; color:#e5a030; }
+    .al-icon { flex-shrink:0; width:20px; height:20px; margin-top:1px; }
+    .al-icon svg { width:20px; height:20px; stroke:currentColor; fill:none; }
+    .al-body { flex:1; min-width:0; }
+    .al-content { display:flex; flex-direction:column; gap:12px; }
+    .al-heading { font-size:16px; font-weight:600; line-height:1.2; }
+    .al-para { font-size:14px; font-weight:400; line-height:1.5; opacity:.85; }
+    .al-actions { display:flex; gap:16px; }
+    .al-link { font-size:14px; font-weight:500; cursor:pointer; text-decoration:underline; text-underline-offset:2px; }
+    .al-close {
+      flex-shrink:0; background:none; border:none; cursor:pointer;
+      color:currentColor; opacity:.6; padding:2px;
+      transition:opacity 0.15s; line-height:0;
+    }
+    .al-close:hover { opacity:1; }
+    .al-close svg { width:20px; height:20px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; }
   </style>
 </head>
 <body>
@@ -785,6 +815,21 @@
             <line x1="13" y1="9" x2="15.5" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".3"/>
           </svg>
           Radio Button
+          <span class="sidebar-dot"></span>
+        </a>
+
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-section-label">Feedback</div>
+
+        <a class="sidebar-link" href="#" onclick="switchPage('alert'); return false;">
+          <svg class="sidebar-icon" viewBox="0 0 18 18" fill="none">
+            <rect x="1.5" y="4" width="15" height="10" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            <circle cx="5" cy="9" r="1.2" fill="currentColor" opacity=".7"/>
+            <line x1="8" y1="7" x2="15" y2="7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".5"/>
+            <line x1="8" y1="9" x2="14" y2="9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".35"/>
+            <line x1="8" y1="11" x2="12" y2="11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".2"/>
+          </svg>
+          Alert
           <span class="sidebar-dot"></span>
         </a>
       </div>
@@ -905,6 +950,33 @@
               <div>
                 <div class="card-name">Tooltip</div>
                 <div class="card-meta">8 arrow positions · title · body</div>
+              </div>
+              <span class="card-chip chip-built">Built</span>
+            </div>
+          </a>
+
+          <!-- Alert card -->
+          <a class="comp-card" href="#" onclick="switchPage('alert'); return false;">
+            <div class="card-preview" style="background:var(--surface);background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:24px 24px;">
+              <div style="display:flex;flex-direction:column;gap:7px;width:220px;">
+                <div style="display:flex;align-items:flex-start;gap:8px;background:#ebf4ff;border:1px solid #d7eafe;border-radius:6px;padding:8px 10px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0959ae" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  <div><div style="font-size:10px;font-weight:600;color:#0959ae;line-height:1.2;">Info heading</div><div style="font-size:9px;color:#0959ae;opacity:.7;margin-top:2px;">Learn more · View Changes →</div></div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:8px;background:#fef6f6;border:1px solid #fbe1df;border-radius:6px;padding:8px 10px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#cc2f24" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  <div><div style="font-size:10px;font-weight:600;color:#cc2f24;line-height:1.2;">Alert heading</div><div style="font-size:9px;color:#cc2f24;opacity:.7;margin-top:2px;">Danger · dismissible</div></div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:8px;background:#eefbf0;border:1px solid #e0f5e4;border-radius:6px;padding:8px 10px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2e8a3d" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-top:1px"><polyline points="20 6 9 17 4 12"/></svg>
+                  <div><div style="font-size:10px;font-weight:600;color:#2e8a3d;line-height:1.2;">Success heading</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div>
+                <div class="card-name">Alert</div>
+                <div class="card-meta">info · alert · success · warning</div>
               </div>
               <span class="card-chip chip-built">Built</span>
             </div>
@@ -2283,6 +2355,204 @@
         </div>
       </div><!-- /#page-radio -->
 
+      <!-- ══════════════════════════════════════════════════ -->
+      <!-- #page-alert                                        -->
+      <!-- ══════════════════════════════════════════════════ -->
+      <div id="page-alert" style="display:none;">
+        <div class="page-header">
+          <h1 class="page-title">Alert</h1>
+          <p class="page-subtitle">Contextual feedback banners with four semantic variants — Info, Alert, Success, and Warning. Each supports heading, body copy, action links, and a dismiss button.</p>
+        </div>
+
+        <!-- ALL VARIANTS ────────────────────────────────── -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Variants</span>
+            <span class="variant-subtitle">Four types × full content</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;max-width:640px;">
+
+            <!-- Info -->
+            <div class="ds-alert ds-alert-info">
+              <div class="al-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </div>
+              <div class="al-body">
+                <div class="al-content">
+                  <p class="al-heading">Heading</p>
+                  <p class="al-para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam.</p>
+                  <div class="al-actions">
+                    <span class="al-link">Learn more</span>
+                    <span class="al-link">View Changes <span style="font-size:13px;">→</span></span>
+                  </div>
+                </div>
+              </div>
+              <button class="al-close">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+
+            <!-- Alert -->
+            <div class="ds-alert ds-alert-alert">
+              <div class="al-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </div>
+              <div class="al-body">
+                <div class="al-content">
+                  <p class="al-heading">Heading</p>
+                  <p class="al-para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam.</p>
+                  <div class="al-actions">
+                    <span class="al-link">Learn more</span>
+                    <span class="al-link">View Changes <span style="font-size:13px;">→</span></span>
+                  </div>
+                </div>
+              </div>
+              <button class="al-close">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+
+            <!-- Success -->
+            <div class="ds-alert ds-alert-success">
+              <div class="al-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>
+              </div>
+              <div class="al-body">
+                <div class="al-content">
+                  <p class="al-heading">Heading</p>
+                  <p class="al-para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam.</p>
+                  <div class="al-actions">
+                    <span class="al-link">Learn more</span>
+                    <span class="al-link">View Changes <span style="font-size:13px;">→</span></span>
+                  </div>
+                </div>
+              </div>
+              <button class="al-close">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+
+            <!-- Warning -->
+            <div class="ds-alert ds-alert-warning">
+              <div class="al-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </div>
+              <div class="al-body">
+                <div class="al-content">
+                  <p class="al-heading">Heading</p>
+                  <p class="al-para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam.</p>
+                  <div class="al-actions">
+                    <span class="al-link">Learn more</span>
+                    <span class="al-link">View Changes <span style="font-size:13px;">→</span></span>
+                  </div>
+                </div>
+              </div>
+              <button class="al-close">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <hr class="section-divider" />
+
+        <!-- WITHOUT ACTIONS ─────────────────────────────── -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Without Actions</span>
+            <span class="variant-subtitle">showActions=false — heading + body only</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;max-width:640px;">
+            <div class="ds-alert ds-alert-info">
+              <div class="al-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+              <div class="al-body"><div class="al-content"><p class="al-heading">Heading</p><p class="al-para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam.</p></div></div>
+              <button class="al-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+            </div>
+            <div class="ds-alert ds-alert-warning">
+              <div class="al-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+              <div class="al-body"><div class="al-content"><p class="al-heading">Heading</p><p class="al-para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam.</p></div></div>
+              <button class="al-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider" />
+
+        <!-- INTERACTIVE PLAYGROUND ──────────────────────── -->
+        <div class="playground">
+          <div class="playground-header">
+            <span class="playground-title">Playground</span>
+            <span style="font-size:11px;color:var(--hint);">Live preview · adjust props and copy code</span>
+          </div>
+          <div class="playground-body">
+            <div class="pg-preview" id="al-preview-area" style="min-height:100px;align-items:flex-start;padding:24px;">
+              <!-- rendered by JS -->
+            </div>
+            <div class="pg-controls">
+
+              <div class="toggle-row">
+                <div><span class="toggle-name">type</span><span class="toggle-type">Info | Alert | Success | Warning</span></div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                  <button class="seg-btn active" id="al-type-Info"    onclick="alSetType('Info',this)">Info</button>
+                  <button class="seg-btn"         id="al-type-alert"  onclick="alSetType('alert',this)">Alert</button>
+                  <button class="seg-btn"         id="al-type-Success" onclick="alSetType('Success',this)">Success</button>
+                  <button class="seg-btn"         id="al-type-Warning" onclick="alSetType('Warning',this)">Warning</button>
+                </div>
+              </div>
+
+              <div class="toggle-row">
+                <div><span class="toggle-name">showClose</span><span class="toggle-type">boolean</span></div>
+                <button class="toggle-switch active" id="al-showClose" onclick="alToggle(this,'showClose')" aria-pressed="true"></button>
+              </div>
+
+              <div class="toggle-row">
+                <div><span class="toggle-name">showActions</span><span class="toggle-type">boolean</span></div>
+                <button class="toggle-switch active" id="al-showActions" onclick="alToggle(this,'showActions')" aria-pressed="true"></button>
+              </div>
+
+              <div class="toggle-row">
+                <div><span class="toggle-name">showBody</span><span class="toggle-type">boolean</span></div>
+                <button class="toggle-switch active" id="al-showBody" onclick="alToggle(this,'showBody')" aria-pressed="true"></button>
+              </div>
+
+            </div>
+          </div>
+          <div class="pg-code-wrap">
+            <div class="pg-code-header">
+              <span class="pg-code-lang">JSX</span>
+              <button class="copy-btn" id="al-copy-btn" onclick="alCopy()">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <div class="pg-code" id="al-code-block"><!-- generated --></div>
+          </div>
+        </div>
+
+        <hr class="section-divider" />
+
+        <!-- PROPS TABLE ─────────────────────────────────── -->
+        <div class="variant-section">
+          <div class="variant-label"><span class="variant-title">Props</span></div>
+          <table class="spec-table">
+            <thead>
+              <tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>type</td><td><span class="spec-val">'Info' | 'alert' | 'Success' | 'Warning'</span></td><td><span class="spec-val">'Info'</span></td><td>Sets the colour scheme and icon</td></tr>
+              <tr><td>heading</td><td><span class="spec-val">string</span></td><td><span class="spec-val">'Heading'</span></td><td>Bold heading text</td></tr>
+              <tr><td>paragraph</td><td><span class="spec-val">string</span></td><td><span class="spec-val">'Lorem ipsum…'</span></td><td>Descriptive body copy below the heading</td></tr>
+              <tr><td>showBody</td><td><span class="spec-val">boolean</span></td><td><span class="spec-val">true</span></td><td>Toggle the paragraph body copy</td></tr>
+              <tr><td>showActions</td><td><span class="spec-val">boolean</span></td><td><span class="spec-val">true</span></td><td>Show "Learn more" and "View Changes" links</td></tr>
+              <tr><td>showClose</td><td><span class="spec-val">boolean</span></td><td><span class="spec-val">true</span></td><td>Show the × dismiss button</td></tr>
+              <tr><td>onClose</td><td><span class="spec-val">() => void</span></td><td>—</td><td>Callback fired when × is pressed</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div><!-- /#page-alert -->
+
     </main>
   </div>
 
@@ -2305,7 +2575,7 @@
     });
 
     // ── Page switching ────────────────────────────────────
-    const pages = ['overview','button','input','tag','tooltip','checkbox','radio'];
+    const pages = ['overview','button','input','tag','tooltip','checkbox','radio','alert'];
 
     // ── Checkbox interactive ──────────────────────────────
     const cbState = { a: false, b: true };
@@ -2922,6 +3192,90 @@
         }, 2000);
       });
     }
+
+    // ══════════════════════════════════════════════════
+    //  ALERT PLAYGROUND
+    // ══════════════════════════════════════════════════
+    const alState = { type: 'Info', showClose: true, showActions: true, showBody: true };
+
+    const alIcons = {
+      Info:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+      alert:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+      Success: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>`,
+      Warning: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`
+    };
+    const alTypeClass = { Info:'ds-alert-info', alert:'ds-alert-alert', Success:'ds-alert-success', Warning:'ds-alert-warning' };
+
+    function alRender() {
+      const { type, showClose, showActions, showBody } = alState;
+      const closeBtn = showClose
+        ? `<button class="al-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>`
+        : '';
+      const actions = showActions
+        ? `<div class="al-actions"><span class="al-link">Learn more</span><span class="al-link">View Changes →</span></div>`
+        : '';
+      const body = showBody
+        ? `<p class="al-para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam.</p>`
+        : '';
+
+      const preview = document.getElementById('al-preview-area');
+      if (preview) {
+        preview.innerHTML = `
+          <div class="ds-alert ${alTypeClass[type]}" style="width:100%;max-width:580px;">
+            <div class="al-icon">${alIcons[type]}</div>
+            <div class="al-body">
+              <div class="al-content">
+                <p class="al-heading">Heading</p>
+                ${body}
+                ${actions}
+              </div>
+            </div>
+            ${closeBtn}
+          </div>`;
+      }
+
+      const code = `<FeedbackAlert\n  type="${type}"${!showBody ? '\n  showBody={false}' : ''}${!showActions ? '\n  showActions={false}' : ''}${!showClose ? '\n  showClose={false}' : ''}\n/>`;
+      const codeBlock = document.getElementById('al-code-block');
+      if (codeBlock) codeBlock.textContent = code;
+    }
+
+    function alSetType(type, el) {
+      alState.type = type;
+      document.querySelectorAll('#al-preview-area').forEach(() => {});
+      document.querySelectorAll('[id^="al-type-"]').forEach(b => b.classList.remove('active'));
+      if (el) el.classList.add('active');
+      alRender();
+    }
+
+    function alToggle(el, prop) {
+      alState[prop] = !alState[prop];
+      el.classList.toggle('active', alState[prop]);
+      el.setAttribute('aria-pressed', alState[prop]);
+      alRender();
+    }
+
+    function alCopy() {
+      const code = document.getElementById('al-code-block');
+      if (code) navigator.clipboard.writeText(code.textContent).catch(() => {});
+      const btn = document.getElementById('al-copy-btn');
+      if (btn) {
+        btn.classList.add('copied');
+        btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`;
+        }, 2000);
+      }
+    }
+
+    // Init alert playground when page loads
+    document.addEventListener('DOMContentLoaded', () => { if (document.getElementById('al-preview-area')) alRender(); });
+    // Also trigger when page is switched to
+    const _origSwitchPage = switchPage;
+    switchPage = function(name) {
+      _origSwitchPage(name);
+      if (name === 'alert') setTimeout(alRender, 0);
+    };
   </script>
 </body>
 </html>
