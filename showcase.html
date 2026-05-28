@@ -23,7 +23,7 @@
       --border:#30363D; --brand-bg:#0D2444; --brand-lt:#2D5FA0;
     }
 
-    html, body { height: 100%; }
+    html, body { min-height: 100%; }
     body {
       font-family: 'Poppins', system-ui, sans-serif;
       background: var(--bg); color: var(--text);
@@ -69,7 +69,7 @@
 
     /* ── Hero ────────────────────────────────────────── */
     .hero {
-      flex: 1;
+      min-height: calc(100vh - 60px);
       display: flex; flex-direction: column;
     }
 
@@ -200,22 +200,42 @@
 
     /* ── Footer ──────────────────────────────────────── */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 40px 48px 32px;
-      transition: border-color 0.2s;
+      background: #0c0f14;
+      padding: 48px 48px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* subtle brand glow in footer */
+    footer::before {
+      content: '';
+      position: absolute;
+      width: 480px; height: 300px;
+      background: radial-gradient(ellipse, rgba(39,120,226,0.12) 0%, transparent 70%);
+      top: -80px; left: -60px;
+      pointer-events: none;
+    }
+    footer::after {
+      content: '';
+      position: absolute;
+      width: 360px; height: 260px;
+      background: radial-gradient(ellipse, rgba(16,185,129,0.08) 0%, transparent 70%);
+      bottom: -40px; right: 5%;
+      pointer-events: none;
     }
 
     .footer-links {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 24px;
-      margin-bottom: 36px;
+      margin-bottom: 40px;
+      position: relative; z-index: 1;
     }
 
     .footer-col {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
 
     .footer-label {
@@ -223,8 +243,7 @@
       font-weight: 500;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--text-sub);
-      transition: color 0.2s;
+      color: #3d4856;
     }
 
     .footer-link {
@@ -234,62 +253,62 @@
       font-size: 15px;
       font-weight: 600;
       letter-spacing: -0.02em;
-      color: var(--text);
+      color: #c9d4e0;
       text-decoration: none;
       width: fit-content;
       transition: color 0.15s, gap 0.15s;
     }
     .footer-link svg {
-      width: 14px; height: 14px;
-      stroke: var(--text-dim); fill: none;
-      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+      width: 13px; height: 13px;
+      stroke: #3d4856; fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
       flex-shrink: 0;
       transition: stroke 0.15s, transform 0.2s;
     }
-    .footer-link:hover { color: var(--brand); gap: 8px; }
-    .footer-link:hover svg { stroke: var(--brand); transform: translate(2px, -2px); }
+    .footer-link:hover { color: #ffffff; gap: 9px; }
+    .footer-link:hover svg { stroke: #2778E2; transform: translate(2px, -2px); }
 
     .footer-divider {
       width: 100%;
       border: none;
-      border-top: 1px dashed var(--border);
-      margin-bottom: 20px;
-      transition: border-color 0.2s;
+      border-top: 1px dashed #1e2631;
+      margin-bottom: 22px;
+      position: relative; z-index: 1;
     }
 
     .footer-bottom {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: relative; z-index: 1;
     }
 
     .footer-copy {
       font-size: 12px;
       font-weight: 400;
-      color: var(--text-dim);
-      letter-spacing: 0;
+      color: #3d4856;
     }
 
     .footer-ver {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
       font-size: 12px;
       font-weight: 500;
-      color: var(--text-sub);
+      color: #3d4856;
       letter-spacing: 0.04em;
     }
-    .footer-ver::before {
-      content: '';
-      width: 4px; height: 4px;
+    .footer-ver-dot {
+      width: 5px; height: 5px;
       border-radius: 50%;
-      background: var(--brand);
-      opacity: 0.6;
+      background: #2778E2;
+      opacity: 0.5;
+      flex-shrink: 0;
     }
 
     @media (max-width: 680px) {
       .footer-links { grid-template-columns: repeat(2, 1fr); gap: 28px 16px; }
-      footer { padding: 32px 24px 24px; }
+      footer { padding: 36px 24px 28px; }
     }
   </style>
 </head>
@@ -409,7 +428,7 @@
 
     <div class="footer-bottom">
       <span class="footer-copy">© 2026 Abhishek Raj</span>
-      <span class="footer-ver">ai ds &nbsp;·&nbsp; v 0.1</span>
+      <span class="footer-ver"><span class="footer-ver-dot"></span>ai ds &nbsp;·&nbsp; v 0.1</span>
     </div>
   </footer>
 
