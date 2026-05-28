@@ -232,65 +232,63 @@
       position: relative; z-index: 1;
     }
 
-    /* card style — mirrors .hcard but dark */
+    /* card style — subtle elevation */
     .footer-card {
-      background: #1c2333;
-      border: 1px solid #2d3a4a;
-      border-radius: 16px;
-      padding: 24px 26px 28px;
+      background: #12181f;
+      border: 1px solid #1e2a36;
+      border-radius: 14px;
+      padding: 20px 22px 24px;
       text-decoration: none;
       display: block;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.5);
-      transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s, background 0.18s;
+      transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s;
     }
     .footer-card:hover {
-      border-color: #2778E2;
-      background: #1e2a3d;
-      box-shadow: 0 8px 32px rgba(39,120,226,0.18), 0 2px 12px rgba(0,0,0,0.5);
-      transform: translateY(-3px);
+      border-color: #2d4a6e;
+      box-shadow: 0 6px 24px rgba(39,120,226,0.10);
+      transform: translateY(-2px);
     }
 
     .footer-card-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 22px;
+      margin-bottom: 18px;
     }
 
     .footer-card-platform {
       font-size: 10px;
       font-weight: 500;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
-      color: #4e6070;
+      color: #364251;
     }
 
     .footer-card-arrow {
-      width: 16px; height: 16px;
-      stroke: #4e6070; fill: none;
+      width: 15px; height: 15px;
+      stroke: #364251; fill: none;
       stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
       flex-shrink: 0;
       transition: stroke 0.15s, transform 0.2s;
     }
     .footer-card:hover .footer-card-arrow {
       stroke: #2778E2;
-      transform: translate(3px, -3px);
+      transform: translate(2px, -2px);
     }
 
     .footer-card-name {
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 600;
       letter-spacing: -0.02em;
-      color: #d4deea;
-      margin-bottom: 6px;
+      color: #8fa3b8;
+      margin-bottom: 4px;
       transition: color 0.15s;
     }
-    .footer-card:hover .footer-card-name { color: #ffffff; }
+    .footer-card:hover .footer-card-name { color: #c4d4e3; }
 
     .footer-card-handle {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 400;
-      color: #4e6070;
+      color: #364251;
       line-height: 1.5;
     }
 
