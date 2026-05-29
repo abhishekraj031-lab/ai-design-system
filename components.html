@@ -3339,7 +3339,7 @@
 
 <!-- ════════════════════════════════════════════════
            DROPDOWN DETAIL PAGE
-           ════════════════════════════════════════════════ -->
+           ════════════════════════════════════════════ -->
       <div id="page-dropdown" style="display:none;">
 
         <div class="detail-header">
@@ -3352,7 +3352,7 @@
           <p class="detail-subtitle">A select trigger field with 7 states — Default, Focused, Filled, Disabled, Error, Filled-Disabled, and Filled-Error — paired with an open-menu panel that supports plain text items, checkboxes, and all-selected views.</p>
         </div>
 
-        <!-- PLAYGROUND -->
+        <!-- Playground -->
         <div class="playground">
           <div class="playground-header">
             <span class="playground-title">Playground</span>
@@ -3361,9 +3361,10 @@
           <div class="playground-body">
             <div class="pg-preview" id="dd-preview-area"></div>
             <div class="pg-controls">
-              <div class="ctrl-group">
-                <div class="ctrl-label">State</div>
-                <div class="seg-group" id="dd-state" style="flex-wrap:wrap;">
+              <!-- State -->
+              <div class="ctrl-row">
+                <span class="ctrl-label">state</span>
+                <div class="seg-picker" id="dd-state" style="flex-wrap:wrap;gap:4px;">
                   <button class="seg-btn active" onclick="ddSeg(this,'dd-state')">Default</button>
                   <button class="seg-btn" onclick="ddSeg(this,'dd-state')">Focused</button>
                   <button class="seg-btn" onclick="ddSeg(this,'dd-state')">Filled</button>
@@ -3373,173 +3374,122 @@
                   <button class="seg-btn" onclick="ddSeg(this,'dd-state')">Filled-Err</button>
                 </div>
               </div>
-              <div class="ctrl-group">
-                <div class="ctrl-label">Options</div>
-                <div style="display:flex;flex-direction:column;gap:8px;">
-                  <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--text);">
-                    <button class="ds-toggle on" id="dd-tog-title" onclick="ddTogOpt(this,'title')" style="flex-shrink:0;"><span class="ds-toggle-thumb"></span></button>
-                    Show title
-                  </label>
-                  <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--text);">
-                    <button class="ds-toggle on" id="dd-tog-help" onclick="ddTogOpt(this,'help')" style="flex-shrink:0;"><span class="ds-toggle-thumb"></span></button>
-                    Help text (error states)
-                  </label>
-                  <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--text);">
-                    <button class="ds-toggle on" id="dd-tog-badge" onclick="ddTogOpt(this,'badge')" style="flex-shrink:0;"><span class="ds-toggle-thumb"></span></button>
-                    Badge (filled states)
-                  </label>
-                </div>
+              <!-- Divider -->
+              <div style="height:1px;background:var(--border);margin:2px 0;"></div>
+              <!-- Boolean props -->
+              <div class="toggle-row">
+                <div><span class="toggle-name">Show title</span><span class="toggle-type">boolean</span></div>
+                <button class="toggle-switch on" id="dd-tog-title" onclick="ddTogOpt(this,'title')" aria-pressed="true"></button>
               </div>
-              <div class="ctrl-group" style="margin-top:auto;">
-                <div class="code-block" id="dd-code-block"></div>
-                <button class="copy-btn" id="dd-copy-btn" onclick="ddCopy()">
-                  <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                  Copy
-                </button>
+              <div class="toggle-row">
+                <div><span class="toggle-name">Help text</span><span class="toggle-type">boolean</span></div>
+                <button class="toggle-switch on" id="dd-tog-help" onclick="ddTogOpt(this,'help')" aria-pressed="true"></button>
               </div>
+              <div class="toggle-row">
+                <div><span class="toggle-name">Badge</span><span class="toggle-type">boolean</span></div>
+                <button class="toggle-switch on" id="dd-tog-badge" onclick="ddTogOpt(this,'badge')" aria-pressed="true"></button>
+              </div>
+            </div><!-- /pg-controls -->
+          </div><!-- /playground-body -->
+          <!-- Code output -->
+          <div class="pg-code-wrap">
+            <div class="pg-code-header">
+              <span class="pg-code-lang">JSX</span>
+              <button class="copy-btn" id="dd-copy-btn" onclick="ddCopy()">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <div class="pg-code"><pre id="dd-code-block"></pre></div>
+          </div>
+        </div><!-- /playground -->
+
+        <!-- ── States ── -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">States</span>
+            <span class="variant-subtitle">Default · Focused · Filled · Disabled · Error · Filled-Disabled · Filled-Error</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-size:11px;color:var(--hint);">Default</span>
+              <div class="ds-dd-wrap"><div class="ds-dd-label">Title</div><div class="ds-dd"><span class="ds-dd-placeholder">Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-size:11px;color:var(--hint);">Focused</span>
+              <div class="ds-dd-wrap"><div class="ds-dd-label">Title</div><div class="ds-dd dd-focused"><span class="ds-dd-placeholder">|Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-size:11px;color:var(--hint);">Filled</span>
+              <div class="ds-dd-wrap"><div class="ds-dd-label">Title</div><div class="ds-dd"><span class="ds-dd-value">Arunachal Pradesh<span class="ds-dd-badge">+4more</span></span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-size:11px;color:var(--hint);">Disabled</span>
+              <div class="ds-dd-wrap"><div class="ds-dd-label">Title</div><div class="ds-dd dd-disabled"><span class="ds-dd-placeholder">Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-size:11px;color:var(--hint);">Error</span>
+              <div class="ds-dd-wrap"><div class="ds-dd-label">Title</div><div class="ds-dd dd-error"><span class="ds-dd-placeholder">Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div><span class="ds-dd-help dd-err">help text will be shown here</span></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-size:11px;color:var(--hint);">Filled · Disabled</span>
+              <div class="ds-dd-wrap"><div class="ds-dd-label">Title</div><div class="ds-dd dd-disabled"><span class="ds-dd-value">Arunachal Pradesh</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-size:11px;color:var(--hint);">Filled · Error</span>
+              <div class="ds-dd-wrap"><div class="ds-dd-label">Title</div><div class="ds-dd dd-error"><span class="ds-dd-value">Arunachal Pradesh<span class="ds-dd-badge">+4more</span></span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div><span class="ds-dd-help dd-err">help text will be shown here</span></div>
             </div>
           </div>
         </div>
 
-        <!-- States variants -->
-        <div class="section-block">
-          <div class="section-title">States</div>
-          <div class="variant-grid" style="grid-template-columns:repeat(3,1fr);gap:20px;">
+        <hr class="section-divider"/>
 
-            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:6px;">
-              <div class="variant-label">Default</div>
-              <div class="ds-dd-wrap" style="max-width:220px;">
-                <div class="ds-dd-label">Title</div>
-                <div class="ds-dd"><span class="ds-dd-placeholder">Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
-              </div>
+        <!-- ── Menu Types ── -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Menu Types</span>
+            <span class="variant-subtitle">Text only · With checkboxes · All selected</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-size:11px;color:var(--hint);">Text only</span>
+              <div class="ds-dd-wrap"><div class="ds-dd-label">Title</div><div class="ds-dd dd-focused dd-open"><span class="ds-dd-placeholder">|Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div><div class="ds-dd-menu"><button class="ds-dd-item">Action 01</button><button class="ds-dd-item">Action 02</button><button class="ds-dd-item">Action 03</button><button class="ds-dd-item">Action 04</button><button class="ds-dd-item">Action 05</button></div></div>
             </div>
-
-            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:6px;">
-              <div class="variant-label">Focused</div>
-              <div class="ds-dd-wrap" style="max-width:220px;">
-                <div class="ds-dd-label">Title</div>
-                <div class="ds-dd dd-focused"><span class="ds-dd-placeholder">|Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
-              </div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-size:11px;color:var(--hint);">With checkboxes</span>
+              <div class="ds-dd-wrap"><div class="ds-dd-label">Title</div><div class="ds-dd dd-focused dd-open"><span class="ds-dd-placeholder">|Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div><div class="ds-dd-menu"><button class="ds-dd-item"><span class="dd-cb"></span>Action 01</button><button class="ds-dd-item"><span class="dd-cb"></span>Action 02</button><button class="ds-dd-item"><span class="dd-cb"></span>Action 03</button><button class="ds-dd-item"><span class="dd-cb"></span>Action 04</button><button class="ds-dd-item"><span class="dd-cb"></span>Action 05</button></div></div>
             </div>
-
-            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:6px;">
-              <div class="variant-label">Filled</div>
-              <div class="ds-dd-wrap" style="max-width:220px;">
-                <div class="ds-dd-label">Title</div>
-                <div class="ds-dd"><span class="ds-dd-value">Arunachal Pradesh<span class="ds-dd-badge">+4more</span></span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
-              </div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-size:11px;color:var(--hint);">All selected</span>
+              <div class="ds-dd-wrap"><div class="ds-dd-label">Title</div><div class="ds-dd dd-focused dd-open"><span class="ds-dd-placeholder">|Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div><div class="ds-dd-menu"><button class="ds-dd-item dd-item-selected"><span class="dd-cb dd-cb-chk"></span>Action 01</button><button class="ds-dd-item dd-item-selected"><span class="dd-cb dd-cb-chk"></span>Action 02</button><button class="ds-dd-item dd-item-selected"><span class="dd-cb dd-cb-chk"></span>Action 03</button><button class="ds-dd-item dd-item-selected"><span class="dd-cb dd-cb-chk"></span>Action 04</button><button class="ds-dd-item dd-item-selected"><span class="dd-cb dd-cb-chk"></span>Action 05</button></div></div>
             </div>
-
-            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:6px;">
-              <div class="variant-label">Disabled</div>
-              <div class="ds-dd-wrap" style="max-width:220px;">
-                <div class="ds-dd-label">Title</div>
-                <div class="ds-dd dd-disabled"><span class="ds-dd-placeholder">Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
-              </div>
-            </div>
-
-            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:6px;">
-              <div class="variant-label">Error</div>
-              <div class="ds-dd-wrap" style="max-width:220px;">
-                <div class="ds-dd-label">Title</div>
-                <div class="ds-dd dd-error"><span class="ds-dd-placeholder">Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
-                <span class="ds-dd-help dd-err">help text will be shown here</span>
-              </div>
-            </div>
-
-            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:6px;">
-              <div class="variant-label">Filled · Disabled</div>
-              <div class="ds-dd-wrap" style="max-width:220px;">
-                <div class="ds-dd-label">Title</div>
-                <div class="ds-dd dd-disabled"><span class="ds-dd-value">Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
-              </div>
-            </div>
-
-            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:6px;">
-              <div class="variant-label">Filled · Error</div>
-              <div class="ds-dd-wrap" style="max-width:220px;">
-                <div class="ds-dd-label">Title</div>
-                <div class="ds-dd dd-error"><span class="ds-dd-value">Placeholder<span class="ds-dd-badge">+4more</span></span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
-                <span class="ds-dd-help dd-err">help text will be shown here</span>
-              </div>
-            </div>
-
           </div>
         </div>
 
-        <!-- Menu variants -->
-        <div class="section-block">
-          <div class="section-title">Menu Types</div>
-          <div class="variant-grid" style="grid-template-columns:repeat(3,1fr);gap:20px;">
+        <hr class="section-divider"/>
 
-            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:6px;">
-              <div class="variant-label">Text only</div>
-              <div class="ds-dd-wrap" style="max-width:240px;">
-                <div class="ds-dd-label">Title</div>
-                <div class="ds-dd dd-focused dd-open"><span class="ds-dd-placeholder">|Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
-                <div class="ds-dd-menu">
-                  <button class="ds-dd-item">Action 01</button>
-                  <button class="ds-dd-item">Action 01</button>
-                  <button class="ds-dd-item">Action 01</button>
-                  <button class="ds-dd-item">Action 01</button>
-                  <button class="ds-dd-item">Action 01</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:6px;">
-              <div class="variant-label">With checkboxes</div>
-              <div class="ds-dd-wrap" style="max-width:240px;">
-                <div class="ds-dd-label">Title</div>
-                <div class="ds-dd dd-focused dd-open"><span class="ds-dd-placeholder">|Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
-                <div class="ds-dd-menu">
-                  <button class="ds-dd-item"><span class="dd-cb"></span>Action 01</button>
-                  <button class="ds-dd-item"><span class="dd-cb"></span>Action 01</button>
-                  <button class="ds-dd-item"><span class="dd-cb"></span>Action 01</button>
-                  <button class="ds-dd-item"><span class="dd-cb"></span>Action 01</button>
-                  <button class="ds-dd-item"><span class="dd-cb"></span>Action 01</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:6px;">
-              <div class="variant-label">All selected</div>
-              <div class="ds-dd-wrap" style="max-width:240px;">
-                <div class="ds-dd-label">Title</div>
-                <div class="ds-dd dd-focused dd-open"><span class="ds-dd-placeholder">|Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
-                <div class="ds-dd-menu">
-                  <button class="ds-dd-item dd-item-selected"><span class="dd-cb dd-cb-chk"></span>Action 01</button>
-                  <button class="ds-dd-item dd-item-selected"><span class="dd-cb dd-cb-chk"></span>Action 01</button>
-                  <button class="ds-dd-item dd-item-selected"><span class="dd-cb dd-cb-chk"></span>Action 01</button>
-                  <button class="ds-dd-item dd-item-selected"><span class="dd-cb dd-cb-chk"></span>Action 01</button>
-                  <button class="ds-dd-item dd-item-selected"><span class="dd-cb dd-cb-chk"></span>Action 01</button>
-                </div>
-              </div>
-            </div>
-
+        <!-- ── Props ── -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Props</span>
           </div>
-        </div>
-
-        <!-- Props -->
-        <div class="section-block">
-          <div class="section-title">Props</div>
-          <table class="props-table">
+          <table class="spec-table">
             <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
             <tbody>
-              <tr><td>label</td><td>string</td><td>—</td><td>Field label shown above the trigger</td></tr>
-              <tr><td>placeholder</td><td>string</td><td>"Placeholder"</td><td>Hint text when no value selected</td></tr>
-              <tr><td>value</td><td>string</td><td>—</td><td>Currently selected value (filled state)</td></tr>
-              <tr><td>state</td><td>"default" | "focused" | "filled" | "disabled" | "error" | "filled-disabled" | "filled-error"</td><td>"default"</td><td>Visual state of the trigger</td></tr>
-              <tr><td>options</td><td>string[]</td><td>—</td><td>Array of option labels for the menu</td></tr>
-              <tr><td>checkbox</td><td>boolean</td><td>false</td><td>Show checkboxes in menu items</td></tr>
-              <tr><td>badge</td><td>string</td><td>—</td><td>Badge label shown after value (e.g. "+4more")</td></tr>
-              <tr><td>helpText</td><td>string</td><td>—</td><td>Help / error message below the trigger</td></tr>
-              <tr><td>onChange</td><td>(v: string) => void</td><td>—</td><td>Callback when selection changes</td></tr>
+              <tr><td>label</td><td><span class="spec-val">string</span></td><td>—</td><td>Field label shown above the trigger</td></tr>
+              <tr><td>placeholder</td><td><span class="spec-val">string</span></td><td><span class="spec-val">"Placeholder"</span></td><td>Hint text when no value selected</td></tr>
+              <tr><td>value</td><td><span class="spec-val">string</span></td><td>—</td><td>Currently selected value (filled state)</td></tr>
+              <tr><td>state</td><td><span class="spec-val">default</span> <span class="spec-val">focused</span> <span class="spec-val">filled</span> <span class="spec-val">disabled</span> <span class="spec-val">error</span> <span class="spec-val">filled-disabled</span> <span class="spec-val">filled-error</span></td><td><span class="spec-val">default</span></td><td>Visual state of the trigger</td></tr>
+              <tr><td>options</td><td><span class="spec-val">string[]</span></td><td>—</td><td>Array of option labels for the menu</td></tr>
+              <tr><td>checkbox</td><td><span class="spec-val">boolean</span></td><td><span class="spec-val">false</span></td><td>Show checkboxes in menu items</td></tr>
+              <tr><td>badge</td><td><span class="spec-val">string</span></td><td>—</td><td>Badge label shown after value (e.g. "+4more")</td></tr>
+              <tr><td>helpText</td><td><span class="spec-val">string</span></td><td>—</td><td>Help / error message below the trigger</td></tr>
+              <tr><td>onChange</td><td><span class="spec-val">(v: string) =&gt; void</span></td><td>—</td><td>Callback when selection changes</td></tr>
             </tbody>
           </table>
         </div>
 
-      </div>
+      </div><!-- /#page-dropdown -->
 
       <!-- ════════════════════════════════════════════════
            TAB DETAIL PAGE
@@ -3553,9 +3503,10 @@
             <span class="meta-tag">Active / Inactive</span>
           </div>
           <h1 class="detail-title">Tab</h1>
-          <p class="detail-subtitle">Horizontal underline tab bar. Active tab shows a brand-blue 2px bottom border; inactive tabs show a muted 1px border. Fully controlled — swap <code style="font-family:monospace;font-size:13px;background:var(--surface);padding:1px 5px;border-radius:4px;border:1px solid var(--border);">.active</code> to move selection.</p>
+          <p class="detail-subtitle">Horizontal underline tab bar. The active tab shows a brand-blue 2 px bottom border; inactive tabs remain flat. Fully controlled — swap <code style="font-family:monospace;font-size:13px;background:var(--surface);padding:1px 5px;border-radius:4px;border:1px solid var(--border);">.active</code> to move selection.</p>
         </div>
 
+        <!-- Playground -->
         <div class="playground">
           <div class="playground-header">
             <span class="playground-title">Playground</span>
@@ -3564,74 +3515,85 @@
           <div class="playground-body">
             <div class="pg-preview" id="tab-preview-area"></div>
             <div class="pg-controls">
-              <div class="ctrl-group">
-                <div class="ctrl-label">Active Tab</div>
-                <div class="seg-group" id="tab-active">
+              <div class="ctrl-row">
+                <span class="ctrl-label">activeIndex</span>
+                <div class="seg-picker" id="tab-active">
                   <button class="seg-btn active" onclick="tabSeg(this,'tab-active')">1</button>
                   <button class="seg-btn" onclick="tabSeg(this,'tab-active')">2</button>
                   <button class="seg-btn" onclick="tabSeg(this,'tab-active')">3</button>
                   <button class="seg-btn" onclick="tabSeg(this,'tab-active')">4</button>
                 </div>
               </div>
-              <div class="ctrl-group">
-                <div class="ctrl-label">Tab Count</div>
-                <div class="seg-group" id="tab-count">
+              <div class="ctrl-row">
+                <span class="ctrl-label">count</span>
+                <div class="seg-picker" id="tab-count">
                   <button class="seg-btn" onclick="tabSeg(this,'tab-count')">2</button>
                   <button class="seg-btn active" onclick="tabSeg(this,'tab-count')">3</button>
                   <button class="seg-btn" onclick="tabSeg(this,'tab-count')">4</button>
                 </div>
               </div>
-              <div class="ctrl-group" style="margin-top:auto;">
-                <div class="code-block" id="tab-code-block"></div>
-                <button class="copy-btn" id="tab-copy-btn" onclick="tabCopy()">
-                  <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                  Copy
-                </button>
+            </div><!-- /pg-controls -->
+          </div><!-- /playground-body -->
+          <!-- Code output -->
+          <div class="pg-code-wrap">
+            <div class="pg-code-header">
+              <span class="pg-code-lang">JSX</span>
+              <button class="copy-btn" id="tab-copy-btn" onclick="tabCopy()">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <div class="pg-code"><pre id="tab-code-block"></pre></div>
+          </div>
+        </div><!-- /playground -->
+
+        <!-- ── States ── -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">States</span>
+            <span class="variant-subtitle">Active tab with brand underline · inactive tabs flat</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:24px;">
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <span style="font-size:11px;color:var(--hint);">Active — Tab 1</span>
+              <div class="ds-tab-bar" style="max-width:440px;">
+                <button class="ds-tab-item active">Overview</button>
+                <button class="ds-tab-item">Design</button>
+                <button class="ds-tab-item">Code</button>
+                <button class="ds-tab-item">Settings</button>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <span style="font-size:11px;color:var(--hint);">Active — Tab 3</span>
+              <div class="ds-tab-bar" style="max-width:440px;">
+                <button class="ds-tab-item">Overview</button>
+                <button class="ds-tab-item">Design</button>
+                <button class="ds-tab-item active">Code</button>
+                <button class="ds-tab-item">Settings</button>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Variants -->
-        <div class="section-block">
-          <div class="section-title">States</div>
-          <div class="variant-grid" style="grid-template-columns:1fr;gap:20px;">
-            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:8px;">
-              <div class="variant-label">Active — Tab 1</div>
-              <div class="ds-tab-bar" style="max-width:400px;">
-                <button class="ds-tab-item active">Tab 1</button>
-                <button class="ds-tab-item">Tab 2</button>
-                <button class="ds-tab-item">Tab 3</button>
-                <button class="ds-tab-item">Tab 4</button>
-              </div>
-            </div>
-            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:8px;">
-              <div class="variant-label">Active — Tab 3</div>
-              <div class="ds-tab-bar" style="max-width:400px;">
-                <button class="ds-tab-item">Tab 1</button>
-                <button class="ds-tab-item">Tab 2</button>
-                <button class="ds-tab-item active">Tab 3</button>
-                <button class="ds-tab-item">Tab 4</button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <hr class="section-divider"/>
 
-        <!-- Props table -->
-        <div class="section-block">
-          <div class="section-title">Props</div>
-          <table class="props-table">
+        <!-- ── Props ── -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Props</span>
+          </div>
+          <table class="spec-table">
             <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
             <tbody>
-              <tr><td>items</td><td>string[]</td><td>—</td><td>Array of tab labels to render</td></tr>
-              <tr><td>activeIndex</td><td>number</td><td>0</td><td>Index of the currently active tab</td></tr>
-              <tr><td>onChange</td><td>(i: number) => void</td><td>—</td><td>Callback fired when a tab is clicked</td></tr>
-              <tr><td>className</td><td>string</td><td>—</td><td>Extra classes on the bar wrapper</td></tr>
+              <tr><td>items</td><td><span class="spec-val">string[]</span></td><td>—</td><td>Array of tab labels to render</td></tr>
+              <tr><td>activeIndex</td><td><span class="spec-val">number</span></td><td><span class="spec-val">0</span></td><td>Index of the currently active tab</td></tr>
+              <tr><td>onChange</td><td><span class="spec-val">(i: number) =&gt; void</span></td><td>—</td><td>Callback fired when a tab is clicked</td></tr>
+              <tr><td>className</td><td><span class="spec-val">string</span></td><td>—</td><td>Extra classes on the bar wrapper</td></tr>
             </tbody>
           </table>
         </div>
 
-      </div>
+      </div><!-- /#page-tab -->
 
       <!-- ════════════════════════════════════════════════
            SWITCHES DETAIL PAGE
@@ -3645,9 +3607,10 @@
             <span class="meta-tag">Lg · Md</span>
           </div>
           <h1 class="detail-title">Switches</h1>
-          <p class="detail-subtitle">Pill-shaped segmented control. The active item lifts to a white (or surface) background with a soft shadow; all other items remain flat. Two sizes — <code style="font-family:monospace;font-size:13px;background:var(--surface);padding:1px 5px;border-radius:4px;border:1px solid var(--border);">lg</code> (44 px) and <code style="font-family:monospace;font-size:13px;background:var(--surface);padding:1px 5px;border-radius:4px;border:1px solid var(--border);">md</code> (36 px).</p>
+          <p class="detail-subtitle">Pill-shaped segmented control. The active item lifts to a white surface with a soft shadow; all other items remain flat. Two sizes — <code style="font-family:monospace;font-size:13px;background:var(--surface);padding:1px 5px;border-radius:4px;border:1px solid var(--border);">lg</code> (44 px) and <code style="font-family:monospace;font-size:13px;background:var(--surface);padding:1px 5px;border-radius:4px;border:1px solid var(--border);">md</code> (36 px).</p>
         </div>
 
+        <!-- Playground -->
         <div class="playground">
           <div class="playground-header">
             <span class="playground-title">Playground</span>
@@ -3656,47 +3619,54 @@
           <div class="playground-body">
             <div class="pg-preview" id="sw-preview-area"></div>
             <div class="pg-controls">
-              <div class="ctrl-group">
-                <div class="ctrl-label">Size</div>
-                <div class="seg-group" id="sw-size">
+              <div class="ctrl-row">
+                <span class="ctrl-label">size</span>
+                <div class="seg-picker" id="sw-size">
                   <button class="seg-btn active" onclick="swSeg(this,'sw-size')">Lg</button>
                   <button class="seg-btn" onclick="swSeg(this,'sw-size')">Md</button>
                 </div>
               </div>
-              <div class="ctrl-group">
-                <div class="ctrl-label">Active Item</div>
-                <div class="seg-group" id="sw-active">
+              <div class="ctrl-row">
+                <span class="ctrl-label">activeIndex</span>
+                <div class="seg-picker" id="sw-active">
                   <button class="seg-btn active" onclick="swSeg(this,'sw-active')">1</button>
                   <button class="seg-btn" onclick="swSeg(this,'sw-active')">2</button>
                   <button class="seg-btn" onclick="swSeg(this,'sw-active')">3</button>
                   <button class="seg-btn" onclick="swSeg(this,'sw-active')">4</button>
                 </div>
               </div>
-              <div class="ctrl-group">
-                <div class="ctrl-label">Item Count</div>
-                <div class="seg-group" id="sw-count">
+              <div class="ctrl-row">
+                <span class="ctrl-label">count</span>
+                <div class="seg-picker" id="sw-count">
                   <button class="seg-btn" onclick="swSeg(this,'sw-count')">2</button>
                   <button class="seg-btn" onclick="swSeg(this,'sw-count')">3</button>
                   <button class="seg-btn active" onclick="swSeg(this,'sw-count')">4</button>
                 </div>
               </div>
-              <div class="ctrl-group" style="margin-top:auto;">
-                <div class="code-block" id="sw-code-block"></div>
-                <button class="copy-btn" id="sw-copy-btn" onclick="swCopy()">
-                  <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                  Copy
-                </button>
-              </div>
+            </div><!-- /pg-controls -->
+          </div><!-- /playground-body -->
+          <!-- Code output -->
+          <div class="pg-code-wrap">
+            <div class="pg-code-header">
+              <span class="pg-code-lang">JSX</span>
+              <button class="copy-btn" id="sw-copy-btn" onclick="swCopy()">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
             </div>
+            <div class="pg-code"><pre id="sw-code-block"></pre></div>
           </div>
-        </div>
+        </div><!-- /playground -->
 
-        <!-- Variants -->
-        <div class="section-block">
-          <div class="section-title">Sizes</div>
-          <div class="variant-grid" style="grid-template-columns:1fr 1fr;gap:20px;">
-            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:8px;">
-              <div class="variant-label">Large (44px)</div>
+        <!-- ── Sizes ── -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Sizes</span>
+            <span class="variant-subtitle">Lg 44 px · Md 36 px</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:28px;">
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <span style="font-size:11px;color:var(--hint);">Large — 44 px</span>
               <div class="ds-switches ds-switches-lg">
                 <button class="ds-switch-item active">Switch 1</button>
                 <button class="ds-switch-item">Switch 2</button>
@@ -3704,8 +3674,8 @@
                 <button class="ds-switch-item">Switch 4</button>
               </div>
             </div>
-            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:8px;">
-              <div class="variant-label">Medium (36px)</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <span style="font-size:11px;color:var(--hint);">Medium — 36 px</span>
               <div class="ds-switches ds-switches-md">
                 <button class="ds-switch-item active">Switch 1</button>
                 <button class="ds-switch-item">Switch 2</button>
@@ -3716,22 +3686,25 @@
           </div>
         </div>
 
-        <!-- Props table -->
-        <div class="section-block">
-          <div class="section-title">Props</div>
-          <table class="props-table">
+        <hr class="section-divider"/>
+
+        <!-- ── Props ── -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Props</span>
+          </div>
+          <table class="spec-table">
             <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
             <tbody>
-              <tr><td>items</td><td>string[]</td><td>—</td><td>Array of option labels</td></tr>
-              <tr><td>activeIndex</td><td>number</td><td>0</td><td>Index of the selected item</td></tr>
-              <tr><td>size</td><td>"lg" | "md"</td><td>"lg"</td><td>Height variant — 44px or 36px</td></tr>
-              <tr><td>onChange</td><td>(i: number) => void</td><td>—</td><td>Callback fired when selection changes</td></tr>
+              <tr><td>items</td><td><span class="spec-val">string[]</span></td><td>—</td><td>Array of option labels</td></tr>
+              <tr><td>activeIndex</td><td><span class="spec-val">number</span></td><td><span class="spec-val">0</span></td><td>Index of the selected item</td></tr>
+              <tr><td>size</td><td><span class="spec-val">"lg"</span> <span class="spec-val">"md"</span></td><td><span class="spec-val">"lg"</span></td><td>Height variant — 44 px or 36 px</td></tr>
+              <tr><td>onChange</td><td><span class="spec-val">(i: number) =&gt; void</span></td><td>—</td><td>Callback fired when selection changes</td></tr>
             </tbody>
           </table>
         </div>
 
-      </div>
-
+      </div><!-- /#page-switches -->
     </main>
   </div>
 
