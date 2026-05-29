@@ -860,6 +860,52 @@
     .dd-cb.dd-cb-chk { background:#068ae9; border-color:#068ae9; }
     .dd-cb.dd-cb-chk::after { content:''; display:block; width:9px; height:5px; border-left:2px solid #fff; border-bottom:2px solid #fff; transform:rotate(-45deg) translate(1px,-1px); }
 
+    /* ── Tab ─────────────────────────────────────────── */
+    .ds-tab-bar {
+      display:flex; align-items:flex-end;
+      border-bottom:1px solid var(--border);
+      width:100%; overflow-x:auto;
+    }
+    .ds-tab-item {
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 16px; height:40px;
+      font-size:14px; font-weight:500; line-height:1.2;
+      color:#7289a1; background:transparent;
+      border:none; border-bottom:2px solid transparent;
+      cursor:pointer; white-space:nowrap; flex-shrink:0;
+      transition:color 0.15s, border-color 0.15s;
+      margin-bottom:-1px;
+    }
+    .ds-tab-item:hover { color:var(--text); }
+    .ds-tab-item.active { color:#1d242b; border-bottom:2px solid #068ae9; }
+    .dark .ds-tab-item { color:var(--muted); }
+    .dark .ds-tab-item.active { color:var(--text); border-bottom-color:#068ae9; }
+
+    /* ── Switches ─────────────────────────────────────── */
+    .ds-switches {
+      display:inline-flex; align-items:center;
+      background:#eceff3; border-radius:9999px;
+      padding:4px; gap:2px;
+    }
+    .dark .ds-switches { background:var(--surface); }
+    .ds-switches-lg { height:44px; }
+    .ds-switches-md { height:36px; padding:3px; }
+    .ds-switch-item {
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:4px 12px; border-radius:9999px;
+      font-size:12px; font-weight:500; line-height:1.2;
+      color:#7289a1; background:transparent;
+      border:none; cursor:pointer; white-space:nowrap;
+      transition:background 0.15s, color 0.15s, box-shadow 0.15s;
+      height:100%;
+    }
+    .ds-switch-item:hover { color:var(--text); }
+    .ds-switch-item.active {
+      background:#ffffff; color:#52667a;
+      box-shadow:0 1px 4px rgba(0,0,0,0.12);
+    }
+    .dark .ds-switch-item.active { background:var(--bg); color:var(--text); }
+
     /* ── Footer ──────────────────────────────────────── */
     footer {
       background: #0c0f14;
