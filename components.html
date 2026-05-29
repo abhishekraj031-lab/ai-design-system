@@ -3481,6 +3481,16 @@
           <div class="playground-body">
             <div class="pg-preview" id="dd-preview-area"></div>
             <div class="pg-controls">
+              <!-- Label -->
+              <div class="ctrl-row">
+                <span class="ctrl-label">Label</span>
+                <input class="ctrl-input" id="dd-label-text" type="text" value="Title" oninput="ddRender()" />
+              </div>
+              <!-- Placeholder -->
+              <div class="ctrl-row">
+                <span class="ctrl-label">Placeholder</span>
+                <input class="ctrl-input" id="dd-placeholder" type="text" value="Placeholder" oninput="ddRender()" />
+              </div>
               <!-- State -->
               <div class="ctrl-row">
                 <span class="ctrl-label">state</span>
@@ -3635,6 +3645,11 @@
           <div class="playground-body">
             <div class="pg-preview" id="tab-preview-area"></div>
             <div class="pg-controls">
+              <!-- Label -->
+              <div class="ctrl-row">
+                <span class="ctrl-label">Label</span>
+                <input class="ctrl-input" id="tab-label" type="text" value="Tab" oninput="tabRender()" />
+              </div>
               <div class="ctrl-row">
                 <span class="ctrl-label">activeIndex</span>
                 <div class="seg-picker" id="tab-active">
@@ -3739,6 +3754,11 @@
           <div class="playground-body">
             <div class="pg-preview" id="sw-preview-area"></div>
             <div class="pg-controls">
+              <!-- Label -->
+              <div class="ctrl-row">
+                <span class="ctrl-label">Label</span>
+                <input class="ctrl-input" id="sw-label" type="text" value="Switch" oninput="swRender()" />
+              </div>
               <div class="ctrl-row">
                 <span class="ctrl-label">size</span>
                 <div class="seg-picker" id="sw-size">
@@ -4765,10 +4785,11 @@
       tabRender();
     }
     function tabRender() {
-      const activeIdx = parseInt(tabActiveVal('tab-active') || '1') - 1;
-      const count     = parseInt(tabActiveVal('tab-count')  || '3');
-      const labels    = ['Overview','Design','Code','Settings'].slice(0, count);
-      const items     = labels.map((l, i) =>
+      const activeIdx  = parseInt(tabActiveVal('tab-active') || '1') - 1;
+      const count      = parseInt(tabActiveVal('tab-count')  || '3');
+      const labelBase  = (document.getElementById('tab-label')?.value || 'Tab').trim() || 'Tab';
+      const labels     = Array.from({length: count}, (_, i) => `${labelBase} ${i + 1}`);
+      const items      = labels.map((l, i) =>
         `<button class="ds-tab-item${i === activeIdx ? ' active' : ''}">${l}</button>`
       ).join('');
       const preview = document.getElementById('tab-preview-area');
@@ -4811,10 +4832,11 @@
       swRender();
     }
     function swRender() {
-      const size      = swActiveVal('sw-size')   || 'Lg';
-      const activeIdx = parseInt(swActiveVal('sw-active') || '1') - 1;
-      const count     = parseInt(swActiveVal('sw-count')  || '4');
-      const labels    = ['Switch 1','Switch 2','Switch 3','Switch 4'].slice(0, count);
+      const size       = swActiveVal('sw-size')   || 'Lg';
+      const activeIdx  = parseInt(swActiveVal('sw-active') || '1') - 1;
+      const count      = parseInt(swActiveVal('sw-count')  || '4');
+      const labelBase  = (document.getElementById('sw-label')?.value || 'Switch').trim() || 'Switch';
+      const labels     = Array.from({length: count}, (_, i) => `${labelBase} ${i + 1}`);
       const sizeClass = size === 'Md' ? 'ds-switches-md' : 'ds-switches-lg';
       const items     = labels.map((l, i) =>
         `<button class="ds-switch-item${i === activeIdx ? ' active' : ''}">${l}</button>`
@@ -4868,7 +4890,9 @@
       ddRender();
     }
     function ddRender() {
-      const state  = ddActiveVal('dd-state') || 'Default';
+      const state       = ddActiveVal('dd-state') || 'Default';
+      const labelText   = (document.getElementById('dd-label-text')?.value || 'Title').trim() || 'Title';
+      const placeholder = (document.getElementById('dd-placeholder')?.value || 'Placeholder').trim() || 'Placeholder';
       const chv    = '<svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>';
       const isError    = state === 'Error' || state === 'Filled-Err';
       const isFilled   = state === 'Filled' || state === 'Filled-Dis' || state === 'Filled-Err';
@@ -4880,12 +4904,12 @@
       let inner = '';
       if (isFilled) {
         const badge = (ddOpts.badge && (state==='Filled'||state==='Filled-Err')) ? '<span class="ds-dd-badge">+4more</span>' : '';
-        inner = `<span class="ds-dd-value">Arunachal Pradesh${badge}</span>` + chv;
+        inner = `<span class="ds-dd-value">${placeholder}${badge}</span>` + chv;
       } else {
         const cur = state === 'Focused' ? '|' : '';
-        inner = `<span class="ds-dd-placeholder">${cur}Placeholder</span>` + chv;
+        inner = `<span class="ds-dd-placeholder">${cur}${placeholder}</span>` + chv;
       }
-      const title = ddOpts.title ? '<div class="ds-dd-label">Title</div>' : '';
+      const title = ddOpts.title ? `<div class="ds-dd-label">${labelText}</div>` : '';
       const help  = (isError && ddOpts.help) ? '<span class="ds-dd-help dd-err">help text will be shown here</span>' : '';
       const wrap  = `<div class="ds-dd-wrap" style="max-width:280px;">${title}<div class="ds-dd ${stateClass}">${inner}</div>${help}</div>`;
       const preview = document.getElementById('dd-preview-area');
@@ -4893,8 +4917,9 @@
 
       const lines = [];
       lines.push(`<span class="c-tag">&lt;Dropdown</span>`);
-      if (ddOpts.title) lines.push(`  <span class="c-prop">label</span>=<span class="c-str">"Title"</span>`);
-      if (isFilled)     lines.push(`  <span class="c-prop">value</span>=<span class="c-str">"Arunachal Pradesh"</span>`);
+      if (ddOpts.title) lines.push(`  <span class="c-prop">label</span>=<span class="c-str">"${labelText}"</span>`);
+      lines.push(`  <span class="c-prop">placeholder</span>=<span class="c-str">"${placeholder}"</span>`);
+      if (isFilled)     lines.push(`  <span class="c-prop">value</span>=<span class="c-str">"${placeholder}"</span>`);
       if (state !== 'Default') lines.push(`  <span class="c-prop">state</span>=<span class="c-str">"${state.toLowerCase()}"</span>`);
       if (isError && ddOpts.help) lines.push(`  <span class="c-prop">helpText</span>=<span class="c-str">"help text will be shown here"</span>`);
       if (ddOpts.badge && isFilled) lines.push(`  <span class="c-prop">badge</span>=<span class="c-str">"+4more"</span>`);
