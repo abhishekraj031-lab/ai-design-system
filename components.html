@@ -863,9 +863,12 @@
     /* ── Tab ─────────────────────────────────────────── */
     .ds-tab-bar {
       display:flex; align-items:flex-end;
+      background:#ffffff;
       border-bottom:1px solid var(--border);
       width:100%; overflow-x:auto;
+      border-radius:var(--r-md) var(--r-md) 0 0;
     }
+    .dark .ds-tab-bar { background:var(--surface); }
     .ds-tab-item {
       display:inline-flex; align-items:center; justify-content:center;
       padding:10px 16px; height:40px;
@@ -4601,7 +4604,7 @@
         `<button class="ds-tab-item${i === activeIdx ? ' active' : ''}">${l}</button>`
       ).join('');
       const preview = document.getElementById('tab-preview-area');
-      if (preview) preview.innerHTML = `<div class="ds-tab-bar" style="min-width:280px;">${items}</div>`;
+      if (preview) preview.innerHTML = `<div style="width:100%;max-width:480px;"><div class="ds-tab-bar">${items}</div></div>`;
 
       const lines = [];
       lines.push(`<span class="c-tag">&lt;TabBar</span>`);
