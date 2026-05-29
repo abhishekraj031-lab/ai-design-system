@@ -361,11 +361,12 @@
       .hero-body {
         display: flex; flex-direction: column; justify-content: flex-start;
         position: relative; overflow: hidden;
-        padding: 48px 20px 0;
-        /* Viewport minus nav (60px) minus 40% of first card (~72px) */
+        padding: 160px 20px 0;
+        /* Viewport minus nav (60px) minus 40% of first card (~72px).
+           160px top padding + ~140px text + remaining ≈ 400-450px gap to cards. */
         height: calc(100vh - 132px);
         height: calc(100svh - 132px);
-        min-height: 300px;
+        min-height: 500px;
       }
       .hero-cards {
         grid-template-columns: 1fr;
