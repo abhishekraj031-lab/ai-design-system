@@ -824,6 +824,42 @@
       letter-spacing:0.1em; color:var(--hint);
     }
 
+    /* ── Dropdown ────────────────────────────────────── */
+    .ds-dd-wrap { display:flex; flex-direction:column; gap:4px; width:100%; }
+    .ds-dd-label { font-size:14px; font-weight:600; color:#1d242b; line-height:1.2; }
+    .dark .ds-dd-label { color:var(--text); }
+    .ds-dd {
+      display:flex; align-items:center; justify-content:space-between;
+      height:40px; padding:10px 12px;
+      background:#ffffff; border:1px solid #e0e5eb; border-radius:6px;
+      cursor:pointer; width:100%; position:relative;
+      transition:border-color 0.15s, background 0.15s;
+      font-size:12px; font-weight:500; color:#97a8b9; line-height:1.2;
+      text-align:left; gap:8px;
+    }
+    .dark .ds-dd { background:var(--surface); border-color:var(--border); color:var(--muted); }
+    .ds-dd.dd-focused  { border-color:#068ae9; }
+    .ds-dd.dd-error    { border-color:#cc2f24; }
+    .ds-dd.dd-disabled { background:#eceff3; border-color:#e0e5eb; cursor:not-allowed; color:#7289a1; }
+    .ds-dd-value { flex:1; min-width:0; display:flex; align-items:center; gap:8px; font-size:14px; font-weight:500; color:#1d242b; white-space:nowrap; overflow:hidden; }
+    .dark .ds-dd-value { color:var(--text); }
+    .ds-dd-placeholder { font-size:12px; font-weight:500; color:#97a8b9; }
+    .ds-dd-badge { display:inline-flex; align-items:center; justify-content:center; height:24px; padding:0 8px; border-radius:9999px; background:#f6f7f9; border:1px solid #e0e5eb; font-size:12px; font-weight:500; color:#1d242b; white-space:nowrap; flex-shrink:0; }
+    .ds-dd-chevron { width:20px; height:20px; flex-shrink:0; stroke:#97a8b9; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; transition:transform 0.2s; }
+    .ds-dd.dd-open .ds-dd-chevron { transform:rotate(180deg); }
+    .ds-dd-help { font-size:12px; font-weight:400; line-height:1.2; color:#52667a; }
+    .ds-dd-help.dd-err { color:#cc2f24; }
+    .ds-dd-menu { border:1px solid #e0e5eb; border-radius:8px; overflow:hidden; background:#ffffff; width:100%; margin-top:4px; }
+    .dark .ds-dd-menu { background:var(--surface); border-color:var(--border); }
+    .ds-dd-item { display:flex; align-items:center; gap:6px; height:40px; padding:10px 12px; font-size:14px; font-weight:600; color:#1d242b; cursor:pointer; background:#ffffff; transition:background 0.12s; border:none; width:100%; text-align:left; }
+    .dark .ds-dd-item { background:var(--surface); color:var(--text); }
+    .ds-dd-item:hover, .ds-dd-item.dd-item-hover { background:#f0f9ff; }
+    .ds-dd-item.dd-item-selected { color:#068ae9; background:#ffffff; }
+    .dark .ds-dd-item.dd-item-selected { background:var(--surface); }
+    .dd-cb { width:16px; height:16px; border-radius:3px; flex-shrink:0; border:2px solid #97a8b9; background:transparent; display:flex; align-items:center; justify-content:center; transition:all 0.12s; pointer-events:none; }
+    .dd-cb.dd-cb-chk { background:#068ae9; border-color:#068ae9; }
+    .dd-cb.dd-cb-chk::after { content:''; display:block; width:9px; height:5px; border-left:2px solid #fff; border-bottom:2px solid #fff; transform:rotate(-45deg) translate(1px,-1px); }
+
     /* ── Footer ──────────────────────────────────────── */
     footer {
       background: #0c0f14;
@@ -1038,6 +1074,15 @@
           Toggle
           <span class="sidebar-dot"></span>
         </a>
+        <a class="sidebar-link" href="#" onclick="switchPage('dropdown'); return false;">
+          <svg class="sidebar-icon" viewBox="0 0 18 18" fill="none">
+            <rect x="2" y="4" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.4"/>
+            <polyline points="6,9 9,12 12,9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Dropdown
+          <span class="sidebar-dot"></span>
+        </a>
+
         <div class="sidebar-divider"></div>
         <div class="sidebar-section-label">Navigation</div>
 
@@ -1263,6 +1308,34 @@
             </div>
           </a>
 
+
+
+          <!-- Dropdown card -->
+          <a class="comp-card" href="#" onclick="switchPage('dropdown'); return false;">
+            <div class="card-preview" style="background:var(--surface);background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:24px 24px;padding:16px 20px;">
+              <div style="display:flex;flex-direction:column;gap:8px;width:100%;max-width:220px;">
+                <div class="ds-dd" style="pointer-events:none;">
+                  <span class="ds-dd-placeholder">Placeholder</span>
+                  <svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+                <div class="ds-dd dd-focused" style="pointer-events:none;">
+                  <span class="ds-dd-placeholder">|Placeholder</span>
+                  <svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+                <div class="ds-dd" style="pointer-events:none;">
+                  <span class="ds-dd-value">Arunachal Pradesh<span class="ds-dd-badge">+4more</span></span>
+                  <svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div>
+                <div class="card-name">Dropdown</div>
+                <div class="card-meta">7 states · menu · checkbox · badge</div>
+              </div>
+              <span class="card-chip chip-built">Built</span>
+            </div>
+          </a>
 
           <!-- Tab card -->
           <a class="comp-card" href="#" onclick="switchPage('tab'); return false;">
@@ -3240,7 +3313,7 @@
     });
 
     // ── Page switching ────────────────────────────────────
-    const pages = ['overview','button','input','tag','tooltip','checkbox','radio','alert','avatar','toggle','tab','switches'];
+    const pages = ['overview','button','input','tag','tooltip','checkbox','radio','alert','avatar','toggle','tab','switches','dropdown'];
 
     // ── Checkbox interactive ──────────────────────────────
     const cbState = { a: false, b: true };
@@ -3347,6 +3420,7 @@
       if (name === 'toggle'  && typeof tglRender  === 'function') tglRender();
       if (name === 'tab'     && typeof tabRender  === 'function') tabRender();
       if (name === 'switches'&& typeof swRender   === 'function') swRender();
+      if (name === 'dropdown'&& typeof ddRender   === 'function') ddRender();
     }
 
     // Restore from hash — deferred so all consts are initialised first
@@ -4188,8 +4262,284 @@
     }
     // swRender called by switchPage
 
+    // ══════════════════════════════════════════════════
+    //  DROPDOWN PLAYGROUND
+    // ══════════════════════════════════════════════════
+    const ddOpts = { title:true, help:true, badge:true };
+
+    function ddActiveVal(groupId) {
+      const a = document.querySelector('#' + groupId + ' .seg-btn.active');
+      return a ? a.textContent.trim() : '';
+    }
+    function ddSeg(btn, groupId) {
+      document.querySelectorAll('#' + groupId + ' .seg-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      ddRender();
+    }
+    function ddTogOpt(btn, opt) {
+      ddOpts[opt] = !ddOpts[opt];
+      btn.classList.toggle('on', ddOpts[opt]);
+      btn.setAttribute('aria-pressed', ddOpts[opt]);
+      ddRender();
+    }
+    function ddRender() {
+      const state  = ddActiveVal('dd-state') || 'Default';
+      const chv    = '<svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>';
+      const isError    = state === 'Error' || state === 'Filled-Err';
+      const isFilled   = state === 'Filled' || state === 'Filled-Dis' || state === 'Filled-Err';
+      const isDisabled = state === 'Disabled' || state === 'Filled-Dis';
+      let stateClass = '';
+      if (state === 'Focused')                          stateClass = 'dd-focused';
+      if (state === 'Error' || state === 'Filled-Err')  stateClass = 'dd-error';
+      if (isDisabled)                                   stateClass = 'dd-disabled';
+      let inner = '';
+      if (isFilled) {
+        const badge = (ddOpts.badge && (state==='Filled'||state==='Filled-Err')) ? '<span class="ds-dd-badge">+4more</span>' : '';
+        inner = `<span class="ds-dd-value">Arunachal Pradesh${badge}</span>` + chv;
+      } else {
+        const cur = state === 'Focused' ? '|' : '';
+        inner = `<span class="ds-dd-placeholder">${cur}Placeholder</span>` + chv;
+      }
+      const title = ddOpts.title ? '<div class="ds-dd-label">Title</div>' : '';
+      const help  = (isError && ddOpts.help) ? '<span class="ds-dd-help dd-err">help text will be shown here</span>' : '';
+      const wrap  = `<div class="ds-dd-wrap" style="max-width:280px;">${title}<div class="ds-dd ${stateClass}">${inner}</div>${help}</div>`;
+      const preview = document.getElementById('dd-preview-area');
+      if (preview) preview.innerHTML = wrap;
+
+      const lines = [];
+      lines.push(`<span class="c-tag">&lt;Dropdown</span>`);
+      if (ddOpts.title) lines.push(`  <span class="c-prop">label</span>=<span class="c-str">"Title"</span>`);
+      if (isFilled)     lines.push(`  <span class="c-prop">value</span>=<span class="c-str">"Arunachal Pradesh"</span>`);
+      if (state !== 'Default') lines.push(`  <span class="c-prop">state</span>=<span class="c-str">"${state.toLowerCase()}"</span>`);
+      if (isError && ddOpts.help) lines.push(`  <span class="c-prop">helpText</span>=<span class="c-str">"help text will be shown here"</span>`);
+      if (ddOpts.badge && isFilled) lines.push(`  <span class="c-prop">badge</span>=<span class="c-str">"+4more"</span>`);
+      lines.push(`  <span class="c-prop">onChange</span>=<span class="c-bool">{handleChange}</span>`);
+      lines.push(`<span class="c-tag">/&gt;</span>`);
+      const cb = document.getElementById('dd-code-block');
+      if (cb) cb.innerHTML = lines.join('\n');
+    }
+    function ddCopy() {
+      const code = document.getElementById('dd-code-block');
+      if (code) navigator.clipboard.writeText(code.innerText).catch(() => {});
+      const btn = document.getElementById('dd-copy-btn');
+      if (btn) {
+        btn.classList.add('copied');
+        btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`;
+        }, 2000);
+      }
+    }
+    // ddRender called by switchPage
+
   </script>
 
+
+
+      <!-- ════════════════════════════════════════════════
+           DROPDOWN DETAIL PAGE
+           ════════════════════════════════════════════════ -->
+      <div id="page-dropdown" style="display:none;">
+
+        <div class="detail-header">
+          <div class="detail-meta">
+            <span class="meta-tag figma">node 35-92</span>
+            <span class="meta-tag">7 states</span>
+            <span class="meta-tag">Menu · Checkbox · Badge</span>
+          </div>
+          <h1 class="detail-title">Dropdown</h1>
+          <p class="detail-subtitle">A select trigger field with 7 states — Default, Focused, Filled, Disabled, Error, Filled-Disabled, and Filled-Error — paired with an open-menu panel that supports plain text items, checkboxes, and all-selected views.</p>
+        </div>
+
+        <!-- PLAYGROUND -->
+        <div class="playground">
+          <div class="playground-header">
+            <span class="playground-title">Playground</span>
+            <span style="font-size:11px;color:var(--hint);">Live preview · adjust props and copy code</span>
+          </div>
+          <div class="playground-body">
+            <div class="pg-preview" id="dd-preview-area"></div>
+            <div class="pg-controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">State</div>
+                <div class="seg-group" id="dd-state" style="flex-wrap:wrap;">
+                  <button class="seg-btn active" onclick="ddSeg(this,'dd-state')">Default</button>
+                  <button class="seg-btn" onclick="ddSeg(this,'dd-state')">Focused</button>
+                  <button class="seg-btn" onclick="ddSeg(this,'dd-state')">Filled</button>
+                  <button class="seg-btn" onclick="ddSeg(this,'dd-state')">Disabled</button>
+                  <button class="seg-btn" onclick="ddSeg(this,'dd-state')">Error</button>
+                  <button class="seg-btn" onclick="ddSeg(this,'dd-state')">Filled-Dis</button>
+                  <button class="seg-btn" onclick="ddSeg(this,'dd-state')">Filled-Err</button>
+                </div>
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">Options</div>
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                  <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--text);">
+                    <button class="ds-toggle on" id="dd-tog-title" onclick="ddTogOpt(this,'title')" style="flex-shrink:0;"><span class="ds-toggle-thumb"></span></button>
+                    Show title
+                  </label>
+                  <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--text);">
+                    <button class="ds-toggle on" id="dd-tog-help" onclick="ddTogOpt(this,'help')" style="flex-shrink:0;"><span class="ds-toggle-thumb"></span></button>
+                    Help text (error states)
+                  </label>
+                  <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--text);">
+                    <button class="ds-toggle on" id="dd-tog-badge" onclick="ddTogOpt(this,'badge')" style="flex-shrink:0;"><span class="ds-toggle-thumb"></span></button>
+                    Badge (filled states)
+                  </label>
+                </div>
+              </div>
+              <div class="ctrl-group" style="margin-top:auto;">
+                <div class="code-block" id="dd-code-block"></div>
+                <button class="copy-btn" id="dd-copy-btn" onclick="ddCopy()">
+                  <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  Copy
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- States variants -->
+        <div class="section-block">
+          <div class="section-title">States</div>
+          <div class="variant-grid" style="grid-template-columns:repeat(3,1fr);gap:20px;">
+
+            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:6px;">
+              <div class="variant-label">Default</div>
+              <div class="ds-dd-wrap" style="max-width:220px;">
+                <div class="ds-dd-label">Title</div>
+                <div class="ds-dd"><span class="ds-dd-placeholder">Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+              </div>
+            </div>
+
+            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:6px;">
+              <div class="variant-label">Focused</div>
+              <div class="ds-dd-wrap" style="max-width:220px;">
+                <div class="ds-dd-label">Title</div>
+                <div class="ds-dd dd-focused"><span class="ds-dd-placeholder">|Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+              </div>
+            </div>
+
+            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:6px;">
+              <div class="variant-label">Filled</div>
+              <div class="ds-dd-wrap" style="max-width:220px;">
+                <div class="ds-dd-label">Title</div>
+                <div class="ds-dd"><span class="ds-dd-value">Arunachal Pradesh<span class="ds-dd-badge">+4more</span></span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+              </div>
+            </div>
+
+            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:6px;">
+              <div class="variant-label">Disabled</div>
+              <div class="ds-dd-wrap" style="max-width:220px;">
+                <div class="ds-dd-label">Title</div>
+                <div class="ds-dd dd-disabled"><span class="ds-dd-placeholder">Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+              </div>
+            </div>
+
+            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:6px;">
+              <div class="variant-label">Error</div>
+              <div class="ds-dd-wrap" style="max-width:220px;">
+                <div class="ds-dd-label">Title</div>
+                <div class="ds-dd dd-error"><span class="ds-dd-placeholder">Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+                <span class="ds-dd-help dd-err">help text will be shown here</span>
+              </div>
+            </div>
+
+            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:6px;">
+              <div class="variant-label">Filled · Disabled</div>
+              <div class="ds-dd-wrap" style="max-width:220px;">
+                <div class="ds-dd-label">Title</div>
+                <div class="ds-dd dd-disabled"><span class="ds-dd-value">Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+              </div>
+            </div>
+
+            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:6px;">
+              <div class="variant-label">Filled · Error</div>
+              <div class="ds-dd-wrap" style="max-width:220px;">
+                <div class="ds-dd-label">Title</div>
+                <div class="ds-dd dd-error"><span class="ds-dd-value">Placeholder<span class="ds-dd-badge">+4more</span></span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+                <span class="ds-dd-help dd-err">help text will be shown here</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Menu variants -->
+        <div class="section-block">
+          <div class="section-title">Menu Types</div>
+          <div class="variant-grid" style="grid-template-columns:repeat(3,1fr);gap:20px;">
+
+            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:6px;">
+              <div class="variant-label">Text only</div>
+              <div class="ds-dd-wrap" style="max-width:240px;">
+                <div class="ds-dd-label">Title</div>
+                <div class="ds-dd dd-focused dd-open"><span class="ds-dd-placeholder">|Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+                <div class="ds-dd-menu">
+                  <button class="ds-dd-item">Action 01</button>
+                  <button class="ds-dd-item">Action 01</button>
+                  <button class="ds-dd-item">Action 01</button>
+                  <button class="ds-dd-item">Action 01</button>
+                  <button class="ds-dd-item">Action 01</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:6px;">
+              <div class="variant-label">With checkboxes</div>
+              <div class="ds-dd-wrap" style="max-width:240px;">
+                <div class="ds-dd-label">Title</div>
+                <div class="ds-dd dd-focused dd-open"><span class="ds-dd-placeholder">|Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+                <div class="ds-dd-menu">
+                  <button class="ds-dd-item"><span class="dd-cb"></span>Action 01</button>
+                  <button class="ds-dd-item"><span class="dd-cb"></span>Action 01</button>
+                  <button class="ds-dd-item"><span class="dd-cb"></span>Action 01</button>
+                  <button class="ds-dd-item"><span class="dd-cb"></span>Action 01</button>
+                  <button class="ds-dd-item"><span class="dd-cb"></span>Action 01</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:6px;">
+              <div class="variant-label">All selected</div>
+              <div class="ds-dd-wrap" style="max-width:240px;">
+                <div class="ds-dd-label">Title</div>
+                <div class="ds-dd dd-focused dd-open"><span class="ds-dd-placeholder">|Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+                <div class="ds-dd-menu">
+                  <button class="ds-dd-item dd-item-selected"><span class="dd-cb dd-cb-chk"></span>Action 01</button>
+                  <button class="ds-dd-item dd-item-selected"><span class="dd-cb dd-cb-chk"></span>Action 01</button>
+                  <button class="ds-dd-item dd-item-selected"><span class="dd-cb dd-cb-chk"></span>Action 01</button>
+                  <button class="ds-dd-item dd-item-selected"><span class="dd-cb dd-cb-chk"></span>Action 01</button>
+                  <button class="ds-dd-item dd-item-selected"><span class="dd-cb dd-cb-chk"></span>Action 01</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Props -->
+        <div class="section-block">
+          <div class="section-title">Props</div>
+          <table class="props-table">
+            <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>label</td><td>string</td><td>—</td><td>Field label shown above the trigger</td></tr>
+              <tr><td>placeholder</td><td>string</td><td>"Placeholder"</td><td>Hint text when no value selected</td></tr>
+              <tr><td>value</td><td>string</td><td>—</td><td>Currently selected value (filled state)</td></tr>
+              <tr><td>state</td><td>"default" | "focused" | "filled" | "disabled" | "error" | "filled-disabled" | "filled-error"</td><td>"default"</td><td>Visual state of the trigger</td></tr>
+              <tr><td>options</td><td>string[]</td><td>—</td><td>Array of option labels for the menu</td></tr>
+              <tr><td>checkbox</td><td>boolean</td><td>false</td><td>Show checkboxes in menu items</td></tr>
+              <tr><td>badge</td><td>string</td><td>—</td><td>Badge label shown after value (e.g. "+4more")</td></tr>
+              <tr><td>helpText</td><td>string</td><td>—</td><td>Help / error message below the trigger</td></tr>
+              <tr><td>onChange</td><td>(v: string) => void</td><td>—</td><td>Callback when selection changes</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
 
       <!-- ════════════════════════════════════════════════
            TAB DETAIL PAGE
