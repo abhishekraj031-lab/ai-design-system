@@ -561,6 +561,87 @@
     @media (max-width: 480px) {
       .footer-links { grid-template-columns: 1fr; }
     }
+
+    /* ── Mobile sidebar overlay ──────────────────────── */
+    .sidebar-backdrop {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 150;
+    }
+    .sidebar-backdrop.open { display: block; }
+
+    /* ── Hamburger + sidebar toggle buttons ─────────── */
+    .menu-btn, .sidebar-toggle-btn {
+      display: none;
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1px solid var(--border); background: none; cursor: pointer;
+      align-items: center; justify-content: center;
+      color: var(--muted); transition: background 0.15s; flex-shrink: 0;
+    }
+    .menu-btn:hover, .sidebar-toggle-btn:hover { background: var(--surface); }
+    .menu-btn svg, .sidebar-toggle-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
+
+    .mobile-nav {
+      display: none;
+      position: fixed; top: 56px; left: 0; right: 0;
+      background: var(--bg); border-bottom: 1px solid var(--border);
+      padding: 12px 16px 16px; z-index: 200;
+      flex-direction: column; gap: 2px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-size: 15px; font-weight: 500; color: var(--muted);
+      text-decoration: none; padding: 12px 16px; border-radius: var(--r-md);
+      transition: background 0.12s, color 0.12s;
+    }
+    .mobile-nav a:hover { background: var(--surface); color: var(--text); }
+    .mobile-nav a.active { color: var(--brand); font-weight: 600; }
+
+    /* ── Responsive breakpoints ──────────────────────── */
+    @media (max-width: 900px) {
+      .sidebar { width: 200px; padding: 20px 12px; }
+      .main { padding: 32px 32px 80px; }
+    }
+
+    @media (max-width: 720px) {
+      /* Sidebar becomes fixed overlay */
+      .sidebar {
+        position: fixed; top: 56px; left: -240px; z-index: 160;
+        width: 240px; height: calc(100vh - 56px);
+        background: var(--bg); border-right: 1px solid var(--border);
+        box-shadow: 4px 0 24px rgba(0,0,0,0.12);
+        transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 20px 12px; overflow-y: auto;
+      }
+      .sidebar.open { left: 0; }
+
+      nav { padding: 0 16px; }
+      .nav-links { display: none; }
+      .menu-btn { display: flex; }
+      .sidebar-toggle-btn { display: flex; }
+
+      .main { padding: 24px 20px 60px; }
+      .page-title { font-size: clamp(32px, 8vw, 56px); }
+      .card-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px; }
+
+      .colour-tabs { overflow-x: auto; padding-bottom: 4px; flex-wrap: nowrap; }
+      .colour-tab { white-space: nowrap; flex-shrink: 0; }
+
+      .ramp-row-v2 { overflow-x: auto; padding-bottom: 4px; flex-wrap: nowrap; }
+      .ramp-chip-wrap { min-width: 52px; flex: 0 0 52px; }
+    }
+
+    @media (max-width: 480px) {
+      nav { padding: 0 14px; }
+      .logo-dim { display: none; }
+      .main { padding: 20px 16px 60px; }
+      .card-grid { grid-template-columns: 1fr !important; gap: 10px; }
+      .ramp-chip-v2 { height: 64px; }
+      .sem-chip { height: 64px; }
+      .colour-strip { overflow-x: auto; }
+    }
   </style>
 </head>
 <body>
@@ -582,15 +663,31 @@
     </div>
 
     <div class="nav-right">
+      <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle sidebar">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="18" rx="1"/><line x1="14" y1="8" x2="21" y2="8"/><line x1="14" y1="12" x2="21" y2="12"/><line x1="14" y1="16" x2="21" y2="16"/></svg>
+      </button>
       <button class="theme-btn" id="themeBtn" title="Toggle dark mode">☀️</button>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">
+        <svg id="menu-icon" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
     </div>
   </nav>
+
+  <!-- ── Mobile nav ────────────────────────────────────── -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="foundations.html" class="active">Foundations</a>
+    <a href="components.html">Components</a>
+    <a href="patterns.html">Patterns</a>
+  </div>
+
+  <!-- ── Sidebar backdrop ──────────────────────────────── -->
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
   <!-- ── Two-column shell ──────────────────────────── -->
   <div class="page-shell">
 
     <!-- ── Left Sidebar ──────────────────────────────── -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
       <div class="sidebar-card">
         <div class="sidebar-section-label">Foundations</div>
 
@@ -1718,6 +1815,58 @@
     if (hash && pages.includes(hash)) {
       switchPage(hash);
     }
+
+    // ── Mobile hamburger ──────────────────────────────────
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    const menuIcon = document.getElementById('menu-icon');
+    if (menuBtn) {
+      menuBtn.addEventListener('click', () => {
+        const open = mobileNav.classList.toggle('open');
+        menuBtn.setAttribute('aria-expanded', open);
+        menuIcon.innerHTML = open
+          ? '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>'
+          : '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
+      });
+    }
+
+    // ── Mobile sidebar toggle ─────────────────────────────
+    const sidebarEl = document.getElementById('sidebar');
+    const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
+    const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+    function openSidebar() {
+      sidebarEl.classList.add('open');
+      sidebarBackdrop.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSidebar() {
+      sidebarEl.classList.remove('open');
+      sidebarBackdrop.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    if (sidebarToggleBtn) {
+      sidebarToggleBtn.addEventListener('click', () => {
+        sidebarEl.classList.contains('open') ? closeSidebar() : openSidebar();
+      });
+    }
+    if (sidebarBackdrop) {
+      sidebarBackdrop.addEventListener('click', closeSidebar);
+    }
+    // Close sidebar on nav link click (mobile)
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 720) closeSidebar();
+      });
+    });
+
+    // ── Close mobile nav on outside click ────────────────
+    document.addEventListener('click', (e) => {
+      if (menuBtn && !menuBtn.contains(e.target) && mobileNav && !mobileNav.contains(e.target)) {
+        mobileNav.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        if (menuIcon) menuIcon.innerHTML = '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
+      }
+    });
   </script>
 
   <!-- ── Footer ─────────────────────────────────────────── -->
