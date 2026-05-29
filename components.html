@@ -1038,6 +1038,26 @@
           Toggle
           <span class="sidebar-dot"></span>
         </a>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-section-label">Navigation</div>
+
+        <a class="sidebar-link" href="#" onclick="switchPage('tab'); return false;">
+          <svg class="sidebar-icon" viewBox="0 0 18 18" fill="none">
+            <rect x="2" y="4" width="6" height="10" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
+            <rect x="10" y="4" width="6" height="10" rx="1.5" stroke="currentColor" stroke-width="1.4" opacity=".4"/>
+          </svg>
+          Tab
+          <span class="sidebar-dot"></span>
+        </a>
+
+        <a class="sidebar-link" href="#" onclick="switchPage('switches'); return false;">
+          <svg class="sidebar-icon" viewBox="0 0 18 18" fill="none">
+            <rect x="1" y="5" width="16" height="8" rx="4" stroke="currentColor" stroke-width="1.4"/>
+            <rect x="3" y="7" width="5" height="4" rx="2" fill="currentColor" opacity=".7"/>
+          </svg>
+          Switches
+          <span class="sidebar-dot"></span>
+        </a>
       </div>
     </aside>
 
@@ -1238,6 +1258,52 @@
               <div>
                 <div class="card-name">Toggle</div>
                 <div class="card-meta">on · off · 3 sizes · with label</div>
+              </div>
+              <span class="card-chip chip-built">Built</span>
+            </div>
+          </a>
+
+
+          <!-- Tab card -->
+          <a class="comp-card" href="#" onclick="switchPage('tab'); return false;">
+            <div class="card-preview" style="background:var(--surface);background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:24px 24px;">
+              <div style="display:flex;flex-direction:column;gap:0;width:100%;max-width:260px;">
+                <div class="ds-tab-bar">
+                  <button class="ds-tab-item active">Overview</button>
+                  <button class="ds-tab-item">Design</button>
+                  <button class="ds-tab-item">Code</button>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div>
+                <div class="card-name">Tab</div>
+                <div class="card-meta">active · inactive · underline</div>
+              </div>
+              <span class="card-chip chip-built">Built</span>
+            </div>
+          </a>
+
+          <!-- Switches card -->
+          <a class="comp-card" href="#" onclick="switchPage('switches'); return false;">
+            <div class="card-preview" style="background:var(--surface);background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:24px 24px;">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:14px;">
+                <div class="ds-switches ds-switches-lg">
+                  <button class="ds-switch-item active">Switch 1</button>
+                  <button class="ds-switch-item">Switch 2</button>
+                  <button class="ds-switch-item">Switch 3</button>
+                </div>
+                <div class="ds-switches ds-switches-md">
+                  <button class="ds-switch-item active">Switch 1</button>
+                  <button class="ds-switch-item">Switch 2</button>
+                  <button class="ds-switch-item">Switch 3</button>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div>
+                <div class="card-name">Switches</div>
+                <div class="card-meta">segmented · lg · md</div>
               </div>
               <span class="card-chip chip-built">Built</span>
             </div>
@@ -3174,7 +3240,7 @@
     });
 
     // ── Page switching ────────────────────────────────────
-    const pages = ['overview','button','input','tag','tooltip','checkbox','radio','alert','avatar','toggle'];
+    const pages = ['overview','button','input','tag','tooltip','checkbox','radio','alert','avatar','toggle','tab','switches'];
 
     // ── Checkbox interactive ──────────────────────────────
     const cbState = { a: false, b: true };
@@ -3279,6 +3345,8 @@
       if (name === 'alert'   && typeof alRender   === 'function') alRender();
       if (name === 'avatar'  && typeof avRender   === 'function') avRender();
       if (name === 'toggle'  && typeof tglRender  === 'function') tglRender();
+      if (name === 'tab'     && typeof tabRender  === 'function') tabRender();
+      if (name === 'switches'&& typeof swRender   === 'function') swRender();
     }
 
     // Restore from hash — deferred so all consts are initialised first
@@ -4024,7 +4092,295 @@
       }
     }
     // tglRender is called by switchPage above whenever toggle page is activated
+
+    // ══════════════════════════════════════════════════
+    //  TAB PLAYGROUND
+    // ══════════════════════════════════════════════════
+    function tabActiveVal(groupId) {
+      const a = document.querySelector('#' + groupId + ' .seg-btn.active');
+      return a ? a.textContent.trim() : '';
+    }
+    function tabSeg(btn, groupId) {
+      document.querySelectorAll('#' + groupId + ' .seg-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      tabRender();
+    }
+    function tabRender() {
+      const activeIdx = parseInt(tabActiveVal('tab-active') || '1') - 1;
+      const count     = parseInt(tabActiveVal('tab-count')  || '3');
+      const labels    = ['Overview','Design','Code','Settings'].slice(0, count);
+      const items     = labels.map((l, i) =>
+        `<button class="ds-tab-item${i === activeIdx ? ' active' : ''}">${l}</button>`
+      ).join('');
+      const preview = document.getElementById('tab-preview-area');
+      if (preview) preview.innerHTML = `<div class="ds-tab-bar" style="min-width:280px;">${items}</div>`;
+
+      const lines = [];
+      lines.push(`<span class="c-tag">&lt;TabBar</span>`);
+      lines.push(`  <span class="c-prop">items</span>=<span class="c-bool">{[${labels.map(l => '"'+l+'"').join(', ')}]}</span>`);
+      if (activeIdx !== 0) lines.push(`  <span class="c-prop">activeIndex</span>=<span class="c-bool">{${activeIdx}}</span>`);
+      lines.push(`  <span class="c-prop">onChange</span>=<span class="c-bool">{setActiveTab}</span>`);
+      lines.push(`<span class="c-tag">/&gt;</span>`);
+      const cb = document.getElementById('tab-code-block');
+      if (cb) cb.innerHTML = lines.join('\n');
+    }
+    function tabCopy() {
+      const code = document.getElementById('tab-code-block');
+      if (code) navigator.clipboard.writeText(code.innerText).catch(() => {});
+      const btn = document.getElementById('tab-copy-btn');
+      if (btn) {
+        btn.classList.add('copied');
+        btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`;
+        }, 2000);
+      }
+    }
+    // tabRender called by switchPage
+
+    // ══════════════════════════════════════════════════
+    //  SWITCHES PLAYGROUND
+    // ══════════════════════════════════════════════════
+    function swActiveVal(groupId) {
+      const a = document.querySelector('#' + groupId + ' .seg-btn.active');
+      return a ? a.textContent.trim() : '';
+    }
+    function swSeg(btn, groupId) {
+      document.querySelectorAll('#' + groupId + ' .seg-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      swRender();
+    }
+    function swRender() {
+      const size      = swActiveVal('sw-size')   || 'Lg';
+      const activeIdx = parseInt(swActiveVal('sw-active') || '1') - 1;
+      const count     = parseInt(swActiveVal('sw-count')  || '4');
+      const labels    = ['Switch 1','Switch 2','Switch 3','Switch 4'].slice(0, count);
+      const sizeClass = size === 'Md' ? 'ds-switches-md' : 'ds-switches-lg';
+      const items     = labels.map((l, i) =>
+        `<button class="ds-switch-item${i === activeIdx ? ' active' : ''}">${l}</button>`
+      ).join('');
+      const preview = document.getElementById('sw-preview-area');
+      if (preview) preview.innerHTML = `<div class="ds-switches ${sizeClass}">${items}</div>`;
+
+      const lines = [];
+      lines.push(`<span class="c-tag">&lt;Switches</span>`);
+      lines.push(`  <span class="c-prop">items</span>=<span class="c-bool">{[${labels.map(l => '"'+l+'"').join(', ')}]}</span>`);
+      if (activeIdx !== 0) lines.push(`  <span class="c-prop">activeIndex</span>=<span class="c-bool">{${activeIdx}}</span>`);
+      if (size !== 'Lg') lines.push(`  <span class="c-prop">size</span>=<span class="c-str">"md"</span>`);
+      lines.push(`  <span class="c-prop">onChange</span>=<span class="c-bool">{setActive}</span>`);
+      lines.push(`<span class="c-tag">/&gt;</span>`);
+      const cb = document.getElementById('sw-code-block');
+      if (cb) cb.innerHTML = lines.join('\n');
+    }
+    function swCopy() {
+      const code = document.getElementById('sw-code-block');
+      if (code) navigator.clipboard.writeText(code.innerText).catch(() => {});
+      const btn = document.getElementById('sw-copy-btn');
+      if (btn) {
+        btn.classList.add('copied');
+        btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`;
+        }, 2000);
+      }
+    }
+    // swRender called by switchPage
+
   </script>
+
+
+      <!-- ════════════════════════════════════════════════
+           TAB DETAIL PAGE
+           ════════════════════════════════════════════════ -->
+      <div id="page-tab" style="display:none;">
+
+        <div class="detail-header">
+          <div class="detail-meta">
+            <span class="meta-tag figma">node 34-67</span>
+            <span class="meta-tag">Underline</span>
+            <span class="meta-tag">Active / Inactive</span>
+          </div>
+          <h1 class="detail-title">Tab</h1>
+          <p class="detail-subtitle">Horizontal underline tab bar. Active tab shows a brand-blue 2px bottom border; inactive tabs show a muted 1px border. Fully controlled — swap <code style="font-family:monospace;font-size:13px;background:var(--surface);padding:1px 5px;border-radius:4px;border:1px solid var(--border);">.active</code> to move selection.</p>
+        </div>
+
+        <div class="playground">
+          <div class="playground-header">
+            <span class="playground-title">Playground</span>
+            <span style="font-size:11px;color:var(--hint);">Live preview · adjust props and copy code</span>
+          </div>
+          <div class="playground-body">
+            <div class="pg-preview" id="tab-preview-area"></div>
+            <div class="pg-controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">Active Tab</div>
+                <div class="seg-group" id="tab-active">
+                  <button class="seg-btn active" onclick="tabSeg(this,'tab-active')">1</button>
+                  <button class="seg-btn" onclick="tabSeg(this,'tab-active')">2</button>
+                  <button class="seg-btn" onclick="tabSeg(this,'tab-active')">3</button>
+                  <button class="seg-btn" onclick="tabSeg(this,'tab-active')">4</button>
+                </div>
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">Tab Count</div>
+                <div class="seg-group" id="tab-count">
+                  <button class="seg-btn" onclick="tabSeg(this,'tab-count')">2</button>
+                  <button class="seg-btn active" onclick="tabSeg(this,'tab-count')">3</button>
+                  <button class="seg-btn" onclick="tabSeg(this,'tab-count')">4</button>
+                </div>
+              </div>
+              <div class="ctrl-group" style="margin-top:auto;">
+                <div class="code-block" id="tab-code-block"></div>
+                <button class="copy-btn" id="tab-copy-btn" onclick="tabCopy()">
+                  <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  Copy
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Variants -->
+        <div class="section-block">
+          <div class="section-title">States</div>
+          <div class="variant-grid" style="grid-template-columns:1fr;gap:20px;">
+            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:8px;">
+              <div class="variant-label">Active — Tab 1</div>
+              <div class="ds-tab-bar" style="max-width:400px;">
+                <button class="ds-tab-item active">Tab 1</button>
+                <button class="ds-tab-item">Tab 2</button>
+                <button class="ds-tab-item">Tab 3</button>
+                <button class="ds-tab-item">Tab 4</button>
+              </div>
+            </div>
+            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:8px;">
+              <div class="variant-label">Active — Tab 3</div>
+              <div class="ds-tab-bar" style="max-width:400px;">
+                <button class="ds-tab-item">Tab 1</button>
+                <button class="ds-tab-item">Tab 2</button>
+                <button class="ds-tab-item active">Tab 3</button>
+                <button class="ds-tab-item">Tab 4</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Props table -->
+        <div class="section-block">
+          <div class="section-title">Props</div>
+          <table class="props-table">
+            <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>items</td><td>string[]</td><td>—</td><td>Array of tab labels to render</td></tr>
+              <tr><td>activeIndex</td><td>number</td><td>0</td><td>Index of the currently active tab</td></tr>
+              <tr><td>onChange</td><td>(i: number) => void</td><td>—</td><td>Callback fired when a tab is clicked</td></tr>
+              <tr><td>className</td><td>string</td><td>—</td><td>Extra classes on the bar wrapper</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <!-- ════════════════════════════════════════════════
+           SWITCHES DETAIL PAGE
+           ════════════════════════════════════════════════ -->
+      <div id="page-switches" style="display:none;">
+
+        <div class="detail-header">
+          <div class="detail-meta">
+            <span class="meta-tag figma">node 34-81</span>
+            <span class="meta-tag">Segmented</span>
+            <span class="meta-tag">Lg · Md</span>
+          </div>
+          <h1 class="detail-title">Switches</h1>
+          <p class="detail-subtitle">Pill-shaped segmented control. The active item lifts to a white (or surface) background with a soft shadow; all other items remain flat. Two sizes — <code style="font-family:monospace;font-size:13px;background:var(--surface);padding:1px 5px;border-radius:4px;border:1px solid var(--border);">lg</code> (44 px) and <code style="font-family:monospace;font-size:13px;background:var(--surface);padding:1px 5px;border-radius:4px;border:1px solid var(--border);">md</code> (36 px).</p>
+        </div>
+
+        <div class="playground">
+          <div class="playground-header">
+            <span class="playground-title">Playground</span>
+            <span style="font-size:11px;color:var(--hint);">Live preview · adjust props and copy code</span>
+          </div>
+          <div class="playground-body">
+            <div class="pg-preview" id="sw-preview-area"></div>
+            <div class="pg-controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">Size</div>
+                <div class="seg-group" id="sw-size">
+                  <button class="seg-btn active" onclick="swSeg(this,'sw-size')">Lg</button>
+                  <button class="seg-btn" onclick="swSeg(this,'sw-size')">Md</button>
+                </div>
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">Active Item</div>
+                <div class="seg-group" id="sw-active">
+                  <button class="seg-btn active" onclick="swSeg(this,'sw-active')">1</button>
+                  <button class="seg-btn" onclick="swSeg(this,'sw-active')">2</button>
+                  <button class="seg-btn" onclick="swSeg(this,'sw-active')">3</button>
+                  <button class="seg-btn" onclick="swSeg(this,'sw-active')">4</button>
+                </div>
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">Item Count</div>
+                <div class="seg-group" id="sw-count">
+                  <button class="seg-btn" onclick="swSeg(this,'sw-count')">2</button>
+                  <button class="seg-btn" onclick="swSeg(this,'sw-count')">3</button>
+                  <button class="seg-btn active" onclick="swSeg(this,'sw-count')">4</button>
+                </div>
+              </div>
+              <div class="ctrl-group" style="margin-top:auto;">
+                <div class="code-block" id="sw-code-block"></div>
+                <button class="copy-btn" id="sw-copy-btn" onclick="swCopy()">
+                  <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  Copy
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Variants -->
+        <div class="section-block">
+          <div class="section-title">Sizes</div>
+          <div class="variant-grid" style="grid-template-columns:1fr 1fr;gap:20px;">
+            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:8px;">
+              <div class="variant-label">Large (44px)</div>
+              <div class="ds-switches ds-switches-lg">
+                <button class="ds-switch-item active">Switch 1</button>
+                <button class="ds-switch-item">Switch 2</button>
+                <button class="ds-switch-item">Switch 3</button>
+                <button class="ds-switch-item">Switch 4</button>
+              </div>
+            </div>
+            <div class="variant-item" style="flex-direction:column;align-items:flex-start;gap:8px;">
+              <div class="variant-label">Medium (36px)</div>
+              <div class="ds-switches ds-switches-md">
+                <button class="ds-switch-item active">Switch 1</button>
+                <button class="ds-switch-item">Switch 2</button>
+                <button class="ds-switch-item">Switch 3</button>
+                <button class="ds-switch-item">Switch 4</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Props table -->
+        <div class="section-block">
+          <div class="section-title">Props</div>
+          <table class="props-table">
+            <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>items</td><td>string[]</td><td>—</td><td>Array of option labels</td></tr>
+              <tr><td>activeIndex</td><td>number</td><td>0</td><td>Index of the selected item</td></tr>
+              <tr><td>size</td><td>"lg" | "md"</td><td>"lg"</td><td>Height variant — 44px or 36px</td></tr>
+              <tr><td>onChange</td><td>(i: number) => void</td><td>—</td><td>Callback fired when selection changes</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
 
   <!-- ── Footer ─────────────────────────────────────────── -->
   <footer>
