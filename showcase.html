@@ -352,14 +352,33 @@
       nav { padding: 0 20px; }
       .nav-links { display: none; }
       .menu-btn { display: flex; }
-      .hero-body { padding: 0 20px; }
-      .hero-cards { grid-template-columns: 1fr; padding: 20px; gap: 12px; }
+
+      /* Hero: let it scroll naturally — body fills viewport, cards peek below */
+      .hero {
+        min-height: unset;
+        display: block;
+      }
+      .hero-body {
+        display: flex; flex-direction: column; justify-content: center;
+        position: relative; overflow: hidden;
+        padding: 0 20px;
+        /* Viewport minus nav (60px) minus 40% of first card (~72px) */
+        height: calc(100vh - 132px);
+        height: calc(100svh - 132px);
+        min-height: 300px;
+      }
+      .hero-cards {
+        grid-template-columns: 1fr;
+        padding: 0 20px 48px;
+        gap: 12px;
+      }
       .hcard { padding: 20px 20px 22px; }
     }
 
     @media (max-width: 400px) {
+      nav { padding: 0 14px; }
       .hero-body { padding: 0 16px; }
-      .hero-cards { padding: 16px; gap: 10px; }
+      .hero-cards { padding: 0 16px 48px; gap: 10px; }
     }
   </style>
 </head>
