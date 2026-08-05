@@ -2,15 +2,203 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="refresh" content="0; url=/foundations.html" />
-  <title>Pulse Design System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Tokens and components — crafted in Figma, documented and shipped." />
+  <title>Pulse · Design System</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    body { font-family: system-ui, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background: #F8FAFC; }
-    a { color: #2577E5; font-size: 16px; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand:#2477E5; --brand-hv:#1A6CDB;
+      --bg:#ffffff; --canvas:#F4F7FA; --text:#151B23;
+      --muted:#576A84; --border:#B2C1D7;
+      --r-lg:12px; --r-xl:16px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Poppins', system-ui, sans-serif;
+      background: var(--canvas);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 32px; height: 56px;
+      background: var(--bg); border-bottom: 1px solid var(--border);
+    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
+    .logo-dot {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: var(--brand); display: flex; align-items: center; justify-content: center;
+    }
+    .logo-dot svg { width: 18px; height: 11px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .logo-name { font-size: 15px; font-weight: 600; letter-spacing: -0.2px; }
+    .nav-links { display: flex; align-items: center; gap: 4px; }
+    .nav-links a {
+      font-size: 13px; font-weight: 500; color: var(--muted);
+      text-decoration: none; padding: 6px 12px; border-radius: 8px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-links a:hover { background: var(--canvas); color: var(--text); }
+
+    /* ── Hero ── */
+    main {
+      flex: 1;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 80px 24px 60px;
+      text-align: center;
+    }
+
+    .hero-label {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;
+      color: var(--brand); background: #EDF4FD; border: 1px solid #B6D2F6;
+      padding: 4px 12px; border-radius: 100px; margin-bottom: 28px;
+    }
+    .hero-label span { width: 6px; height: 6px; border-radius: 50%; background: var(--brand); display: block; }
+
+    h1 {
+      font-size: clamp(52px, 8vw, 88px);
+      font-weight: 700;
+      letter-spacing: -3px;
+      line-height: 1;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .tagline {
+      font-size: 17px; font-weight: 400;
+      color: var(--muted); line-height: 1.6;
+      max-width: 460px; margin: 0 auto 56px;
+    }
+
+    /* ── Cards ── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      width: 100%; max-width: 680px;
+      margin-bottom: 64px;
+    }
+
+    .card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 28px 28px 24px;
+      text-decoration: none; color: inherit;
+      text-align: left;
+      transition: box-shadow 0.18s, border-color 0.18s, transform 0.18s;
+      cursor: pointer;
+    }
+    .card:hover {
+      box-shadow: 0 8px 28px rgba(36,119,229,0.10);
+      border-color: #B6D2F6;
+      transform: translateY(-2px);
+    }
+
+    .card-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: #EDF4FD; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+    }
+    .card-icon svg { width: 20px; height: 20px; stroke: var(--brand); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    .card-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;
+      color: var(--brand); margin-bottom: 4px;
+    }
+    .card-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.3px; }
+    .card-desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+    /* ── Footer ── */
+    footer {
+      padding: 28px 32px;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy { font-size: 12px; color: var(--muted); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a {
+      font-size: 12px; color: var(--muted); text-decoration: none; font-weight: 500;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--brand); }
+
+    @media (max-width: 520px) {
+      .cards { grid-template-columns: 1fr; }
+      nav { padding: 0 16px; }
+      .nav-links { display: none; }
+      footer { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
   </style>
 </head>
 <body>
-  <p>Redirecting… <a href="foundations.html">Click here if not redirected</a></p>
+
+  <!-- Nav -->
+  <nav>
+    <a href="index.html" class="logo">
+      <div class="logo-dot">
+        <svg viewBox="0 0 18 11"><polyline points="0,5.5 3.5,5.5 5.5,1 7.5,10 9.5,3 11.5,8 13.5,5.5 18,5.5"/></svg>
+      </div>
+      <span class="logo-name">Pulse</span>
+    </a>
+    <div class="nav-links">
+      <a href="foundations.html">Foundations</a>
+      <a href="components.html">Components</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <main>
+    <div class="hero-label"><span></span>Design System</div>
+    <h1>Pulse.</h1>
+    <p class="tagline">Tokens and components — crafted in Figma, built for consistency across every product surface.</p>
+
+    <div class="cards">
+      <a href="foundations.html" class="card">
+        <div class="card-icon">
+          <!-- tokens/palette icon -->
+          <svg viewBox="0 0 20 20"><rect x="2" y="2" width="7" height="7" rx="2"/><rect x="11" y="2" width="7" height="7" rx="2"/><rect x="2" y="11" width="7" height="7" rx="2"/><rect x="11" y="11" width="7" height="7" rx="2"/></svg>
+        </div>
+        <div class="card-label">Tokens &amp; Styles</div>
+        <div class="card-title">Foundations</div>
+        <div class="card-desc">Colour, typography, spacing and radii — the tokens behind every component.</div>
+      </a>
+
+      <a href="components.html" class="card">
+        <div class="card-icon">
+          <!-- components icon -->
+          <svg viewBox="0 0 20 20"><rect x="2" y="2" width="16" height="5" rx="2"/><rect x="2" y="10" width="7" height="8" rx="2"/><rect x="11" y="10" width="7" height="8" rx="2"/></svg>
+        </div>
+        <div class="card-label">12 Components</div>
+        <div class="card-title">Components</div>
+        <div class="card-desc">Interactive showcase of every component — buttons, inputs, tags, and more.</div>
+      </a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <span class="footer-copy">© 2026 Abhi · Pulse v1.0</span>
+    <div class="footer-links">
+      <a href="foundations.html">Foundations</a>
+      <a href="components.html">Components</a>
+    </div>
+  </footer>
+
 </body>
 </html>
