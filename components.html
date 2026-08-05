@@ -76,40 +76,35 @@
 
     /* ── Sidebar ─────────────────────────────────────── */
     .sidebar {
-      width: 260px; flex-shrink: 0;
-      padding: 28px 16px;
+      width: 240px; flex-shrink: 0;
+      padding: 24px 12px;
+      border-right: 1px solid var(--border);
+      background: var(--bg);
       position: sticky; top: 56px;
       height: calc(100vh - 56px); overflow-y: auto;
     }
-    .sidebar-card {
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: var(--r-xl); padding: 8px 8px 8px 8px;
-      overflow: hidden;
-    }
     .sidebar-section-label {
-      font-size: 9.5px; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.10em; color: var(--hint);
-      padding: 10px 10px 5px 18px;
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--hint);
+      padding: 0 10px; margin-bottom: 10px;
     }
     .sidebar-link {
       display: flex; align-items: center; gap: 10px;
-      padding: 8px 12px; border-radius: var(--r-md);
-      text-decoration: none; font-size: 13px; font-weight: 500;
-      color: var(--muted); transition: background 0.12s, color 0.12s, border-color 0.12s;
-      cursor: pointer; border-left: 2.5px solid transparent;
-      margin-left: -8px; padding-left: 18px;
-      border-radius: 0 var(--r-md) var(--r-md) 0;
+      padding: 10px 12px; border-radius: 10px;
+      text-decoration: none; font-size: 15px; font-weight: 500;
+      color: var(--muted); transition: background 0.12s, color 0.12s;
+      cursor: pointer; border: none; background: none; width: 100%; text-align: left;
+      font-family: 'Poppins', system-ui, sans-serif;
     }
     .sidebar-link:hover { background: var(--canvas); color: var(--text); }
     .sidebar-link.active {
       background: var(--brand-bg); color: var(--brand); font-weight: 600;
-      border-left-color: var(--brand);
     }
-    .dark .sidebar-link.active { background: rgba(37,119,229,0.15); color: var(--brand-lt); border-left-color: var(--brand); }
+    .dark .sidebar-link.active { background: rgba(37,119,229,0.15); color: var(--brand-lt); }
     .sidebar-icon { width: 18px; height: 18px; flex-shrink: 0; opacity: 0.65; transition: opacity 0.12s; }
     .sidebar-link:hover .sidebar-icon,
     .sidebar-link.active .sidebar-icon { opacity: 1; }
-    .sidebar-divider { height: 1px; background: var(--border); margin: 8px 0; }
+    .sidebar-divider { height: 1px; background: var(--border); margin: 6px 0; }
     .sidebar-dot {
       margin-left: auto; width: 6px; height: 6px; border-radius: 50%;
       background: #22c55e; flex-shrink: 0;
@@ -1183,7 +1178,6 @@
 
     <!-- ── Sidebar ───────────────────────────────────── -->
     <aside class="sidebar" id="sidebar">
-      <div class="sidebar-card">
         <div class="sidebar-section-label">Components</div>
 
         <a class="sidebar-link active" href="components.html" onclick="switchPage('overview'); return false;">
@@ -1346,7 +1340,6 @@
           Breadcrumbs
           <span class="sidebar-dot"></span>
         </a>
-      </div>
     </aside>
 
     <!-- ── Main ──────────────────────────────────────── -->
