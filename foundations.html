@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Foundations · AI Design System</title>
+  <title>Foundations · Pulse</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -11,30 +12,30 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --brand-bg:#EEF4FD; --brand-subtle:#D4E5FA; --brand-lt:#A9CAF5;
-      --brand:#2778E2;    --brand-hv:#1D62C0;     --brand-ac:#154D9E;
-      --brand-text:#06225B;
-      --success-bg:#ECFDF5; --success:#10B981; --success-hv:#059669; --success-text:#064E3B;
-      --warning-bg:#FFF7ED; --warning:#F97316; --warning-hv:#EA580C; --warning-text:#7C2D12;
+      --brand-bg:#EDF4FD; --brand-subtle:#DBE8FB; --brand-lt:#B6D2F6;
+      --brand:#2477E5;    --brand-hv:#1A6CDB;     --brand-ac:#165AB6;
+      --brand-text:#0D366D;
+      --success-bg:#ECFDF1; --success:#10BC83; --success-hv:#059E6F; --success-text:#064E3B;
+      --warning-bg:#FEEDE1; --warning:#E56106; --warning-hv:#D15805; --warning-text:#6D2E03;
       --error-bg:#FFF5F5;   --error:#EF4444;   --error-hv:#DC2626;   --error-ac:#B91C1C; --error-text:#7F1D1D;
-      --caution-bg:#FFFBEB; --caution:#F59E0B; --caution-text:#78350F;
-      --info-bg:#EBF8FE;    --info:#1CA3FD;    --info-text:#01436F;
+      --caution-bg:#FFFBEB; --caution:#D88B09; --caution-text:#3F1C08;
+      --info-bg:#EBF8FE;    --info:#028CE9;    --info-text:#01253D;
       --purple-bg:#FAF5FF;  --purple:#8B5CF6;  --purple-text:#4C1D95;
       --magenta-bg:#FDF4FF; --magenta:#D946EF; --magenta-text:#701A75;
-      --teal-bg:#F0FDFA;    --teal:#14B8A6;    --teal-text:#134E4A;
-      --neutral-bg:#F8FAFC; --neutral-lt:#E2E8F0; --neutral:#64748B; --neutral-hv:#475569; --neutral-text:#0F172A;
+      --teal-bg:#E8FCF7;    --teal:#15BDAA;    --teal-text:#134E4A;
+      --neutral-bg:#F4F7FA; --neutral-lt:#B2C1D7; --neutral:#576A84; --neutral-hv:#4B5768; --neutral-text:#151B23;
 
-      --bg:#ffffff; --surface:#F1F5F9; --canvas:#F8FAFC; --text:#0F172A;
-      --muted:#64748B; --hint:#94A3B8; --border:#E2E8F0;
+      --bg:#ffffff; --surface:#D8E3EE; --canvas:#F4F7FA; --text:#151B23;
+      --muted:#576A84; --hint:#6E8AAB; --border:#B2C1D7;
       --r-sm:6px; --r-md:8px; --r-lg:12px; --r-xl:16px;
     }
 
     .dark {
-      --bg:#0F172A; --surface:#1E293B; --canvas:#0A1120; --text:#F1F5F9;
-      --muted:#94A3B8; --hint:#475569; --border:#334155;
-      --brand-bg:#0D2444; --brand-text:#A9CAF5;
-      --success-bg:#022C22; --success-text:#6EE7B7;
-      --warning-bg:#431407; --warning-text:#FED7AA;
+      --bg:#151B23; --surface:#242E3C; --canvas:#0A1120; --text:#D8E3EE;
+      --muted:#6E8AAB; --hint:#4B5768; --border:#384352;
+      --brand-bg:#0D2444; --brand-text:#B6D2F6;
+      --success-bg:#022C22; --success-text:#61E5B1;
+      --warning-bg:#431407; --warning-text:#FCC39C;
       --error-bg:#2D0A0A;   --error-text:#FECACA;
     }
 
@@ -227,7 +228,7 @@
 
     /* ── Preview: Colours ────────────────────────────── */
     .preview-colours {
-      background: linear-gradient(135deg, #EEF4FD 0%, #D4E5FA 50%, #A9CAF5 100%);
+      background: linear-gradient(135deg, #EDF4FD 0%, #DBE8FB 50%, #B6D2F6 100%);
       width: 100%; height: 100%;
       display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;
       padding: 20px;
@@ -493,15 +494,16 @@
   <!-- ── Nav ─────────────────────────────────────────── -->
   <nav>
     <a href="foundations.html" class="logo">
-      <div class="logo-dot">AI</div>
-      <span class="logo-name">Design System</span>
+      <div class="logo-dot">
+        <svg viewBox="0 0 18 11"><polyline points="0,5.5 3.5,5.5 5.5,1 7.5,10 9.5,3 11.5,8 13.5,5.5 18,5.5"/></svg>
+      </div>
+      <span class="logo-name">Pulse</span>
       <span class="logo-dim">&nbsp;·&nbsp;V 0.1</span>
     </a>
 
     <div class="nav-links">
       <a href="foundations.html" class="active">Foundations</a>
       <a href="components.html">Components</a>
-      <a href="#">Patterns</a>
     </div>
 
     <div class="nav-right">
@@ -532,9 +534,9 @@
 
         <a class="sidebar-link" href="foundations.html#colours" onclick="switchPage('colours')">
           <svg class="sidebar-icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="6" cy="6" r="4" fill="#2778E2"/>
-            <circle cx="12" cy="6" r="4" fill="#10B981"/>
-            <circle cx="9" cy="12" r="4" fill="#F97316"/>
+            <circle cx="6" cy="6" r="4" fill="#2477E5"/>
+            <circle cx="12" cy="6" r="4" fill="#10BC83"/>
+            <circle cx="9" cy="12" r="4" fill="#E56106"/>
           </svg>
           Colours
         </a>
@@ -545,15 +547,6 @@
             <path d="M5 9h8M9 5v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
           Icons
-        </a>
-
-        <a class="sidebar-link" href="foundations.html#illustrations" onclick="switchPage('illustrations')">
-          <svg class="sidebar-icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="2" width="14" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M2 12l4-4 3 3 3-3 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="6" cy="6.5" r="1.5" fill="currentColor" opacity=".6"/>
-          </svg>
-          Illustrations
         </a>
 
         <a class="sidebar-link" href="foundations.html#radius" onclick="switchPage('radius')">
@@ -587,29 +580,29 @@
       <div id="page-overview">
         <div class="page-header">
           <h1 class="page-title">foundations</h1>
-          <p class="page-subtitle">The building blocks of the AI Design System — visual language, tokens, and primitives that inform every component.</p>
+          <p class="page-subtitle">The building blocks of the Pulse Design System — visual language, tokens, and primitives that inform every component.</p>
         </div>
 
         <div class="card-grid">
 
           <!-- ── Colours card ──────────────────────────── -->
           <a class="ds-card" href="#" onclick="switchPage('colours'); return false;">
-            <div class="card-preview" style="background: linear-gradient(135deg,#EEF4FD 0%,#D4E5FA 100%); overflow:hidden;">
+            <div class="card-preview" style="background: linear-gradient(135deg,#EDF4FD 0%,#DBE8FB 100%); overflow:hidden;">
               <svg width="200" height="130" viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;">
                 <!-- Circle 1 — blue, floats up -->
-                <circle cx="68" cy="58" r="40" fill="#2778E2" opacity=".88">
+                <circle cx="68" cy="58" r="40" fill="#2477E5" opacity=".88">
                   <animateTransform attributeName="transform" type="translate"
                     values="0,0; 0,-7; 0,0" dur="3.2s" repeatCount="indefinite" calcMode="spline"
                     keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
                 </circle>
                 <!-- Circle 2 — green, floats mid -->
-                <circle cx="100" cy="58" r="40" fill="#10B981" opacity=".70">
+                <circle cx="100" cy="58" r="40" fill="#10BC83" opacity=".70">
                   <animateTransform attributeName="transform" type="translate"
                     values="0,0; 0,-7; 0,0" dur="3.2s" begin="0.6s" repeatCount="indefinite" calcMode="spline"
                     keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
                 </circle>
                 <!-- Circle 3 — orange, floats later -->
-                <circle cx="132" cy="58" r="40" fill="#F97316" opacity=".58">
+                <circle cx="132" cy="58" r="40" fill="#E56106" opacity=".58">
                   <animateTransform attributeName="transform" type="translate"
                     values="0,0; 0,-7; 0,0" dur="3.2s" begin="1.2s" repeatCount="indefinite" calcMode="spline"
                     keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
@@ -617,15 +610,15 @@
 
                 <!-- Toggle OFF (left) — knob slides right→left loop -->
                 <rect x="36" y="96" width="52" height="19" rx="9.5" fill="white" opacity=".92"/>
-                <circle cx="48" cy="105.5" r="6.5" fill="#CBD5E1">
+                <circle cx="48" cy="105.5" r="6.5" fill="#8DA4BE">
                   <animate attributeName="cx" values="48;74;74;48" keyTimes="0;0.35;0.65;1"
                     dur="3.5s" repeatCount="indefinite" calcMode="spline"
                     keySplines="0.4 0 0.6 1; 0 0 1 1; 0.4 0 0.6 1"/>
                 </circle>
 
                 <!-- Toggle ON (right) — knob slides left→right loop (offset) -->
-                <rect x="112" y="96" width="52" height="19" rx="9.5" fill="#2778E2" opacity=".9">
-                  <animate attributeName="fill" values="#2778E2;#CBD5E1;#CBD5E1;#2778E2"
+                <rect x="112" y="96" width="52" height="19" rx="9.5" fill="#2477E5" opacity=".9">
+                  <animate attributeName="fill" values="#2477E5;#8DA4BE;#8DA4BE;#2477E5"
                     keyTimes="0;0.35;0.65;1" dur="3.5s" repeatCount="indefinite"/>
                 </rect>
                 <circle cx="152" cy="105.5" r="6.5" fill="white">
@@ -646,17 +639,17 @@
             <div class="card-preview" style="background: #F4F6F8;">
               <svg width="180" height="120" viewBox="0 0 180 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <!-- Search bar -->
-                <rect x="26" y="14" width="128" height="26" rx="8" fill="white" stroke="#E2E8F0" stroke-width="1.5"/>
-                <circle cx="42" cy="27" r="5" stroke="#94A3B8" stroke-width="1.5"/>
-                <path d="M46 31l3.5 3.5" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"/>
+                <rect x="26" y="14" width="128" height="26" rx="8" fill="white" stroke="#B2C1D7" stroke-width="1.5"/>
+                <circle cx="42" cy="27" r="5" stroke="#6E8AAB" stroke-width="1.5"/>
+                <path d="M46 31l3.5 3.5" stroke="#6E8AAB" stroke-width="1.5" stroke-linecap="round"/>
                 <!-- Typing text bar -->
-                <rect x="55" y="23" width="0" height="8" rx="4" fill="#E2E8F0">
+                <rect x="55" y="23" width="0" height="8" rx="4" fill="#B2C1D7">
                   <animate attributeName="width" values="0;18;30;48;30;18;0" keyTimes="0;0.2;0.4;0.6;0.7;0.85;1"
                     dur="4s" repeatCount="indefinite" calcMode="spline"
                     keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/>
                 </rect>
                 <!-- Blinking cursor -->
-                <rect x="55" y="22" width="1.5" height="10" rx="1" fill="#64748B">
+                <rect x="55" y="22" width="1.5" height="10" rx="1" fill="#576A84">
                   <animateTransform attributeName="transform" type="translate"
                     values="0,0;18,0;30,0;48,0;30,0;18,0;0,0" keyTimes="0;0.2;0.4;0.6;0.7;0.85;1"
                     dur="4s" repeatCount="indefinite"/>
@@ -664,32 +657,32 @@
                 </rect>
 
                 <!-- Icon grid row 1 — staggered fade in -->
-                <rect x="26" y="52" width="22" height="22" rx="5" fill="white" stroke="#E2E8F0" stroke-width="1">
+                <rect x="26" y="52" width="22" height="22" rx="5" fill="white" stroke="#B2C1D7" stroke-width="1">
                   <animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="0s" repeatCount="indefinite"/>
                 </rect>
-                <rect x="54" y="52" width="22" height="22" rx="5" fill="white" stroke="#E2E8F0" stroke-width="1">
+                <rect x="54" y="52" width="22" height="22" rx="5" fill="white" stroke="#B2C1D7" stroke-width="1">
                   <animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="0.3s" repeatCount="indefinite"/>
                 </rect>
-                <rect x="82" y="52" width="22" height="22" rx="5" fill="white" stroke="#E2E8F0" stroke-width="1">
+                <rect x="82" y="52" width="22" height="22" rx="5" fill="white" stroke="#B2C1D7" stroke-width="1">
                   <animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="0.6s" repeatCount="indefinite"/>
                 </rect>
-                <rect x="110" y="52" width="22" height="22" rx="5" fill="white" stroke="#E2E8F0" stroke-width="1">
+                <rect x="110" y="52" width="22" height="22" rx="5" fill="white" stroke="#B2C1D7" stroke-width="1">
                   <animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="0.9s" repeatCount="indefinite"/>
                 </rect>
-                <rect x="138" y="52" width="16" height="22" rx="5" fill="white" stroke="#E2E8F0" stroke-width="1">
+                <rect x="138" y="52" width="16" height="22" rx="5" fill="white" stroke="#B2C1D7" stroke-width="1">
                   <animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="1.2s" repeatCount="indefinite"/>
                 </rect>
                 <!-- Icon shapes inside cells -->
-                <circle cx="37" cy="63" r="5" fill="#94A3B8" opacity=".55"/>
-                <rect x="59" y="59" width="12" height="12" rx="2" fill="#94A3B8" opacity=".4"/>
-                <path d="M87 58l5 10 5-10" stroke="#94A3B8" stroke-width="1.5" fill="none" opacity=".45"/>
-                <path d="M115 59v12M110 65h10" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" opacity=".45"/>
-                <path d="M142 60l7 9M149 60l-7 9" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" opacity=".4"/>
+                <circle cx="37" cy="63" r="5" fill="#6E8AAB" opacity=".55"/>
+                <rect x="59" y="59" width="12" height="12" rx="2" fill="#6E8AAB" opacity=".4"/>
+                <path d="M87 58l5 10 5-10" stroke="#6E8AAB" stroke-width="1.5" fill="none" opacity=".45"/>
+                <path d="M115 59v12M110 65h10" stroke="#6E8AAB" stroke-width="1.5" stroke-linecap="round" opacity=".45"/>
+                <path d="M142 60l7 9M149 60l-7 9" stroke="#6E8AAB" stroke-width="1.5" stroke-linecap="round" opacity=".4"/>
 
                 <!-- Grid row 2 -->
-                <rect x="26" y="82" width="22" height="16" rx="4" fill="white" stroke="#E2E8F0" stroke-width="1" opacity=".6"/>
-                <rect x="54" y="82" width="22" height="16" rx="4" fill="white" stroke="#E2E8F0" stroke-width="1" opacity=".4"/>
-                <rect x="82" y="82" width="22" height="16" rx="4" fill="white" stroke="#E2E8F0" stroke-width="1" opacity=".2"/>
+                <rect x="26" y="82" width="22" height="16" rx="4" fill="white" stroke="#B2C1D7" stroke-width="1" opacity=".6"/>
+                <rect x="54" y="82" width="22" height="16" rx="4" fill="white" stroke="#B2C1D7" stroke-width="1" opacity=".4"/>
+                <rect x="82" y="82" width="22" height="16" rx="4" fill="white" stroke="#B2C1D7" stroke-width="1" opacity=".2"/>
               </svg>
             </div>
             <div class="card-label">
@@ -698,120 +691,37 @@
             </div>
           </a>
 
-          <!-- ── Illustrations card ─────────────────────── -->
-          <a class="ds-card" href="#" onclick="switchPage('illustrations'); return false;">
-            <div class="card-preview" style="padding:0; overflow:hidden;">
-              <svg width="100%" height="100%" viewBox="0 0 360 240" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Sky gradient -->
-                <defs>
-                  <linearGradient id="sky-grad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#C8D8E8"/>
-                    <stop offset="100%" stop-color="#E0EAF4"/>
-                  </linearGradient>
-                </defs>
-                <rect width="360" height="240" fill="url(#sky-grad)"/>
-
-                <!-- Cloud 1 — drifts right -->
-                <g opacity=".75">
-                  <animateTransform attributeName="transform" type="translate"
-                    values="-40,0; 380,0" dur="18s" repeatCount="indefinite"/>
-                  <ellipse cx="60" cy="48" rx="30" ry="14" fill="white"/>
-                  <ellipse cx="85" cy="44" rx="22" ry="12" fill="white"/>
-                  <ellipse cx="42" cy="52" rx="18" ry="10" fill="white"/>
-                </g>
-                <!-- Cloud 2 — drifts right, offset timing -->
-                <g opacity=".55">
-                  <animateTransform attributeName="transform" type="translate"
-                    values="100,0; 520,0" dur="24s" begin="-8s" repeatCount="indefinite"/>
-                  <ellipse cx="80" cy="30" rx="22" ry="10" fill="white"/>
-                  <ellipse cx="98" cy="27" rx="16" ry="9" fill="white"/>
-                  <ellipse cx="65" cy="34" rx="14" ry="8" fill="white"/>
-                </g>
-
-                <!-- Sun circle — pulses -->
-                <circle cx="295" cy="56" r="24" fill="#FFD066" opacity=".85">
-                  <animate attributeName="r" values="24;27;24" dur="3s" repeatCount="indefinite" calcMode="spline"
-                    keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
-                  <animate attributeName="opacity" values="0.85;1;0.85" dur="3s" repeatCount="indefinite"/>
-                </circle>
-                <!-- Sun glow -->
-                <circle cx="295" cy="56" r="34" fill="#FFD066" opacity=".15">
-                  <animate attributeName="r" values="34;42;34" dur="3s" repeatCount="indefinite" calcMode="spline"
-                    keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
-                  <animate attributeName="opacity" values="0.15;0.28;0.15" dur="3s" repeatCount="indefinite"/>
-                </circle>
-                <!-- Sun rays — spin -->
-                <g>
-                  <animateTransform attributeName="transform" type="rotate"
-                    from="0 295 56" to="360 295 56" dur="20s" repeatCount="indefinite"/>
-                  <line x1="295" y1="24" x2="295" y2="17" stroke="#FFD066" stroke-width="2.5" stroke-linecap="round" opacity=".7"/>
-                  <line x1="295" y1="88" x2="295" y2="95" stroke="#FFD066" stroke-width="2.5" stroke-linecap="round" opacity=".7"/>
-                  <line x1="263" y1="56" x2="256" y2="56" stroke="#FFD066" stroke-width="2.5" stroke-linecap="round" opacity=".7"/>
-                  <line x1="327" y1="56" x2="334" y2="56" stroke="#FFD066" stroke-width="2.5" stroke-linecap="round" opacity=".7"/>
-                  <line x1="272" y1="33" x2="267" y2="28" stroke="#FFD066" stroke-width="2" stroke-linecap="round" opacity=".5"/>
-                  <line x1="318" y1="79" x2="323" y2="84" stroke="#FFD066" stroke-width="2" stroke-linecap="round" opacity=".5"/>
-                  <line x1="272" y1="79" x2="267" y2="84" stroke="#FFD066" stroke-width="2" stroke-linecap="round" opacity=".5"/>
-                  <line x1="318" y1="33" x2="323" y2="28" stroke="#FFD066" stroke-width="2" stroke-linecap="round" opacity=".5"/>
-                </g>
-
-                <!-- Mountains back (subtle parallax hint — gentle sway) -->
-                <g>
-                  <animateTransform attributeName="transform" type="translate"
-                    values="0,0; -4,0; 0,0" dur="8s" repeatCount="indefinite" calcMode="spline"
-                    keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
-                  <path d="M0 180 L80 80 L160 180Z" fill="#B0C4D8"/>
-                  <path d="M120 180 L220 60 L320 180Z" fill="#98B0C8"/>
-                </g>
-                <!-- Mountains front -->
-                <g>
-                  <animateTransform attributeName="transform" type="translate"
-                    values="0,0; 6,0; 0,0" dur="8s" repeatCount="indefinite" calcMode="spline"
-                    keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
-                  <path d="M0 220 L100 130 L180 180 L260 110 L360 200 L360 240 L0 240Z" fill="#7A9AB5"/>
-                  <!-- Tree -->
-                  <rect x="40" y="186" width="8" height="24" rx="4" fill="#4A7A95"/>
-                  <path d="M44 180 L56 198 L32 198Z" fill="#3D6A82"/>
-                  <path d="M44 168 L58 188 L30 188Z" fill="#4A7A95"/>
-                </g>
-              </svg>
-            </div>
-            <div class="card-label">
-              <div class="card-label-text">Illustrations</div>
-              <div class="card-label-meta">Scene · Character · Abstract</div>
-            </div>
-          </a>
-
           <!-- ── Radius card ────────────────────────────── -->
           <a class="ds-card" href="#" onclick="switchPage('radius'); return false;">
             <div class="card-preview" style="background: #F4F6F8;">
               <svg width="180" height="120" viewBox="0 0 180 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <!-- Shape row — each shape has a subtle scale pulse on cycle -->
-                <rect x="12" y="36" width="30" height="30" rx="0" fill="white" stroke="#CBD5E1" stroke-width="1.5">
-                  <animate attributeName="stroke" values="#CBD5E1;#94A3B8;#CBD5E1" dur="4s" begin="0s" repeatCount="indefinite"/>
+                <rect x="12" y="36" width="30" height="30" rx="0" fill="white" stroke="#8DA4BE" stroke-width="1.5">
+                  <animate attributeName="stroke" values="#8DA4BE;#6E8AAB;#8DA4BE" dur="4s" begin="0s" repeatCount="indefinite"/>
                 </rect>
-                <rect x="50" y="36" width="30" height="30" rx="4" fill="white" stroke="#94A3B8" stroke-width="1.5">
-                  <animate attributeName="stroke" values="#94A3B8;#64748B;#94A3B8" dur="4s" begin="0.5s" repeatCount="indefinite"/>
+                <rect x="50" y="36" width="30" height="30" rx="4" fill="white" stroke="#6E8AAB" stroke-width="1.5">
+                  <animate attributeName="stroke" values="#6E8AAB;#576A84;#6E8AAB" dur="4s" begin="0.5s" repeatCount="indefinite"/>
                 </rect>
-                <rect x="88" y="36" width="30" height="30" rx="8" fill="white" stroke="#64748B" stroke-width="1.5">
-                  <animate attributeName="stroke" values="#64748B;#2778E2;#64748B" dur="4s" begin="1s" repeatCount="indefinite"/>
+                <rect x="88" y="36" width="30" height="30" rx="8" fill="white" stroke="#576A84" stroke-width="1.5">
+                  <animate attributeName="stroke" values="#576A84;#2477E5;#576A84" dur="4s" begin="1s" repeatCount="indefinite"/>
                 </rect>
                 <!-- Last shape — highlighted, pulses -->
-                <rect x="126" y="36" width="30" height="30" rx="15" fill="white" stroke="#2778E2" stroke-width="2">
+                <rect x="126" y="36" width="30" height="30" rx="15" fill="white" stroke="#2477E5" stroke-width="2">
                   <animate attributeName="stroke-width" values="2;3;2" dur="2s" repeatCount="indefinite"/>
                 </rect>
                 <!-- Fill pulse on highlighted -->
-                <rect x="126" y="36" width="30" height="30" rx="15" fill="#2778E2" opacity="0">
+                <rect x="126" y="36" width="30" height="30" rx="15" fill="#2477E5" opacity="0">
                   <animate attributeName="opacity" values="0;0.08;0" dur="2s" repeatCount="indefinite"/>
                 </rect>
 
                 <!-- Labels -->
-                <text x="16" y="82" font-size="8" fill="#94A3B8" font-family="monospace">0px</text>
-                <text x="53" y="82" font-size="8" fill="#94A3B8" font-family="monospace">4px</text>
-                <text x="91" y="82" font-size="8" fill="#64748B" font-family="monospace">8px</text>
-                <text x="126" y="82" font-size="8" fill="#2778E2" font-family="monospace">14px</text>
+                <text x="16" y="82" font-size="8" fill="#6E8AAB" font-family="monospace">0px</text>
+                <text x="53" y="82" font-size="8" fill="#6E8AAB" font-family="monospace">4px</text>
+                <text x="91" y="82" font-size="8" fill="#576A84" font-family="monospace">8px</text>
+                <text x="126" y="82" font-size="8" fill="#2477E5" font-family="monospace">14px</text>
 
                 <!-- Marching-ants arc indicator -->
-                <path d="M126 51 Q126 36 141 36" stroke="#2778E2" stroke-width="1.5" fill="none"
+                <path d="M126 51 Q126 36 141 36" stroke="#2477E5" stroke-width="1.5" fill="none"
                   stroke-dasharray="3 2.5">
                   <animate attributeName="stroke-dashoffset" from="0" to="-22" dur="1s" repeatCount="indefinite"/>
                 </path>
@@ -828,34 +738,34 @@
             <div class="card-preview" style="background: #F4F6F8;">
               <svg width="180" height="120" viewBox="0 0 180 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <!-- Bars grow from 0 → target → 0, looping with stagger -->
-                <rect x="30" y="18" height="10" rx="2" fill="#2778E2" opacity=".3" width="4">
+                <rect x="30" y="18" height="10" rx="2" fill="#2477E5" opacity=".3" width="4">
                   <animate attributeName="width" values="0;4;4;0" keyTimes="0;0.15;0.85;1" dur="3.6s" begin="0s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
                 </rect>
-                <text x="42" y="26" font-size="8" fill="#94A3B8" font-family="monospace">4px</text>
+                <text x="42" y="26" font-size="8" fill="#6E8AAB" font-family="monospace">4px</text>
 
-                <rect x="30" y="34" height="10" rx="2" fill="#2778E2" opacity=".4" width="8">
+                <rect x="30" y="34" height="10" rx="2" fill="#2477E5" opacity=".4" width="8">
                   <animate attributeName="width" values="0;8;8;0" keyTimes="0;0.15;0.85;1" dur="3.6s" begin="0.25s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
                 </rect>
-                <text x="46" y="42" font-size="8" fill="#94A3B8" font-family="monospace">8px</text>
+                <text x="46" y="42" font-size="8" fill="#6E8AAB" font-family="monospace">8px</text>
 
-                <rect x="30" y="50" height="10" rx="2" fill="#2778E2" opacity=".55" width="16">
+                <rect x="30" y="50" height="10" rx="2" fill="#2477E5" opacity=".55" width="16">
                   <animate attributeName="width" values="0;16;16;0" keyTimes="0;0.15;0.85;1" dur="3.6s" begin="0.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
                 </rect>
-                <text x="54" y="58" font-size="8" fill="#64748B" font-family="monospace">16px</text>
+                <text x="54" y="58" font-size="8" fill="#576A84" font-family="monospace">16px</text>
 
-                <rect x="30" y="66" height="10" rx="2" fill="#2778E2" opacity=".7" width="32">
+                <rect x="30" y="66" height="10" rx="2" fill="#2477E5" opacity=".7" width="32">
                   <animate attributeName="width" values="0;32;32;0" keyTimes="0;0.15;0.85;1" dur="3.6s" begin="0.75s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
                 </rect>
-                <text x="70" y="74" font-size="8" fill="#64748B" font-family="monospace">32px</text>
+                <text x="70" y="74" font-size="8" fill="#576A84" font-family="monospace">32px</text>
 
-                <rect x="30" y="82" height="10" rx="2" fill="#2778E2" opacity=".88" width="64">
+                <rect x="30" y="82" height="10" rx="2" fill="#2477E5" opacity=".88" width="64">
                   <animate attributeName="width" values="0;64;64;0" keyTimes="0;0.15;0.85;1" dur="3.6s" begin="1s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
                 </rect>
-                <text x="102" y="90" font-size="8" fill="#2778E2" font-family="monospace">64px</text>
+                <text x="102" y="90" font-size="8" fill="#2477E5" font-family="monospace">64px</text>
 
                 <!-- Scale bracket -->
-                <path d="M152 28 L158 28 L158 88 L152 88" stroke="#E2E8F0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                <text x="161" y="62" font-size="8" fill="#94A3B8" font-family="monospace" transform="rotate(90,161,62)">scale</text>
+                <path d="M152 28 L158 28 L158 88 L152 88" stroke="#B2C1D7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <text x="161" y="62" font-size="8" fill="#6E8AAB" font-family="monospace" transform="rotate(90,161,62)">scale</text>
               </svg>
             </div>
             <div class="card-label">
@@ -905,16 +815,16 @@
           <div class="ramp-section">
             <h3 class="ramp-section-title">Grey</h3>
             <div class="ramp-row-v2">
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#f8fafc; border:1px solid #e2e8f0;"><span class="chip-label-v2" style="color:#475569;">base-50</span></div><span class="chip-hex-v2">#F8FAFC</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#f1f5f9;"><span class="chip-label-v2" style="color:#475569;">base-100</span></div><span class="chip-hex-v2">#F1F5F9</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#e2e8f0;"><span class="chip-label-v2" style="color:#475569;">base-200</span></div><span class="chip-hex-v2">#E2E8F0</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#cbd5e1;"><span class="chip-label-v2" style="color:#475569;">base-300</span></div><span class="chip-hex-v2">#CBD5E1</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#94a3b8;"><span class="chip-label-v2" style="color:#fff;">base-400</span></div><span class="chip-hex-v2">#94A3B8</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2 ramp-default-v2" style="background:#64748b;"><span class="chip-label-v2" style="color:#fff;">base-500</span></div><span class="chip-hex-v2">#64748B</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#475569;"><span class="chip-label-v2" style="color:#fff;">base-600</span></div><span class="chip-hex-v2">#475569</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#334155;"><span class="chip-label-v2" style="color:#fff;">base-700</span></div><span class="chip-hex-v2">#334155</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#1e293b;"><span class="chip-label-v2" style="color:#fff;">base-800</span></div><span class="chip-hex-v2">#1E293B</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#0f172a;"><span class="chip-label-v2" style="color:#fff;">base-900</span></div><span class="chip-hex-v2">#0F172A</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#f4f7fa; border:1px solid #b2c1d7;"><span class="chip-label-v2" style="color:#4B5768;">base-50</span></div><span class="chip-hex-v2">#F4F7FA</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#d8e3ee;"><span class="chip-label-v2" style="color:#4B5768;">base-100</span></div><span class="chip-hex-v2">#D8E3EE</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#b2c1d7;"><span class="chip-label-v2" style="color:#4B5768;">base-200</span></div><span class="chip-hex-v2">#B2C1D7</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#8da4be;"><span class="chip-label-v2" style="color:#4B5768;">base-300</span></div><span class="chip-hex-v2">#8DA4BE</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#6e8aab;"><span class="chip-label-v2" style="color:#fff;">base-400</span></div><span class="chip-hex-v2">#6E8AAB</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2 ramp-default-v2" style="background:#576a84;"><span class="chip-label-v2" style="color:#fff;">base-500</span></div><span class="chip-hex-v2">#576A84</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#4B5768;"><span class="chip-label-v2" style="color:#fff;">base-600</span></div><span class="chip-hex-v2">#4B5768</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#384352;"><span class="chip-label-v2" style="color:#fff;">base-700</span></div><span class="chip-hex-v2">#384352</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#242e3c;"><span class="chip-label-v2" style="color:#fff;">base-800</span></div><span class="chip-hex-v2">#242E3C</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#151b23;"><span class="chip-label-v2" style="color:#fff;">base-900</span></div><span class="chip-hex-v2">#151B23</span></div>
             </div>
           </div>
 
@@ -922,16 +832,16 @@
           <div class="ramp-section">
             <h3 class="ramp-section-title">Brand</h3>
             <div class="ramp-row-v2">
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#eef4fd;"><span class="chip-label-v2" style="color:#154d9e;">base-50</span></div><span class="chip-hex-v2">#EEF4FD</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#d4e5fa;"><span class="chip-label-v2" style="color:#154d9e;">base-100</span></div><span class="chip-hex-v2">#D4E5FA</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#a9caf5;"><span class="chip-label-v2" style="color:#154d9e;">base-200</span></div><span class="chip-hex-v2">#A9CAF5</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#7dafef;"><span class="chip-label-v2" style="color:#06225b;">base-300</span></div><span class="chip-hex-v2">#7DAFEF</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#edf4fd;"><span class="chip-label-v2" style="color:#165ab6;">base-50</span></div><span class="chip-hex-v2">#EDF4FD</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#dbe8fb;"><span class="chip-label-v2" style="color:#165ab6;">base-100</span></div><span class="chip-hex-v2">#DBE8FB</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#b6d2f6;"><span class="chip-label-v2" style="color:#165ab6;">base-200</span></div><span class="chip-hex-v2">#B6D2F6</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#b6d2f6;"><span class="chip-label-v2" style="color:#0d366d;">base-300</span></div><span class="chip-hex-v2">#B6D2F6</span></div>
               <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#5293ea;"><span class="chip-label-v2" style="color:#fff;">base-400</span></div><span class="chip-hex-v2">#5293EA</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2 ramp-default-v2" style="background:#2778e2;"><span class="chip-label-v2" style="color:#fff;">base-500</span></div><span class="chip-hex-v2">#2778E2</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#1d62c0;"><span class="chip-label-v2" style="color:#fff;">base-600</span></div><span class="chip-hex-v2">#1D62C0</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#154d9e;"><span class="chip-label-v2" style="color:#fff;">base-700</span></div><span class="chip-hex-v2">#154D9E</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#0d377d;"><span class="chip-label-v2" style="color:#fff;">base-800</span></div><span class="chip-hex-v2">#0D377D</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#06225b;"><span class="chip-label-v2" style="color:#fff;">base-900</span></div><span class="chip-hex-v2">#06225B</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2 ramp-default-v2" style="background:#2477e5;"><span class="chip-label-v2" style="color:#fff;">base-500</span></div><span class="chip-hex-v2">#2477E5</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#1a6cdb;"><span class="chip-label-v2" style="color:#fff;">base-600</span></div><span class="chip-hex-v2">#1A6CDB</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#165ab6;"><span class="chip-label-v2" style="color:#fff;">base-700</span></div><span class="chip-hex-v2">#165AB6</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#114892;"><span class="chip-label-v2" style="color:#fff;">base-800</span></div><span class="chip-hex-v2">#114892</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#0d366d;"><span class="chip-label-v2" style="color:#fff;">base-900</span></div><span class="chip-hex-v2">#0D366D</span></div>
             </div>
           </div>
 
@@ -939,13 +849,13 @@
           <div class="ramp-section">
             <h3 class="ramp-section-title">Green</h3>
             <div class="ramp-row-v2">
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#ecfdf5;"><span class="chip-label-v2" style="color:#047857;">base-50</span></div><span class="chip-hex-v2">#ECFDF5</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#d1fae5;"><span class="chip-label-v2" style="color:#047857;">base-100</span></div><span class="chip-hex-v2">#D1FAE5</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#a7f3d0;"><span class="chip-label-v2" style="color:#065f46;">base-200</span></div><span class="chip-hex-v2">#A7F3D0</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#6ee7b7;"><span class="chip-label-v2" style="color:#065f46;">base-300</span></div><span class="chip-hex-v2">#6EE7B7</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#34d399;"><span class="chip-label-v2" style="color:#fff;">base-400</span></div><span class="chip-hex-v2">#34D399</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2 ramp-default-v2" style="background:#10b981;"><span class="chip-label-v2" style="color:#fff;">base-500</span></div><span class="chip-hex-v2">#10B981</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#059669;"><span class="chip-label-v2" style="color:#fff;">base-600</span></div><span class="chip-hex-v2">#059669</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#ecfdf1;"><span class="chip-label-v2" style="color:#047857;">base-50</span></div><span class="chip-hex-v2">#ECFDF1</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#c8f9e0;"><span class="chip-label-v2" style="color:#047857;">base-100</span></div><span class="chip-hex-v2">#C8F9E0</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#93f0c5;"><span class="chip-label-v2" style="color:#065f46;">base-200</span></div><span class="chip-hex-v2">#93F0C5</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#61e5b1;"><span class="chip-label-v2" style="color:#065f46;">base-300</span></div><span class="chip-hex-v2">#61E5B1</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#36d39a;"><span class="chip-label-v2" style="color:#fff;">base-400</span></div><span class="chip-hex-v2">#36D39A</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2 ramp-default-v2" style="background:#10bc83;"><span class="chip-label-v2" style="color:#fff;">base-500</span></div><span class="chip-hex-v2">#10BC83</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#059E6F;"><span class="chip-label-v2" style="color:#fff;">base-600</span></div><span class="chip-hex-v2">#059E6F</span></div>
               <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#047857;"><span class="chip-label-v2" style="color:#fff;">base-700</span></div><span class="chip-hex-v2">#047857</span></div>
               <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#065f46;"><span class="chip-label-v2" style="color:#fff;">base-800</span></div><span class="chip-hex-v2">#065F46</span></div>
               <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#064e3b;"><span class="chip-label-v2" style="color:#fff;">base-900</span></div><span class="chip-hex-v2">#064E3B</span></div>
@@ -956,16 +866,16 @@
           <div class="ramp-section">
             <h3 class="ramp-section-title">Orange</h3>
             <div class="ramp-row-v2">
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fff7ed;"><span class="chip-label-v2" style="color:#c2410c;">base-50</span></div><span class="chip-hex-v2">#FFF7ED</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#ffedd5;"><span class="chip-label-v2" style="color:#c2410c;">base-100</span></div><span class="chip-hex-v2">#FFEDD5</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fed7aa;"><span class="chip-label-v2" style="color:#9a3412;">base-200</span></div><span class="chip-hex-v2">#FED7AA</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fdba74;"><span class="chip-label-v2" style="color:#7c2d12;">base-300</span></div><span class="chip-hex-v2">#FDBA74</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fb923c;"><span class="chip-label-v2" style="color:#fff;">base-400</span></div><span class="chip-hex-v2">#FB923C</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2 ramp-default-v2" style="background:#f97316;"><span class="chip-label-v2" style="color:#fff;">base-500</span></div><span class="chip-hex-v2">#F97316</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#ea580c;"><span class="chip-label-v2" style="color:#fff;">base-600</span></div><span class="chip-hex-v2">#EA580C</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#c2410c;"><span class="chip-label-v2" style="color:#fff;">base-700</span></div><span class="chip-hex-v2">#C2410C</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#9a3412;"><span class="chip-label-v2" style="color:#fff;">base-800</span></div><span class="chip-hex-v2">#9A3412</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#7c2d12;"><span class="chip-label-v2" style="color:#fff;">base-900</span></div><span class="chip-hex-v2">#7C2D12</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#feede1;"><span class="chip-label-v2" style="color:#bd5005;">base-50</span></div><span class="chip-hex-v2">#FEEDE1</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fee1cd;"><span class="chip-label-v2" style="color:#bd5005;">base-100</span></div><span class="chip-hex-v2">#FEE1CD</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fcc39c;"><span class="chip-label-v2" style="color:#953f04;">base-200</span></div><span class="chip-hex-v2">#FCC39C</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fba56a;"><span class="chip-label-v2" style="color:#6d2e03;">base-300</span></div><span class="chip-hex-v2">#FBA56A</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fa812e;"><span class="chip-label-v2" style="color:#fff;">base-400</span></div><span class="chip-hex-v2">#FA812E</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2 ramp-default-v2" style="background:#e56106;"><span class="chip-label-v2" style="color:#fff;">base-500</span></div><span class="chip-hex-v2">#E56106</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#d15805;"><span class="chip-label-v2" style="color:#fff;">base-600</span></div><span class="chip-hex-v2">#D15805</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#bd5005;"><span class="chip-label-v2" style="color:#fff;">base-700</span></div><span class="chip-hex-v2">#BD5005</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#953f04;"><span class="chip-label-v2" style="color:#fff;">base-800</span></div><span class="chip-hex-v2">#953F04</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#6d2e03;"><span class="chip-label-v2" style="color:#fff;">base-900</span></div><span class="chip-hex-v2">#6D2E03</span></div>
             </div>
           </div>
 
@@ -973,8 +883,8 @@
           <div class="ramp-section">
             <h3 class="ramp-section-title">Red</h3>
             <div class="ramp-row-v2">
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fef2f2;"><span class="chip-label-v2" style="color:#b91c1c;">base-50</span></div><span class="chip-hex-v2">#FEF2F2</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fee2e2;"><span class="chip-label-v2" style="color:#b91c1c;">base-100</span></div><span class="chip-hex-v2">#FEE2E2</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#feecec;"><span class="chip-label-v2" style="color:#b91c1c;">base-50</span></div><span class="chip-hex-v2">#FEECEC</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fed8d8;"><span class="chip-label-v2" style="color:#b91c1c;">base-100</span></div><span class="chip-hex-v2">#FED8D8</span></div>
               <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fecaca;"><span class="chip-label-v2" style="color:#991b1b;">base-200</span></div><span class="chip-hex-v2">#FECACA</span></div>
               <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fca5a5;"><span class="chip-label-v2" style="color:#7f1d1d;">base-300</span></div><span class="chip-hex-v2">#FCA5A5</span></div>
               <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#f87171;"><span class="chip-label-v2" style="color:#fff;">base-400</span></div><span class="chip-hex-v2">#F87171</span></div>
@@ -990,16 +900,16 @@
           <div class="ramp-section">
             <h3 class="ramp-section-title">Blue</h3>
             <div class="ramp-row-v2">
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#ebf8ff;"><span class="chip-label-v2" style="color:#0277c5;">base-50</span></div><span class="chip-hex-v2">#EBF8FF</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#cdeefe;"><span class="chip-label-v2" style="color:#0277c5;">base-100</span></div><span class="chip-hex-v2">#CDEEFE</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#a4e0fe;"><span class="chip-label-v2" style="color:#025b97;">base-200</span></div><span class="chip-hex-v2">#A4E0FE</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#7cd2fe;"><span class="chip-label-v2" style="color:#025b97;">base-300</span></div><span class="chip-hex-v2">#7CD2FE</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#49c1fd;"><span class="chip-label-v2" style="color:#fff;">base-400</span></div><span class="chip-hex-v2">#49C1FD</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2 ramp-default-v2" style="background:#1ca3fd;"><span class="chip-label-v2" style="color:#fff;">base-500</span></div><span class="chip-hex-v2">#1CA3FD</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#028fed;"><span class="chip-label-v2" style="color:#fff;">base-600</span></div><span class="chip-hex-v2">#028FED</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#0277c5;"><span class="chip-label-v2" style="color:#fff;">base-700</span></div><span class="chip-hex-v2">#0277C5</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#025b97;"><span class="chip-label-v2" style="color:#fff;">base-800</span></div><span class="chip-hex-v2">#025B97</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#01436f;"><span class="chip-label-v2" style="color:#fff;">base-900</span></div><span class="chip-hex-v2">#01436F</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#ebf8ff;"><span class="chip-label-v2" style="color:#025b97;">base-50</span></div><span class="chip-hex-v2">#EBF8FF</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#b9e7fe;"><span class="chip-label-v2" style="color:#025b97;">base-100</span></div><span class="chip-hex-v2">#B9E7FE</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#9addfe;"><span class="chip-label-v2" style="color:#01436f;">base-200</span></div><span class="chip-hex-v2">#9ADDFE</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#67cbfe;"><span class="chip-label-v2" style="color:#01436f;">base-300</span></div><span class="chip-hex-v2">#67CBFE</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#2bb7fd;"><span class="chip-label-v2" style="color:#fff;">base-400</span></div><span class="chip-hex-v2">#2BB7FD</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2 ramp-default-v2" style="background:#028ce9;"><span class="chip-label-v2" style="color:#fff;">base-500</span></div><span class="chip-hex-v2">#028CE9</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#0274c0;"><span class="chip-label-v2" style="color:#fff;">base-600</span></div><span class="chip-hex-v2">#0274C0</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#025b97;"><span class="chip-label-v2" style="color:#fff;">base-700</span></div><span class="chip-hex-v2">#025B97</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#01436f;"><span class="chip-label-v2" style="color:#fff;">base-800</span></div><span class="chip-hex-v2">#01436F</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#01253d;"><span class="chip-label-v2" style="color:#fff;">base-900</span></div><span class="chip-hex-v2">#01253D</span></div>
             </div>
           </div>
 
@@ -1007,16 +917,16 @@
           <div class="ramp-section">
             <h3 class="ramp-section-title">Yellow</h3>
             <div class="ramp-row-v2">
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fffbeb;"><span class="chip-label-v2" style="color:#b45309;">base-50</span></div><span class="chip-hex-v2">#FFFBEB</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fef3c7;"><span class="chip-label-v2" style="color:#b45309;">base-100</span></div><span class="chip-hex-v2">#FEF3C7</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fde68a;"><span class="chip-label-v2" style="color:#92400e;">base-200</span></div><span class="chip-hex-v2">#FDE68A</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fcd34d;"><span class="chip-label-v2" style="color:#78350f;">base-300</span></div><span class="chip-hex-v2">#FCD34D</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fbbf24;"><span class="chip-label-v2" style="color:#78350f;">base-400</span></div><span class="chip-hex-v2">#FBBF24</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2 ramp-default-v2" style="background:#f59e0b;"><span class="chip-label-v2" style="color:#fff;">base-500</span></div><span class="chip-hex-v2">#F59E0B</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#d97706;"><span class="chip-label-v2" style="color:#fff;">base-600</span></div><span class="chip-hex-v2">#D97706</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#b45309;"><span class="chip-label-v2" style="color:#fff;">base-700</span></div><span class="chip-hex-v2">#B45309</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#92400e;"><span class="chip-label-v2" style="color:#fff;">base-800</span></div><span class="chip-hex-v2">#92400E</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#78350f;"><span class="chip-label-v2" style="color:#fff;">base-900</span></div><span class="chip-hex-v2">#78350F</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fffbeb;"><span class="chip-label-v2" style="color:#883f07;">base-50</span></div><span class="chip-hex-v2">#FFFBEB</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fef2c3;"><span class="chip-label-v2" style="color:#883f07;">base-100</span></div><span class="chip-hex-v2">#FEF2C3</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fde791;"><span class="chip-label-v2" style="color:#5d2909;">base-200</span></div><span class="chip-hex-v2">#FDE791</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fcd75f;"><span class="chip-label-v2" style="color:#3f1c08;">base-300</span></div><span class="chip-hex-v2">#FCD75F</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#fbbc19;"><span class="chip-label-v2" style="color:#3f1c08;">base-400</span></div><span class="chip-hex-v2">#FBBC19</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2 ramp-default-v2" style="background:#d88b09;"><span class="chip-label-v2" style="color:#fff;">base-500</span></div><span class="chip-hex-v2">#D88B09</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#b36205;"><span class="chip-label-v2" style="color:#fff;">base-600</span></div><span class="chip-hex-v2">#B36205</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#883f07;"><span class="chip-label-v2" style="color:#fff;">base-700</span></div><span class="chip-hex-v2">#883F07</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#5d2909;"><span class="chip-label-v2" style="color:#fff;">base-800</span></div><span class="chip-hex-v2">#5D2909</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#3f1c08;"><span class="chip-label-v2" style="color:#fff;">base-900</span></div><span class="chip-hex-v2">#3F1C08</span></div>
             </div>
           </div>
 
@@ -1024,15 +934,15 @@
           <div class="ramp-section">
             <h3 class="ramp-section-title">Teal</h3>
             <div class="ramp-row-v2">
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#f0fdfa;"><span class="chip-label-v2" style="color:#0f766e;">base-50</span></div><span class="chip-hex-v2">#F0FDFA</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#ccfbf1;"><span class="chip-label-v2" style="color:#0f766e;">base-100</span></div><span class="chip-hex-v2">#CCFBF1</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#99f6e4;"><span class="chip-label-v2" style="color:#115e59;">base-200</span></div><span class="chip-hex-v2">#99F6E4</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#5eead4;"><span class="chip-label-v2" style="color:#134e4a;">base-300</span></div><span class="chip-hex-v2">#5EEAD4</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#2dd4bf;"><span class="chip-label-v2" style="color:#fff;">base-400</span></div><span class="chip-hex-v2">#2DD4BF</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2 ramp-default-v2" style="background:#14b8a6;"><span class="chip-label-v2" style="color:#fff;">base-500</span></div><span class="chip-hex-v2">#14B8A6</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#0d9488;"><span class="chip-label-v2" style="color:#fff;">base-600</span></div><span class="chip-hex-v2">#0D9488</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#0f766e;"><span class="chip-label-v2" style="color:#fff;">base-700</span></div><span class="chip-hex-v2">#0F766E</span></div>
-              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#115e59;"><span class="chip-label-v2" style="color:#fff;">base-800</span></div><span class="chip-hex-v2">#115E59</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#e8fcf7;"><span class="chip-label-v2" style="color:#0e6d65;">base-50</span></div><span class="chip-hex-v2">#E8FCF7</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#d0fbf2;"><span class="chip-label-v2" style="color:#0e6d65;">base-100</span></div><span class="chip-hex-v2">#D0FBF2</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#93f5e2;"><span class="chip-label-v2" style="color:#105652;">base-200</span></div><span class="chip-hex-v2">#93F5E2</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#61ead5;"><span class="chip-label-v2" style="color:#134e4a;">base-300</span></div><span class="chip-hex-v2">#61EAD5</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#34d5c1;"><span class="chip-label-v2" style="color:#fff;">base-400</span></div><span class="chip-hex-v2">#34D5C1</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2 ramp-default-v2" style="background:#15bdaa;"><span class="chip-label-v2" style="color:#fff;">base-500</span></div><span class="chip-hex-v2">#15BDAA</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#0e9b8e;"><span class="chip-label-v2" style="color:#fff;">base-600</span></div><span class="chip-hex-v2">#0E9B8E</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#0e6d65;"><span class="chip-label-v2" style="color:#fff;">base-700</span></div><span class="chip-hex-v2">#0E6D65</span></div>
+              <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#105652;"><span class="chip-label-v2" style="color:#fff;">base-800</span></div><span class="chip-hex-v2">#105652</span></div>
               <div class="ramp-chip-wrap"><div class="ramp-chip-v2" style="background:#134e4a;"><span class="chip-label-v2" style="color:#fff;">base-900</span></div><span class="chip-hex-v2">#134E4A</span></div>
             </div>
           </div>
@@ -1046,15 +956,15 @@
           <div class="ramp-section">
             <h3 class="ramp-section-title">Typography</h3>
             <div class="sem-row">
-              <div class="sem-wrap"><div class="sem-chip" style="background:#334155;"><span class="sem-label" style="color:#fff;">primary</span></div><span class="sem-hex">#334155</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#64748b;"><span class="sem-label" style="color:#fff;">secondary</span></div><span class="sem-hex">#64748B</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#94a3b8;"><span class="sem-label" style="color:#fff;">disable</span></div><span class="sem-hex">#94A3B8</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#94a3b8;"><span class="sem-label" style="color:#fff;">placeholder</span></div><span class="sem-hex">#94A3B8</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#475569;"><span class="sem-label" style="color:#fff;">tag</span></div><span class="sem-hex">#475569</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#fff;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">on-surface</span></div><span class="sem-hex">#FFFFFF</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#0277c5;"><span class="sem-label" style="color:#fff;">information</span></div><span class="sem-hex">#0277C5</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#10b981;"><span class="sem-label" style="color:#fff;">success</span></div><span class="sem-hex">#10B981</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#f97316;"><span class="sem-label" style="color:#fff;">warning</span></div><span class="sem-hex">#F97316</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#384352;"><span class="sem-label" style="color:#fff;">primary</span></div><span class="sem-hex">#384352</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#576a84;"><span class="sem-label" style="color:#fff;">secondary</span></div><span class="sem-hex">#576A84</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#6e8aab;"><span class="sem-label" style="color:#fff;">disable</span></div><span class="sem-hex">#6E8AAB</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#6e8aab;"><span class="sem-label" style="color:#fff;">placeholder</span></div><span class="sem-hex">#6E8AAB</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#4B5768;"><span class="sem-label" style="color:#fff;">tag</span></div><span class="sem-hex">#4B5768</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#fff;border:1px solid #b2c1d7;"><span class="sem-label" style="color:#4B5768;">on-surface</span></div><span class="sem-hex">#FFFFFF</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#025b97;"><span class="sem-label" style="color:#fff;">information</span></div><span class="sem-hex">#025B97</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#10bc83;"><span class="sem-label" style="color:#fff;">success</span></div><span class="sem-hex">#10BC83</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#e56106;"><span class="sem-label" style="color:#fff;">warning</span></div><span class="sem-hex">#E56106</span></div>
               <div class="sem-wrap"><div class="sem-chip" style="background:#ef4444;"><span class="sem-label" style="color:#fff;">error</span></div><span class="sem-hex">#EF4444</span></div>
             </div>
           </div>
@@ -1063,10 +973,10 @@
           <div class="ramp-section">
             <h3 class="ramp-section-title">Button Background</h3>
             <div class="sem-row">
-              <div class="sem-wrap"><div class="sem-chip" style="background:#2778e2;"><span class="sem-label" style="color:#fff;">brand-primary</span></div><span class="sem-hex">#2778E2</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#1d62c0;"><span class="sem-label" style="color:#fff;">brand-hover</span></div><span class="sem-hex">#1D62C0</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#154d9e;"><span class="sem-label" style="color:#fff;">brand-clicked</span></div><span class="sem-hex">#154D9E</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#eef4fd;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#2778e2;">brand-mute</span></div><span class="sem-hex">#EEF4FD</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#2477e5;"><span class="sem-label" style="color:#fff;">brand-primary</span></div><span class="sem-hex">#2477E5</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#1a6cdb;"><span class="sem-label" style="color:#fff;">brand-hover</span></div><span class="sem-hex">#1A6CDB</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#165ab6;"><span class="sem-label" style="color:#fff;">brand-clicked</span></div><span class="sem-hex">#165AB6</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#edf4fd;border:1px solid #b2c1d7;"><span class="sem-label" style="color:#2477e5;">brand-mute</span></div><span class="sem-hex">#EDF4FD</span></div>
             </div>
           </div>
 
@@ -1074,30 +984,30 @@
           <div class="ramp-section">
             <h3 class="ramp-section-title">Background</h3>
             <div class="sem-row">
-              <div class="sem-wrap"><div class="sem-chip" style="background:#fff;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">white</span></div><span class="sem-hex">#FFFFFF</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#f8fafc;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">bg-subtle</span></div><span class="sem-hex">#F8FAFC</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#fff;border:1px solid #b2c1d7;"><span class="sem-label" style="color:#4B5768;">white</span></div><span class="sem-hex">#FFFFFF</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#f4f7fa;border:1px solid #b2c1d7;"><span class="sem-label" style="color:#4B5768;">bg-subtle</span></div><span class="sem-hex">#F4F7FA</span></div>
               <div class="sem-wrap"><div class="sem-chip" style="background:#000;"><span class="sem-label" style="color:#fff;">black</span></div><span class="sem-hex">#000000</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#f1f5f9;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">disable</span></div><span class="sem-hex">#F1F5F9</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#cbd5e1;"><span class="sem-label" style="color:#334155;">disable-icon</span></div><span class="sem-hex">#CBD5E1</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#64748b;"><span class="sem-label" style="color:#fff;">default-icon</span></div><span class="sem-hex">#64748B</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#2778e2;"><span class="sem-label" style="color:#fff;">brand-primary</span></div><span class="sem-hex">#2778E2</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#1d62c0;"><span class="sem-label" style="color:#fff;">brand-hover</span></div><span class="sem-hex">#1D62C0</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#154d9e;"><span class="sem-label" style="color:#fff;">brand-clicked</span></div><span class="sem-hex">#154D9E</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#ebf8ff;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">info-subtle</span></div><span class="sem-hex">#EBF8FF</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#cdeefe;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">info-mute</span></div><span class="sem-hex">#CDEEFE</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#0277c5;"><span class="sem-label" style="color:#fff;">info-primary</span></div><span class="sem-hex">#0277C5</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#ecfdf5;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">suc-subtle</span></div><span class="sem-hex">#ECFDF5</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#d1fae5;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">suc-mute</span></div><span class="sem-hex">#D1FAE5</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#10b981;"><span class="sem-label" style="color:#fff;">suc-primary</span></div><span class="sem-hex">#10B981</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#059669;"><span class="sem-label" style="color:#fff;">suc-hover</span></div><span class="sem-hex">#059669</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#d8e3ee;border:1px solid #b2c1d7;"><span class="sem-label" style="color:#4B5768;">disable</span></div><span class="sem-hex">#D8E3EE</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#8da4be;"><span class="sem-label" style="color:#384352;">disable-icon</span></div><span class="sem-hex">#8DA4BE</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#576a84;"><span class="sem-label" style="color:#fff;">default-icon</span></div><span class="sem-hex">#576A84</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#2477e5;"><span class="sem-label" style="color:#fff;">brand-primary</span></div><span class="sem-hex">#2477E5</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#1a6cdb;"><span class="sem-label" style="color:#fff;">brand-hover</span></div><span class="sem-hex">#1A6CDB</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#165ab6;"><span class="sem-label" style="color:#fff;">brand-clicked</span></div><span class="sem-hex">#165AB6</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#ebf8ff;border:1px solid #b2c1d7;"><span class="sem-label" style="color:#4B5768;">info-subtle</span></div><span class="sem-hex">#EBF8FF</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#b9e7fe;border:1px solid #b2c1d7;"><span class="sem-label" style="color:#4B5768;">info-mute</span></div><span class="sem-hex">#B9E7FE</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#025b97;"><span class="sem-label" style="color:#fff;">info-primary</span></div><span class="sem-hex">#025B97</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#ecfdf1;border:1px solid #b2c1d7;"><span class="sem-label" style="color:#4B5768;">suc-subtle</span></div><span class="sem-hex">#ECFDF1</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#c8f9e0;border:1px solid #b2c1d7;"><span class="sem-label" style="color:#4B5768;">suc-mute</span></div><span class="sem-hex">#C8F9E0</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#10bc83;"><span class="sem-label" style="color:#fff;">suc-primary</span></div><span class="sem-hex">#10BC83</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#059E6F;"><span class="sem-label" style="color:#fff;">suc-hover</span></div><span class="sem-hex">#059E6F</span></div>
               <div class="sem-wrap"><div class="sem-chip" style="background:#047857;"><span class="sem-label" style="color:#fff;">suc-clicked</span></div><span class="sem-hex">#047857</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#fff7ed;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">war-subtle</span></div><span class="sem-hex">#FFF7ED</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#ffedd5;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">war-mute</span></div><span class="sem-hex">#FFEDD5</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#f97316;"><span class="sem-label" style="color:#fff;">war-primary</span></div><span class="sem-hex">#F97316</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#ea580c;"><span class="sem-label" style="color:#fff;">war-hover</span></div><span class="sem-hex">#EA580C</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#c2410c;"><span class="sem-label" style="color:#fff;">war-clicked</span></div><span class="sem-hex">#C2410C</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#fef2f2;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">alert-subtle</span></div><span class="sem-hex">#FEF2F2</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#fee2e2;border:1px solid #e2e8f0;"><span class="sem-label" style="color:#475569;">alert-mute</span></div><span class="sem-hex">#FEE2E2</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#feede1;border:1px solid #b2c1d7;"><span class="sem-label" style="color:#4B5768;">war-subtle</span></div><span class="sem-hex">#FEEDE1</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#fee1cd;border:1px solid #b2c1d7;"><span class="sem-label" style="color:#4B5768;">war-mute</span></div><span class="sem-hex">#FEE1CD</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#e56106;"><span class="sem-label" style="color:#fff;">war-primary</span></div><span class="sem-hex">#E56106</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#d15805;"><span class="sem-label" style="color:#fff;">war-hover</span></div><span class="sem-hex">#D15805</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#bd5005;"><span class="sem-label" style="color:#fff;">war-clicked</span></div><span class="sem-hex">#BD5005</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#feecec;border:1px solid #b2c1d7;"><span class="sem-label" style="color:#4B5768;">alert-subtle</span></div><span class="sem-hex">#FEECEC</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#fed8d8;border:1px solid #b2c1d7;"><span class="sem-label" style="color:#4B5768;">alert-mute</span></div><span class="sem-hex">#FED8D8</span></div>
               <div class="sem-wrap"><div class="sem-chip" style="background:#ef4444;"><span class="sem-label" style="color:#fff;">error-primary</span></div><span class="sem-hex">#EF4444</span></div>
               <div class="sem-wrap"><div class="sem-chip" style="background:#dc2626;"><span class="sem-label" style="color:#fff;">alert-hover</span></div><span class="sem-hex">#DC2626</span></div>
               <div class="sem-wrap"><div class="sem-chip" style="background:#b91c1c;"><span class="sem-label" style="color:#fff;">alert-clicked</span></div><span class="sem-hex">#B91C1C</span></div>
@@ -1108,14 +1018,14 @@
           <div class="ramp-section">
             <h3 class="ramp-section-title">Border</h3>
             <div class="sem-row">
-              <div class="sem-wrap"><div class="sem-chip" style="background:#e2e8f0;border:1px solid #cbd5e1;"><span class="sem-label" style="color:#475569;">default</span></div><span class="sem-hex">#E2E8F0</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#cbd5e1;border:1px solid #94a3b8;"><span class="sem-label" style="color:#475569;">disable</span></div><span class="sem-hex">#CBD5E1</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#2778e2;"><span class="sem-label" style="color:#fff;">brand-primary</span></div><span class="sem-hex">#2778E2</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#1d62c0;"><span class="sem-label" style="color:#fff;">brand-hover</span></div><span class="sem-hex">#1D62C0</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#154d9e;"><span class="sem-label" style="color:#fff;">brand-clicked</span></div><span class="sem-hex">#154D9E</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#10b981;"><span class="sem-label" style="color:#fff;">success-primary</span></div><span class="sem-hex">#10B981</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#b2c1d7;border:1px solid #8da4be;"><span class="sem-label" style="color:#4B5768;">default</span></div><span class="sem-hex">#B2C1D7</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#8da4be;border:1px solid #6e8aab;"><span class="sem-label" style="color:#4B5768;">disable</span></div><span class="sem-hex">#8DA4BE</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#2477e5;"><span class="sem-label" style="color:#fff;">brand-primary</span></div><span class="sem-hex">#2477E5</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#1a6cdb;"><span class="sem-label" style="color:#fff;">brand-hover</span></div><span class="sem-hex">#1A6CDB</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#165ab6;"><span class="sem-label" style="color:#fff;">brand-clicked</span></div><span class="sem-hex">#165AB6</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#10bc83;"><span class="sem-label" style="color:#fff;">success-primary</span></div><span class="sem-hex">#10BC83</span></div>
               <div class="sem-wrap"><div class="sem-chip" style="background:#ef4444;"><span class="sem-label" style="color:#fff;">error-primary</span></div><span class="sem-hex">#EF4444</span></div>
-              <div class="sem-wrap"><div class="sem-chip" style="background:#f97316;"><span class="sem-label" style="color:#fff;">warning-primary</span></div><span class="sem-hex">#F97316</span></div>
+              <div class="sem-wrap"><div class="sem-chip" style="background:#e56106;"><span class="sem-label" style="color:#fff;">warning-primary</span></div><span class="sem-hex">#E56106</span></div>
             </div>
           </div>
 
@@ -1518,55 +1428,6 @@
         </script>
       </div>
 
-      <!-- ── Illustrations sub-page ────────────────────── -->
-      <div id="page-illustrations" style="display:none;">
-        <div class="page-header">
-          <h1 class="page-title">illustrations</h1>
-          <p class="page-subtitle">Scene, character, and abstract illustrations for onboarding, empty states, and marketing moments.</p>
-        </div>
-
-        <div class="section-block">
-          <div class="section-block-title">Empty States</div>
-          <div style="display:flex;gap:16px;flex-wrap:wrap;">
-
-            <div style="background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:40px 24px;text-align:center;flex:1;min-width:180px;max-width:240px;">
-              <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="10" y="20" width="60" height="44" rx="6" fill="var(--brand-bg)" stroke="var(--brand-lt)" stroke-width="1.5"/>
-                <path d="M24 42h32M24 50h20" stroke="var(--brand)" stroke-width="2" stroke-linecap="round" opacity=".4"/>
-                <circle cx="40" cy="36" r="8" fill="var(--brand-subtle)"/>
-                <path d="M37 36l2 2 4-4" stroke="var(--brand)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              <div style="font-size:13px;font-weight:600;color:var(--text);margin-top:12px;">No items yet</div>
-              <div style="font-size:11px;color:var(--hint);margin-top:4px;">Create your first item</div>
-            </div>
-
-            <div style="background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:40px 24px;text-align:center;flex:1;min-width:180px;max-width:240px;">
-              <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="40" cy="34" r="20" fill="var(--surface)" stroke="var(--border)" stroke-width="1.5"/>
-                <circle cx="32" cy="30" r="3" fill="var(--hint)"/>
-                <circle cx="48" cy="30" r="3" fill="var(--hint)"/>
-                <path d="M32 42 Q40 36 48 42" stroke="var(--hint)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                <path d="M25 58h30" stroke="var(--border)" stroke-width="1.5" stroke-linecap="round"/>
-                <rect x="30" y="54" width="20" height="4" rx="2" fill="var(--surface)"/>
-              </svg>
-              <div style="font-size:13px;font-weight:600;color:var(--text);margin-top:12px;">Nothing found</div>
-              <div style="font-size:11px;color:var(--hint);margin-top:4px;">Try a different search</div>
-            </div>
-
-            <div style="background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:40px 24px;text-align:center;flex:1;min-width:180px;max-width:240px;">
-              <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20 60 L40 20 L60 60Z" fill="var(--warning-bg)" stroke="var(--warning)" stroke-width="1.5" stroke-linejoin="round"/>
-                <line x1="40" y1="34" x2="40" y2="48" stroke="var(--warning)" stroke-width="2" stroke-linecap="round"/>
-                <circle cx="40" cy="54" r="1.5" fill="var(--warning)"/>
-              </svg>
-              <div style="font-size:13px;font-weight:600;color:var(--text);margin-top:12px;">Something went wrong</div>
-              <div style="font-size:11px;color:var(--hint);margin-top:4px;">Please try again</div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
     </main>
   </div>
 
@@ -1596,7 +1457,7 @@
     }
 
     // ── Sub-page switching ────────────────────────────────
-    const pages = ['overview','colours','icons','illustrations','radius','spacing','typography'];
+    const pages = ['overview','colours','icons','radius','spacing','typography'];
     const links = document.querySelectorAll('.sidebar-link');
 
     function switchPage(name) {

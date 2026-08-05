@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Components · AI Design System</title>
+  <title>Components · Pulse</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -11,25 +12,25 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --brand-bg:#EEF4FD; --brand-subtle:#D4E5FA; --brand-lt:#A9CAF5;
-      --brand:#2778E2;    --brand-hv:#1D62C0;     --brand-ac:#154D9E;  --brand-text:#06225B;
-      --success-bg:#ECFDF5; --success:#10B981; --success-hv:#059669; --success-text:#064E3B;
-      --warning-bg:#FFF7ED; --warning:#F97316; --warning-hv:#EA580C; --warning-text:#7C2D12;
-      --error-bg:#FFF5F5;   --error:#EF4444;   --error-hv:#DC2626;   --error-text:#7F1D1D;
-      --neutral-bg:#F8FAFC; --neutral-lt:#E2E8F0; --neutral:#64748B;  --neutral-text:#0F172A;
+      --brand-bg:#E8F0FC; --brand-subtle:#D1E3FA; --brand-lt:#A4C7F4;
+      --brand:#2577E5;    --brand-hv:#1960BD;     --brand-ac:#1851A0;  --brand-text:#041943;
+      --success-bg:#ECFDF1; --success:#10BC83; --success-hv:#059E6F; --success-text:#064E3B;
+      --warning-bg:#FFF7ED; --warning:#E56106; --warning-hv:#B84509; --warning-text:#471A0A;
+      --error-bg:#FEECEC;   --error:#EF4444;   --error-hv:#DC2626;   --error-text:#7F1D1D;
+      --neutral-bg:#F4F7FA; --neutral-lt:#B2C1D7; --neutral:#576A84;  --neutral-text:#151B23;
 
-      --bg:#ffffff; --surface:#F1F5F9; --canvas:#F8FAFC; --text:#0F172A;
-      --muted:#64748B; --hint:#94A3B8; --border:#E2E8F0;
+      --bg:#ffffff; --surface:#D8E3EE; --canvas:#F4F7FA; --text:#151B23;
+      --muted:#576A84; --hint:#6E8AAB; --border:#E1E5EA;
       --r-sm:6px; --r-md:8px; --r-lg:12px; --r-xl:16px;
     }
     .dark {
-      --bg:#0F172A; --surface:#1E293B; --canvas:#0A1120; --text:#F1F5F9;
-      --muted:#94A3B8; --hint:#475569; --border:#334155;
-      --brand-bg:#0D2444; --brand-text:#A9CAF5;
-      --success-bg:#022C22; --success-text:#6EE7B7;
-      --warning-bg:#431407; --warning-text:#FED7AA;
+      --bg:#151B23; --surface:#242E3C; --canvas:#0A1120; --text:#D8E3EE;
+      --muted:#6E8AAB; --hint:#4B5768; --border:#384352;
+      --brand-bg:#0B2D66; --brand-text:#A4C7F4;
+      --success-bg:#022C22; --success-text:#61E5B1;
+      --warning-bg:#431407; --warning-text:#FED09A;
       --error-bg:#2D0A0A;   --error-text:#FECACA;
-      --neutral-lt:#1E293B; --neutral-bg:#0F172A;
+      --neutral-lt:#242E3C; --neutral-bg:#151B23;
     }
 
     html { scroll-behavior: smooth; }
@@ -104,7 +105,7 @@
       background: var(--brand-bg); color: var(--brand); font-weight: 600;
       border-left-color: var(--brand);
     }
-    .dark .sidebar-link.active { background: rgba(39,120,226,0.15); color: var(--brand-lt); border-left-color: var(--brand); }
+    .dark .sidebar-link.active { background: rgba(37,119,229,0.15); color: var(--brand-lt); border-left-color: var(--brand); }
     .sidebar-icon { width: 18px; height: 18px; flex-shrink: 0; opacity: 0.65; transition: opacity 0.12s; }
     .sidebar-link:hover .sidebar-icon,
     .sidebar-link.active .sidebar-icon { opacity: 1; }
@@ -128,11 +129,11 @@
     /* ── Overview grid ───────────────────────────────── */
     .comp-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
     }
-    @media (max-width: 1200px) { .comp-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 860px)  { .comp-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 1200px) { .comp-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 860px)  { .comp-grid { grid-template-columns: 1fr; } }
 
     .comp-card {
       background: var(--bg); border: 1px solid var(--border);
@@ -150,13 +151,13 @@
     .comp-card.coming-soon { opacity: 0.5; pointer-events: none; }
 
     .card-preview {
-      width: 100%; aspect-ratio: 4 / 3;
+      width: 100%; aspect-ratio: 3 / 2;
       overflow: hidden; display: flex;
       align-items: center; justify-content: center;
       position: relative;
     }
     .card-footer {
-      padding: 14px 16px 16px;
+      padding: 18px 20px 20px;
       border-top: 1px solid var(--border);
       display: flex; align-items: flex-start; justify-content: space-between; gap: 8px;
     }
@@ -486,7 +487,7 @@
       background:var(--bg);
       transition:border-color 0.15s, box-shadow 0.15s;
     }
-    .inp-wrap.inp-active  { border-color:#2778e2; box-shadow:0 0 0 3px rgba(39,120,226,0.12); }
+    .inp-wrap.inp-active  { border-color:#2477e5; box-shadow:0 0 0 3px rgba(36,119,229,0.12); }
     .inp-wrap.inp-error   { border-color:#dc2626; }
     .inp-wrap.inp-disabled,
     .inp-wrap.inp-filled-disabled { background:#f8fafc; }
@@ -685,15 +686,14 @@
   <nav>
     <a href="foundations.html" class="logo">
       <div class="logo-icon">
-        <svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+        <svg viewBox="0 0 18 11"><polyline points="0,5.5 3.5,5.5 5.5,1 7.5,10 9.5,3 11.5,8 13.5,5.5 18,5.5"/></svg>
       </div>
-      <span class="logo-name">Design System</span>
+      <span class="logo-name">Pulse</span>
       <span class="logo-dim">&nbsp;·&nbsp;V 0.1</span>
     </a>
     <div class="nav-links">
       <a href="foundations.html">Foundations</a>
       <a href="components.html" class="active">Components</a>
-      <a href="#">Patterns</a>
     </div>
     <div class="nav-right">
       <button class="theme-btn" id="themeBtn" title="Toggle dark mode">
@@ -2038,7 +2038,7 @@
             <!-- Checked -->
             <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
               <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
-                <span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:4px;border:1.5px solid #2778E2;background:#2778E2;flex-shrink:0;">
+                <span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:4px;border:1.5px solid #2577E5;background:#2577E5;flex-shrink:0;">
                   <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </span>
                 <span style="font-size:13px;font-weight:500;color:var(--text);">Checked</span>
@@ -2049,7 +2049,7 @@
             <!-- Indeterminate -->
             <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
               <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
-                <span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:4px;border:1.5px solid #2778E2;background:#2778E2;flex-shrink:0;">
+                <span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:4px;border:1.5px solid #2577E5;background:#2577E5;flex-shrink:0;">
                   <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><line x1="2" y1="6" x2="10" y2="6" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>
                 </span>
                 <span style="font-size:13px;font-weight:500;color:var(--text);">Indeterminate</span>
@@ -2091,7 +2091,7 @@
             </label>
 
             <label id="cb-b" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;width:fit-content;" onclick="toggleCb('b')">
-              <span id="cb-box-b" style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:4px;border:1.5px solid #2778E2;background:#2778E2;flex-shrink:0;transition:all 0.12s;">
+              <span id="cb-box-b" style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:4px;border:1.5px solid #2577E5;background:#2577E5;flex-shrink:0;transition:all 0.12s;">
                 <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
               <span style="font-size:13px;font-weight:500;color:var(--text);">Subscribe to newsletter</span>
@@ -2112,7 +2112,7 @@
             <!-- Parent -->
             <div style="padding-bottom:12px;border-bottom:1px solid var(--border);margin-bottom:12px;">
               <label id="cb-parent" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;width:fit-content;" onclick="toggleParent()">
-                <span id="cb-parent-box" style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:4px;border:1.5px solid #2778E2;background:#2778E2;flex-shrink:0;transition:all 0.12s;">
+                <span id="cb-parent-box" style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:4px;border:1.5px solid #2577E5;background:#2577E5;flex-shrink:0;transition:all 0.12s;">
                   <svg id="cb-parent-icon" width="11" height="11" viewBox="0 0 12 12" fill="none"><line x1="2" y1="6" x2="10" y2="6" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>
                 </span>
                 <span style="font-size:13px;font-weight:600;color:var(--text);">Select all</span>
@@ -2121,7 +2121,7 @@
             <!-- Children -->
             <div style="display:flex;flex-direction:column;gap:12px;padding-left:8px;" id="cb-children">
               <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;width:fit-content;" onclick="toggleChild(this)">
-                <span class="cb-child-box" style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:4px;border:1.5px solid #2778E2;background:#2778E2;flex-shrink:0;transition:all 0.12s;"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span class="cb-child-box" style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:4px;border:1.5px solid #2577E5;background:#2577E5;flex-shrink:0;transition:all 0.12s;"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                 <span style="font-size:13px;font-weight:500;color:var(--text);">Design tokens</span>
               </label>
               <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;width:fit-content;" onclick="toggleChild(this)">
@@ -2129,7 +2129,7 @@
                 <span style="font-size:13px;font-weight:500;color:var(--text);">Component library</span>
               </label>
               <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;width:fit-content;" onclick="toggleChild(this)">
-                <span class="cb-child-box" style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:4px;border:1.5px solid #2778E2;background:#2778E2;flex-shrink:0;transition:all 0.12s;"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span class="cb-child-box" style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:4px;border:1.5px solid #2577E5;background:#2577E5;flex-shrink:0;transition:all 0.12s;"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                 <span style="font-size:13px;font-weight:500;color:var(--text);">Documentation</span>
               </label>
             </div>
@@ -2178,8 +2178,8 @@
             <!-- Checked -->
             <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
               <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
-                <span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;border:1.5px solid #2778E2;background:transparent;flex-shrink:0;">
-                  <span style="width:8px;height:8px;border-radius:50%;background:#2778E2;display:block;"></span>
+                <span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;border:1.5px solid #2577E5;background:transparent;flex-shrink:0;">
+                  <span style="width:8px;height:8px;border-radius:50%;background:#2577E5;display:block;"></span>
                 </span>
                 <span style="font-size:13px;font-weight:500;color:var(--text);">Selected</span>
               </label>
@@ -2222,10 +2222,10 @@
                   <div style="font-size:11px;color:var(--muted);margin-top:2px;">Up to 3 projects · Community support</div>
                 </div>
               </label>
-              <label class="radio-opt" data-group="a" data-val="pro" style="display:flex;align-items:center;gap:10px;padding:14px 16px;border:1.5px solid #2778E2;border-radius:8px;cursor:pointer;transition:all 0.12s;background:var(--brand-bg);" onclick="selectRadio('a','pro',this)">
-                <span class="radio-ring" style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;border:1.5px solid #2778E2;flex-shrink:0;transition:all 0.12s;"><span class="radio-dot" style="width:8px;height:8px;border-radius:50%;background:#2778E2;transition:all 0.12s;"></span></span>
+              <label class="radio-opt" data-group="a" data-val="pro" style="display:flex;align-items:center;gap:10px;padding:14px 16px;border:1.5px solid #2577E5;border-radius:8px;cursor:pointer;transition:all 0.12s;background:var(--brand-bg);" onclick="selectRadio('a','pro',this)">
+                <span class="radio-ring" style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;border:1.5px solid #2577E5;flex-shrink:0;transition:all 0.12s;"><span class="radio-dot" style="width:8px;height:8px;border-radius:50%;background:#2577E5;transition:all 0.12s;"></span></span>
                 <div>
-                  <div style="font-size:13px;font-weight:600;color:var(--text);">Pro <span style="font-size:10px;background:#2778E2;color:#fff;padding:1px 6px;border-radius:10px;margin-left:4px;font-weight:600;">Popular</span></div>
+                  <div style="font-size:13px;font-weight:600;color:var(--text);">Pro <span style="font-size:10px;background:#2577E5;color:#fff;padding:1px 6px;border-radius:10px;margin-left:4px;font-weight:600;">Popular</span></div>
                   <div style="font-size:11px;color:var(--muted);margin-top:2px;">Unlimited projects · Priority support</div>
                 </div>
               </label>
@@ -2247,7 +2247,7 @@
             <p style="font-size:12px;font-weight:600;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:16px;">Notification frequency</p>
             <div style="display:flex;flex-wrap:wrap;gap:20px;" id="radio-group-b">
               <label style="display:inline-flex;align-items:center;gap:7px;cursor:pointer;" onclick="selectRadio('b','instant',this)">
-                <span class="radio-ring" style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;border:1.5px solid #2778E2;flex-shrink:0;"><span class="radio-dot" style="width:8px;height:8px;border-radius:50%;background:#2778E2;"></span></span>
+                <span class="radio-ring" style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;border:1.5px solid #2577E5;flex-shrink:0;"><span class="radio-dot" style="width:8px;height:8px;border-radius:50%;background:#2577E5;"></span></span>
                 <span style="font-size:13px;font-weight:500;color:var(--text);">Instant</span>
               </label>
               <label style="display:inline-flex;align-items:center;gap:7px;cursor:pointer;" onclick="selectRadio('b','daily',this)">
@@ -2314,7 +2314,7 @@
       const box = document.getElementById('cb-box-' + id);
       if (!box) return;
       if (cbState[id]) {
-        box.style.background = '#2778E2'; box.style.borderColor = '#2778E2';
+        box.style.background = '#2577E5'; box.style.borderColor = '#2577E5';
         box.innerHTML = '<svg width="11" height="11" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
       } else {
         box.style.background = 'transparent'; box.style.borderColor = '#CBD5E1';
@@ -2324,11 +2324,11 @@
     }
     function toggleChild(lbl) {
       const box = lbl.querySelector('.cb-child-box');
-      const isChecked = box.style.background === 'rgb(39, 120, 226)' || box.style.background === '#2778E2' || box.innerHTML.includes('svg');
+      const isChecked = box.style.background === 'rgb(39, 120, 226)' || box.style.background === '#2577E5' || box.innerHTML.includes('svg');
       if (isChecked) {
         box.style.background = 'transparent'; box.style.borderColor = '#CBD5E1'; box.innerHTML = '';
       } else {
-        box.style.background = '#2778E2'; box.style.borderColor = '#2778E2';
+        box.style.background = '#2577E5'; box.style.borderColor = '#2577E5';
         box.innerHTML = '<svg width="11" height="11" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
       }
       updateParent();
@@ -2340,7 +2340,7 @@
       const pb = document.getElementById('cb-parent-box');
       const pi = document.getElementById('cb-parent-icon');
       if (!pb) return;
-      pb.style.background = '#2778E2'; pb.style.borderColor = '#2778E2';
+      pb.style.background = '#2577E5'; pb.style.borderColor = '#2577E5';
       if (checked === 0) {
         pb.style.background = 'transparent'; pb.style.borderColor = '#CBD5E1'; pi.outerHTML = '<span id="cb-parent-icon"></span>';
       } else if (checked === boxes.length) {
@@ -2356,7 +2356,7 @@
         if (anyChecked) {
           box.style.background = 'transparent'; box.style.borderColor = '#CBD5E1'; box.innerHTML = '';
         } else {
-          box.style.background = '#2778E2'; box.style.borderColor = '#2778E2';
+          box.style.background = '#2577E5'; box.style.borderColor = '#2577E5';
           box.innerHTML = '<svg width="11" height="11" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
         }
       });
@@ -2372,10 +2372,10 @@
         const dot  = lbl.querySelector('.radio-dot');
         if (!ring || !dot) return;
         const isSelected = (lbl === clickedLabel || lbl.closest('label') === clickedLabel);
-        ring.style.borderColor = isSelected ? '#2778E2' : '#CBD5E1';
-        dot.style.background   = isSelected ? '#2778E2' : 'transparent';
+        ring.style.borderColor = isSelected ? '#2577E5' : '#CBD5E1';
+        dot.style.background   = isSelected ? '#2577E5' : 'transparent';
         if (lbl.style !== undefined) {
-          lbl.style.borderColor = isSelected ? '#2778E2' : 'var(--border)';
+          lbl.style.borderColor = isSelected ? '#2577E5' : 'var(--border)';
           lbl.style.background  = isSelected ? 'var(--brand-bg)' : '';
         }
       });
