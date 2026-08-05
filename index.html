@@ -160,9 +160,9 @@
 
     .hcard {
       background: var(--card-bg); border: 1px solid var(--border);
-      border-radius: var(--r-xl); padding: 16px 20px 18px;
+      border-radius: var(--r-xl); padding: 24px 24px 22px;
       cursor: pointer; text-align: left;
-      text-decoration: none; display: block;
+      text-decoration: none; display: flex; flex-direction: column; gap: 14px;
       transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s, background 0.2s;
     }
     .hcard:hover {
@@ -172,31 +172,46 @@
     }
     .dark .hcard:hover { border-color: var(--brand); box-shadow: 0 8px 32px rgba(39,120,226,0.15); }
 
-    .hcard-header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 10px;
+    /* Icon */
+    .hcard-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--brand-bg);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-    .hcard-num {
-      font-size: 11px; font-weight: 500;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--text-dim);
+    .hcard-icon svg {
+      width: 22px; height: 22px; stroke: var(--brand); fill: none;
+      stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;
     }
-    .hcard-arrow {
-      width: 18px; height: 18px; flex-shrink: 0;
-      stroke: var(--text-sub); fill: none;
-      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
-      transition: stroke 0.15s, transform 0.2s;
-    }
-    .hcard:hover .hcard-arrow { stroke: var(--brand); transform: translate(3px, -3px); }
 
-    .hcard-name {
-      font-size: 18px; font-weight: 600;
-      letter-spacing: -0.02em; color: var(--text);
-      margin-bottom: 4px; transition: color 0.2s;
+    /* Middle row: label+title left, arrow right */
+    .hcard-mid {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
     }
+    .hcard-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--brand); margin-bottom: 4px;
+    }
+    .hcard-name {
+      font-size: 22px; font-weight: 700;
+      letter-spacing: -0.03em; color: var(--text); transition: color 0.2s;
+      line-height: 1.1;
+    }
+    .hcard-arrow-btn {
+      width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+      background: var(--brand-bg);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.18s, transform 0.2s;
+    }
+    .hcard-arrow-btn svg {
+      width: 16px; height: 16px; stroke: var(--brand); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+      transition: transform 0.2s;
+    }
+    .hcard:hover .hcard-arrow-btn { background: var(--brand-lt); }
+    .hcard:hover .hcard-arrow-btn svg { transform: translate(2px, -2px); }
+
     .hcard-desc {
-      font-size: 13px; color: var(--text-dim);
-      line-height: 1.65;
+      font-size: 13px; color: var(--text-dim); line-height: 1.65;
     }
 
     /* ── Footer ── */
@@ -308,7 +323,7 @@
         padding: 80px 20px 0; min-height: 380px; height: auto;
       }
       .hero-cards { grid-template-columns: 1fr; padding: 0 20px 48px; gap: 12px; }
-      .hcard { padding: 20px 20px 22px; }
+      .hcard { padding: 20px 20px 20px; gap: 12px; }
     }
     @media (max-width: 400px) {
       nav { padding: 0 14px; }
@@ -369,21 +384,37 @@
 
     <div class="hero-cards">
       <a class="hcard" href="foundations.html">
-        <div class="hcard-header">
-          <span class="hcard-num">01 / Foundations</span>
-          <svg class="hcard-arrow" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        <div class="hcard-icon">
+          <!-- grid/tokens icon -->
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
         </div>
-        <p class="hcard-name">Foundations</p>
-        <p class="hcard-desc">The essential building blocks including colour tokens, typography, spacing, and radius principles.</p>
+        <div class="hcard-mid">
+          <div>
+            <p class="hcard-label">Tokens &amp; Styles</p>
+            <p class="hcard-name">Foundations</p>
+          </div>
+          <div class="hcard-arrow-btn">
+            <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </div>
+        </div>
+        <p class="hcard-desc">Colour, typography, spacing and radii — the tokens behind every component.</p>
       </a>
 
       <a class="hcard" href="components.html">
-        <div class="hcard-header">
-          <span class="hcard-num">02 / Components</span>
-          <svg class="hcard-arrow" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        <div class="hcard-icon">
+          <!-- layers/components icon -->
+          <svg viewBox="0 0 24 24"><polygon points="12 2 22 8.5 12 15 2 8.5"/><polyline points="2 15.5 12 22 22 15.5"/><polyline points="2 12 12 18.5 22 12"/></svg>
         </div>
-        <p class="hcard-name">Components</p>
-        <p class="hcard-desc">Reusable interface elements like buttons, inputs, and modals built directly from Figma.</p>
+        <div class="hcard-mid">
+          <div>
+            <p class="hcard-label">12 Components</p>
+            <p class="hcard-name">Components</p>
+          </div>
+          <div class="hcard-arrow-btn">
+            <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </div>
+        </div>
+        <p class="hcard-desc">Reusable interface elements like buttons, inputs, and tags built directly from Figma.</p>
       </a>
     </div>
   </section>
