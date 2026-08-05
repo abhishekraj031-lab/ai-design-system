@@ -1183,46 +1183,72 @@
       <!-- ── Radius sub-page ───────────────────────────── -->
       <div id="page-radius" style="display:none;">
         <div class="page-header">
-          <h1 class="page-title">radius</h1>
-          <p class="page-subtitle">Border radius scale used across all components. From sharp to pill.</p>
+          <h1 class="page-title">corner radius</h1>
+          <p class="page-subtitle">Border radius scale used across all components. From sharp to full pill.</p>
         </div>
 
         <div class="section-block">
-          <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-end;">
+          <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-end;">
+            <!-- helper macro: box size grows with radius for visual clarity -->
             <div style="text-align:center;">
-              <div style="width:80px;height:80px;border-radius:0;background:var(--bg);border:2px solid var(--border);margin:0 auto 10px;"></div>
-              <div style="font-size:13px;font-weight:600;color:var(--text);">None</div>
+              <div style="width:64px;height:64px;border-radius:0px;background:var(--brand-bg);border:2px solid var(--brand-lt);margin:0 auto 10px;"></div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">0</div>
               <div style="font-size:11px;font-family:monospace;color:var(--hint);">0px</div>
             </div>
             <div style="text-align:center;">
-              <div style="width:80px;height:80px;border-radius:4px;background:var(--bg);border:2px solid var(--border);margin:0 auto 10px;"></div>
-              <div style="font-size:13px;font-weight:600;color:var(--text);">XS</div>
+              <div style="width:64px;height:64px;border-radius:2px;background:var(--brand-bg);border:2px solid var(--brand-lt);margin:0 auto 10px;"></div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">2</div>
+              <div style="font-size:11px;font-family:monospace;color:var(--hint);">2px</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="width:64px;height:64px;border-radius:4px;background:var(--brand-bg);border:2px solid var(--brand-lt);margin:0 auto 10px;"></div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">4</div>
               <div style="font-size:11px;font-family:monospace;color:var(--hint);">4px</div>
             </div>
             <div style="text-align:center;">
-              <div style="width:80px;height:80px;border-radius:6px;background:var(--bg);border:2px solid var(--neutral-lt);margin:0 auto 10px;"></div>
-              <div style="font-size:13px;font-weight:600;color:var(--text);">SM</div>
+              <div style="width:64px;height:64px;border-radius:6px;background:var(--brand-bg);border:2px solid var(--brand-lt);margin:0 auto 10px;"></div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">6</div>
               <div style="font-size:11px;font-family:monospace;color:var(--hint);">6px</div>
             </div>
             <div style="text-align:center;">
-              <div style="width:80px;height:80px;border-radius:8px;background:var(--bg);border:2px solid var(--border);margin:0 auto 10px;"></div>
-              <div style="font-size:13px;font-weight:600;color:var(--text);">MD</div>
+              <div style="width:64px;height:64px;border-radius:8px;background:var(--brand-bg);border:2px solid var(--brand-lt);margin:0 auto 10px;"></div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">8</div>
               <div style="font-size:11px;font-family:monospace;color:var(--hint);">8px</div>
             </div>
             <div style="text-align:center;">
-              <div style="width:80px;height:80px;border-radius:12px;background:var(--bg);border:2px solid var(--border);margin:0 auto 10px;"></div>
-              <div style="font-size:13px;font-weight:600;color:var(--text);">LG</div>
+              <div style="width:64px;height:64px;border-radius:10px;background:var(--brand-bg);border:2px solid var(--brand-lt);margin:0 auto 10px;"></div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">10</div>
+              <div style="font-size:11px;font-family:monospace;color:var(--hint);">10px</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="width:64px;height:64px;border-radius:12px;background:var(--brand-bg);border:2px solid var(--brand-lt);margin:0 auto 10px;"></div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">12</div>
               <div style="font-size:11px;font-family:monospace;color:var(--hint);">12px</div>
             </div>
             <div style="text-align:center;">
-              <div style="width:80px;height:80px;border-radius:16px;background:var(--bg);border:2px solid var(--border);margin:0 auto 10px;"></div>
-              <div style="font-size:13px;font-weight:600;color:var(--text);">XL</div>
+              <div style="width:64px;height:64px;border-radius:16px;background:var(--brand-bg);border:2px solid var(--brand-lt);margin:0 auto 10px;"></div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">16</div>
               <div style="font-size:11px;font-family:monospace;color:var(--hint);">16px</div>
             </div>
             <div style="text-align:center;">
-              <div style="width:80px;height:80px;border-radius:9999px;background:var(--bg);border:2px solid var(--border);margin:0 auto 10px;"></div>
-              <div style="font-size:13px;font-weight:600;color:var(--text);">Full</div>
-              <div style="font-size:11px;font-family:monospace;color:var(--hint);">9999px</div>
+              <div style="width:64px;height:64px;border-radius:20px;background:var(--brand-bg);border:2px solid var(--brand-lt);margin:0 auto 10px;"></div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">20</div>
+              <div style="font-size:11px;font-family:monospace;color:var(--hint);">20px</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="width:64px;height:64px;border-radius:24px;background:var(--brand-bg);border:2px solid var(--brand-lt);margin:0 auto 10px;"></div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">24</div>
+              <div style="font-size:11px;font-family:monospace;color:var(--hint);">24px</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="width:64px;height:64px;border-radius:32px;background:var(--brand-bg);border:2px solid var(--brand-lt);margin:0 auto 10px;"></div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">32</div>
+              <div style="font-size:11px;font-family:monospace;color:var(--hint);">32px</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="width:64px;height:64px;border-radius:9999px;background:var(--brand-bg);border:2px solid var(--brand-lt);margin:0 auto 10px;"></div>
+              <div style="font-size:12px;font-weight:600;color:var(--text);">Full</div>
+              <div style="font-size:11px;font-family:monospace;color:var(--hint);">96px</div>
             </div>
           </div>
         </div>
@@ -1232,55 +1258,81 @@
       <div id="page-spacing" style="display:none;">
         <div class="page-header">
           <h1 class="page-title">spacing</h1>
-          <p class="page-subtitle">A 4px base grid. All spacing values are multiples of 4.</p>
+          <p class="page-subtitle">Base-4 grid. All spacing values snap to this scale.</p>
         </div>
 
         <div class="section-block">
-          <div style="display:flex;flex-direction:column;gap:12px;max-width:600px;">
+          <div style="display:flex;flex-direction:column;gap:10px;max-width:560px;">
+            <!-- each row: label | bar (capped at 200px for readability) | px value -->
             <div style="display:flex;align-items:center;gap:16px;">
-              <span style="font-size:10px;color:var(--hint);font-family:monospace;width:48px;">4px</span>
-              <div style="width:4px;height:28px;background:var(--brand);border-radius:2px;opacity:0.3;"></div>
-              <span style="font-size:12px;color:var(--muted);">Extra tight — icon gaps, badge padding</span>
+              <span style="font-size:11px;font-family:monospace;color:var(--hint);width:36px;flex-shrink:0;">2</span>
+              <div style="width:2px;height:24px;background:var(--brand);border-radius:2px;flex-shrink:0;"></div>
+              <span style="font-size:12px;color:var(--muted);">2px</span>
             </div>
             <div style="display:flex;align-items:center;gap:16px;">
-              <span style="font-size:10px;color:var(--hint);font-family:monospace;width:48px;">8px</span>
-              <div style="width:8px;height:28px;background:var(--brand);border-radius:2px;opacity:0.4;"></div>
-              <span style="font-size:12px;color:var(--muted);">Tight — compact list items, inline spacing</span>
+              <span style="font-size:11px;font-family:monospace;color:var(--hint);width:36px;flex-shrink:0;">4</span>
+              <div style="width:4px;height:24px;background:var(--brand);border-radius:2px;flex-shrink:0;"></div>
+              <span style="font-size:12px;color:var(--muted);">4px</span>
             </div>
             <div style="display:flex;align-items:center;gap:16px;">
-              <span style="font-size:10px;color:var(--hint);font-family:monospace;width:48px;">12px</span>
-              <div style="width:12px;height:28px;background:var(--brand);border-radius:2px;opacity:0.5;"></div>
-              <span style="font-size:12px;color:var(--muted);">Small — button padding, form row gaps</span>
+              <span style="font-size:11px;font-family:monospace;color:var(--hint);width:36px;flex-shrink:0;">6</span>
+              <div style="width:6px;height:24px;background:var(--brand);border-radius:2px;flex-shrink:0;"></div>
+              <span style="font-size:12px;color:var(--muted);">6px</span>
             </div>
             <div style="display:flex;align-items:center;gap:16px;">
-              <span style="font-size:10px;color:var(--hint);font-family:monospace;width:48px;">16px</span>
-              <div style="width:16px;height:28px;background:var(--brand);border-radius:2px;opacity:0.6;"></div>
-              <span style="font-size:12px;color:var(--muted);">Base — card padding, section insets</span>
+              <span style="font-size:11px;font-family:monospace;color:var(--hint);width:36px;flex-shrink:0;">8</span>
+              <div style="width:8px;height:24px;background:var(--brand);border-radius:2px;flex-shrink:0;"></div>
+              <span style="font-size:12px;color:var(--muted);">8px</span>
             </div>
             <div style="display:flex;align-items:center;gap:16px;">
-              <span style="font-size:10px;color:var(--hint);font-family:monospace;width:48px;">24px</span>
-              <div style="width:24px;height:28px;background:var(--brand);border-radius:2px;opacity:0.7;"></div>
-              <span style="font-size:12px;color:var(--muted);">Medium — card gaps, content blocks</span>
+              <span style="font-size:11px;font-family:monospace;color:var(--hint);width:36px;flex-shrink:0;">12</span>
+              <div style="width:12px;height:24px;background:var(--brand);border-radius:2px;flex-shrink:0;"></div>
+              <span style="font-size:12px;color:var(--muted);">12px</span>
             </div>
             <div style="display:flex;align-items:center;gap:16px;">
-              <span style="font-size:10px;color:var(--hint);font-family:monospace;width:48px;">32px</span>
-              <div style="width:32px;height:28px;background:var(--brand);border-radius:2px;opacity:0.8;"></div>
-              <span style="font-size:12px;color:var(--muted);">Large — section spacing, page margins</span>
+              <span style="font-size:11px;font-family:monospace;color:var(--hint);width:36px;flex-shrink:0;">16</span>
+              <div style="width:16px;height:24px;background:var(--brand);border-radius:2px;flex-shrink:0;"></div>
+              <span style="font-size:12px;color:var(--muted);">16px</span>
             </div>
             <div style="display:flex;align-items:center;gap:16px;">
-              <span style="font-size:10px;color:var(--hint);font-family:monospace;width:48px;">48px</span>
-              <div style="width:48px;height:28px;background:var(--brand);border-radius:2px;opacity:0.85;"></div>
-              <span style="font-size:12px;color:var(--muted);">XL — hero padding, nav height</span>
+              <span style="font-size:11px;font-family:monospace;color:var(--hint);width:36px;flex-shrink:0;">20</span>
+              <div style="width:20px;height:24px;background:var(--brand);border-radius:2px;flex-shrink:0;"></div>
+              <span style="font-size:12px;color:var(--muted);">20px</span>
             </div>
             <div style="display:flex;align-items:center;gap:16px;">
-              <span style="font-size:10px;color:var(--hint);font-family:monospace;width:48px;">64px</span>
-              <div style="width:64px;height:28px;background:var(--brand);border-radius:2px;"></div>
-              <span style="font-size:12px;color:var(--muted);">2XL — section breaks, page segments</span>
+              <span style="font-size:11px;font-family:monospace;color:var(--hint);width:36px;flex-shrink:0;">24</span>
+              <div style="width:24px;height:24px;background:var(--brand);border-radius:2px;flex-shrink:0;"></div>
+              <span style="font-size:12px;color:var(--muted);">24px</span>
             </div>
             <div style="display:flex;align-items:center;gap:16px;">
-              <span style="font-size:10px;color:var(--hint);font-family:monospace;width:48px;">80px</span>
-              <div style="width:80px;height:28px;background:var(--brand-subtle);border-radius:2px;border:1px solid var(--brand-lt);"></div>
-              <span style="font-size:12px;color:var(--muted);">3XL — full section vertical padding</span>
+              <span style="font-size:11px;font-family:monospace;color:var(--hint);width:36px;flex-shrink:0;">32</span>
+              <div style="width:32px;height:24px;background:var(--brand);border-radius:2px;flex-shrink:0;"></div>
+              <span style="font-size:12px;color:var(--muted);">32px</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;">
+              <span style="font-size:11px;font-family:monospace;color:var(--hint);width:36px;flex-shrink:0;">40</span>
+              <div style="width:40px;height:24px;background:var(--brand);border-radius:2px;flex-shrink:0;"></div>
+              <span style="font-size:12px;color:var(--muted);">40px</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;">
+              <span style="font-size:11px;font-family:monospace;color:var(--hint);width:36px;flex-shrink:0;">48</span>
+              <div style="width:48px;height:24px;background:var(--brand);border-radius:2px;flex-shrink:0;"></div>
+              <span style="font-size:12px;color:var(--muted);">48px</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;">
+              <span style="font-size:11px;font-family:monospace;color:var(--hint);width:36px;flex-shrink:0;">64</span>
+              <div style="width:64px;height:24px;background:var(--brand);border-radius:2px;flex-shrink:0;"></div>
+              <span style="font-size:12px;color:var(--muted);">64px</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;">
+              <span style="font-size:11px;font-family:monospace;color:var(--hint);width:36px;flex-shrink:0;">80</span>
+              <div style="width:80px;height:24px;background:var(--brand);border-radius:2px;flex-shrink:0;"></div>
+              <span style="font-size:12px;color:var(--muted);">80px</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;">
+              <span style="font-size:11px;font-family:monospace;color:var(--hint);width:36px;flex-shrink:0;">96</span>
+              <div style="width:96px;height:24px;background:var(--brand);border-radius:2px;flex-shrink:0;"></div>
+              <span style="font-size:12px;color:var(--muted);">96px</span>
             </div>
           </div>
         </div>
