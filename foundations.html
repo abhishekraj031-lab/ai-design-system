@@ -56,10 +56,10 @@
     }
     .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .logo-dot {
-      width: 28px; height: 28px; border-radius: 50%;
+      width: 28px; height: 28px; border-radius: 8px;
       background: var(--brand); display: flex; align-items: center; justify-content: center;
-      font-size: 9px; font-weight: 700; color: #fff; letter-spacing: -0.02em;
     }
+    .logo-dot svg { width: 18px; height: 11px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     .logo-name { font-size: 14px; font-weight: 600; color: var(--text); }
     .logo-dim  { font-size: 14px; font-weight: 400; color: var(--muted); }
     .nav-links { display: flex; gap: 32px; }
@@ -493,7 +493,7 @@
 
   <!-- ── Nav ─────────────────────────────────────────── -->
   <nav>
-    <a href="foundations.html" class="logo">
+    <a href="index.html" class="logo">
       <div class="logo-dot">
         <svg viewBox="0 0 18 11"><polyline points="0,5.5 3.5,5.5 5.5,1 7.5,10 9.5,3 11.5,8 13.5,5.5 18,5.5"/></svg>
       </div>
