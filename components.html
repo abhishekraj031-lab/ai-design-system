@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Components · Pulse</title>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -20,6 +19,7 @@
       --neutral-bg:#F4F7FA; --neutral-lt:#B2C1D7; --neutral:#576A84;  --neutral-text:#151B23;
 
       --bg:#ffffff; --surface:#D8E3EE; --canvas:#F4F7FA; --text:#151B23;
+      --text-primary:#1D242B; --text-secondary:#52667A;
       --muted:#576A84; --hint:#6E8AAB; --border:#E1E5EA;
       --r-sm:6px; --r-md:8px; --r-lg:12px; --r-xl:16px;
     }
@@ -50,11 +50,11 @@
     }
     .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .logo-icon {
-      width: 28px; height: 28px; border-radius: 50%;
-      border: 1.5px solid var(--text);
+      width: 28px; height: 28px; border-radius: 8px;
+      background: var(--brand);
       display: flex; align-items: center; justify-content: center;
     }
-    .logo-icon svg { width: 12px; height: 12px; stroke: var(--text); fill: none; stroke-width: 2.2; stroke-linecap: round; }
+    .logo-icon svg { width: 18px; height: 11px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     .logo-name { font-size: 14px; font-weight: 600; color: var(--text); }
     .logo-dim  { font-size: 14px; font-weight: 400; color: var(--muted); }
     .nav-links { display: flex; gap: 32px; }
@@ -76,7 +76,7 @@
 
     /* ── Sidebar ─────────────────────────────────────── */
     .sidebar {
-      width: 220px; flex-shrink: 0;
+      width: 260px; flex-shrink: 0;
       padding: 28px 16px;
       position: sticky; top: 56px;
       height: calc(100vh - 56px); overflow-y: auto;
@@ -187,7 +187,7 @@
       font-family: monospace; letter-spacing: 0.02em;
     }
     .meta-tag.figma { border-color: var(--brand-lt); color: var(--brand); background: var(--brand-bg); }
-    .detail-subtitle { font-size: 14px; color: var(--muted); max-width: 520px; line-height: 1.6; }
+    .detail-subtitle { font-size: 14px; color: var(--muted); max-width: 100%; line-height: 1.6; }
 
     /* ── Variant section ─────────────────────────────── */
     .variant-section { margin-bottom: 56px; }
@@ -352,6 +352,10 @@
       display: grid; grid-template-columns: 1fr 320px;
       min-height: 240px;
     }
+    /* Wider controls — fixed narrow preview */
+    .playground-body.wide-controls {
+      grid-template-columns: 1fr 320px;
+    }
     .pg-preview {
       display: flex; align-items: center; justify-content: center;
       padding: 40px;
@@ -483,44 +487,57 @@
     .inp-wrap {
       display:flex; height:40px; width:100%;
       align-items:center; overflow:hidden;
-      border:1px solid var(--border); border-radius:6px;
-      background:var(--bg);
-      transition:border-color 0.15s, box-shadow 0.15s;
+      border:1px solid #e0e5eb; border-radius:6px;
+      background:#ffffff;
+      transition:border-color 0.15s;
     }
-    .inp-wrap.inp-active  { border-color:#2477e5; box-shadow:0 0 0 3px rgba(36,119,229,0.12); }
-    .inp-wrap.inp-error   { border-color:#dc2626; }
+    .dark .inp-wrap { background:var(--surface); border-color:var(--border); }
+    .inp-wrap.inp-active  { border-color:#068ae9; }
+    .inp-wrap.inp-error   { border-color:#cc2f24; }
     .inp-wrap.inp-disabled,
-    .inp-wrap.inp-filled-disabled { background:#f8fafc; }
+    .inp-wrap.inp-filled-disabled { background:#eceff3; border-color:#e0e5eb; }
+    .dark .inp-wrap.inp-disabled,
+    .dark .inp-wrap.inp-filled-disabled { background:var(--surface); }
 
     /* Native input inside */
     .inp-field {
       flex:1; min-width:0; background:transparent;
       border:none; outline:none; padding:0 12px;
-      font-size:11px; font-family:'Poppins',sans-serif;
-      color:#334155; line-height:1.5;
+      font-size:12px; font-family:'Poppins',sans-serif;
+      color:#1d242b; line-height:1.2;
+    }
+    .inp-field.inp-filled {
+      font-size:14px; font-weight:500; color:#1d242b;
     }
     .dark .inp-field { color:var(--text); }
-    .inp-field::placeholder { color:#94a3b8; }
+    .inp-field::placeholder { color:#97a8b9; font-size:12px; font-weight:400; }
     .inp-field:disabled { cursor:not-allowed; }
     .inp-field.pad-l { padding-left:8px; }
     .inp-field.pad-r { padding-right:8px; }
 
+    /* Label above input */
+    .inp-label {
+      font-size:14px; font-weight:600; color:#1d242b;
+      line-height:1.2; display:block; margin-bottom:4px;
+    }
+    .dark .inp-label { color:var(--text); }
+
     /* Addon slot (text or icon) */
     .inp-addon {
       display:flex; align-items:center; justify-content:center;
-      width:40px; height:100%; flex-shrink:0;
-      background:#f8fafc;
-      font-size:11px; font-weight:500; color:#475569;
-      font-family:'Poppins',sans-serif;
+      min-width:40px; padding:0 10px; height:100%; flex-shrink:0;
+      background:transparent;
+      font-size:14px; font-weight:500; color:#52667a;
+      font-family:'Poppins',sans-serif; white-space:nowrap;
     }
-    .inp-addon.addon-first { border-right:1px solid var(--border); }
-    .inp-addon.addon-last  { border-left:1px solid var(--border); }
-    .inp-addon.addon-text  { background:#f1f5f9; }
-    .dark .inp-addon { background:var(--surface); color:var(--muted); }
+    .inp-addon.addon-first { border-right:1px solid #e0e5eb; }
+    .inp-addon.addon-last  { border-left:1px solid #e0e5eb; }
+    .inp-addon svg { width:16px; height:16px; stroke:#52667a; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+    .dark .inp-addon { color:var(--muted); }
 
     /* Help / error text */
-    .inp-help      { font-size:11px; line-height:1.5; color:var(--muted); }
-    .inp-help.err  { color:#dc2626; }
+    .inp-help      { font-size:12px; line-height:1.2; color:#52667a; margin-top:4px; }
+    .inp-help.err  { color:#cc2f24; }
 
     /* State / type section grids */
     .inp-states-grid {
@@ -678,13 +695,457 @@
       font-size:10px; font-weight:600; text-transform:uppercase;
       letter-spacing:0.1em; color:var(--hint);
     }
+
+    /* ── Alert component ────────────────────────────── */
+    .ds-alert {
+      display:flex; align-items:flex-start; gap:12px;
+      padding:20px; border-radius:8px; border:1px solid;
+      position:relative;
+    }
+    .ds-alert-info    { background:#ebf4ff; border-color:#d7eafe; color:#0959ae; }
+    .ds-alert-alert   { background:#fef6f6; border-color:#fbe1df; color:#cc2f24; }
+    .ds-alert-success { background:#eefbf0; border-color:#e0f5e4; color:#2e8a3d; }
+    .ds-alert-warning { background:#fff7f0; border-color:#fdf5d8; color:#b86e00; }
+    .dark .ds-alert-info    { background:#0d2444; border-color:#1a3d70; color:#6badf5; }
+    .dark .ds-alert-alert   { background:#2d0e0c; border-color:#5c1c18; color:#f08079; }
+    .dark .ds-alert-success { background:#0c2b12; border-color:#1a4d22; color:#6dba7d; }
+    .dark .ds-alert-warning { background:#2b1a05; border-color:#5c380a; color:#e5a030; }
+    .al-icon { flex-shrink:0; width:20px; height:20px; margin-top:1px; }
+    .al-icon svg { width:20px; height:20px; stroke:currentColor; fill:none; }
+    .al-body { flex:1; min-width:0; }
+    .al-content { display:flex; flex-direction:column; gap:12px; }
+    .al-heading { font-size:16px; font-weight:600; line-height:1.2; }
+    .al-para { font-size:14px; font-weight:400; line-height:1.5; opacity:.85; }
+    .al-actions { display:flex; gap:16px; }
+    .al-link { font-size:14px; font-weight:500; cursor:pointer; text-decoration:underline; text-underline-offset:2px; }
+    .al-close {
+      flex-shrink:0; background:none; border:none; cursor:pointer;
+      color:currentColor; opacity:.6; padding:2px;
+      transition:opacity 0.15s; line-height:0;
+    }
+    .al-close:hover { opacity:1; }
+    .al-close svg { width:20px; height:20px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; }
+
+    /* ── Avatar component ───────────────────────────── */
+    .ds-avatar {
+      position:relative; display:inline-flex; flex-shrink:0;
+      border-radius:50%; overflow:visible;
+    }
+    .av-inner {
+      width:100%; height:100%; border-radius:50%; overflow:hidden;
+      background:var(--brand-bg); border:1.5px solid var(--brand-lt);
+      display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    }
+    .dark .av-inner { background:#0d2444; border-color:#2d5fa0; }
+    /* Sizes */
+    .av-xs { width:24px; height:24px; }
+    .av-sm { width:32px; height:32px; }
+    .av-md { width:40px; height:40px; }
+    .av-lg { width:56px; height:56px; }
+    /* Initials */
+    .av-initials { font-weight:600; color:var(--brand); line-height:1; user-select:none; }
+    .av-xs .av-initials { font-size:8px; }
+    .av-sm .av-initials { font-size:11px; }
+    .av-md .av-initials { font-size:13px; }
+    .av-lg .av-initials { font-size:18px; }
+    /* Icon */
+    .av-icon svg { stroke:var(--brand); fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+    .av-xs .av-icon svg { width:12px; height:12px; }
+    .av-sm .av-icon svg { width:16px; height:16px; }
+    .av-md .av-icon svg { width:20px; height:20px; }
+    .av-lg .av-icon svg { width:28px; height:28px; }
+    /* Photo */
+    .av-photo { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+    /* Status dot */
+    .av-status-dot {
+      position:absolute; bottom:0; right:0;
+      border-radius:50%; border:2px solid var(--bg);
+    }
+    .dark .av-status-dot { border-color:var(--bg); }
+    .av-xs .av-status-dot { width:7px; height:7px; bottom:-1px; right:-1px; }
+    .av-sm .av-status-dot { width:9px; height:9px; bottom:-1px; right:-1px; }
+    .av-md .av-status-dot { width:11px; height:11px; }
+    .av-lg .av-status-dot { width:14px; height:14px; }
+    .av-active .av-status-dot  { background:#22c55e; }
+    .av-idle .av-status-dot    { background:#f59e0b; }
+    .av-offline .av-status-dot { background:#94a3b8; }
+    .av-busy .av-status-dot    { background:#ef4444; }
+    /* Group */
+    .av-group { display:flex; flex-direction:row; align-items:center; }
+    .av-group .ds-avatar { margin-left:-8px; }
+    .av-group .ds-avatar:first-child { margin-left:0; }
+    .av-overflow {
+      border-radius:50%; background:var(--surface); border:1.5px solid var(--border);
+      display:flex; align-items:center; justify-content:center;
+      font-weight:600; color:var(--muted); flex-shrink:0; margin-left:-8px;
+    }
+    .av-overflow-sm { width:32px; height:32px; font-size:10px; }
+    .av-overflow-md { width:40px; height:40px; font-size:11px; }
+    /* ── Toggle component ───────────────────────────── */
+    .ds-toggle {
+      position:relative; display:inline-flex; align-items:center;
+      width:28px; height:16px; border-radius:999px;
+      background:#f6f7f9; border:1px solid #e0e5eb;
+      cursor:pointer; transition:background 0.2s, border-color 0.2s;
+      flex-shrink:0; outline:none;
+    }
+    .dark .ds-toggle { background:var(--surface); border-color:var(--border); }
+    .ds-toggle.on { background:var(--brand); border-color:var(--brand); }
+    .ds-toggle-thumb {
+      position:absolute; left:2px;
+      width:12px; height:12px; border-radius:50%;
+      background:#fff; box-shadow:0 1px 3px rgba(0,0,0,0.22);
+      transition:transform 0.18s;
+      pointer-events:none;
+    }
+    .ds-toggle.on .ds-toggle-thumb { transform:translateX(12px); }
+    /* Disabled */
+    .ds-toggle.disabled { opacity:0.4; cursor:not-allowed; pointer-events:none; }
+    /* Size — MD */
+    .ds-toggle-md { width:36px; height:20px; }
+    .ds-toggle-md .ds-toggle-thumb { width:16px; height:16px; }
+    .ds-toggle-md.on .ds-toggle-thumb { transform:translateX(16px); }
+    /* Size — LG */
+    .ds-toggle-lg { width:44px; height:24px; }
+    .ds-toggle-lg .ds-toggle-thumb { width:20px; height:20px; }
+    .ds-toggle-lg.on .ds-toggle-thumb { transform:translateX(20px); }
+    /* With label wrapper */
+    .ds-toggle-wrap { display:inline-flex; align-items:center; gap:8px; cursor:pointer; }
+    .ds-toggle-label { font-size:14px; font-weight:500; color:var(--text); line-height:1.2; user-select:none; }
+    .ds-toggle-label.sm { font-size:12px; }
+    .ds-toggle-label.lg { font-size:15px; }
+
+    /* Avatar variants grid */
+    .av-grid {
+      display:grid; grid-template-columns:80px repeat(3,1fr);
+      gap:20px 28px; align-items:center;
+    }
+    .av-grid-hdr {
+      font-size:10px; font-weight:600; text-transform:uppercase;
+      letter-spacing:0.1em; color:var(--hint);
+    }
+
+    /* ── Dropdown ────────────────────────────────────── */
+    .ds-dd-wrap { display:flex; flex-direction:column; gap:4px; width:100%; }
+    .ds-dd-label { font-size:14px; font-weight:600; color:#1d242b; line-height:1.2; }
+    .dark .ds-dd-label { color:var(--text); }
+    .ds-dd {
+      display:flex; align-items:center; justify-content:space-between;
+      height:40px; padding:10px 12px;
+      background:#ffffff; border:1px solid #e0e5eb; border-radius:6px;
+      cursor:pointer; width:100%; position:relative;
+      transition:border-color 0.15s, background 0.15s;
+      font-size:12px; font-weight:500; color:#97a8b9; line-height:1.2;
+      text-align:left; gap:8px;
+    }
+    .dark .ds-dd { background:var(--surface); border-color:var(--border); color:var(--muted); }
+    .ds-dd.dd-focused  { border-color:#068ae9; }
+    .ds-dd.dd-error    { border-color:#cc2f24; }
+    .ds-dd.dd-disabled { background:#eceff3; border-color:#e0e5eb; cursor:not-allowed; color:#7289a1; }
+    .ds-dd-value { flex:1; min-width:0; display:flex; align-items:center; gap:8px; font-size:14px; font-weight:500; color:#1d242b; white-space:nowrap; overflow:hidden; }
+    .dark .ds-dd-value { color:var(--text); }
+    .ds-dd-placeholder { font-size:12px; font-weight:500; color:#97a8b9; }
+    .ds-dd-badge { display:inline-flex; align-items:center; justify-content:center; height:24px; padding:0 8px; border-radius:9999px; background:#f6f7f9; border:1px solid #e0e5eb; font-size:12px; font-weight:500; color:#1d242b; white-space:nowrap; flex-shrink:0; }
+    .ds-dd-chevron { width:20px; height:20px; flex-shrink:0; stroke:#97a8b9; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; transition:transform 0.2s; }
+    .ds-dd.dd-open .ds-dd-chevron { transform:rotate(180deg); }
+    .ds-dd-help { font-size:12px; font-weight:400; line-height:1.2; color:#52667a; }
+    .ds-dd-help.dd-err { color:#cc2f24; }
+    .ds-dd-menu { border:1px solid #e0e5eb; border-radius:8px; overflow:hidden; background:#ffffff; width:100%; margin-top:4px; }
+    .dark .ds-dd-menu { background:var(--surface); border-color:var(--border); }
+    .ds-dd-item { display:flex; align-items:center; gap:6px; height:40px; padding:10px 12px; font-size:14px; font-weight:600; color:#1d242b; cursor:pointer; background:#ffffff; transition:background 0.12s; border:none; width:100%; text-align:left; }
+    .dark .ds-dd-item { background:var(--surface); color:var(--text); }
+    .ds-dd-item:hover, .ds-dd-item.dd-item-hover { background:#f0f9ff; }
+    .ds-dd-item.dd-item-selected { color:#068ae9; background:#ffffff; }
+    .dark .ds-dd-item.dd-item-selected { background:var(--surface); }
+    .dd-cb { width:16px; height:16px; border-radius:3px; flex-shrink:0; border:2px solid #97a8b9; background:transparent; display:flex; align-items:center; justify-content:center; transition:all 0.12s; pointer-events:none; }
+    .dd-cb.dd-cb-chk { background:#068ae9; border-color:#068ae9; }
+    .dd-cb.dd-cb-chk::after { content:''; display:block; width:9px; height:5px; border-left:2px solid #fff; border-bottom:2px solid #fff; transform:rotate(-45deg) translate(1px,-1px); }
+
+    /* ── Tab ─────────────────────────────────────────── */
+    .ds-tab-bar {
+      display:flex; align-items:flex-end;
+      background:#ffffff;
+      border-bottom:1px solid var(--border);
+      width:100%; overflow-x:auto;
+      border-radius:var(--r-md) var(--r-md) 0 0;
+    }
+    .dark .ds-tab-bar { background:var(--surface); }
+    .ds-tab-item {
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 16px; height:40px;
+      font-size:14px; font-weight:500; line-height:1.2;
+      color:#7289a1; background:transparent;
+      border:none; border-bottom:2px solid transparent;
+      cursor:pointer; white-space:nowrap; flex-shrink:0;
+      transition:color 0.15s, border-color 0.15s;
+      margin-bottom:-1px;
+    }
+    .ds-tab-item:hover { color:var(--text); }
+    .ds-tab-item.active { color:#1d242b; border-bottom:2px solid #068ae9; }
+    .dark .ds-tab-item { color:var(--muted); }
+    .dark .ds-tab-item.active { color:var(--text); border-bottom-color:#068ae9; }
+
+    /* ── Switches ─────────────────────────────────────── */
+    .ds-switches {
+      display:inline-flex; align-items:center;
+      background:#eceff3; border-radius:9999px;
+      padding:4px; gap:2px;
+    }
+    .dark .ds-switches { background:var(--surface); }
+    .ds-switches-lg { height:44px; }
+    .ds-switches-md { height:36px; padding:3px; }
+    .ds-switch-item {
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:4px 12px; border-radius:9999px;
+      font-size:12px; font-weight:500; line-height:1.2;
+      color:#7289a1; background:transparent;
+      border:none; cursor:pointer; white-space:nowrap;
+      transition:background 0.15s, color 0.15s, box-shadow 0.15s;
+      height:100%;
+    }
+    .ds-switch-item:hover { color:var(--text); }
+    .ds-switch-item.active {
+      background:#ffffff; color:#52667a;
+      box-shadow:0 1px 4px rgba(0,0,0,0.12);
+    }
+    .dark .ds-switch-item.active { background:var(--bg); color:var(--text); }
+
+    /* ── Pagination ─────────────────────────────────── */
+    .ds-pg { display:inline-flex; align-items:center; gap:4px; flex-wrap:wrap; }
+    .ds-pg-arrow {
+      display:inline-flex; align-items:center; justify-content:center; gap:6px;
+      height:36px; padding:0 12px;
+      border:1px solid var(--border); border-radius:6px;
+      background:transparent; cursor:pointer;
+      font-family:'Poppins',sans-serif; font-size:13px; font-weight:500; color:#475569;
+      transition:background 0.12s, color 0.12s, border-color 0.12s;
+      white-space:nowrap; flex-shrink:0;
+    }
+    .ds-pg-arrow:hover { background:var(--surface); color:var(--text); border-color:#CBD5E1; }
+    .ds-pg-arrow.icon-only { width:36px; padding:0; }
+    .ds-pg-arrow svg { width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+    .ds-pg-page {
+      display:inline-flex; align-items:center; justify-content:center;
+      width:32px; height:32px; border-radius:8px;
+      border:1.5px solid transparent; background:transparent;
+      cursor:pointer; font-family:'Poppins',sans-serif;
+      font-size:13px; font-weight:500; color:#475569;
+      transition:background 0.12s, color 0.12s, border-color 0.12s;
+    }
+    .ds-pg-page:hover { background:var(--surface); color:var(--text); border-color:var(--border); }
+    .ds-pg-page.active { background:var(--brand); color:#fff; border-color:var(--brand); font-weight:600; }
+    .ds-pg-ellipsis {
+      display:inline-flex; align-items:center; justify-content:center;
+      width:32px; height:32px; font-size:13px; color:var(--hint);
+      font-family:'Poppins',sans-serif;
+    }
+    .ds-pg-text {
+      font-size:13px; font-weight:500; color:#475569;
+      padding:0 4px; white-space:nowrap;
+      font-family:'Poppins',sans-serif;
+    }
+
+    /* ── Breadcrumbs ─────────────────────────────────── */
+    .ds-bc { display:inline-flex; align-items:center; gap:4px; flex-wrap:wrap; }
+    .ds-bc-link {
+      display:inline-flex; align-items:center;
+      font-family:'Poppins',sans-serif; font-size:10px; font-weight:400;
+      color:var(--brand-hv); text-decoration:none; cursor:pointer;
+      transition:color 0.12s; white-space:nowrap;
+    }
+    .ds-bc-link:hover { color:var(--brand); }
+    .ds-bc-current {
+      font-family:'Poppins',sans-serif; font-size:10px; font-weight:400;
+      color:var(--text); white-space:nowrap;
+    }
+    .ds-bc-sep {
+      display:inline-flex; align-items:center;
+      width:8px; height:8px; flex-shrink:0;
+    }
+    .ds-bc-sep svg { width:8px; height:8px; stroke:var(--hint); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+
+    /* ── Footer ──────────────────────────────────────── */
+    footer {
+      background: #0c0f14;
+      padding: 48px 48px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    footer::before {
+      content: '';
+      position: absolute;
+      width: 480px; height: 300px;
+      background: radial-gradient(ellipse, rgba(39,120,226,0.12) 0%, transparent 70%);
+      top: -80px; left: -60px;
+      pointer-events: none;
+    }
+    footer::after {
+      content: '';
+      position: absolute;
+      width: 360px; height: 260px;
+      background: radial-gradient(ellipse, rgba(16,185,129,0.08) 0%, transparent 70%);
+      bottom: -40px; right: 5%;
+      pointer-events: none;
+    }
+    .footer-links {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+      position: relative; z-index: 1;
+    }
+    .footer-col { display: flex; flex-direction: column; gap: 10px; }
+    .footer-label {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: #3d4856;
+    }
+    .footer-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 15px; font-weight: 600; letter-spacing: -0.02em;
+      color: #c9d4e0; text-decoration: none; width: fit-content;
+      transition: color 0.15s, gap 0.15s;
+    }
+    .footer-link svg {
+      width: 13px; height: 13px; stroke: #3d4856; fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+      flex-shrink: 0; transition: stroke 0.15s, transform 0.2s;
+    }
+    .footer-link:hover { color: #ffffff; gap: 9px; }
+    .footer-link:hover svg { stroke: #2577E5; transform: translate(2px, -2px); }
+    .footer-divider {
+      width: 100%; border: none;
+      border-top: 1px dashed #1e2631;
+      margin-bottom: 22px; position: relative; z-index: 1;
+    }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      position: relative; z-index: 1;
+    }
+    .footer-copy { font-size: 12px; font-weight: 400; color: #3d4856; }
+    .footer-ver {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 12px; font-weight: 500; color: #3d4856; letter-spacing: 0.04em;
+    }
+    .footer-ver-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: #2577E5; opacity: 0.5; flex-shrink: 0;
+    }
+    @media (max-width: 760px) {
+      .footer-links { grid-template-columns: repeat(2, 1fr); }
+      footer { padding: 36px 24px 28px; }
+    }
+    @media (max-width: 480px) {
+      .footer-links { grid-template-columns: 1fr; }
+    }
+
+    /* ── Mobile sidebar overlay ──────────────────────── */
+    .sidebar-backdrop {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 150;
+    }
+    .sidebar-backdrop.open { display: block; }
+
+    /* ── Hamburger + sidebar toggle ──────────────────── */
+    .menu-btn, .sidebar-toggle-btn {
+      display: none;
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1px solid var(--border); background: none; cursor: pointer;
+      align-items: center; justify-content: center;
+      color: var(--muted); transition: background 0.15s; flex-shrink: 0;
+    }
+    .menu-btn:hover, .sidebar-toggle-btn:hover { background: var(--surface); }
+    .menu-btn svg, .sidebar-toggle-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
+
+    .mobile-nav {
+      display: none;
+      position: fixed; top: 56px; left: 0; right: 0;
+      background: var(--bg); border-bottom: 1px solid var(--border);
+      padding: 12px 16px 16px; z-index: 200;
+      flex-direction: column; gap: 2px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-size: 15px; font-weight: 500; color: var(--muted);
+      text-decoration: none; padding: 12px 16px; border-radius: var(--r-md);
+      transition: background 0.12s, color 0.12s;
+    }
+    .mobile-nav a:hover { background: var(--surface); color: var(--text); }
+    .mobile-nav a.active { color: var(--brand); font-weight: 600; }
+
+    /* ── Responsive breakpoints ──────────────────────── */
+    @media (max-width: 1024px) {
+      .sidebar { width: 220px; }
+      .main { padding: 32px 32px 80px; }
+    }
+
+    @media (max-width: 720px) {
+      /* Sidebar becomes fixed overlay */
+      .sidebar {
+        position: fixed; top: 56px; left: -280px; z-index: 160;
+        width: 260px; height: calc(100vh - 56px);
+        background: var(--bg); border-right: 1px solid var(--border);
+        box-shadow: 4px 0 24px rgba(0,0,0,0.12);
+        transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 24px 12px; overflow-y: auto;
+      }
+      .sidebar.open { left: 0; }
+
+      nav { padding: 0 16px; }
+      .nav-links { display: none; }
+      .menu-btn { display: flex; }
+      .sidebar-toggle-btn { display: flex; }
+
+      .main { padding: 24px 20px 60px; }
+      .page-title { font-size: clamp(28px, 8vw, 48px); }
+
+      /* Playground: stack preview on top, controls below */
+      .playground-body,
+      .playground-body.wide-controls {
+        grid-template-columns: 1fr !important;
+      }
+      .pg-preview {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        min-height: 180px;
+        padding: 24px 16px;
+      }
+      .pg-controls { overflow-y: visible; }
+
+      /* Comp overview grid */
+      .comp-grid { grid-template-columns: repeat(2, 1fr) !important; }
+
+      /* Intent rows */
+      .intent-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .intent-name { width: auto; }
+
+      /* Size row */
+      .size-label { width: auto; }
+    }
+
+    @media (max-width: 480px) {
+      nav { padding: 0 14px; }
+      .logo-dim { display: none; }
+      .main { padding: 18px 14px 56px; }
+      .comp-grid { grid-template-columns: 1fr !important; }
+      .playground-body { min-height: unset; }
+      .detail-title { font-size: clamp(24px, 8vw, 40px); }
+      .spec-table { font-size: 11px; }
+      .spec-table th, .spec-table td { padding: 8px 8px; }
+      .btn-group { gap: 6px; }
+      .seg-picker { gap: 3px; }
+      .seg-btn { padding: 5px 8px; font-size: 10px; }
+    }
   </style>
 </head>
 <body>
 
   <!-- ── Nav ─────────────────────────────────────────── -->
   <nav>
-    <a href="foundations.html" class="logo">
+    <a href="showcase.html" class="logo">
       <div class="logo-icon">
         <svg viewBox="0 0 18 11"><polyline points="0,5.5 3.5,5.5 5.5,1 7.5,10 9.5,3 11.5,8 13.5,5.5 18,5.5"/></svg>
       </div>
@@ -696,17 +1157,32 @@
       <a href="components.html" class="active">Components</a>
     </div>
     <div class="nav-right">
+      <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle sidebar">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="18" rx="1"/><line x1="14" y1="8" x2="21" y2="8"/><line x1="14" y1="12" x2="21" y2="12"/><line x1="14" y1="16" x2="21" y2="16"/></svg>
+      </button>
       <button class="theme-btn" id="themeBtn" title="Toggle dark mode">
         <svg id="icon-sun" viewBox="0 0 24 24" style="display:none;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></svg>
         <svg id="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">
+        <svg id="menu-icon" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
     </div>
   </nav>
+
+  <!-- ── Mobile nav ────────────────────────────────────── -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="foundations.html">Foundations</a>
+    <a href="components.html" class="active">Components</a>
+  </div>
+
+  <!-- ── Sidebar backdrop ──────────────────────────────── -->
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
   <div class="page-shell">
 
     <!-- ── Sidebar ───────────────────────────────────── -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
       <div class="sidebar-card">
         <div class="sidebar-section-label">Components</div>
 
@@ -785,6 +1261,89 @@
             <line x1="13" y1="9" x2="15.5" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".3"/>
           </svg>
           Radio Button
+          <span class="sidebar-dot"></span>
+        </a>
+
+        <a class="sidebar-link" href="#" onclick="switchPage('alert'); return false;">
+          <svg class="sidebar-icon" viewBox="0 0 18 18" fill="none">
+            <rect x="1.5" y="4" width="15" height="10" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            <circle cx="5" cy="9" r="1.2" fill="currentColor" opacity=".7"/>
+            <line x1="8" y1="7" x2="15" y2="7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".5"/>
+            <line x1="8" y1="9" x2="14" y2="9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".35"/>
+            <line x1="8" y1="11" x2="12" y2="11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".2"/>
+          </svg>
+          Alert
+          <span class="sidebar-dot"></span>
+        </a>
+
+        <a class="sidebar-link" href="#" onclick="switchPage('avatar'); return false;">
+          <svg class="sidebar-icon" viewBox="0 0 18 18" fill="none">
+            <circle cx="9" cy="7" r="3.5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M3 16c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          Avatar
+          <span class="sidebar-dot"></span>
+        </a>
+
+        <a class="sidebar-link" href="#" onclick="switchPage('toggle'); return false;">
+          <svg class="sidebar-icon" viewBox="0 0 18 18" fill="none">
+            <rect x="2" y="6" width="14" height="6" rx="3" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            <circle cx="12" cy="9" r="2" fill="currentColor" opacity=".7"/>
+          </svg>
+          Toggle
+          <span class="sidebar-dot"></span>
+        </a>
+        <a class="sidebar-link" href="#" onclick="switchPage('dropdown'); return false;">
+          <svg class="sidebar-icon" viewBox="0 0 18 18" fill="none">
+            <rect x="2" y="4" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.4"/>
+            <polyline points="6,9 9,12 12,9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Dropdown
+          <span class="sidebar-dot"></span>
+        </a>
+
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-section-label">Navigation</div>
+
+        <a class="sidebar-link" href="#" onclick="switchPage('tab'); return false;">
+          <svg class="sidebar-icon" viewBox="0 0 18 18" fill="none">
+            <rect x="2" y="4" width="6" height="10" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
+            <rect x="10" y="4" width="6" height="10" rx="1.5" stroke="currentColor" stroke-width="1.4" opacity=".4"/>
+          </svg>
+          Tab
+          <span class="sidebar-dot"></span>
+        </a>
+
+        <a class="sidebar-link" href="#" onclick="switchPage('switches'); return false;">
+          <svg class="sidebar-icon" viewBox="0 0 18 18" fill="none">
+            <rect x="1" y="5" width="16" height="8" rx="4" stroke="currentColor" stroke-width="1.4"/>
+            <rect x="3" y="7" width="5" height="4" rx="2" fill="currentColor" opacity=".7"/>
+          </svg>
+          Switches
+          <span class="sidebar-dot"></span>
+        </a>
+
+        <a class="sidebar-link" href="#" onclick="switchPage('pagination'); return false;">
+          <svg class="sidebar-icon" viewBox="0 0 18 18" fill="none">
+            <rect x="2" y="7" width="3" height="4" rx="1" stroke="currentColor" stroke-width="1.4"/>
+            <rect x="7" y="7" width="3" height="4" rx="1" fill="currentColor" opacity=".7"/>
+            <rect x="12" y="7" width="3" height="4" rx="1" stroke="currentColor" stroke-width="1.4"/>
+            <polyline points="1,5 3,3 5,5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/>
+            <polyline points="13,5 15,3 17,5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/>
+          </svg>
+          Pagination
+          <span class="sidebar-dot"></span>
+        </a>
+
+        <a class="sidebar-link" href="#" onclick="switchPage('breadcrumb'); return false;">
+          <svg class="sidebar-icon" viewBox="0 0 18 18" fill="none">
+            <circle cx="3" cy="9" r="1.5" fill="currentColor" opacity=".6"/>
+            <polyline points="5.5,7 7.5,9 5.5,11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity=".4"/>
+            <circle cx="10" cy="9" r="1.5" fill="currentColor" opacity=".8"/>
+            <polyline points="12.5,7 14.5,9 12.5,11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity=".4"/>
+            <circle cx="17" cy="9" r="1.5" fill="currentColor"/>
+          </svg>
+          Breadcrumbs
           <span class="sidebar-dot"></span>
         </a>
       </div>
@@ -905,6 +1464,229 @@
               <div>
                 <div class="card-name">Tooltip</div>
                 <div class="card-meta">8 arrow positions · title · body</div>
+              </div>
+              <span class="card-chip chip-built">Built</span>
+            </div>
+          </a>
+
+          <!-- Alert card -->
+          <a class="comp-card" href="#" onclick="switchPage('alert'); return false;">
+            <div class="card-preview" style="background:var(--surface);background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:24px 24px;">
+              <div style="display:flex;flex-direction:column;gap:7px;width:220px;">
+                <div style="display:flex;align-items:flex-start;gap:8px;background:#ebf4ff;border:1px solid #d7eafe;border-radius:6px;padding:8px 10px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0959ae" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  <div><div style="font-size:10px;font-weight:600;color:#0959ae;line-height:1.2;">Info heading</div><div style="font-size:9px;color:#0959ae;opacity:.7;margin-top:2px;">Learn more · View Changes →</div></div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:8px;background:#fef6f6;border:1px solid #fbe1df;border-radius:6px;padding:8px 10px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#cc2f24" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  <div><div style="font-size:10px;font-weight:600;color:#cc2f24;line-height:1.2;">Alert heading</div><div style="font-size:9px;color:#cc2f24;opacity:.7;margin-top:2px;">Danger · dismissible</div></div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:8px;background:#eefbf0;border:1px solid #e0f5e4;border-radius:6px;padding:8px 10px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2e8a3d" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-top:1px"><polyline points="20 6 9 17 4 12"/></svg>
+                  <div><div style="font-size:10px;font-weight:600;color:#2e8a3d;line-height:1.2;">Success heading</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div>
+                <div class="card-name">Alert</div>
+                <div class="card-meta">info · alert · success · warning</div>
+              </div>
+              <span class="card-chip chip-built">Built</span>
+            </div>
+          </a>
+
+          <!-- Avatar card -->
+          <a class="comp-card" href="#" onclick="switchPage('avatar'); return false;">
+            <div class="card-preview" style="background:var(--surface);background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:24px 24px;">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:14px;">
+                <!-- Row of sizes -->
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <div class="ds-avatar av-xs av-active"><div class="av-inner"><span class="av-initials">AG</span></div><span class="av-status-dot"></span></div>
+                  <div class="ds-avatar av-sm av-idle"><div class="av-inner"><span class="av-initials">AG</span></div><span class="av-status-dot"></span></div>
+                  <div class="ds-avatar av-md av-active"><div class="av-inner"><span class="av-initials">AG</span></div><span class="av-status-dot"></span></div>
+                  <div class="ds-avatar av-lg av-busy"><div class="av-inner"><span class="av-initials">AG</span></div><span class="av-status-dot"></span></div>
+                </div>
+                <!-- Group -->
+                <div class="av-group" style="padding-left:8px;">
+                  <div class="ds-avatar av-sm"><div class="av-inner"><span class="av-initials">A</span></div></div>
+                  <div class="ds-avatar av-sm"><div class="av-inner"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div></div>
+                  <div class="ds-avatar av-sm"><div class="av-inner"><span class="av-initials">B</span></div></div>
+                  <div class="av-overflow av-overflow-sm">+2</div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div>
+                <div class="card-name">Avatar</div>
+                <div class="card-meta">image · icon · initials · 4 sizes · group</div>
+              </div>
+              <span class="card-chip chip-built">Built</span>
+            </div>
+          </a>
+
+          <!-- Toggle card -->
+          <a class="comp-card" href="#" onclick="switchPage('toggle'); return false;">
+            <div class="card-preview" style="background:var(--surface);background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:24px 24px;">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
+                <!-- States row -->
+                <div style="display:flex;align-items:center;gap:16px;">
+                  <button class="ds-toggle"><span class="ds-toggle-thumb"></span></button>
+                  <button class="ds-toggle on"><span class="ds-toggle-thumb"></span></button>
+                  <button class="ds-toggle ds-toggle-md on"><span class="ds-toggle-thumb"></span></button>
+                </div>
+                <!-- With label -->
+                <div class="ds-toggle-wrap">
+                  <button class="ds-toggle on"><span class="ds-toggle-thumb"></span></button>
+                  <span class="ds-toggle-label">Available</span>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div>
+                <div class="card-name">Toggle</div>
+                <div class="card-meta">on · off · 3 sizes · with label</div>
+              </div>
+              <span class="card-chip chip-built">Built</span>
+            </div>
+          </a>
+
+
+
+          <!-- Dropdown card -->
+          <a class="comp-card" href="#" onclick="switchPage('dropdown'); return false;">
+            <div class="card-preview" style="background:var(--surface);background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:24px 24px;padding:16px 20px;">
+              <div style="display:flex;flex-direction:column;gap:8px;width:100%;max-width:220px;">
+                <div class="ds-dd" style="pointer-events:none;">
+                  <span class="ds-dd-placeholder">Placeholder</span>
+                  <svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+                <div class="ds-dd dd-focused" style="pointer-events:none;">
+                  <span class="ds-dd-placeholder">|Placeholder</span>
+                  <svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+                <div class="ds-dd" style="pointer-events:none;">
+                  <span class="ds-dd-value">Arunachal Pradesh<span class="ds-dd-badge">+4more</span></span>
+                  <svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div>
+                <div class="card-name">Dropdown</div>
+                <div class="card-meta">7 states · menu · checkbox · badge</div>
+              </div>
+              <span class="card-chip chip-built">Built</span>
+            </div>
+          </a>
+
+          <!-- Tab card -->
+          <a class="comp-card" href="#" onclick="switchPage('tab'); return false;">
+            <div class="card-preview" style="background:var(--surface);background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:24px 24px;">
+              <div style="display:flex;flex-direction:column;gap:0;width:100%;max-width:260px;">
+                <div class="ds-tab-bar">
+                  <button class="ds-tab-item active">Overview</button>
+                  <button class="ds-tab-item">Design</button>
+                  <button class="ds-tab-item">Code</button>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div>
+                <div class="card-name">Tab</div>
+                <div class="card-meta">active · inactive · underline</div>
+              </div>
+              <span class="card-chip chip-built">Built</span>
+            </div>
+          </a>
+
+          <!-- Switches card -->
+          <a class="comp-card" href="#" onclick="switchPage('switches'); return false;">
+            <div class="card-preview" style="background:var(--surface);background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:24px 24px;">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:14px;">
+                <div class="ds-switches ds-switches-lg">
+                  <button class="ds-switch-item active">Switch 1</button>
+                  <button class="ds-switch-item">Switch 2</button>
+                  <button class="ds-switch-item">Switch 3</button>
+                </div>
+                <div class="ds-switches ds-switches-md">
+                  <button class="ds-switch-item active">Switch 1</button>
+                  <button class="ds-switch-item">Switch 2</button>
+                  <button class="ds-switch-item">Switch 3</button>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div>
+                <div class="card-name">Switches</div>
+                <div class="card-meta">segmented · lg · md</div>
+              </div>
+              <span class="card-chip chip-built">Built</span>
+            </div>
+          </a>
+
+          <!-- Pagination card -->
+          <a class="comp-card" href="#" onclick="switchPage('pagination'); return false;">
+            <div class="card-preview" style="background:var(--surface);background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:24px 24px;">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:14px;">
+                <div class="ds-pg">
+                  <button class="ds-pg-arrow"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Previous</button>
+                  <button class="ds-pg-page">1</button>
+                  <button class="ds-pg-page active">2</button>
+                  <button class="ds-pg-page">3</button>
+                  <span class="ds-pg-ellipsis">…</span>
+                  <button class="ds-pg-page">9</button>
+                  <button class="ds-pg-arrow">Next<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+                </div>
+                <div class="ds-pg">
+                  <button class="ds-pg-arrow icon-only"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+                  <button class="ds-pg-page">4</button>
+                  <button class="ds-pg-page active">5</button>
+                  <button class="ds-pg-page">6</button>
+                  <button class="ds-pg-arrow icon-only"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div>
+                <div class="card-name">Pagination</div>
+                <div class="card-meta">desktop · mobile · numbers · text</div>
+              </div>
+              <span class="card-chip chip-built">Built</span>
+            </div>
+          </a>
+
+          <!-- Breadcrumbs card -->
+          <a class="comp-card" href="#" onclick="switchPage('breadcrumb'); return false;">
+            <div class="card-preview" style="background:var(--surface);background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:24px 24px;padding:20px;">
+              <div style="display:flex;flex-direction:column;gap:12px;width:100%;max-width:260px;">
+                <div class="ds-bc">
+                  <span class="ds-bc-link">Home</span>
+                  <span class="ds-bc-sep"><svg viewBox="0 0 8 8"><polyline points="2,1 6,4 2,7"/></svg></span>
+                  <span class="ds-bc-current">Current Page</span>
+                </div>
+                <div class="ds-bc">
+                  <span class="ds-bc-link">Home</span>
+                  <span class="ds-bc-sep"><svg viewBox="0 0 8 8"><polyline points="2,1 6,4 2,7"/></svg></span>
+                  <span class="ds-bc-link">Category</span>
+                  <span class="ds-bc-sep"><svg viewBox="0 0 8 8"><polyline points="2,1 6,4 2,7"/></svg></span>
+                  <span class="ds-bc-current">Current Page</span>
+                </div>
+                <div class="ds-bc">
+                  <span class="ds-bc-link">Home</span>
+                  <span class="ds-bc-sep"><svg viewBox="0 0 8 8"><polyline points="2,1 6,4 2,7"/></svg></span>
+                  <span class="ds-bc-link">Category</span>
+                  <span class="ds-bc-sep"><svg viewBox="0 0 8 8"><polyline points="2,1 6,4 2,7"/></svg></span>
+                  <span class="ds-bc-link">Sub</span>
+                  <span class="ds-bc-sep"><svg viewBox="0 0 8 8"><polyline points="2,1 6,4 2,7"/></svg></span>
+                  <span class="ds-bc-current">Page</span>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div>
+                <div class="card-name">Breadcrumbs</div>
+                <div class="card-meta">1–4 levels · chevron separator</div>
               </div>
               <span class="card-chip chip-built">Built</span>
             </div>
@@ -1389,16 +2171,16 @@
         <div class="variant-section">
           <div class="variant-label">
             <span class="variant-title">States</span>
-            <span class="variant-subtitle">state axis · addonType="default"</span>
+            <span class="variant-subtitle">6 states · Default type</span>
           </div>
           <div class="inp-states-grid">
 
             <div>
               <p class="inp-row-label">Default</p>
               <div class="inp-group">
-                <label class="inp-label">Label</label>
+                <label class="inp-label">Title</label>
                 <div class="inp-wrap">
-                  <input class="inp-field" placeholder="Enter Text" />
+                  <input class="inp-field" placeholder="Enter" />
                 </div>
               </div>
             </div>
@@ -1406,9 +2188,9 @@
             <div>
               <p class="inp-row-label">Active</p>
               <div class="inp-group">
-                <label class="inp-label">Label</label>
+                <label class="inp-label">Title</label>
                 <div class="inp-wrap inp-active">
-                  <input class="inp-field" placeholder="Enter Text" />
+                  <input class="inp-field" placeholder="Enter" />
                 </div>
               </div>
             </div>
@@ -1416,9 +2198,9 @@
             <div>
               <p class="inp-row-label">Filled</p>
               <div class="inp-group">
-                <label class="inp-label">Label</label>
+                <label class="inp-label">Title</label>
                 <div class="inp-wrap">
-                  <input class="inp-field" value="Abhishek Gupta" />
+                  <input class="inp-field inp-filled" value="7838224516" readonly />
                 </div>
               </div>
             </div>
@@ -1426,9 +2208,9 @@
             <div>
               <p class="inp-row-label">Disabled</p>
               <div class="inp-group">
-                <label class="inp-label" style="opacity:.5;">Label</label>
+                <label class="inp-label" style="opacity:.5;">Title</label>
                 <div class="inp-wrap inp-disabled">
-                  <input class="inp-field" placeholder="Enter Text" disabled />
+                  <input class="inp-field" placeholder="Enter" disabled />
                 </div>
               </div>
             </div>
@@ -1436,9 +2218,9 @@
             <div>
               <p class="inp-row-label">Filled Disabled</p>
               <div class="inp-group">
-                <label class="inp-label" style="opacity:.5;">Label</label>
+                <label class="inp-label" style="opacity:.5;">Title</label>
                 <div class="inp-wrap inp-filled-disabled">
-                  <input class="inp-field" value="Abhishek Gupta" disabled />
+                  <input class="inp-field inp-filled" value="7838224516" disabled />
                 </div>
               </div>
             </div>
@@ -1446,11 +2228,11 @@
             <div>
               <p class="inp-row-label">Error</p>
               <div class="inp-group">
-                <label class="inp-label">Label</label>
+                <label class="inp-label">Title</label>
                 <div class="inp-wrap inp-error">
-                  <input class="inp-field" value="Abhishek Gupta" />
+                  <input class="inp-field inp-filled" value="7838224516" readonly />
                 </div>
-                <p class="inp-help err">This field is required</p>
+                <p class="inp-help err">Help text will be shown here</p>
               </div>
             </div>
 
@@ -1459,75 +2241,65 @@
 
         <hr class="section-divider" />
 
-        <!-- ── Addon Types ── -->
+        <!-- ── Types ── -->
         <div class="variant-section">
           <div class="variant-label">
-            <span class="variant-title">Addon Types</span>
-            <span class="variant-subtitle">addonType axis · state="default"</span>
+            <span class="variant-title">Types</span>
+            <span class="variant-subtitle">Default · Leading Text · Trailing Text · Leading Icon · Trailing Icon</span>
           </div>
-          <div style="display:flex;flex-direction:column;gap:20px;max-width:360px;">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;">
 
-            <div>
-              <p class="inp-row-label">Default</p>
-              <div class="inp-group">
-                <label class="inp-label">Label</label>
-                <div class="inp-wrap">
-                  <input class="inp-field" placeholder="Enter Text" />
-                </div>
-                <p class="inp-help">Help text will be shown here</p>
+            <!-- Default -->
+            <div class="inp-group">
+              <label class="inp-label">Title</label>
+              <div class="inp-wrap">
+                <input class="inp-field" placeholder="Enter" />
               </div>
+              <p class="inp-help">Help text will be shown here</p>
             </div>
 
-            <div>
-              <p class="inp-row-label">Text First</p>
-              <div class="inp-group">
-                <label class="inp-label">Phone Number</label>
-                <div class="inp-wrap">
-                  <div class="inp-addon addon-first addon-text">+91</div>
-                  <input class="inp-field pad-l" placeholder="Enter Mobile Number" />
-                </div>
-                <p class="inp-help">Help text will be shown here</p>
+            <!-- Leading Text (+91) -->
+            <div class="inp-group">
+              <label class="inp-label">Title</label>
+              <div class="inp-wrap">
+                <div class="inp-addon addon-first">+91</div>
+                <input class="inp-field pad-l" placeholder="Enter" />
               </div>
+              <p class="inp-help">Help text will be shown here</p>
             </div>
 
-            <div>
-              <p class="inp-row-label">Text Last</p>
-              <div class="inp-group">
-                <label class="inp-label">Day</label>
-                <div class="inp-wrap">
-                  <input class="inp-field pad-r" placeholder="Enter Days" />
-                  <div class="inp-addon addon-last addon-text">Day</div>
-                </div>
-                <p class="inp-help">Help text will be shown here</p>
+            <!-- Trailing Text (%) -->
+            <div class="inp-group">
+              <label class="inp-label">Title</label>
+              <div class="inp-wrap">
+                <input class="inp-field pad-r" placeholder="Enter" />
+                <div class="inp-addon addon-last">%</div>
               </div>
+              <p class="inp-help">Help text will be shown here</p>
             </div>
 
-            <div>
-              <p class="inp-row-label">Icon First</p>
-              <div class="inp-group">
-                <label class="inp-label">Email</label>
-                <div class="inp-wrap">
-                  <div class="inp-addon addon-first">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                  </div>
-                  <input class="inp-field pad-l" placeholder="Enter Email" />
+            <!-- Leading Icon (mail) -->
+            <div class="inp-group">
+              <label class="inp-label">Title</label>
+              <div class="inp-wrap">
+                <div class="inp-addon addon-first">
+                  <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                 </div>
-                <p class="inp-help">Help text will be shown here</p>
+                <input class="inp-field pad-l" placeholder="Enter" />
               </div>
+              <p class="inp-help">Help text will be shown here</p>
             </div>
 
-            <div>
-              <p class="inp-row-label">Icon Last</p>
-              <div class="inp-group">
-                <label class="inp-label">Password</label>
-                <div class="inp-wrap">
-                  <input class="inp-field pad-r" placeholder="Enter Password" type="password" />
-                  <div class="inp-addon addon-last">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
-                  </div>
+            <!-- Trailing Icon (eye-off) -->
+            <div class="inp-group">
+              <label class="inp-label">Title</label>
+              <div class="inp-wrap">
+                <input class="inp-field pad-r" placeholder="Enter" type="password" />
+                <div class="inp-addon addon-last">
+                  <svg viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
                 </div>
-                <p class="inp-help">Help text will be shown here</p>
               </div>
+              <p class="inp-help">Help text will be shown here</p>
             </div>
 
           </div>
@@ -2283,6 +3055,1268 @@
         </div>
       </div><!-- /#page-radio -->
 
+      <!-- ══════════════════════════════════════════════════ -->
+      <!-- #page-alert                                        -->
+      <!-- ══════════════════════════════════════════════════ -->
+      <div id="page-alert" style="display:none;">
+        <div class="page-header">
+          <h1 class="page-title">Alert</h1>
+          <p class="page-subtitle">Contextual feedback banners with four semantic variants — Info, Alert, Success, and Warning. Each supports heading, body copy, action links, and a dismiss button.</p>
+        </div>
+
+        <!-- INTERACTIVE PLAYGROUND ──────────────────────── -->
+        <div class="playground">
+          <div class="playground-header">
+            <span class="playground-title">Playground</span>
+            <span style="font-size:11px;color:var(--hint);">Live preview · adjust props and copy code</span>
+          </div>
+          <div class="playground-body">
+            <div class="pg-preview" id="al-preview-area" style="min-height:100px;align-items:flex-start;padding:24px;">
+              <!-- rendered by JS -->
+            </div>
+            <div class="pg-controls">
+
+              <div class="toggle-row">
+                <div><span class="toggle-name">type</span><span class="toggle-type">Info | Alert | Success | Warning</span></div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                  <button class="seg-btn active" id="al-type-Info"    onclick="alSetType('Info',this)">Info</button>
+                  <button class="seg-btn"         id="al-type-alert"  onclick="alSetType('alert',this)">Alert</button>
+                  <button class="seg-btn"         id="al-type-Success" onclick="alSetType('Success',this)">Success</button>
+                  <button class="seg-btn"         id="al-type-Warning" onclick="alSetType('Warning',this)">Warning</button>
+                </div>
+              </div>
+
+              <div class="toggle-row">
+                <div><span class="toggle-name">showClose</span><span class="toggle-type">boolean</span></div>
+                <button class="toggle-switch on" id="al-showClose" onclick="alToggle(this,'showClose')" aria-pressed="true"></button>
+              </div>
+
+              <div class="toggle-row">
+                <div><span class="toggle-name">showActions</span><span class="toggle-type">boolean</span></div>
+                <button class="toggle-switch on" id="al-showActions" onclick="alToggle(this,'showActions')" aria-pressed="true"></button>
+              </div>
+
+              <div class="toggle-row">
+                <div><span class="toggle-name">showBody</span><span class="toggle-type">boolean</span></div>
+                <button class="toggle-switch on" id="al-showBody" onclick="alToggle(this,'showBody')" aria-pressed="true"></button>
+              </div>
+
+            </div>
+          </div>
+          <div class="pg-code-wrap">
+            <div class="pg-code-header">
+              <span class="pg-code-lang">JSX</span>
+              <button class="copy-btn" id="al-copy-btn" onclick="alCopy()">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <div class="pg-code" id="al-code-block"><!-- generated --></div>
+          </div>
+        </div>
+
+        <hr class="section-divider" />
+
+        <!-- ALL VARIANTS ────────────────────────────────── -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Variants</span>
+            <span class="variant-subtitle">Four types × full content</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;max-width:640px;">
+            <div class="ds-alert ds-alert-info">
+              <div class="al-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+              <div class="al-body"><div class="al-content"><p class="al-heading">Heading</p><p class="al-para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam.</p><div class="al-actions"><span class="al-link">Learn more</span><span class="al-link">View Changes →</span></div></div></div>
+              <button class="al-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+            </div>
+            <div class="ds-alert ds-alert-alert">
+              <div class="al-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+              <div class="al-body"><div class="al-content"><p class="al-heading">Heading</p><p class="al-para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam.</p><div class="al-actions"><span class="al-link">Learn more</span><span class="al-link">View Changes →</span></div></div></div>
+              <button class="al-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+            </div>
+            <div class="ds-alert ds-alert-success">
+              <div class="al-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg></div>
+              <div class="al-body"><div class="al-content"><p class="al-heading">Heading</p><p class="al-para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam.</p><div class="al-actions"><span class="al-link">Learn more</span><span class="al-link">View Changes →</span></div></div></div>
+              <button class="al-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+            </div>
+            <div class="ds-alert ds-alert-warning">
+              <div class="al-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+              <div class="al-body"><div class="al-content"><p class="al-heading">Heading</p><p class="al-para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam.</p><div class="al-actions"><span class="al-link">Learn more</span><span class="al-link">View Changes →</span></div></div></div>
+              <button class="al-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider" />
+
+        <!-- PROPS TABLE ─────────────────────────────────── -->
+        <div class="variant-section">
+          <div class="variant-label"><span class="variant-title">Props</span></div>
+          <table class="spec-table">
+            <thead>
+              <tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>type</td><td><span class="spec-val">'Info' | 'alert' | 'Success' | 'Warning'</span></td><td><span class="spec-val">'Info'</span></td><td>Sets the colour scheme and icon</td></tr>
+              <tr><td>heading</td><td><span class="spec-val">string</span></td><td><span class="spec-val">'Heading'</span></td><td>Bold heading text</td></tr>
+              <tr><td>paragraph</td><td><span class="spec-val">string</span></td><td><span class="spec-val">'Lorem ipsum…'</span></td><td>Descriptive body copy below the heading</td></tr>
+              <tr><td>showBody</td><td><span class="spec-val">boolean</span></td><td><span class="spec-val">true</span></td><td>Toggle the paragraph body copy</td></tr>
+              <tr><td>showActions</td><td><span class="spec-val">boolean</span></td><td><span class="spec-val">true</span></td><td>Show "Learn more" and "View Changes" links</td></tr>
+              <tr><td>showClose</td><td><span class="spec-val">boolean</span></td><td><span class="spec-val">true</span></td><td>Show the × dismiss button</td></tr>
+              <tr><td>onClose</td><td><span class="spec-val">() => void</span></td><td>—</td><td>Callback fired when × is pressed</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div><!-- /#page-alert -->
+
+      <!-- ════════════════════════════════════════════════
+           AVATAR DETAIL PAGE
+           ════════════════════════════════════════════════ -->
+      <div id="page-avatar" style="display:none;">
+
+        <div class="detail-header">
+          <div class="detail-meta">
+            <span class="meta-tag figma">node 24-425</span>
+            <span class="meta-tag">CVA</span>
+            <span class="meta-tag">3 types</span>
+          </div>
+          <h1 class="detail-title">Avatar</h1>
+          <p class="detail-subtitle">A circular identity component available in three types — <code style="font-family:monospace;font-size:13px;background:var(--surface);padding:1px 5px;border-radius:4px;border:1px solid var(--border);">Image</code>, <code style="font-family:monospace;font-size:13px;background:var(--surface);padding:1px 5px;border-radius:4px;border:1px solid var(--border);">Icon</code>, and <code style="font-family:monospace;font-size:13px;background:var(--surface);padding:1px 5px;border-radius:4px;border:1px solid var(--border);">Initials</code> — across 4 sizes with optional status indicators, plus a <code style="font-family:monospace;font-size:13px;background:var(--surface);padding:1px 5px;border-radius:4px;border:1px solid var(--border);">ThumbnailsGroup</code> for stacked layouts.</p>
+        </div>
+
+        <!-- Playground -->
+        <div class="playground">
+          <div class="playground-header">
+            <span class="playground-title">Playground</span>
+            <span style="font-size:11px;color:var(--hint);">Live preview · adjust props and copy code</span>
+          </div>
+          <div class="playground-body">
+            <div class="pg-preview" id="av-preview-area"></div>
+            <div class="pg-controls">
+              <!-- Type -->
+              <div class="ctrl-row">
+                <span class="ctrl-label">type</span>
+                <div class="seg-picker" id="av-type">
+                  <button class="seg-btn active" onclick="avSeg(this,'av-type')">Initials</button>
+                  <button class="seg-btn" onclick="avSeg(this,'av-type')">Icon</button>
+                  <button class="seg-btn" onclick="avSeg(this,'av-type')">Image</button>
+                </div>
+              </div>
+              <!-- Size -->
+              <div class="ctrl-row">
+                <span class="ctrl-label">size</span>
+                <div class="seg-picker" id="av-size">
+                  <button class="seg-btn" onclick="avSeg(this,'av-size')">XS</button>
+                  <button class="seg-btn" onclick="avSeg(this,'av-size')">SM</button>
+                  <button class="seg-btn active" onclick="avSeg(this,'av-size')">MD</button>
+                  <button class="seg-btn" onclick="avSeg(this,'av-size')">LG</button>
+                </div>
+              </div>
+              <!-- Status -->
+              <div class="ctrl-row">
+                <span class="ctrl-label">status</span>
+                <div class="seg-picker" id="av-status">
+                  <button class="seg-btn active" onclick="avSeg(this,'av-status')">None</button>
+                  <button class="seg-btn" onclick="avSeg(this,'av-status')">Active</button>
+                  <button class="seg-btn" onclick="avSeg(this,'av-status')">Idle</button>
+                  <button class="seg-btn" onclick="avSeg(this,'av-status')">Offline</button>
+                  <button class="seg-btn" onclick="avSeg(this,'av-status')">Busy</button>
+                </div>
+              </div>
+              <!-- Initials input (shown only for Initials type) -->
+              <div class="ctrl-row" id="av-initials-row">
+                <span class="ctrl-label">initials</span>
+                <input class="ctrl-input" id="av-initials-val" type="text" value="AG" maxlength="2" oninput="avRender()" />
+              </div>
+            </div>
+          </div>
+          <!-- Code -->
+          <div class="pg-code-wrap">
+            <div class="pg-code-header">
+              <span class="pg-code-lang">TSX</span>
+              <button class="copy-btn" id="av-copy-btn" onclick="avCopy()">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <div class="pg-code"><pre id="av-code-block"></pre></div>
+          </div>
+        </div>
+
+        <hr class="section-divider" />
+
+        <!-- Variants: sizes × types -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Sizes &amp; Types</span>
+            <span class="variant-subtitle">All type × size combinations</span>
+          </div>
+          <div class="av-grid" style="margin-bottom:8px;">
+            <div class="av-grid-hdr"></div>
+            <div class="av-grid-hdr">Initials</div>
+            <div class="av-grid-hdr">Icon</div>
+            <div class="av-grid-hdr">Image</div>
+          </div>
+          <!-- XS row -->
+          <div class="av-grid" style="margin-bottom:12px;">
+            <div class="av-grid-hdr">XS · 24px</div>
+            <div><div class="ds-avatar av-xs"><div class="av-inner"><span class="av-initials">AG</span></div></div></div>
+            <div><div class="ds-avatar av-xs"><div class="av-inner av-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div></div></div>
+            <div><div class="ds-avatar av-xs"><div class="av-inner" style="background:#f1f5f9;"><img class="av-photo" src="https://i.pravatar.cc/56?img=3" alt="avatar" /></div></div></div>
+          </div>
+          <!-- SM row -->
+          <div class="av-grid" style="margin-bottom:12px;">
+            <div class="av-grid-hdr">SM · 32px</div>
+            <div><div class="ds-avatar av-sm"><div class="av-inner"><span class="av-initials">AG</span></div></div></div>
+            <div><div class="ds-avatar av-sm"><div class="av-inner av-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div></div></div>
+            <div><div class="ds-avatar av-sm"><div class="av-inner" style="background:#f1f5f9;"><img class="av-photo" src="https://i.pravatar.cc/56?img=3" alt="avatar" /></div></div></div>
+          </div>
+          <!-- MD row -->
+          <div class="av-grid" style="margin-bottom:12px;">
+            <div class="av-grid-hdr">MD · 40px</div>
+            <div><div class="ds-avatar av-md"><div class="av-inner"><span class="av-initials">AG</span></div></div></div>
+            <div><div class="ds-avatar av-md"><div class="av-inner av-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div></div></div>
+            <div><div class="ds-avatar av-md"><div class="av-inner" style="background:#f1f5f9;"><img class="av-photo" src="https://i.pravatar.cc/56?img=3" alt="avatar" /></div></div></div>
+          </div>
+          <!-- LG row -->
+          <div class="av-grid" style="margin-bottom:0;">
+            <div class="av-grid-hdr">LG · 56px</div>
+            <div><div class="ds-avatar av-lg"><div class="av-inner"><span class="av-initials">AG</span></div></div></div>
+            <div><div class="ds-avatar av-lg"><div class="av-inner av-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div></div></div>
+            <div><div class="ds-avatar av-lg"><div class="av-inner" style="background:#f1f5f9;"><img class="av-photo" src="https://i.pravatar.cc/56?img=3" alt="avatar" /></div></div></div>
+          </div>
+        </div>
+
+        <hr class="section-divider" />
+
+        <!-- Variants: status dots -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Status Indicators</span>
+            <span class="variant-subtitle">Active · Idle · Offline · Busy</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:32px;flex-wrap:wrap;">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+              <div class="ds-avatar av-md av-active"><div class="av-inner"><span class="av-initials">AG</span></div><span class="av-status-dot"></span></div>
+              <span style="font-size:11px;color:var(--hint);">Active</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+              <div class="ds-avatar av-md av-idle"><div class="av-inner"><span class="av-initials">AG</span></div><span class="av-status-dot"></span></div>
+              <span style="font-size:11px;color:var(--hint);">Idle</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+              <div class="ds-avatar av-md av-offline"><div class="av-inner"><span class="av-initials">AG</span></div><span class="av-status-dot"></span></div>
+              <span style="font-size:11px;color:var(--hint);">Offline</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+              <div class="ds-avatar av-md av-busy"><div class="av-inner"><span class="av-initials">AG</span></div><span class="av-status-dot"></span></div>
+              <span style="font-size:11px;color:var(--hint);">Busy</span>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider" />
+
+        <!-- Variants: ThumbnailsGroup -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Thumbnails Group</span>
+            <span class="variant-subtitle">Stacked overlapping avatars with overflow counter</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:24px;">
+            <!-- SM group -->
+            <div style="display:flex;align-items:center;gap:20px;">
+              <span class="intent-name">SM · 32px</span>
+              <div class="av-group">
+                <div class="ds-avatar av-sm"><div class="av-inner"><span class="av-initials">AG</span></div></div>
+                <div class="ds-avatar av-sm"><div class="av-inner av-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div></div>
+                <div class="ds-avatar av-sm"><div class="av-inner" style="background:#f1f5f9;"><img class="av-photo" src="https://i.pravatar.cc/56?img=5" alt="avatar" /></div></div>
+                <div class="av-overflow av-overflow-sm">+2</div>
+              </div>
+            </div>
+            <!-- MD group -->
+            <div style="display:flex;align-items:center;gap:20px;">
+              <span class="intent-name">MD · 40px</span>
+              <div class="av-group">
+                <div class="ds-avatar av-md"><div class="av-inner"><span class="av-initials">AG</span></div></div>
+                <div class="ds-avatar av-md"><div class="av-inner av-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div></div>
+                <div class="ds-avatar av-md"><div class="av-inner" style="background:#f1f5f9;"><img class="av-photo" src="https://i.pravatar.cc/56?img=5" alt="avatar" /></div></div>
+                <div class="av-overflow av-overflow-md">+5</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider" />
+
+        <!-- Props table -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Props</span>
+          </div>
+          <table class="spec-table">
+            <thead>
+              <tr>
+                <th>Prop</th><th>Type</th><th>Default</th><th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>type</td>
+                <td><span class="spec-val">"Initials" | "Icon" | "Image"</span></td>
+                <td><span class="token">Initials</span></td>
+                <td>Visual type of the avatar</td>
+              </tr>
+              <tr>
+                <td>size</td>
+                <td><span class="spec-val">"xs" | "sm" | "md" | "lg"</span></td>
+                <td><span class="token">md</span></td>
+                <td>Controls diameter: 24 / 32 / 40 / 56px</td>
+              </tr>
+              <tr>
+                <td>status</td>
+                <td><span class="spec-val">"active" | "idle" | "offline" | "busy"</span></td>
+                <td><span class="token">undefined</span></td>
+                <td>Shows a status dot at bottom-right. Omit to hide</td>
+              </tr>
+              <tr>
+                <td>initials</td>
+                <td><span class="spec-val">string</span></td>
+                <td><span class="token">—</span></td>
+                <td>1–2 character text shown when type is Initials</td>
+              </tr>
+              <tr>
+                <td>src</td>
+                <td><span class="spec-val">string</span></td>
+                <td><span class="token">—</span></td>
+                <td>Image URL shown when type is Image</td>
+              </tr>
+              <tr>
+                <td>alt</td>
+                <td><span class="spec-val">string</span></td>
+                <td><span class="token">—</span></td>
+                <td>Alt text for the photo — required for accessibility when type is Image</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div><!-- /#page-avatar -->
+
+      <!-- ════════════════════════════════════════════════
+           TOGGLE DETAIL PAGE
+           ════════════════════════════════════════════════ -->
+      <div id="page-toggle" style="display:none;">
+
+        <div class="detail-header">
+          <div class="detail-meta">
+            <span class="meta-tag figma">node 27-120</span>
+            <span class="meta-tag">CVA</span>
+            <span class="meta-tag">3 sizes</span>
+          </div>
+          <h1 class="detail-title">Toggle</h1>
+          <p class="detail-subtitle">A binary on/off control — available in three sizes with an optional inline label. Maps to the <code style="font-family:monospace;font-size:13px;background:var(--surface);padding:1px 5px;border-radius:4px;border:1px solid var(--border);">checked</code> boolean prop and fires an <code style="font-family:monospace;font-size:13px;background:var(--surface);padding:1px 5px;border-radius:4px;border:1px solid var(--border);">onChange</code> handler.</p>
+        </div>
+
+        <!-- Playground -->
+        <div class="playground">
+          <div class="playground-header">
+            <span class="playground-title">Playground</span>
+            <span style="font-size:11px;color:var(--hint);">Live preview · adjust props and copy code</span>
+          </div>
+          <div class="playground-body">
+            <div class="pg-preview" id="tgl-preview-area"></div>
+            <div class="pg-controls">
+              <!-- State -->
+              <div class="ctrl-row">
+                <span class="ctrl-label">checked</span>
+                <div class="seg-picker" id="tgl-state">
+                  <button class="seg-btn" onclick="tglSeg(this,'tgl-state')">false</button>
+                  <button class="seg-btn active" onclick="tglSeg(this,'tgl-state')">true</button>
+                </div>
+              </div>
+              <!-- Size -->
+              <div class="ctrl-row">
+                <span class="ctrl-label">size</span>
+                <div class="seg-picker" id="tgl-size">
+                  <button class="seg-btn active" onclick="tglSeg(this,'tgl-size')">SM</button>
+                  <button class="seg-btn" onclick="tglSeg(this,'tgl-size')">MD</button>
+                  <button class="seg-btn" onclick="tglSeg(this,'tgl-size')">LG</button>
+                </div>
+              </div>
+              <!-- Label toggle -->
+              <div class="toggle-row">
+                <span class="toggle-name">Show Label<span class="toggle-type">boolean</span></span>
+                <button class="toggle-switch on" id="tgl-showLabel" onclick="tglToggle(this,'showLabel')" aria-pressed="true"></button>
+              </div>
+              <!-- Disabled toggle -->
+              <div class="toggle-row">
+                <span class="toggle-name">Disabled<span class="toggle-type">boolean</span></span>
+                <button class="toggle-switch" id="tgl-disabled" onclick="tglToggle(this,'disabled')" aria-pressed="false"></button>
+              </div>
+              <!-- Label text -->
+              <div class="ctrl-row" id="tgl-label-row">
+                <span class="ctrl-label">label</span>
+                <input class="ctrl-input" id="tgl-label-val" type="text" value="Available" oninput="tglRender()" />
+              </div>
+            </div>
+          </div>
+          <div class="pg-code-wrap">
+            <div class="pg-code-header">
+              <span class="pg-code-lang">TSX</span>
+              <button class="copy-btn" id="tgl-copy-btn" onclick="tglCopy()">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <div class="pg-code"><pre id="tgl-code-block"></pre></div>
+          </div>
+        </div>
+
+        <hr class="section-divider" />
+
+        <!-- Variants: States -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">States</span>
+            <span class="variant-subtitle">Off · On · Disabled Off · Disabled On</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:40px;flex-wrap:wrap;">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+              <button class="ds-toggle"><span class="ds-toggle-thumb"></span></button>
+              <span style="font-size:11px;color:var(--hint);">Off</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+              <button class="ds-toggle on"><span class="ds-toggle-thumb"></span></button>
+              <span style="font-size:11px;color:var(--hint);">On</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+              <button class="ds-toggle disabled"><span class="ds-toggle-thumb"></span></button>
+              <span style="font-size:11px;color:var(--hint);">Disabled Off</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+              <button class="ds-toggle on disabled"><span class="ds-toggle-thumb"></span></button>
+              <span style="font-size:11px;color:var(--hint);">Disabled On</span>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider" />
+
+        <!-- Variants: Sizes -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Sizes</span>
+            <span class="variant-subtitle">SM 28×16 · MD 36×20 · LG 44×24</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:20px;">
+            <div style="display:flex;align-items:center;gap:20px;">
+              <span class="size-label">SM</span>
+              <button class="ds-toggle"><span class="ds-toggle-thumb"></span></button>
+              <button class="ds-toggle on"><span class="ds-toggle-thumb"></span></button>
+            </div>
+            <div style="display:flex;align-items:center;gap:20px;">
+              <span class="size-label">MD</span>
+              <button class="ds-toggle ds-toggle-md"><span class="ds-toggle-thumb"></span></button>
+              <button class="ds-toggle ds-toggle-md on"><span class="ds-toggle-thumb"></span></button>
+            </div>
+            <div style="display:flex;align-items:center;gap:20px;">
+              <span class="size-label">LG</span>
+              <button class="ds-toggle ds-toggle-lg"><span class="ds-toggle-thumb"></span></button>
+              <button class="ds-toggle ds-toggle-lg on"><span class="ds-toggle-thumb"></span></button>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider" />
+
+        <!-- Variants: With Label -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Toggle with Label</span>
+            <span class="variant-subtitle">Inline label for contextual use</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <div class="ds-toggle-wrap">
+              <button class="ds-toggle"><span class="ds-toggle-thumb"></span></button>
+              <span class="ds-toggle-label">Available</span>
+            </div>
+            <div class="ds-toggle-wrap">
+              <button class="ds-toggle on"><span class="ds-toggle-thumb"></span></button>
+              <span class="ds-toggle-label">Available</span>
+            </div>
+            <div class="ds-toggle-wrap">
+              <button class="ds-toggle ds-toggle-md on"><span class="ds-toggle-thumb"></span></button>
+              <span class="ds-toggle-label">Enable notifications</span>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider" />
+
+        <!-- Props table -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Props</span>
+          </div>
+          <table class="spec-table">
+            <thead>
+              <tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>checked</td>
+                <td><span class="spec-val">boolean</span></td>
+                <td><span class="token">false</span></td>
+                <td>Controls the on/off state</td>
+              </tr>
+              <tr>
+                <td>onChange</td>
+                <td><span class="spec-val">(checked: boolean) =&gt; void</span></td>
+                <td><span class="token">—</span></td>
+                <td>Callback fired when the user toggles</td>
+              </tr>
+              <tr>
+                <td>size</td>
+                <td><span class="spec-val">"sm" | "md" | "lg"</span></td>
+                <td><span class="token">sm</span></td>
+                <td>28×16 / 36×20 / 44×24px</td>
+              </tr>
+              <tr>
+                <td>label</td>
+                <td><span class="spec-val">string</span></td>
+                <td><span class="token">—</span></td>
+                <td>Inline label text. When provided renders a Toggle with Text layout</td>
+              </tr>
+              <tr>
+                <td>disabled</td>
+                <td><span class="spec-val">boolean</span></td>
+                <td><span class="token">false</span></td>
+                <td>Prevents interaction, reduces opacity to 40%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div><!-- /#page-toggle -->
+
+<!-- ════════════════════════════════════════════════
+           DROPDOWN DETAIL PAGE
+           ════════════════════════════════════════════ -->
+      <div id="page-dropdown" style="display:none;">
+
+        <div class="detail-header">
+          <div class="detail-meta">
+            <span class="meta-tag figma">node 35-92</span>
+            <span class="meta-tag">7 states</span>
+            <span class="meta-tag">Menu · Checkbox · Badge</span>
+          </div>
+          <h1 class="detail-title">Dropdown</h1>
+          <p class="detail-subtitle">A select trigger field with 7 states — Default, Focused, Filled, Disabled, Error, Filled-Disabled, and Filled-Error — paired with an open-menu panel that supports plain text items, checkboxes, and all-selected views.</p>
+        </div>
+
+        <!-- Playground -->
+        <div class="playground">
+          <div class="playground-header">
+            <span class="playground-title">Playground</span>
+            <span style="font-size:11px;color:var(--hint);">Live preview · adjust props and copy code</span>
+          </div>
+          <div class="playground-body">
+            <div class="pg-preview" id="dd-preview-area"></div>
+            <div class="pg-controls">
+              <!-- Label -->
+              <div class="ctrl-row">
+                <span class="ctrl-label">Label</span>
+                <input class="ctrl-input" id="dd-label-text" type="text" value="Title" oninput="ddRender()" />
+              </div>
+              <!-- Placeholder -->
+              <div class="ctrl-row">
+                <span class="ctrl-label">Placeholder</span>
+                <input class="ctrl-input" id="dd-placeholder" type="text" value="Placeholder" oninput="ddRender()" />
+              </div>
+              <!-- State -->
+              <div class="ctrl-row">
+                <span class="ctrl-label">state</span>
+                <div class="seg-picker" id="dd-state" style="flex-wrap:wrap;gap:4px;">
+                  <button class="seg-btn active" onclick="ddSeg(this,'dd-state')">Default</button>
+                  <button class="seg-btn" onclick="ddSeg(this,'dd-state')">Focused</button>
+                  <button class="seg-btn" onclick="ddSeg(this,'dd-state')">Filled</button>
+                  <button class="seg-btn" onclick="ddSeg(this,'dd-state')">Disabled</button>
+                  <button class="seg-btn" onclick="ddSeg(this,'dd-state')">Error</button>
+                  <button class="seg-btn" onclick="ddSeg(this,'dd-state')">Filled-Dis</button>
+                  <button class="seg-btn" onclick="ddSeg(this,'dd-state')">Filled-Err</button>
+                </div>
+              </div>
+              <!-- Divider -->
+              <div style="height:1px;background:var(--border);margin:2px 0;"></div>
+              <!-- Boolean props -->
+              <div class="toggle-row">
+                <div><span class="toggle-name">Show title</span><span class="toggle-type">boolean</span></div>
+                <button class="toggle-switch on" id="dd-tog-title" onclick="ddTogOpt(this,'title')" aria-pressed="true"></button>
+              </div>
+              <div class="toggle-row">
+                <div><span class="toggle-name">Help text</span><span class="toggle-type">boolean</span></div>
+                <button class="toggle-switch on" id="dd-tog-help" onclick="ddTogOpt(this,'help')" aria-pressed="true"></button>
+              </div>
+              <div class="toggle-row">
+                <div><span class="toggle-name">Badge</span><span class="toggle-type">boolean</span></div>
+                <button class="toggle-switch on" id="dd-tog-badge" onclick="ddTogOpt(this,'badge')" aria-pressed="true"></button>
+              </div>
+            </div><!-- /pg-controls -->
+          </div><!-- /playground-body -->
+          <!-- Code output -->
+          <div class="pg-code-wrap">
+            <div class="pg-code-header">
+              <span class="pg-code-lang">JSX</span>
+              <button class="copy-btn" id="dd-copy-btn" onclick="ddCopy()">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <div class="pg-code"><pre id="dd-code-block"></pre></div>
+          </div>
+        </div><!-- /playground -->
+
+        <!-- ── States ── -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">States</span>
+            <span class="variant-subtitle">Default · Focused · Filled · Disabled · Error · Filled-Disabled · Filled-Error</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-size:11px;color:var(--hint);">Default</span>
+              <div class="ds-dd-wrap"><div class="ds-dd-label">Title</div><div class="ds-dd"><span class="ds-dd-placeholder">Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-size:11px;color:var(--hint);">Focused</span>
+              <div class="ds-dd-wrap"><div class="ds-dd-label">Title</div><div class="ds-dd dd-focused"><span class="ds-dd-placeholder">|Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-size:11px;color:var(--hint);">Filled</span>
+              <div class="ds-dd-wrap"><div class="ds-dd-label">Title</div><div class="ds-dd"><span class="ds-dd-value">Arunachal Pradesh<span class="ds-dd-badge">+4more</span></span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-size:11px;color:var(--hint);">Disabled</span>
+              <div class="ds-dd-wrap"><div class="ds-dd-label">Title</div><div class="ds-dd dd-disabled"><span class="ds-dd-placeholder">Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-size:11px;color:var(--hint);">Error</span>
+              <div class="ds-dd-wrap"><div class="ds-dd-label">Title</div><div class="ds-dd dd-error"><span class="ds-dd-placeholder">Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div><span class="ds-dd-help dd-err">help text will be shown here</span></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-size:11px;color:var(--hint);">Filled · Disabled</span>
+              <div class="ds-dd-wrap"><div class="ds-dd-label">Title</div><div class="ds-dd dd-disabled"><span class="ds-dd-value">Arunachal Pradesh</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-size:11px;color:var(--hint);">Filled · Error</span>
+              <div class="ds-dd-wrap"><div class="ds-dd-label">Title</div><div class="ds-dd dd-error"><span class="ds-dd-value">Arunachal Pradesh<span class="ds-dd-badge">+4more</span></span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div><span class="ds-dd-help dd-err">help text will be shown here</span></div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider"/>
+
+        <!-- ── Menu Types ── -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Menu Types</span>
+            <span class="variant-subtitle">Text only · With checkboxes · All selected</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-size:11px;color:var(--hint);">Text only</span>
+              <div class="ds-dd-wrap"><div class="ds-dd-label">Title</div><div class="ds-dd dd-focused dd-open"><span class="ds-dd-placeholder">|Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div><div class="ds-dd-menu"><button class="ds-dd-item">Action 01</button><button class="ds-dd-item">Action 02</button><button class="ds-dd-item">Action 03</button><button class="ds-dd-item">Action 04</button><button class="ds-dd-item">Action 05</button></div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-size:11px;color:var(--hint);">With checkboxes</span>
+              <div class="ds-dd-wrap"><div class="ds-dd-label">Title</div><div class="ds-dd dd-focused dd-open"><span class="ds-dd-placeholder">|Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div><div class="ds-dd-menu"><button class="ds-dd-item"><span class="dd-cb"></span>Action 01</button><button class="ds-dd-item"><span class="dd-cb"></span>Action 02</button><button class="ds-dd-item"><span class="dd-cb"></span>Action 03</button><button class="ds-dd-item"><span class="dd-cb"></span>Action 04</button><button class="ds-dd-item"><span class="dd-cb"></span>Action 05</button></div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-size:11px;color:var(--hint);">All selected</span>
+              <div class="ds-dd-wrap"><div class="ds-dd-label">Title</div><div class="ds-dd dd-focused dd-open"><span class="ds-dd-placeholder">|Placeholder</span><svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div><div class="ds-dd-menu"><button class="ds-dd-item dd-item-selected"><span class="dd-cb dd-cb-chk"></span>Action 01</button><button class="ds-dd-item dd-item-selected"><span class="dd-cb dd-cb-chk"></span>Action 02</button><button class="ds-dd-item dd-item-selected"><span class="dd-cb dd-cb-chk"></span>Action 03</button><button class="ds-dd-item dd-item-selected"><span class="dd-cb dd-cb-chk"></span>Action 04</button><button class="ds-dd-item dd-item-selected"><span class="dd-cb dd-cb-chk"></span>Action 05</button></div></div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider"/>
+
+        <!-- ── Props ── -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Props</span>
+          </div>
+          <table class="spec-table">
+            <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>label</td><td><span class="spec-val">string</span></td><td>—</td><td>Field label shown above the trigger</td></tr>
+              <tr><td>placeholder</td><td><span class="spec-val">string</span></td><td><span class="spec-val">"Placeholder"</span></td><td>Hint text when no value selected</td></tr>
+              <tr><td>value</td><td><span class="spec-val">string</span></td><td>—</td><td>Currently selected value (filled state)</td></tr>
+              <tr><td>state</td><td><span class="spec-val">default</span> <span class="spec-val">focused</span> <span class="spec-val">filled</span> <span class="spec-val">disabled</span> <span class="spec-val">error</span> <span class="spec-val">filled-disabled</span> <span class="spec-val">filled-error</span></td><td><span class="spec-val">default</span></td><td>Visual state of the trigger</td></tr>
+              <tr><td>options</td><td><span class="spec-val">string[]</span></td><td>—</td><td>Array of option labels for the menu</td></tr>
+              <tr><td>checkbox</td><td><span class="spec-val">boolean</span></td><td><span class="spec-val">false</span></td><td>Show checkboxes in menu items</td></tr>
+              <tr><td>badge</td><td><span class="spec-val">string</span></td><td>—</td><td>Badge label shown after value (e.g. "+4more")</td></tr>
+              <tr><td>helpText</td><td><span class="spec-val">string</span></td><td>—</td><td>Help / error message below the trigger</td></tr>
+              <tr><td>onChange</td><td><span class="spec-val">(v: string) =&gt; void</span></td><td>—</td><td>Callback when selection changes</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div><!-- /#page-dropdown -->
+
+      <!-- ════════════════════════════════════════════════
+           TAB DETAIL PAGE
+           ════════════════════════════════════════════════ -->
+      <div id="page-tab" style="display:none;">
+
+        <div class="detail-header">
+          <div class="detail-meta">
+            <span class="meta-tag figma">node 34-67</span>
+            <span class="meta-tag">Underline</span>
+            <span class="meta-tag">Active / Inactive</span>
+          </div>
+          <h1 class="detail-title">Tab</h1>
+          <p class="detail-subtitle">Horizontal underline tab bar. The active tab shows a brand-blue 2 px bottom border; inactive tabs remain flat. Fully controlled — swap <code style="font-family:monospace;font-size:13px;background:var(--surface);padding:1px 5px;border-radius:4px;border:1px solid var(--border);">.active</code> to move selection.</p>
+        </div>
+
+        <!-- Playground -->
+        <div class="playground">
+          <div class="playground-header">
+            <span class="playground-title">Playground</span>
+            <span style="font-size:11px;color:var(--hint);">Live preview · adjust props and copy code</span>
+          </div>
+          <div class="playground-body">
+            <div class="pg-preview" id="tab-preview-area"></div>
+            <div class="pg-controls">
+              <!-- Label -->
+              <div class="ctrl-row">
+                <span class="ctrl-label">Label</span>
+                <input class="ctrl-input" id="tab-label" type="text" value="Tab" oninput="tabRender()" />
+              </div>
+              <div class="ctrl-row">
+                <span class="ctrl-label">activeIndex</span>
+                <div class="seg-picker" id="tab-active">
+                  <button class="seg-btn active" onclick="tabSeg(this,'tab-active')">1</button>
+                  <button class="seg-btn" onclick="tabSeg(this,'tab-active')">2</button>
+                  <button class="seg-btn" onclick="tabSeg(this,'tab-active')">3</button>
+                  <button class="seg-btn" onclick="tabSeg(this,'tab-active')">4</button>
+                </div>
+              </div>
+              <div class="ctrl-row">
+                <span class="ctrl-label">count</span>
+                <div class="seg-picker" id="tab-count">
+                  <button class="seg-btn" onclick="tabSeg(this,'tab-count')">2</button>
+                  <button class="seg-btn active" onclick="tabSeg(this,'tab-count')">3</button>
+                  <button class="seg-btn" onclick="tabSeg(this,'tab-count')">4</button>
+                </div>
+              </div>
+            </div><!-- /pg-controls -->
+          </div><!-- /playground-body -->
+          <!-- Code output -->
+          <div class="pg-code-wrap">
+            <div class="pg-code-header">
+              <span class="pg-code-lang">JSX</span>
+              <button class="copy-btn" id="tab-copy-btn" onclick="tabCopy()">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <div class="pg-code"><pre id="tab-code-block"></pre></div>
+          </div>
+        </div><!-- /playground -->
+
+        <!-- ── States ── -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">States</span>
+            <span class="variant-subtitle">Active tab with brand underline · inactive tabs flat</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:24px;">
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <span style="font-size:11px;color:var(--hint);">Active — Tab 1</span>
+              <div class="ds-tab-bar" style="max-width:440px;">
+                <button class="ds-tab-item active">Overview</button>
+                <button class="ds-tab-item">Design</button>
+                <button class="ds-tab-item">Code</button>
+                <button class="ds-tab-item">Settings</button>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <span style="font-size:11px;color:var(--hint);">Active — Tab 3</span>
+              <div class="ds-tab-bar" style="max-width:440px;">
+                <button class="ds-tab-item">Overview</button>
+                <button class="ds-tab-item">Design</button>
+                <button class="ds-tab-item active">Code</button>
+                <button class="ds-tab-item">Settings</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider"/>
+
+        <!-- ── Props ── -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Props</span>
+          </div>
+          <table class="spec-table">
+            <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>items</td><td><span class="spec-val">string[]</span></td><td>—</td><td>Array of tab labels to render</td></tr>
+              <tr><td>activeIndex</td><td><span class="spec-val">number</span></td><td><span class="spec-val">0</span></td><td>Index of the currently active tab</td></tr>
+              <tr><td>onChange</td><td><span class="spec-val">(i: number) =&gt; void</span></td><td>—</td><td>Callback fired when a tab is clicked</td></tr>
+              <tr><td>className</td><td><span class="spec-val">string</span></td><td>—</td><td>Extra classes on the bar wrapper</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div><!-- /#page-tab -->
+
+      <!-- ════════════════════════════════════════════════
+           SWITCHES DETAIL PAGE
+           ════════════════════════════════════════════════ -->
+      <div id="page-switches" style="display:none;">
+
+        <div class="detail-header">
+          <div class="detail-meta">
+            <span class="meta-tag figma">node 34-81</span>
+            <span class="meta-tag">Segmented</span>
+            <span class="meta-tag">Lg · Md</span>
+          </div>
+          <h1 class="detail-title">Switches</h1>
+          <p class="detail-subtitle">Pill-shaped segmented control. The active item lifts to a white surface with a soft shadow; all other items remain flat. Two sizes — <code style="font-family:monospace;font-size:13px;background:var(--surface);padding:1px 5px;border-radius:4px;border:1px solid var(--border);">lg</code> (44 px) and <code style="font-family:monospace;font-size:13px;background:var(--surface);padding:1px 5px;border-radius:4px;border:1px solid var(--border);">md</code> (36 px).</p>
+        </div>
+
+        <!-- Playground -->
+        <div class="playground">
+          <div class="playground-header">
+            <span class="playground-title">Playground</span>
+            <span style="font-size:11px;color:var(--hint);">Live preview · adjust props and copy code</span>
+          </div>
+          <div class="playground-body">
+            <div class="pg-preview" id="sw-preview-area"></div>
+            <div class="pg-controls">
+              <!-- Label -->
+              <div class="ctrl-row">
+                <span class="ctrl-label">Label</span>
+                <input class="ctrl-input" id="sw-label" type="text" value="Switch" oninput="swRender()" />
+              </div>
+              <div class="ctrl-row">
+                <span class="ctrl-label">size</span>
+                <div class="seg-picker" id="sw-size">
+                  <button class="seg-btn active" onclick="swSeg(this,'sw-size')">Lg</button>
+                  <button class="seg-btn" onclick="swSeg(this,'sw-size')">Md</button>
+                </div>
+              </div>
+              <div class="ctrl-row">
+                <span class="ctrl-label">activeIndex</span>
+                <div class="seg-picker" id="sw-active">
+                  <button class="seg-btn active" onclick="swSeg(this,'sw-active')">1</button>
+                  <button class="seg-btn" onclick="swSeg(this,'sw-active')">2</button>
+                  <button class="seg-btn" onclick="swSeg(this,'sw-active')">3</button>
+                  <button class="seg-btn" onclick="swSeg(this,'sw-active')">4</button>
+                </div>
+              </div>
+              <div class="ctrl-row">
+                <span class="ctrl-label">count</span>
+                <div class="seg-picker" id="sw-count">
+                  <button class="seg-btn" onclick="swSeg(this,'sw-count')">2</button>
+                  <button class="seg-btn" onclick="swSeg(this,'sw-count')">3</button>
+                  <button class="seg-btn active" onclick="swSeg(this,'sw-count')">4</button>
+                </div>
+              </div>
+            </div><!-- /pg-controls -->
+          </div><!-- /playground-body -->
+          <!-- Code output -->
+          <div class="pg-code-wrap">
+            <div class="pg-code-header">
+              <span class="pg-code-lang">JSX</span>
+              <button class="copy-btn" id="sw-copy-btn" onclick="swCopy()">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <div class="pg-code"><pre id="sw-code-block"></pre></div>
+          </div>
+        </div><!-- /playground -->
+
+        <!-- ── Sizes ── -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Sizes</span>
+            <span class="variant-subtitle">Lg 44 px · Md 36 px</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:28px;">
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <span style="font-size:11px;color:var(--hint);">Large — 44 px</span>
+              <div class="ds-switches ds-switches-lg">
+                <button class="ds-switch-item active">Switch 1</button>
+                <button class="ds-switch-item">Switch 2</button>
+                <button class="ds-switch-item">Switch 3</button>
+                <button class="ds-switch-item">Switch 4</button>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <span style="font-size:11px;color:var(--hint);">Medium — 36 px</span>
+              <div class="ds-switches ds-switches-md">
+                <button class="ds-switch-item active">Switch 1</button>
+                <button class="ds-switch-item">Switch 2</button>
+                <button class="ds-switch-item">Switch 3</button>
+                <button class="ds-switch-item">Switch 4</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider"/>
+
+        <!-- ── Props ── -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Props</span>
+          </div>
+          <table class="spec-table">
+            <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>items</td><td><span class="spec-val">string[]</span></td><td>—</td><td>Array of option labels</td></tr>
+              <tr><td>activeIndex</td><td><span class="spec-val">number</span></td><td><span class="spec-val">0</span></td><td>Index of the selected item</td></tr>
+              <tr><td>size</td><td><span class="spec-val">"lg"</span> <span class="spec-val">"md"</span></td><td><span class="spec-val">"lg"</span></td><td>Height variant — 44 px or 36 px</td></tr>
+              <tr><td>onChange</td><td><span class="spec-val">(i: number) =&gt; void</span></td><td>—</td><td>Callback fired when selection changes</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div><!-- /#page-switches -->
+
+      <!-- ════════════════════════════════════════════════
+           PAGINATION DETAIL PAGE
+           ════════════════════════════════════════════════ -->
+      <div id="page-pagination" style="display:none;">
+
+        <div class="detail-header">
+          <div class="detail-meta">
+            <span class="meta-tag figma">node 133-264</span>
+            <span class="meta-tag">Desktop · Mobile</span>
+            <span class="meta-tag">Numbers · Text</span>
+          </div>
+          <h1 class="detail-title">Pagination</h1>
+          <p class="detail-subtitle">Navigate between pages of content. Supports numbered page buttons and text-only variants in both desktop (with text labels) and mobile (icon-only arrows) breakpoints.</p>
+        </div>
+
+        <!-- Playground -->
+        <div class="playground">
+          <div class="playground-header">
+            <span class="playground-title">Playground</span>
+            <span style="font-size:11px;color:var(--hint);">Live preview · adjust props and copy code</span>
+          </div>
+          <div class="playground-body">
+            <div class="pg-preview" id="pg-preview-area-pagination" style="flex-direction:column;gap:16px;"></div>
+            <div class="pg-controls">
+              <div class="ctrl-row">
+                <span class="ctrl-label">Type</span>
+                <div class="seg-picker" id="pg-type">
+                  <button class="seg-btn active" onclick="pgSegPg(this,'pg-type')">Numbers</button>
+                  <button class="seg-btn" onclick="pgSegPg(this,'pg-type')">Text Only</button>
+                </div>
+              </div>
+              <div class="ctrl-row">
+                <span class="ctrl-label">Breakpoint</span>
+                <div class="seg-picker" id="pg-bp">
+                  <button class="seg-btn active" onclick="pgSegPg(this,'pg-bp')">Desktop</button>
+                  <button class="seg-btn" onclick="pgSegPg(this,'pg-bp')">Mobile</button>
+                </div>
+              </div>
+              <div class="ctrl-row">
+                <span class="ctrl-label">Current Page</span>
+                <div class="seg-picker" id="pg-cur">
+                  <button class="seg-btn" onclick="pgSegPg(this,'pg-cur')">1</button>
+                  <button class="seg-btn" onclick="pgSegPg(this,'pg-cur')">2</button>
+                  <button class="seg-btn active" onclick="pgSegPg(this,'pg-cur')">5</button>
+                  <button class="seg-btn" onclick="pgSegPg(this,'pg-cur')">9</button>
+                  <button class="seg-btn" onclick="pgSegPg(this,'pg-cur')">10</button>
+                </div>
+              </div>
+              <div class="ctrl-row">
+                <span class="ctrl-label">Total Pages</span>
+                <div class="seg-picker" id="pg-total">
+                  <button class="seg-btn" onclick="pgSegPg(this,'pg-total')">5</button>
+                  <button class="seg-btn active" onclick="pgSegPg(this,'pg-total')">10</button>
+                  <button class="seg-btn" onclick="pgSegPg(this,'pg-total')">20</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pg-code-wrap">
+            <div class="pg-code-header">
+              <span class="pg-code-lang">JSX</span>
+              <button class="copy-btn" id="pg-copy-btn" onclick="pgCopyPg()">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <div class="pg-code"><pre id="pg-code-block-pagination"></pre></div>
+          </div>
+        </div>
+
+        <!-- ── Variants ── -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Desktop — Numbers</span>
+            <span class="variant-subtitle">Previous / Next with text + page number buttons</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:20px;">
+            <div>
+              <div style="font-size:11px;color:var(--hint);margin-bottom:10px;">First page</div>
+              <div class="ds-pg">
+                <button class="ds-pg-arrow" disabled style="opacity:0.4;cursor:not-allowed;"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Previous</button>
+                <button class="ds-pg-page active">1</button>
+                <button class="ds-pg-page">2</button>
+                <button class="ds-pg-page">3</button>
+                <span class="ds-pg-ellipsis">…</span>
+                <button class="ds-pg-page">9</button>
+                <button class="ds-pg-page">10</button>
+                <button class="ds-pg-arrow">Next<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:11px;color:var(--hint);margin-bottom:10px;">Middle page</div>
+              <div class="ds-pg">
+                <button class="ds-pg-arrow"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Previous</button>
+                <button class="ds-pg-page">1</button>
+                <button class="ds-pg-page">2</button>
+                <span class="ds-pg-ellipsis">…</span>
+                <button class="ds-pg-page">4</button>
+                <button class="ds-pg-page active">5</button>
+                <button class="ds-pg-page">6</button>
+                <span class="ds-pg-ellipsis">…</span>
+                <button class="ds-pg-page">9</button>
+                <button class="ds-pg-page">10</button>
+                <button class="ds-pg-arrow">Next<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:11px;color:var(--hint);margin-bottom:10px;">Last page</div>
+              <div class="ds-pg">
+                <button class="ds-pg-arrow"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Previous</button>
+                <button class="ds-pg-page">1</button>
+                <button class="ds-pg-page">2</button>
+                <span class="ds-pg-ellipsis">…</span>
+                <button class="ds-pg-page">8</button>
+                <button class="ds-pg-page">9</button>
+                <button class="ds-pg-page active">10</button>
+                <button class="ds-pg-arrow" disabled style="opacity:0.4;cursor:not-allowed;">Next<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Desktop — Text Only</span>
+            <span class="variant-subtitle">Previous / Next + "Page X of Y"</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <div class="ds-pg">
+              <button class="ds-pg-arrow"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Previous</button>
+              <span class="ds-pg-text">Page 3 of 10</span>
+              <button class="ds-pg-arrow">Next<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Mobile — Numbers</span>
+            <span class="variant-subtitle">Icon-only arrow buttons + page numbers</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <div class="ds-pg">
+              <button class="ds-pg-arrow icon-only"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+              <button class="ds-pg-page">1</button>
+              <button class="ds-pg-page active">2</button>
+              <button class="ds-pg-page">3</button>
+              <span class="ds-pg-ellipsis">…</span>
+              <button class="ds-pg-page">10</button>
+              <button class="ds-pg-arrow icon-only"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Mobile — Text Only</span>
+            <span class="variant-subtitle">Icon-only arrows + "Page X of Y"</span>
+          </div>
+          <div class="ds-pg">
+            <button class="ds-pg-arrow icon-only"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+            <span class="ds-pg-text">Page 3 of 10</span>
+            <button class="ds-pg-arrow icon-only"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+          </div>
+        </div>
+
+        <hr class="section-divider"/>
+
+        <!-- Props -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Props</span>
+          </div>
+          <table class="spec-table">
+            <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>currentPage</td><td><span class="spec-val">number</span></td><td><span class="spec-val">1</span></td><td>The currently active page</td></tr>
+              <tr><td>totalPages</td><td><span class="spec-val">number</span></td><td>—</td><td>Total number of pages</td></tr>
+              <tr><td>type</td><td><span class="spec-val">"numbers"</span> <span class="spec-val">"text"</span></td><td><span class="spec-val">"numbers"</span></td><td>Show page buttons or "Page X of Y" text</td></tr>
+              <tr><td>mobile</td><td><span class="spec-val">boolean</span></td><td><span class="spec-val">false</span></td><td>Icon-only arrow buttons for mobile breakpoint</td></tr>
+              <tr><td>onChange</td><td><span class="spec-val">(page: number) =&gt; void</span></td><td>—</td><td>Callback fired on page change</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div><!-- /#page-pagination -->
+
+      <!-- ════════════════════════════════════════════════
+           BREADCRUMBS DETAIL PAGE
+           ════════════════════════════════════════════════ -->
+      <div id="page-breadcrumb" style="display:none;">
+
+        <div class="detail-header">
+          <div class="detail-meta">
+            <span class="meta-tag figma">node 51-102</span>
+            <span class="meta-tag">1–4 levels</span>
+            <span class="meta-tag">Chevron separator</span>
+          </div>
+          <h1 class="detail-title">Breadcrumbs</h1>
+          <p class="detail-subtitle">Show the user's location within a hierarchy. Links render in brand blue; the current (last) item is plain text. Up to four depth levels supported.</p>
+        </div>
+
+        <!-- Playground -->
+        <div class="playground">
+          <div class="playground-header">
+            <span class="playground-title">Playground</span>
+            <span style="font-size:11px;color:var(--hint);">Live preview · adjust props and copy code</span>
+          </div>
+          <div class="playground-body">
+            <div class="pg-preview" id="pg-preview-area-breadcrumb"></div>
+            <div class="pg-controls">
+              <div class="ctrl-row">
+                <span class="ctrl-label">Depth</span>
+                <div class="seg-picker" id="bc-depth">
+                  <button class="seg-btn" onclick="bcSeg(this,'bc-depth')">1</button>
+                  <button class="seg-btn active" onclick="bcSeg(this,'bc-depth')">2</button>
+                  <button class="seg-btn" onclick="bcSeg(this,'bc-depth')">3</button>
+                  <button class="seg-btn" onclick="bcSeg(this,'bc-depth')">4</button>
+                </div>
+              </div>
+              <div class="ctrl-row">
+                <span class="ctrl-label">Home Label</span>
+                <input class="ctrl-input" id="bc-home" type="text" value="Home" oninput="bcRender()" />
+              </div>
+              <div class="ctrl-row">
+                <span class="ctrl-label">Level 2</span>
+                <input class="ctrl-input" id="bc-l2" type="text" value="Category" oninput="bcRender()" />
+              </div>
+              <div class="ctrl-row" id="bc-l3-row">
+                <span class="ctrl-label">Level 3</span>
+                <input class="ctrl-input" id="bc-l3" type="text" value="Sub-category" oninput="bcRender()" />
+              </div>
+              <div class="ctrl-row" id="bc-l4-row" style="display:none;">
+                <span class="ctrl-label">Level 4</span>
+                <input class="ctrl-input" id="bc-l4" type="text" value="Detail" oninput="bcRender()" />
+              </div>
+              <div class="ctrl-row">
+                <span class="ctrl-label">Current Page</span>
+                <input class="ctrl-input" id="bc-current" type="text" value="Current Page" oninput="bcRender()" />
+              </div>
+            </div>
+          </div>
+          <div class="pg-code-wrap">
+            <div class="pg-code-header">
+              <span class="pg-code-lang">JSX</span>
+              <button class="copy-btn" id="bc-copy-btn" onclick="bcCopy()">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <div class="pg-code"><pre id="bc-code-block"></pre></div>
+          </div>
+        </div>
+
+        <!-- ── Depth variants ── -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Depth Variants</span>
+            <span class="variant-subtitle">1 to 4 levels deep</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:20px;">
+            <div>
+              <div style="font-size:11px;color:var(--hint);margin-bottom:8px;">One liner — depth 1</div>
+              <div class="ds-bc">
+                <span class="ds-bc-link">Home</span>
+                <span class="ds-bc-sep"><svg viewBox="0 0 8 8"><polyline points="2,1 6,4 2,7"/></svg></span>
+                <span class="ds-bc-current">Current Page</span>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:11px;color:var(--hint);margin-bottom:8px;">Two liner — depth 2</div>
+              <div class="ds-bc">
+                <span class="ds-bc-link">Home</span>
+                <span class="ds-bc-sep"><svg viewBox="0 0 8 8"><polyline points="2,1 6,4 2,7"/></svg></span>
+                <span class="ds-bc-link">Category</span>
+                <span class="ds-bc-sep"><svg viewBox="0 0 8 8"><polyline points="2,1 6,4 2,7"/></svg></span>
+                <span class="ds-bc-current">Current Page</span>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:11px;color:var(--hint);margin-bottom:8px;">Three liner — depth 3</div>
+              <div class="ds-bc">
+                <span class="ds-bc-link">Home</span>
+                <span class="ds-bc-sep"><svg viewBox="0 0 8 8"><polyline points="2,1 6,4 2,7"/></svg></span>
+                <span class="ds-bc-link">Category</span>
+                <span class="ds-bc-sep"><svg viewBox="0 0 8 8"><polyline points="2,1 6,4 2,7"/></svg></span>
+                <span class="ds-bc-link">Sub-category</span>
+                <span class="ds-bc-sep"><svg viewBox="0 0 8 8"><polyline points="2,1 6,4 2,7"/></svg></span>
+                <span class="ds-bc-current">Current Page</span>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:11px;color:var(--hint);margin-bottom:8px;">Four liner — depth 4</div>
+              <div class="ds-bc">
+                <span class="ds-bc-link">Home</span>
+                <span class="ds-bc-sep"><svg viewBox="0 0 8 8"><polyline points="2,1 6,4 2,7"/></svg></span>
+                <span class="ds-bc-link">Category</span>
+                <span class="ds-bc-sep"><svg viewBox="0 0 8 8"><polyline points="2,1 6,4 2,7"/></svg></span>
+                <span class="ds-bc-link">Sub-category</span>
+                <span class="ds-bc-sep"><svg viewBox="0 0 8 8"><polyline points="2,1 6,4 2,7"/></svg></span>
+                <span class="ds-bc-link">Detail</span>
+                <span class="ds-bc-sep"><svg viewBox="0 0 8 8"><polyline points="2,1 6,4 2,7"/></svg></span>
+                <span class="ds-bc-current">Current Page</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider"/>
+
+        <!-- Props -->
+        <div class="variant-section">
+          <div class="variant-label">
+            <span class="variant-title">Props</span>
+          </div>
+          <table class="spec-table">
+            <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>items</td><td><span class="spec-val">&#123; label: string; href?: string &#125;[]</span></td><td>—</td><td>Array of crumb objects. Last item renders as current page (no link)</td></tr>
+              <tr><td>separator</td><td><span class="spec-val">ReactNode</span></td><td>chevron</td><td>Custom separator element between items</td></tr>
+              <tr><td>onNavigate</td><td><span class="spec-val">(href: string) =&gt; void</span></td><td>—</td><td>Called when a link crumb is clicked</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div><!-- /#page-breadcrumb -->
+
     </main>
   </div>
 
@@ -2305,7 +4339,7 @@
     });
 
     // ── Page switching ────────────────────────────────────
-    const pages = ['overview','button','input','tag','tooltip','checkbox','radio'];
+    const pages = ['overview','button','input','tag','tooltip','checkbox','radio','alert','avatar','toggle','tab','switches','dropdown','pagination','breadcrumb'];
 
     // ── Checkbox interactive ──────────────────────────────
     const cbState = { a: false, b: true };
@@ -2324,7 +4358,7 @@
     }
     function toggleChild(lbl) {
       const box = lbl.querySelector('.cb-child-box');
-      const isChecked = box.style.background === 'rgb(39, 120, 226)' || box.style.background === '#2577E5' || box.innerHTML.includes('svg');
+      const isChecked = box.style.background === 'rgb(36, 119, 229)' || box.style.background === '#2577E5' || box.innerHTML.includes('svg');
       if (isChecked) {
         box.style.background = 'transparent'; box.style.borderColor = '#CBD5E1'; box.innerHTML = '';
       } else {
@@ -2403,10 +4437,18 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
       history.replaceState(null, '', name !== 'overview' ? '#' + name : window.location.pathname);
       // Re-render playgrounds when their page is shown
-      if (name === 'button' && typeof pgUpdate  === 'function') pgUpdate();
-      if (name === 'input'  && typeof ipUpdate  === 'function') ipUpdate();
-      if (name === 'tag'     && typeof tagUpdate === 'function') tagUpdate();
-      if (name === 'tooltip' && typeof ttUpdate  === 'function') ttUpdate();
+      if (name === 'button'  && typeof pgUpdate   === 'function') pgUpdate();
+      if (name === 'input'   && typeof ipUpdate   === 'function') ipUpdate();
+      if (name === 'tag'     && typeof tagUpdate  === 'function') tagUpdate();
+      if (name === 'tooltip' && typeof ttUpdate   === 'function') ttUpdate();
+      if (name === 'alert'   && typeof alRender   === 'function') alRender();
+      if (name === 'avatar'  && typeof avRender   === 'function') avRender();
+      if (name === 'toggle'  && typeof tglRender  === 'function') tglRender();
+      if (name === 'tab'     && typeof tabRender  === 'function') tabRender();
+      if (name === 'switches'   && typeof swRender    === 'function') swRender();
+      if (name === 'dropdown'   && typeof ddRender    === 'function') ddRender();
+      if (name === 'pagination' && typeof pgRenderPg  === 'function') pgRenderPg();
+      if (name === 'breadcrumb' && typeof bcRender    === 'function') bcRender();
     }
 
     // Restore from hash — deferred so all consts are initialised first
@@ -2414,6 +4456,57 @@
     if (hash && pages.includes(hash)) {
       document.addEventListener('DOMContentLoaded', () => switchPage(hash));
     }
+
+    // ── Mobile hamburger ──────────────────────────────────
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    const menuIcon = document.getElementById('menu-icon');
+    if (menuBtn) {
+      menuBtn.addEventListener('click', () => {
+        const open = mobileNav.classList.toggle('open');
+        menuBtn.setAttribute('aria-expanded', open);
+        menuIcon.innerHTML = open
+          ? '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>'
+          : '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
+      });
+    }
+
+    // ── Mobile sidebar toggle ─────────────────────────────
+    const sidebarEl = document.getElementById('sidebar');
+    const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
+    const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+    function openSidebar() {
+      if (sidebarEl) sidebarEl.classList.add('open');
+      if (sidebarBackdrop) sidebarBackdrop.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSidebar() {
+      if (sidebarEl) sidebarEl.classList.remove('open');
+      if (sidebarBackdrop) sidebarBackdrop.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    if (sidebarToggleBtn) {
+      sidebarToggleBtn.addEventListener('click', () => {
+        sidebarEl && sidebarEl.classList.contains('open') ? closeSidebar() : openSidebar();
+      });
+    }
+    if (sidebarBackdrop) {
+      sidebarBackdrop.addEventListener('click', closeSidebar);
+    }
+    // Close sidebar after nav link click on mobile
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 720) closeSidebar();
+      });
+    });
+    // Close mobile nav on outside click
+    document.addEventListener('click', (e) => {
+      if (menuBtn && !menuBtn.contains(e.target) && mobileNav && !mobileNav.contains(e.target)) {
+        mobileNav.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        if (menuIcon) menuIcon.innerHTML = '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
+      }
+    });
 
     // ══════════════════════════════════════════════════
     //  INTERACTIVE PLAYGROUND
@@ -2922,6 +5015,607 @@
         }, 2000);
       });
     }
+
+    // ══════════════════════════════════════════════════
+    //  ALERT PLAYGROUND
+    // ══════════════════════════════════════════════════
+    const alState = { type: 'Info', showClose: true, showActions: true, showBody: true };
+
+    const alIcons = {
+      Info:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+      alert:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+      Success: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>`,
+      Warning: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`
+    };
+    const alTypeClass = { Info:'ds-alert-info', alert:'ds-alert-alert', Success:'ds-alert-success', Warning:'ds-alert-warning' };
+
+    function alRender() {
+      const { type, showClose, showActions, showBody } = alState;
+      const closeBtn = showClose
+        ? `<button class="al-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>`
+        : '';
+      const actions = showActions
+        ? `<div class="al-actions"><span class="al-link">Learn more</span><span class="al-link">View Changes →</span></div>`
+        : '';
+      const body = showBody
+        ? `<p class="al-para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam.</p>`
+        : '';
+
+      const preview = document.getElementById('al-preview-area');
+      if (preview) {
+        preview.innerHTML = `
+          <div class="ds-alert ${alTypeClass[type]}" style="width:100%;max-width:580px;">
+            <div class="al-icon">${alIcons[type]}</div>
+            <div class="al-body">
+              <div class="al-content">
+                <p class="al-heading">Heading</p>
+                ${body}
+                ${actions}
+              </div>
+            </div>
+            ${closeBtn}
+          </div>`;
+      }
+
+      const code = `<FeedbackAlert\n  type="${type}"${!showBody ? '\n  showBody={false}' : ''}${!showActions ? '\n  showActions={false}' : ''}${!showClose ? '\n  showClose={false}' : ''}\n/>`;
+      const codeBlock = document.getElementById('al-code-block');
+      if (codeBlock) codeBlock.textContent = code;
+    }
+
+    function alSetType(type, el) {
+      alState.type = type;
+      document.querySelectorAll('#al-preview-area').forEach(() => {});
+      document.querySelectorAll('[id^="al-type-"]').forEach(b => b.classList.remove('active'));
+      if (el) el.classList.add('active');
+      alRender();
+    }
+
+    function alToggle(el, prop) {
+      alState[prop] = !alState[prop];
+      el.classList.toggle('on', alState[prop]);
+      el.setAttribute('aria-pressed', alState[prop]);
+      alRender();
+    }
+
+    function alCopy() {
+      const code = document.getElementById('al-code-block');
+      if (code) navigator.clipboard.writeText(code.textContent).catch(() => {});
+      const btn = document.getElementById('al-copy-btn');
+      if (btn) {
+        btn.classList.add('copied');
+        btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`;
+        }, 2000);
+      }
+    }
+
+    // alRender is called by switchPage above whenever alert page is activated
+
+    // ══════════════════════════════════════════════════
+    //  AVATAR PLAYGROUND
+    // ══════════════════════════════════════════════════
+    const AV_USER_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>`;
+    const AV_PHOTO_URL = 'https://i.pravatar.cc/80?img=3';
+
+    const avSizeClass = { XS:'av-xs', SM:'av-sm', MD:'av-md', LG:'av-lg' };
+    const avStatusClass = { None:'', Active:'av-active', Idle:'av-idle', Offline:'av-offline', Busy:'av-busy' };
+
+    function avActiveVal(groupId) {
+      const a = document.querySelector('#' + groupId + ' .seg-btn.active');
+      return a ? a.textContent.trim() : '';
+    }
+
+    function avSeg(btn, groupId) {
+      document.querySelectorAll('#' + groupId + ' .seg-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      avRender();
+    }
+
+    function avBuildHTML(type, size, status, initials) {
+      const sizeClass   = avSizeClass[size]   || 'av-md';
+      const statusClass = avStatusClass[status] || '';
+      const statusDot   = status && status !== 'None' ? `<span class="av-status-dot"></span>` : '';
+      let inner = '';
+      if (type === 'Initials') {
+        inner = `<div class="av-inner"><span class="av-initials">${initials || 'AG'}</span></div>`;
+      } else if (type === 'Icon') {
+        inner = `<div class="av-inner av-icon">${AV_USER_SVG}</div>`;
+      } else {
+        inner = `<div class="av-inner" style="background:#f1f5f9;"><img class="av-photo" src="${AV_PHOTO_URL}" alt="avatar" /></div>`;
+      }
+      return `<div class="ds-avatar ${sizeClass}${statusClass ? ' ' + statusClass : ''}">${inner}${statusDot}</div>`;
+    }
+
+    function avRender() {
+      const type     = avActiveVal('av-type')   || 'Initials';
+      const size     = avActiveVal('av-size')   || 'MD';
+      const status   = avActiveVal('av-status') || 'None';
+      const initials = (document.getElementById('av-initials-val') || {}).value || 'AG';
+
+      // Show/hide initials input row
+      const initRow = document.getElementById('av-initials-row');
+      if (initRow) initRow.style.display = type === 'Initials' ? 'flex' : 'none';
+
+      const preview = document.getElementById('av-preview-area');
+      if (preview) preview.innerHTML = avBuildHTML(type, size, status, initials);
+
+      // Build code
+      const lines = [];
+      lines.push(`<span class="c-tag">&lt;Avatar</span>`);
+      if (type !== 'Initials') lines.push(`  <span class="c-prop">type</span>=<span class="c-str">"${type}"</span>`);
+      if (size !== 'MD')       lines.push(`  <span class="c-prop">size</span>=<span class="c-str">"${size.toLowerCase()}"</span>`);
+      if (status && status !== 'None') lines.push(`  <span class="c-prop">status</span>=<span class="c-str">"${status.toLowerCase()}"</span>`);
+      if (type === 'Initials') lines.push(`  <span class="c-prop">initials</span>=<span class="c-str">"${initials}"</span>`);
+      if (type === 'Image')    lines.push(`  <span class="c-prop">src</span>=<span class="c-str">"..."</span>  <span class="c-prop">alt</span>=<span class="c-str">"User name"</span>`);
+      lines.push(`<span class="c-tag">/&gt;</span>`);
+
+      const codeBlock = document.getElementById('av-code-block');
+      if (codeBlock) codeBlock.innerHTML = lines.join('\n');
+    }
+
+    function avCopy() {
+      const code = document.getElementById('av-code-block');
+      if (code) navigator.clipboard.writeText(code.innerText).catch(() => {});
+      const btn = document.getElementById('av-copy-btn');
+      if (btn) {
+        btn.classList.add('copied');
+        btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`;
+        }, 2000);
+      }
+    }
+    // avRender is called by switchPage above whenever avatar page is activated
+
+    // ══════════════════════════════════════════════════
+    //  TOGGLE PLAYGROUND
+    // ══════════════════════════════════════════════════
+    const tglState = { checked: true, size: 'SM', showLabel: true, disabled: false };
+
+    function tglActiveVal(groupId) {
+      const a = document.querySelector('#' + groupId + ' .seg-btn.active');
+      return a ? a.textContent.trim() : '';
+    }
+
+    function tglSeg(btn, groupId) {
+      document.querySelectorAll('#' + groupId + ' .seg-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      if (groupId === 'tgl-state') tglState.checked = btn.textContent.trim() === 'true';
+      if (groupId === 'tgl-size')  tglState.size = btn.textContent.trim();
+      tglRender();
+    }
+
+    function tglToggle(el, prop) {
+      tglState[prop] = !tglState[prop];
+      el.classList.toggle('on', tglState[prop]);
+      el.setAttribute('aria-pressed', tglState[prop]);
+      // Show/hide label input
+      if (prop === 'showLabel') {
+        const row = document.getElementById('tgl-label-row');
+        if (row) row.style.display = tglState.showLabel ? 'flex' : 'none';
+      }
+      tglRender();
+    }
+
+    function tglRender() {
+      const { checked, size, showLabel, disabled } = tglState;
+      const labelText = (document.getElementById('tgl-label-val') || {}).value || 'Available';
+      const sizeClass = size === 'MD' ? ' ds-toggle-md' : size === 'LG' ? ' ds-toggle-lg' : '';
+      const onClass   = checked  ? ' on'       : '';
+      const disClass  = disabled ? ' disabled'  : '';
+      const thumb     = `<span class="ds-toggle-thumb"></span>`;
+      const toggle    = `<button class="ds-toggle${sizeClass}${onClass}${disClass}">${thumb}</button>`;
+
+      const preview = document.getElementById('tgl-preview-area');
+      if (preview) {
+        if (showLabel) {
+          preview.innerHTML = `<label class="ds-toggle-wrap">${toggle}<span class="ds-toggle-label">${labelText}</span></label>`;
+        } else {
+          preview.innerHTML = toggle;
+        }
+      }
+
+      // Code
+      const lines = [];
+      lines.push(`<span class="c-tag">&lt;Toggle</span>`);
+      if (checked)   lines.push(`  <span class="c-prop">checked</span>=<span class="c-bool">{true}</span>`);
+      if (size !== 'SM') lines.push(`  <span class="c-prop">size</span>=<span class="c-str">"${size.toLowerCase()}"</span>`);
+      if (showLabel) lines.push(`  <span class="c-prop">label</span>=<span class="c-str">"${labelText}"</span>`);
+      if (disabled)  lines.push(`  <span class="c-prop">disabled</span>`);
+      lines.push(`  <span class="c-prop">onChange</span>=<span class="c-bool">{handleChange}</span>`);
+      lines.push(`<span class="c-tag">/&gt;</span>`);
+      const codeBlock = document.getElementById('tgl-code-block');
+      if (codeBlock) codeBlock.innerHTML = lines.join('\n');
+    }
+
+    function tglCopy() {
+      const code = document.getElementById('tgl-code-block');
+      if (code) navigator.clipboard.writeText(code.innerText).catch(() => {});
+      const btn = document.getElementById('tgl-copy-btn');
+      if (btn) {
+        btn.classList.add('copied');
+        btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`;
+        }, 2000);
+      }
+    }
+    // tglRender is called by switchPage above whenever toggle page is activated
+
+    // ══════════════════════════════════════════════════
+    //  TAB PLAYGROUND
+    // ══════════════════════════════════════════════════
+    function tabActiveVal(groupId) {
+      const a = document.querySelector('#' + groupId + ' .seg-btn.active');
+      return a ? a.textContent.trim() : '';
+    }
+    function tabSeg(btn, groupId) {
+      document.querySelectorAll('#' + groupId + ' .seg-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      tabRender();
+    }
+    function tabRender() {
+      const activeIdx  = parseInt(tabActiveVal('tab-active') || '1') - 1;
+      const count      = parseInt(tabActiveVal('tab-count')  || '3');
+      const labelBase  = (document.getElementById('tab-label')?.value || 'Tab').trim() || 'Tab';
+      const labels     = Array.from({length: count}, (_, i) => `${labelBase} ${i + 1}`);
+      const items      = labels.map((l, i) =>
+        `<button class="ds-tab-item${i === activeIdx ? ' active' : ''}">${l}</button>`
+      ).join('');
+      const preview = document.getElementById('tab-preview-area');
+      if (preview) preview.innerHTML = `<div style="width:100%;max-width:480px;"><div class="ds-tab-bar">${items}</div></div>`;
+
+      const lines = [];
+      lines.push(`<span class="c-tag">&lt;TabBar</span>`);
+      lines.push(`  <span class="c-prop">items</span>=<span class="c-bool">{[${labels.map(l => '"'+l+'"').join(', ')}]}</span>`);
+      if (activeIdx !== 0) lines.push(`  <span class="c-prop">activeIndex</span>=<span class="c-bool">{${activeIdx}}</span>`);
+      lines.push(`  <span class="c-prop">onChange</span>=<span class="c-bool">{setActiveTab}</span>`);
+      lines.push(`<span class="c-tag">/&gt;</span>`);
+      const cb = document.getElementById('tab-code-block');
+      if (cb) cb.innerHTML = lines.join('\n');
+    }
+    function tabCopy() {
+      const code = document.getElementById('tab-code-block');
+      if (code) navigator.clipboard.writeText(code.innerText).catch(() => {});
+      const btn = document.getElementById('tab-copy-btn');
+      if (btn) {
+        btn.classList.add('copied');
+        btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`;
+        }, 2000);
+      }
+    }
+    // tabRender called by switchPage
+
+    // ══════════════════════════════════════════════════
+    //  SWITCHES PLAYGROUND
+    // ══════════════════════════════════════════════════
+    function swActiveVal(groupId) {
+      const a = document.querySelector('#' + groupId + ' .seg-btn.active');
+      return a ? a.textContent.trim() : '';
+    }
+    function swSeg(btn, groupId) {
+      document.querySelectorAll('#' + groupId + ' .seg-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      swRender();
+    }
+    function swRender() {
+      const size       = swActiveVal('sw-size')   || 'Lg';
+      const activeIdx  = parseInt(swActiveVal('sw-active') || '1') - 1;
+      const count      = parseInt(swActiveVal('sw-count')  || '4');
+      const labelBase  = (document.getElementById('sw-label')?.value || 'Switch').trim() || 'Switch';
+      const labels     = Array.from({length: count}, (_, i) => `${labelBase} ${i + 1}`);
+      const sizeClass = size === 'Md' ? 'ds-switches-md' : 'ds-switches-lg';
+      const items     = labels.map((l, i) =>
+        `<button class="ds-switch-item${i === activeIdx ? ' active' : ''}">${l}</button>`
+      ).join('');
+      const preview = document.getElementById('sw-preview-area');
+      if (preview) preview.innerHTML = `<div class="ds-switches ${sizeClass}">${items}</div>`;
+
+      const lines = [];
+      lines.push(`<span class="c-tag">&lt;Switches</span>`);
+      lines.push(`  <span class="c-prop">items</span>=<span class="c-bool">{[${labels.map(l => '"'+l+'"').join(', ')}]}</span>`);
+      if (activeIdx !== 0) lines.push(`  <span class="c-prop">activeIndex</span>=<span class="c-bool">{${activeIdx}}</span>`);
+      if (size !== 'Lg') lines.push(`  <span class="c-prop">size</span>=<span class="c-str">"md"</span>`);
+      lines.push(`  <span class="c-prop">onChange</span>=<span class="c-bool">{setActive}</span>`);
+      lines.push(`<span class="c-tag">/&gt;</span>`);
+      const cb = document.getElementById('sw-code-block');
+      if (cb) cb.innerHTML = lines.join('\n');
+    }
+    function swCopy() {
+      const code = document.getElementById('sw-code-block');
+      if (code) navigator.clipboard.writeText(code.innerText).catch(() => {});
+      const btn = document.getElementById('sw-copy-btn');
+      if (btn) {
+        btn.classList.add('copied');
+        btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`;
+        }, 2000);
+      }
+    }
+    // swRender called by switchPage
+
+    // ══════════════════════════════════════════════════
+    //  DROPDOWN PLAYGROUND
+    // ══════════════════════════════════════════════════
+    const ddOpts = { title:true, help:true, badge:true };
+
+    function ddActiveVal(groupId) {
+      const a = document.querySelector('#' + groupId + ' .seg-btn.active');
+      return a ? a.textContent.trim() : '';
+    }
+    function ddSeg(btn, groupId) {
+      document.querySelectorAll('#' + groupId + ' .seg-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      ddRender();
+    }
+    function ddTogOpt(btn, opt) {
+      ddOpts[opt] = !ddOpts[opt];
+      btn.classList.toggle('on', ddOpts[opt]);
+      btn.setAttribute('aria-pressed', ddOpts[opt]);
+      ddRender();
+    }
+    function ddRender() {
+      const state       = ddActiveVal('dd-state') || 'Default';
+      const labelText   = (document.getElementById('dd-label-text')?.value || 'Title').trim() || 'Title';
+      const placeholder = (document.getElementById('dd-placeholder')?.value || 'Placeholder').trim() || 'Placeholder';
+      const chv    = '<svg class="ds-dd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>';
+      const isError    = state === 'Error' || state === 'Filled-Err';
+      const isFilled   = state === 'Filled' || state === 'Filled-Dis' || state === 'Filled-Err';
+      const isDisabled = state === 'Disabled' || state === 'Filled-Dis';
+      let stateClass = '';
+      if (state === 'Focused')                          stateClass = 'dd-focused';
+      if (state === 'Error' || state === 'Filled-Err')  stateClass = 'dd-error';
+      if (isDisabled)                                   stateClass = 'dd-disabled';
+      let inner = '';
+      if (isFilled) {
+        const badge = (ddOpts.badge && (state==='Filled'||state==='Filled-Err')) ? '<span class="ds-dd-badge">+4more</span>' : '';
+        inner = `<span class="ds-dd-value">${placeholder}${badge}</span>` + chv;
+      } else {
+        const cur = state === 'Focused' ? '|' : '';
+        inner = `<span class="ds-dd-placeholder">${cur}${placeholder}</span>` + chv;
+      }
+      const title = ddOpts.title ? `<div class="ds-dd-label">${labelText}</div>` : '';
+      const help  = (isError && ddOpts.help) ? '<span class="ds-dd-help dd-err">help text will be shown here</span>' : '';
+      const wrap  = `<div class="ds-dd-wrap" style="max-width:280px;">${title}<div class="ds-dd ${stateClass}">${inner}</div>${help}</div>`;
+      const preview = document.getElementById('dd-preview-area');
+      if (preview) preview.innerHTML = wrap;
+
+      const lines = [];
+      lines.push(`<span class="c-tag">&lt;Dropdown</span>`);
+      if (ddOpts.title) lines.push(`  <span class="c-prop">label</span>=<span class="c-str">"${labelText}"</span>`);
+      lines.push(`  <span class="c-prop">placeholder</span>=<span class="c-str">"${placeholder}"</span>`);
+      if (isFilled)     lines.push(`  <span class="c-prop">value</span>=<span class="c-str">"${placeholder}"</span>`);
+      if (state !== 'Default') lines.push(`  <span class="c-prop">state</span>=<span class="c-str">"${state.toLowerCase()}"</span>`);
+      if (isError && ddOpts.help) lines.push(`  <span class="c-prop">helpText</span>=<span class="c-str">"help text will be shown here"</span>`);
+      if (ddOpts.badge && isFilled) lines.push(`  <span class="c-prop">badge</span>=<span class="c-str">"+4more"</span>`);
+      lines.push(`  <span class="c-prop">onChange</span>=<span class="c-bool">{handleChange}</span>`);
+      lines.push(`<span class="c-tag">/&gt;</span>`);
+      const cb = document.getElementById('dd-code-block');
+      if (cb) cb.innerHTML = lines.join('\n');
+    }
+    function ddCopy() {
+      const code = document.getElementById('dd-code-block');
+      if (code) navigator.clipboard.writeText(code.innerText).catch(() => {});
+      const btn = document.getElementById('dd-copy-btn');
+      if (btn) {
+        btn.classList.add('copied');
+        btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`;
+        }, 2000);
+      }
+    }
+    // ddRender called by switchPage
+
+    // ══════════════════════════════════════════════════
+    //  PAGINATION PLAYGROUND
+    // ══════════════════════════════════════════════════
+    function pgActiveValPg(groupId) {
+      const a = document.querySelector('#' + groupId + ' .seg-btn.active');
+      return a ? a.textContent.trim() : '';
+    }
+    function pgSegPg(btn, groupId) {
+      document.querySelectorAll('#' + groupId + ' .seg-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      pgRenderPg();
+    }
+    function pgRenderPg() {
+      const type    = pgActiveValPg('pg-type') || 'Numbers';
+      const bp      = pgActiveValPg('pg-bp') || 'Desktop';
+      const cur     = parseInt(pgActiveValPg('pg-cur') || '5');
+      const total   = parseInt(pgActiveValPg('pg-total') || '10');
+      const mobile  = bp === 'Mobile';
+      const textOnly= type === 'Text Only';
+
+      const PREV_SVG = `<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>`;
+      const NEXT_SVG = `<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>`;
+
+      const prevBtn = mobile
+        ? `<button class="ds-pg-arrow icon-only"${cur===1?' disabled style="opacity:0.4;cursor:not-allowed;"':''}>${PREV_SVG}</button>`
+        : `<button class="ds-pg-arrow"${cur===1?' disabled style="opacity:0.4;cursor:not-allowed;"':''}>${PREV_SVG}Previous</button>`;
+      const nextBtn = mobile
+        ? `<button class="ds-pg-arrow icon-only"${cur===total?' disabled style="opacity:0.4;cursor:not-allowed;"':''}>${NEXT_SVG}</button>`
+        : `<button class="ds-pg-arrow"${cur===total?' disabled style="opacity:0.4;cursor:not-allowed;"':''}>${NEXT_SVG}</button>`.replace(NEXT_SVG, `Next${NEXT_SVG}`);
+
+      let middle = '';
+      if (textOnly) {
+        middle = `<span class="ds-pg-text">Page ${cur} of ${total}</span>`;
+      } else {
+        // Build smart page window
+        const pages = [];
+        const range = new Set();
+        range.add(1); range.add(2);
+        range.add(total - 1); range.add(total);
+        for (let i = Math.max(1, cur - 1); i <= Math.min(total, cur + 1); i++) range.add(i);
+        const sorted = Array.from(range).filter(p => p >= 1 && p <= total).sort((a,b)=>a-b);
+        let prev = 0;
+        for (const p of sorted) {
+          if (prev && p - prev > 1) pages.push('…');
+          pages.push(p);
+          prev = p;
+        }
+        middle = pages.map(p => {
+          if (p === '…') return `<span class="ds-pg-ellipsis">…</span>`;
+          return `<button class="ds-pg-page${p===cur?' active':''}">${p}</button>`;
+        }).join('');
+      }
+
+      const html = `<div class="ds-pg">${prevBtn}${middle}${nextBtn}</div>`;
+      const preview = document.getElementById('pg-preview-area-pagination');
+      if (preview) preview.innerHTML = html;
+
+      // Code
+      const lines = [];
+      lines.push(`<span class="c-tag">&lt;Pagination</span>`);
+      lines.push(`  <span class="c-prop">currentPage</span>=<span class="c-bool">{${cur}}</span>`);
+      lines.push(`  <span class="c-prop">totalPages</span>=<span class="c-bool">{${total}}</span>`);
+      if (textOnly) lines.push(`  <span class="c-prop">type</span>=<span class="c-str">"text"</span>`);
+      if (mobile)   lines.push(`  <span class="c-prop">mobile</span>`);
+      lines.push(`  <span class="c-prop">onChange</span>=<span class="c-bool">{setPage}</span>`);
+      lines.push(`<span class="c-tag">/&gt;</span>`);
+      const cb = document.getElementById('pg-code-block-pagination');
+      if (cb) cb.innerHTML = lines.join('\n');
+    }
+    function pgCopyPg() {
+      const code = document.getElementById('pg-code-block-pagination');
+      if (code) navigator.clipboard.writeText(code.innerText).catch(() => {});
+      const btn = document.getElementById('pg-copy-btn');
+      if (btn) {
+        btn.classList.add('copied');
+        btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`;
+        }, 2000);
+      }
+    }
+
+    // ══════════════════════════════════════════════════
+    //  BREADCRUMBS PLAYGROUND
+    // ══════════════════════════════════════════════════
+    function bcActiveVal(groupId) {
+      const a = document.querySelector('#' + groupId + ' .seg-btn.active');
+      return a ? a.textContent.trim() : '';
+    }
+    function bcSeg(btn, groupId) {
+      document.querySelectorAll('#' + groupId + ' .seg-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      // Show/hide level inputs
+      const depth = parseInt(btn.textContent.trim());
+      const l3row = document.getElementById('bc-l3-row');
+      const l4row = document.getElementById('bc-l4-row');
+      if (l3row) l3row.style.display = depth >= 3 ? 'flex' : 'none';
+      if (l4row) l4row.style.display = depth >= 4 ? 'flex' : 'none';
+      bcRender();
+    }
+    function bcRender() {
+      const depth   = parseInt(bcActiveVal('bc-depth') || '2');
+      const home    = (document.getElementById('bc-home')?.value    || 'Home').trim() || 'Home';
+      const l2      = (document.getElementById('bc-l2')?.value      || 'Category').trim() || 'Category';
+      const l3      = (document.getElementById('bc-l3')?.value      || 'Sub-category').trim() || 'Sub-category';
+      const l4      = (document.getElementById('bc-l4')?.value      || 'Detail').trim() || 'Detail';
+      const current = (document.getElementById('bc-current')?.value || 'Current Page').trim() || 'Current Page';
+
+      const SEP = `<span class="ds-bc-sep"><svg viewBox="0 0 8 8"><polyline points="2,1 6,4 2,7"/></svg></span>`;
+      const link = (t) => `<span class="ds-bc-link">${t}</span>`;
+      const cur  = `<span class="ds-bc-current">${current}</span>`;
+
+      const parts = [link(home)];
+      if (depth >= 2) parts.push(link(l2));
+      if (depth >= 3) parts.push(link(l3));
+      if (depth >= 4) parts.push(link(l4));
+      parts.push(cur);
+
+      const html = `<div class="ds-bc">${parts.join(SEP)}</div>`;
+      const preview = document.getElementById('pg-preview-area-breadcrumb');
+      if (preview) preview.innerHTML = html;
+
+      // Build items array for code
+      const items = [{ label: home }];
+      if (depth >= 2) items.push({ label: l2, href: '#' });
+      if (depth >= 3) items.push({ label: l3, href: '#' });
+      if (depth >= 4) items.push({ label: l4, href: '#' });
+      items.push({ label: current });
+
+      const lines = [];
+      lines.push(`<span class="c-tag">&lt;Breadcrumbs</span>`);
+      lines.push(`  <span class="c-prop">items</span>=<span class="c-bool">{[</span>`);
+      items.forEach((item, i) => {
+        const isLast = i === items.length - 1;
+        if (item.href) {
+          lines.push(`    <span class="c-bool">{ label: </span><span class="c-str">"${item.label}"</span><span class="c-bool">, href: </span><span class="c-str">"${item.href}"</span><span class="c-bool"> }${isLast?'':','}</span>`);
+        } else {
+          lines.push(`    <span class="c-bool">{ label: </span><span class="c-str">"${item.label}"</span><span class="c-bool"> }${isLast?'':','}</span>`);
+        }
+      });
+      lines.push(`  <span class="c-bool">]}</span>`);
+      lines.push(`<span class="c-tag">/&gt;</span>`);
+      const cb = document.getElementById('bc-code-block');
+      if (cb) cb.innerHTML = lines.join('\n');
+    }
+    function bcCopy() {
+      const code = document.getElementById('bc-code-block');
+      if (code) navigator.clipboard.writeText(code.innerText).catch(() => {});
+      const btn = document.getElementById('bc-copy-btn');
+      if (btn) {
+        btn.classList.add('copied');
+        btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`;
+        }, 2000);
+      }
+    }
+
   </script>
+
+  <!-- ── Footer ─────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-links">
+      <div class="footer-col">
+        <span class="footer-label">LinkedIn</span>
+        <a class="footer-link" href="https://www.linkedin.com/in/abhidesigns/" target="_blank" rel="noopener">
+          /in/abhidesigns
+          <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-label">Portfolio</span>
+        <a class="footer-link" href="https://designerabhishek.framer.website/" target="_blank" rel="noopener">
+          designerabhishek.framer.website
+          <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-label">Dribbble</span>
+        <a class="footer-link" href="https://dribbble.com/abhishekraj031" target="_blank" rel="noopener">
+          abhishekraj031
+          <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-label">Twitter / X</span>
+        <a class="footer-link" href="https://twitter.com/designerabhi" target="_blank" rel="noopener">
+          @designerabhi
+          <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+    </div>
+    <hr class="footer-divider" />
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Abhishek Gupta</span>
+      <span class="footer-ver"><span class="footer-ver-dot"></span>pulse &nbsp;·&nbsp; v 0.1</span>
+    </div>
+  </footer>
 </body>
 </html>
