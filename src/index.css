@@ -1,0 +1,533 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   TIER 1 — PRIMITIVE COLOR RAMPS
+   100 tokens: 10 ramps × 10 shades (50–900)
+   Source: Figma Design System V.2.0 / Color Palette
+   Do NOT use these directly in components — use Tier 2 tokens.
+   ============================================================ */
+
+@layer base {
+  :root {
+    /* BRAND (primary blue) — updated 2026-08-05 from Figma OFB / Base/Brand. Main blue at shade 400. */
+    --color-brand-50:  216.0  76.9% 94.9%;   /* #E8F0FC */
+    --color-brand-100: 213.7  80.4% 90.0%;   /* #D1E3FA */
+    --color-brand-200: 213.7  78.4% 80.0%;   /* #A4C7F4 */
+    --color-brand-300: 213.8  77.8% 70.0%;   /* #77ABEE */
+    --color-brand-400: 214.4  78.7% 52.2%;   /* #2577E5 — primary action blue */
+    --color-brand-500: 214.0  76.6% 42.0%;   /* #1960BD */
+    --color-brand-600: 214.8  73.9% 36.1%;   /* #1851A0 */
+    --color-brand-700: 215.4  76.5% 30.0%;   /* #124287 */
+    --color-brand-800: 217.6  80.5% 22.2%;   /* #0B2D66 */
+    --color-brand-900: 220.0  88.8% 13.9%;   /* #041943 */
+
+    /* BLUE (information/sky) — updated 2026-08-05 from Figma OFB / Base/Blue */
+    --color-blue-50:   200.8 100.0% 96.1%;  /* #EBF8FF */
+    --color-blue-100:  200.0  97.5% 86.1%;  /* #B9E7FE */
+    --color-blue-200:  199.7  98.0% 80.0%;  /* #9ADDFE */
+    --color-blue-300:  200.3  98.7% 70.0%;  /* #67CBFE */
+    --color-blue-400:  200.1  98.3% 58.1%;  /* #2BB7FD */
+    --color-blue-500:  204.2  98.3% 46.1%;  /* #028CE9 */
+    --color-blue-600:  204.0  97.8% 38.1%;  /* #0274C0 */
+    --color-blue-700:  204.1  97.3% 30.0%;  /* #025B97 */
+    --color-blue-800:  203.9  98.0% 22.0%;  /* #01436F */
+    --color-blue-900:  204.0  96.3% 12.2%;  /* #01253D */
+
+    /* GREEN (success) — updated 2026-08-05 from Figma OFB / Base/Green */
+    --color-green-50:  137.9 81.7% 95.9%;   /* #ECFDF1 */
+    --color-green-100: 149.4 80.0% 88.0%;   /* #C8F9E0 */
+    --color-green-200: 152.4 75.7% 75.9%;   /* #93F0C5 */
+    --color-green-300: 156.4 71.7% 63.9%;   /* #61E5B1 */
+    --color-green-400: 158.2 64.1% 51.9%;   /* #36D39A */
+    --color-green-500: 160.1 84.4% 40.0%;   /* #10BC83 */
+    --color-green-600: 161.5 93.8% 32.0%;   /* #059E6F */
+    --color-green-700: 162.9 93.5% 24.3%;   /* #047857 */
+    --color-green-800: 163.1 88.1% 19.8%;   /* #065F46 */
+    --color-green-900: 164.2 85.7% 16.5%;   /* #064E3B */
+
+    /* ORANGE (warning) — updated 2026-08-03 from Figma base/colors/orange */
+    --color-orange-50:  33.8 100.0% 96.5%;  /* #FFF7ED */
+    --color-orange-100: 34.2 100.0% 90.0%;  /* #FFE9CC */
+    --color-orange-200: 32.3  98.0% 80.0%;  /* #FED09A */
+    --color-orange-300: 30.5  97.5% 68.0%;  /* #FDAF5E */
+    --color-orange-400: 27.1  95.6% 55.9%;  /* #FA8423 */
+    --color-orange-500: 24.4  94.9% 46.1%;  /* #E56106 */
+    --color-orange-600: 20.6  90.6% 37.9%;  /* #B84509 */
+    --color-orange-700: 17.4  88.2% 30.0%;  /* #903009 */
+    --color-orange-800: 14.9  61.5% 22.0%;  /* #64220C */
+    --color-orange-900: 15.8  75.2% 15.9%;  /* #471A0A */
+
+    /* RED (error) — 50/100 updated; 200–900 unchanged */
+    --color-red-50:   0.0   91.0% 96.1%;    /* #FEECEC */
+    --color-red-100:  0.0   95.5% 92.2%;    /* #FED8D8 */
+    --color-red-200:  0.0   96.3% 89.4%;    /* #FECACA */
+    --color-red-300:  0.0   93.5% 81.8%;    /* #FCA5A5 */
+    --color-red-400:  0.0   90.6% 70.8%;    /* #F87171 */
+    --color-red-500:  0.0   84.2% 60.2%;    /* #EF4444 */
+    --color-red-600:  0.0   72.2% 50.6%;    /* #DC2626 */
+    --color-red-700:  0.0   73.7% 41.8%;    /* #B91C1C */
+    --color-red-800:  0.0   70.0% 35.3%;    /* #991B1B */
+    --color-red-900:  0.0   62.8% 30.6%;    /* #7F1D1D */
+
+    /* YELLOW (caution) — updated 2026-08-03; scale is darker/richer than before */
+    --color-yellow-50:  47.7 100.0% 96.1%;  /* #FFFBEB */
+    --color-yellow-100: 47.8  97.1% 88.1%;  /* #FEF2C3 */
+    --color-yellow-200: 47.7  96.6% 78.0%;  /* #FDE791 */
+    --color-yellow-300: 45.8  96.4% 68.0%;  /* #FCD75F */
+    --color-yellow-400: 43.3  96.5% 54.1%;  /* #FBBC19 */
+    --color-yellow-500: 37.7  92.1% 44.1%;  /* #D88B09 */
+    --color-yellow-600: 32.0  94.5% 36.1%;  /* #B36205 */
+    --color-yellow-700: 26.1  90.4% 28.0%;  /* #883F07 */
+    --color-yellow-800: 23.0  54.8% 20.0%;  /* #5D2909 */
+    --color-yellow-900: 22.0  77.7% 13.9%;  /* #3F1C08 */
+
+    /* PURPLE (accent) — DEPRECATED: no Figma data; retained for shadcn compat */
+    --color-purple-50:  270.0 100.0% 98.0%; /* #FAF5FF */
+    --color-purple-100: 251.4  91.3% 95.5%; /* #EDE9FE */
+    --color-purple-200: 250.5  95.2% 91.8%; /* #DDD6FE */
+    --color-purple-300: 252.5  94.7% 85.1%; /* #C4B5FD */
+    --color-purple-400: 255.1  91.7% 76.3%; /* #A78BFA */
+    --color-purple-500: 258.3  89.5% 66.3%; /* #8B5CF6 */
+    --color-purple-600: 262.1  83.3% 57.8%; /* #7C3AED */
+    --color-purple-700: 263.4  70.0% 50.4%; /* #6D28D9 */
+    --color-purple-800: 263.4  69.3% 42.2%; /* #5B21B6 */
+    --color-purple-900: 263.5  67.4% 34.9%; /* #4C1D95 */
+
+    /* MAGENTA → PINK — updated 2026-08-03 from Figma base/color/pink; var names unchanged */
+    --color-magenta-50:  339.7  91.0% 96.1%; /* #FEECF2 */
+    --color-magenta-100: 340.6  90.1% 92.0%; /* #FDD8E4 */
+    --color-magenta-200: 340.1  93.9% 86.9%; /* #FDBED3 */
+    --color-magenta-300: 340.3  95.0% 78.1%; /* #FC92B5 */
+    --color-magenta-400: 340.0  94.8% 69.0%; /* #FB6597 */
+    --color-magenta-500: 339.9  95.2% 58.0%; /* #FA2E72 */
+    --color-magenta-600: 339.9  80.0% 47.1%; /* #D81858 */
+    --color-magenta-700: 340.0  94.5% 36.1%; /* #B3053F */
+    --color-magenta-800: 339.7  94.6% 24.9%; /* #7C032C */
+    --color-magenta-900: 340.5  79.5% 19.0%; /* #570A23 */
+
+    /* TEAL (secondary) — updated 2026-08-05 from Figma OFB / Base/Teal; full scale confirmed */
+    --color-teal-50:  166.2  77.3% 96.7%;   /* #F0FDFA */
+    --color-teal-100: 167.9  84.1% 84.9%;   /* #B8F9EC */
+    --color-teal-200: 168.4  83.1% 76.9%;   /* #93F5E2 */
+    --color-teal-300: 170.8  76.5% 64.9%;   /* #61EAD5 */
+    --color-teal-400: 172.6  65.7% 52.0%;   /* #34D5C1 */
+    --color-teal-500: 173.3  79.9% 41.2%;   /* #15BDAA */
+    --color-teal-600: 174.4  83.3% 33.2%;   /* #0E9B8E */
+    --color-teal-700: 174.8  77.4% 24.1%;   /* #0E6D65 */
+    --color-teal-800: 176.5  68.8% 20.0%;   /* #105652 */
+    --color-teal-900: 175.7  60.4% 14.0%;   /* #0E3936 */
+
+    /* GREY (neutral) — updated 2026-08-03 from Figma base/colors/grey */
+    --color-grey-50:  210.0  38.1% 96.9%;   /* #F4F7FA */
+    --color-grey-100: 210.0  39.1% 89.0%;   /* #D8E3EE */
+    --color-grey-200: 215.6  31.6% 77.1%;   /* #B2C1D7 */
+    --color-grey-300: 211.9  27.4% 64.9%;   /* #8DA4BE */
+    --color-grey-400: 212.5  26.7% 55.1%;   /* #6E8AAB */
+    --color-grey-500: 214.4  20.5% 43.0%;   /* #576A84 */
+    --color-grey-600: 215.3  16.2% 35.1%;   /* #4B5768 */
+    --color-grey-700: 214.7  18.8% 27.1%;   /* #384352 */
+    --color-grey-800: 215.1  15.1% 18.8%;   /* #242E3C */
+    --color-grey-900: 213.8   7.1% 11.0%;   /* #151B23 */
+  }
+}
+
+/* ============================================================
+   TIER 2 — SEMANTIC TOKENS
+   80 tokens: 10 roles × 8 states
+   Naming: --{role}-{state}
+   These are the ONLY tokens allowed in component Tailwind classes.
+   ============================================================ */
+
+@layer base {
+  :root {
+    /* ── BRAND ── primary product blue (OFB: main blue at shade 400) */
+    --brand-background: var(--color-brand-50);
+    --brand-subtle:     var(--color-brand-100);
+    --brand-light:      var(--color-brand-200);
+    --brand-default:    var(--color-brand-400);  /* #2577E5 — OFB primary action blue */
+    --brand-hover:      var(--color-brand-500);  /* #1960BD */
+    --brand-active:     var(--color-brand-600);  /* #1851A0 */
+    --brand-emphasis:   var(--color-brand-700);  /* #124287 */
+    --brand-text:       var(--color-brand-900);  /* #041943 */
+
+    /* ── INFORMATION ── ← Blue ramp */
+    --information-background: var(--color-blue-50);
+    --information-subtle:     var(--color-blue-100);
+    --information-light:      var(--color-blue-200);
+    --information-default:    var(--color-blue-500);
+    --information-hover:      var(--color-blue-600);
+    --information-active:     var(--color-blue-700);
+    --information-emphasis:   var(--color-blue-800);
+    --information-text:       var(--color-blue-900);
+
+    /* ── SUCCESS ── ← Green ramp */
+    --success-background: var(--color-green-50);
+    --success-subtle:     var(--color-green-100);
+    --success-light:      var(--color-green-200);
+    --success-default:    var(--color-green-500);
+    --success-hover:      var(--color-green-600);
+    --success-active:     var(--color-green-700);
+    --success-emphasis:   var(--color-green-800);
+    --success-text:       var(--color-green-900);
+
+    /* ── WARNING ── ← Orange ramp */
+    --warning-background: var(--color-orange-50);
+    --warning-subtle:     var(--color-orange-100);
+    --warning-light:      var(--color-orange-200);
+    --warning-default:    var(--color-orange-500);
+    --warning-hover:      var(--color-orange-600);
+    --warning-active:     var(--color-orange-700);
+    --warning-emphasis:   var(--color-orange-800);
+    --warning-text:       var(--color-orange-900);
+
+    /* ── ERROR ── ← Red ramp */
+    --error-background: var(--color-red-50);
+    --error-subtle:     var(--color-red-100);
+    --error-light:      var(--color-red-200);
+    --error-default:    var(--color-red-500);
+    --error-hover:      var(--color-red-600);
+    --error-active:     var(--color-red-700);
+    --error-emphasis:   var(--color-red-800);
+    --error-text:       var(--color-red-900);
+
+    /* ── CAUTION ── ← Yellow ramp */
+    --caution-background: var(--color-yellow-50);
+    --caution-subtle:     var(--color-yellow-100);
+    --caution-light:      var(--color-yellow-200);
+    --caution-default:    var(--color-yellow-500);
+    --caution-hover:      var(--color-yellow-600);
+    --caution-active:     var(--color-yellow-700);
+    --caution-emphasis:   var(--color-yellow-800);
+    --caution-text:       var(--color-yellow-900);
+
+    /* ── PURPLE ── ← Purple ramp */
+    --purple-background: var(--color-purple-50);
+    --purple-subtle:     var(--color-purple-100);
+    --purple-light:      var(--color-purple-200);
+    --purple-default:    var(--color-purple-500);
+    --purple-hover:      var(--color-purple-600);
+    --purple-active:     var(--color-purple-700);
+    --purple-emphasis:   var(--color-purple-800);
+    --purple-text:       var(--color-purple-900);
+
+    /* ── MAGENTA ── ← Magenta ramp */
+    --magenta-background: var(--color-magenta-50);
+    --magenta-subtle:     var(--color-magenta-100);
+    --magenta-light:      var(--color-magenta-200);
+    --magenta-default:    var(--color-magenta-500);
+    --magenta-hover:      var(--color-magenta-600);
+    --magenta-active:     var(--color-magenta-700);
+    --magenta-emphasis:   var(--color-magenta-800);
+    --magenta-text:       var(--color-magenta-900);
+
+    /* ── TEAL ── ← Teal ramp */
+    --teal-background: var(--color-teal-50);
+    --teal-subtle:     var(--color-teal-100);
+    --teal-light:      var(--color-teal-200);
+    --teal-default:    var(--color-teal-500);
+    --teal-hover:      var(--color-teal-600);
+    --teal-active:     var(--color-teal-700);
+    --teal-emphasis:   var(--color-teal-800);
+    --teal-text:       var(--color-teal-900);
+
+    /* ── NEUTRAL ── ← Grey ramp */
+    --neutral-background: var(--color-grey-50);
+    --neutral-subtle:     var(--color-grey-100);
+    --neutral-light:      var(--color-grey-200);
+    --neutral-default:    var(--color-grey-500);
+    --neutral-hover:      var(--color-grey-600);
+    --neutral-active:     var(--color-grey-700);
+    --neutral-emphasis:   var(--color-grey-800);
+    --neutral-text:       var(--color-grey-900);
+  }
+}
+
+/* ============================================================
+   OFB SEMANTIC TOKENS — Figma Design System OFB / semantic collection
+   Updated: 2026-08-05
+   Groups: typography (10 ✓), border (1 ✓), icon (7 pending), surface (11 pending)
+   Component code should prefer the Tier 2 tokens above.
+   ============================================================ */
+
+@layer base {
+  :root {
+    /* ── Typography ── 10 tokens confirmed from OFB semantic collection */
+    --semantic-text-primary:     215.1 15.1% 18.8%;   /* #242E3C — grey/800 */
+    --semantic-text-secondary:   215.3 16.2% 35.1%;   /* #4B5768 — grey/600 */
+    --semantic-text-tertiary:    214.7 18.8% 27.1%;   /* #384352 — grey/700 */
+    --semantic-text-on-surface:    0.0  0.0% 100.0%;  /* #FFFFFF  */
+    --semantic-text-placeholder: 211.9 27.4% 64.9%;   /* #8DA4BE — grey/300 */
+    --semantic-text-disable:     212.5 26.7% 55.1%;   /* #6E8AAB — grey/400 */
+    --semantic-text-brand:       214.4 78.7% 52.2%;   /* #2577E5 — brand/400 */
+    --semantic-text-error:         0.0 72.2% 50.6%;   /* #DC2626 — red/600 */
+    --semantic-text-success:     161.5 93.8% 32.0%;   /* #059E6F — green/600 */
+    --semantic-text-warning:      24.4 94.9% 46.1%;   /* #E56106 — orange/500 */
+
+    /* ── Border ── 1 of 6 confirmed; remaining pending additional Figma data */
+    --semantic-border-brand-light: 213.7 80.4% 90.0%; /* #D1E3FA — brand/100 */
+
+    /* ── Corner Radius ── */
+    --corner-radius-m:  8px;
+    --corner-radius-s:  6px;
+    --corner-radius-lg: 16px;
+
+    /* ── Spacing ── */
+    --spacing-8:   8px;
+    --spacing-12:  12px;
+    --spacing-24:  24px;
+    --spacing-40:  40px;
+    --spacing-80:  80px;
+    --spacing-128: 128px;
+  }
+}
+
+/* ============================================================
+   TIER 3 — COMPONENT TOKENS
+   Scoped to specific components. Add to tailwind.config.js too.
+   ============================================================ */
+
+@layer base {
+  :root {
+    /* ── TOOLTIP ──
+       Intentionally fixed dark surface — does NOT flip in dark mode.
+       Figma node 106:689 — warm near-black #1b2022 */
+    --tooltip-surface: 210 24% 12%;   /* #1b2022 */
+    --tooltip-text:      0  0% 100%;  /* #ffffff */
+    --tooltip-body:    210 15% 85%;   /* #d1d8db */
+  }
+}
+
+/* ============================================================
+   TOOLTIP — ARROW UTILITIES
+   CSS border-triangle trick. Cannot be done with Tailwind alone.
+   ============================================================ */
+
+@layer components {
+  .tt-arrow {
+    display: block;
+    width: 0;
+    height: 0;
+    flex-shrink: 0;
+  }
+  .tt-arrow-down {
+    border-left:  8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top:  10px solid hsl(var(--tooltip-surface));
+  }
+  .tt-arrow-up {
+    border-left:  8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 10px solid hsl(var(--tooltip-surface));
+  }
+  .tt-arrow-left {
+    border-top:    8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 10px solid hsl(var(--tooltip-surface));
+  }
+  .tt-arrow-right {
+    border-top:    8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left:  10px solid hsl(var(--tooltip-surface));
+  }
+}
+
+/* ============================================================
+   TIER 2 — DARK MODE OVERRIDES
+   Flips each role's semantic tokens to use the opposite end of
+   the shade ramp so text/bg stay legible on a dark background.
+   ============================================================ */
+
+@layer base {
+  .dark {
+    /* ── BRAND ── */
+    --brand-background: var(--color-brand-900);
+    --brand-subtle:     var(--color-brand-800);
+    --brand-light:      var(--color-brand-700);
+    --brand-default:    var(--color-brand-400);
+    --brand-hover:      var(--color-brand-300);
+    --brand-active:     var(--color-brand-200);
+    --brand-emphasis:   var(--color-brand-100);
+    --brand-text:       var(--color-brand-50);
+
+    /* ── INFORMATION ── */
+    --information-background: var(--color-blue-900);
+    --information-subtle:     var(--color-blue-800);
+    --information-light:      var(--color-blue-700);
+    --information-default:    var(--color-blue-400);
+    --information-hover:      var(--color-blue-300);
+    --information-active:     var(--color-blue-200);
+    --information-emphasis:   var(--color-blue-100);
+    --information-text:       var(--color-blue-50);
+
+    /* ── SUCCESS ── */
+    --success-background: var(--color-green-900);
+    --success-subtle:     var(--color-green-800);
+    --success-light:      var(--color-green-700);
+    --success-default:    var(--color-green-400);
+    --success-hover:      var(--color-green-300);
+    --success-active:     var(--color-green-200);
+    --success-emphasis:   var(--color-green-100);
+    --success-text:       var(--color-green-50);
+
+    /* ── WARNING ── */
+    --warning-background: var(--color-orange-900);
+    --warning-subtle:     var(--color-orange-800);
+    --warning-light:      var(--color-orange-700);
+    --warning-default:    var(--color-orange-400);
+    --warning-hover:      var(--color-orange-300);
+    --warning-active:     var(--color-orange-200);
+    --warning-emphasis:   var(--color-orange-100);
+    --warning-text:       var(--color-orange-50);
+
+    /* ── ERROR ── */
+    --error-background: var(--color-red-900);
+    --error-subtle:     var(--color-red-800);
+    --error-light:      var(--color-red-700);
+    --error-default:    var(--color-red-400);
+    --error-hover:      var(--color-red-300);
+    --error-active:     var(--color-red-200);
+    --error-emphasis:   var(--color-red-100);
+    --error-text:       var(--color-red-50);
+
+    /* ── CAUTION ── */
+    --caution-background: var(--color-yellow-900);
+    --caution-subtle:     var(--color-yellow-800);
+    --caution-light:      var(--color-yellow-700);
+    --caution-default:    var(--color-yellow-400);
+    --caution-hover:      var(--color-yellow-300);
+    --caution-active:     var(--color-yellow-200);
+    --caution-emphasis:   var(--color-yellow-100);
+    --caution-text:       var(--color-yellow-50);
+
+    /* ── PURPLE ── */
+    --purple-background: var(--color-purple-900);
+    --purple-subtle:     var(--color-purple-800);
+    --purple-light:      var(--color-purple-700);
+    --purple-default:    var(--color-purple-400);
+    --purple-hover:      var(--color-purple-300);
+    --purple-active:     var(--color-purple-200);
+    --purple-emphasis:   var(--color-purple-100);
+    --purple-text:       var(--color-purple-50);
+
+    /* ── MAGENTA ── */
+    --magenta-background: var(--color-magenta-900);
+    --magenta-subtle:     var(--color-magenta-800);
+    --magenta-light:      var(--color-magenta-700);
+    --magenta-default:    var(--color-magenta-400);
+    --magenta-hover:      var(--color-magenta-300);
+    --magenta-active:     var(--color-magenta-200);
+    --magenta-emphasis:   var(--color-magenta-100);
+    --magenta-text:       var(--color-magenta-50);
+
+    /* ── TEAL ── */
+    --teal-background: var(--color-teal-900);
+    --teal-subtle:     var(--color-teal-800);
+    --teal-light:      var(--color-teal-700);
+    --teal-default:    var(--color-teal-400);
+    --teal-hover:      var(--color-teal-300);
+    --teal-active:     var(--color-teal-200);
+    --teal-emphasis:   var(--color-teal-100);
+    --teal-text:       var(--color-teal-50);
+
+    /* ── NEUTRAL ── */
+    --neutral-background: var(--color-grey-900);
+    --neutral-subtle:     var(--color-grey-800);
+    --neutral-light:      var(--color-grey-700);
+    --neutral-default:    var(--color-grey-400);
+    --neutral-hover:      var(--color-grey-300);
+    --neutral-active:     var(--color-grey-200);
+    --neutral-emphasis:   var(--color-grey-100);
+    --neutral-text:       var(--color-grey-50);
+  }
+}
+
+/* ============================================================
+   SHADCN COMPAT LAYER
+   Maps shadcn's expected token names → Figma semantic values.
+   Required for shadcn primitives (Button, Input, Card, etc.)
+   to render correctly with Figma brand colours.
+   ============================================================ */
+
+@layer base {
+  :root {
+    /* Page chrome */
+    --background: 0 0% 100%;                        /* white */
+    --foreground: var(--color-grey-900);             /* #0F172A */
+
+    /* Surfaces */
+    --card:             0 0% 100%;
+    --card-foreground:  var(--color-grey-900);
+    --popover:          0 0% 100%;
+    --popover-foreground: var(--color-grey-900);
+
+    /* Primary → brand (OFB: main blue at shade 400) */
+    --primary:            var(--color-brand-400);    /* #2577E5 */
+    --primary-foreground: 0 0% 100%;                 /* white */
+
+    /* Secondary → teal */
+    --secondary:            var(--color-teal-50);    /* #F0FDFA */
+    --secondary-foreground: var(--color-teal-900);   /* #134E4A */
+
+    /* Muted → neutral */
+    --muted:            var(--color-grey-100);       /* #F1F5F9 */
+    --muted-foreground: var(--color-grey-500);       /* #64748B */
+
+    /* Accent → brand tint */
+    --accent:            var(--color-brand-50);      /* #EDF4FD */
+    --accent-foreground: var(--color-brand-900);     /* #0D366D */
+
+    /* Destructive → error */
+    --destructive:            var(--color-red-500);  /* #EF4444 */
+    --destructive-foreground: 0 0% 100%;             /* white */
+
+    /* Borders & inputs → neutral light */
+    --border: var(--color-grey-200);                 /* #B2C1D7 */
+    --input:  var(--color-grey-200);                 /* #B2C1D7 */
+
+    /* Focus ring → brand */
+    --ring:   var(--color-brand-400);                /* #2577E5 */
+
+    /* Border radius */
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: var(--color-grey-900);
+    --foreground: var(--color-grey-50);
+
+    --card:             var(--color-grey-900);
+    --card-foreground:  var(--color-grey-50);
+    --popover:          var(--color-grey-900);
+    --popover-foreground: var(--color-grey-50);
+
+    --primary:            var(--color-brand-400);
+    --primary-foreground: 0 0% 100%;
+
+    --secondary:            var(--color-teal-900);
+    --secondary-foreground: var(--color-teal-50);
+
+    --muted:            var(--color-grey-800);
+    --muted-foreground: var(--color-grey-400);
+
+    --accent:            var(--color-brand-900);
+    --accent-foreground: var(--color-brand-50);
+
+    --destructive:            var(--color-red-700);
+    --destructive-foreground: 0 0% 100%;
+
+    --border: var(--color-grey-800);
+    --input:  var(--color-grey-800);
+    --ring:   var(--color-brand-400);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

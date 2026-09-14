@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patterns · Pulse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand:#2477E5; --brand-hv:#1A6CDB; --brand-lt:#B6D2F6; --brand-bg:#EDF4FD;
+      --bg:#ffffff; --surface:#F4F7FA;
+      --text:#151B23; --text-primary:#1D242B; --text-secondary:#52667A;
+      --text-dim:#6E8AAB; --text-sub:#8DA4BE;
+      --border:#E1E5EA; --card-bg:#ffffff;
+      --r-xl:16px; --r-md:8px; --r-sm:6px;
+    }
+    .dark {
+      --bg:#0D1117; --surface:#161B22; --card-bg:#161B22;
+      --text:#E6EDF3; --text-dim:#7D8590; --text-sub:#3D4450;
+      --border:#30363D; --brand-bg:#0D2444; --brand-lt:#2D5FA0;
+    }
+
+    html, body { height: 100%; }
+    body {
+      font-family: 'Poppins', system-ui, sans-serif;
+      background: var(--bg); color: var(--text);
+      transition: background 0.2s, color 0.2s;
+      display: flex; flex-direction: column;
+    }
+
+    /* ── Nav ─────────────────────────────────────────── */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 60px; flex-shrink: 0;
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--text);
+    }
+    .logo-icon {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: var(--brand);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .logo-icon svg { width: 18px; height: 11px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .logo-wordmark { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; transition: color 0.2s; }
+
+    .nav-links { display: flex; align-items: center; gap: 40px; }
+    .nav-links a {
+      font-size: 14px; font-weight: 400; color: var(--text-dim);
+      text-decoration: none; transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--text); font-weight: 500; }
+
+    .theme-btn {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1.5px solid var(--border); background: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-dim); transition: background 0.15s, border-color 0.15s;
+    }
+    .theme-btn:hover { background: var(--surface); border-color: var(--text-dim); }
+    .theme-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; }
+
+    /* ── Main ─────────────────────────────────────────── */
+    main {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      padding: 48px;
+    }
+
+    .cs-wrap { text-align: center; max-width: 480px; }
+
+    /* Badge */
+    .cs-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--brand-bg); color: var(--brand);
+      font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; padding: 6px 14px;
+      border-radius: 100px; border: 1px solid var(--brand-lt);
+      margin-bottom: 32px;
+    }
+    .cs-badge-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--brand);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.75); }
+    }
+
+    /* Illustration */
+    .cs-illustration {
+      margin: 0 auto 36px;
+      width: 120px; height: 120px; position: relative;
+    }
+    .cs-ring {
+      position: absolute; inset: 0; border-radius: 50%;
+      border: 1.5px dashed var(--border);
+      animation: spin 18s linear infinite;
+    }
+    .cs-ring-inner {
+      position: absolute; inset: 18px; border-radius: 50%;
+      border: 1.5px dashed var(--brand-lt);
+      animation: spin 10s linear infinite reverse;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .cs-icon-wrap {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cs-icon-box {
+      width: 56px; height: 56px;
+      background: var(--brand-bg); border: 1.5px solid var(--brand-lt);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cs-icon-box svg {
+      width: 24px; height: 24px;
+      stroke: var(--brand); fill: none;
+      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .cs-orbit-dot {
+      position: absolute; width: 8px; height: 8px; border-radius: 50%;
+    }
+    .cs-orbit-dot:nth-child(1) { top: 4px; left: 50%; transform: translateX(-50%); background: var(--brand); }
+    .cs-orbit-dot:nth-child(2) { bottom: 4px; left: 50%; transform: translateX(-50%); background: var(--brand-lt); }
+    .cs-orbit-dot:nth-child(3) { left: 4px; top: 50%; transform: translateY(-50%); background: var(--text-sub); }
+
+    /* Text */
+    .cs-title {
+      font-size: 30px; font-weight: 700;
+      letter-spacing: -0.03em; line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .cs-title span { color: var(--brand); }
+    .cs-desc {
+      font-size: 15px; color: var(--text-dim); line-height: 1.7;
+    }
+
+    /* ── Footer ──────────────────────────────────────── */
+    footer {
+      background: #0c0f14;
+      padding: 48px 48px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    footer::before {
+      content: '';
+      position: absolute;
+      width: 480px; height: 300px;
+      background: radial-gradient(ellipse, rgba(39,120,226,0.12) 0%, transparent 70%);
+      top: -80px; left: -60px;
+      pointer-events: none;
+    }
+    footer::after {
+      content: '';
+      position: absolute;
+      width: 360px; height: 260px;
+      background: radial-gradient(ellipse, rgba(16,185,129,0.08) 0%, transparent 70%);
+      bottom: -40px; right: 5%;
+      pointer-events: none;
+    }
+    .footer-links {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+      position: relative; z-index: 1;
+    }
+    .footer-col { display: flex; flex-direction: column; gap: 10px; }
+    .footer-label {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: #3d4856;
+    }
+    .footer-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 15px; font-weight: 600; letter-spacing: -0.02em;
+      color: #c9d4e0; text-decoration: none; width: fit-content;
+      transition: color 0.15s, gap 0.15s;
+    }
+    .footer-link svg {
+      width: 13px; height: 13px; stroke: #3d4856; fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+      flex-shrink: 0; transition: stroke 0.15s, transform 0.2s;
+    }
+    .footer-link:hover { color: #ffffff; gap: 9px; }
+    .footer-link:hover svg { stroke: #2477E5; transform: translate(2px, -2px); }
+    .footer-divider {
+      width: 100%; border: none;
+      border-top: 1px dashed #1e2631;
+      margin-bottom: 22px; position: relative; z-index: 1;
+    }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      position: relative; z-index: 1;
+    }
+    .footer-copy { font-size: 12px; font-weight: 400; color: #3d4856; }
+    .footer-ver {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 12px; font-weight: 500; color: #3d4856; letter-spacing: 0.04em;
+    }
+    .footer-ver-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: #2477E5; opacity: 0.5; flex-shrink: 0;
+    }
+    @media (max-width: 760px) {
+      .footer-links { grid-template-columns: repeat(2, 1fr); }
+      footer { padding: 36px 24px 28px; }
+    }
+    @media (max-width: 480px) {
+      .footer-links { grid-template-columns: 1fr; }
+    }
+
+    /* ── Hamburger / mobile nav ──────────────────────── */
+    .menu-btn {
+      display: none;
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1.5px solid var(--border); background: none; cursor: pointer;
+      align-items: center; justify-content: center;
+      color: var(--text-dim); transition: background 0.15s, border-color 0.15s;
+      flex-shrink: 0;
+    }
+    .menu-btn:hover { background: var(--surface); border-color: var(--text-dim); }
+    .menu-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
+
+    .mobile-nav {
+      display: none;
+      position: fixed; top: 60px; left: 0; right: 0;
+      background: var(--bg); border-bottom: 1px solid var(--border);
+      padding: 12px 16px 16px; z-index: 200;
+      flex-direction: column; gap: 2px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      transition: background 0.2s;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-size: 15px; font-weight: 500; color: var(--text-dim);
+      text-decoration: none; padding: 12px 16px; border-radius: var(--r-md);
+      transition: background 0.12s, color 0.12s;
+    }
+    .mobile-nav a:hover { background: var(--surface); color: var(--text); }
+
+    /* ── Responsive breakpoints ──────────────────────── */
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .menu-btn { display: flex; }
+      main { padding: 32px 20px; }
+      .cs-title { font-size: 24px; }
+      .cs-desc { font-size: 14px; }
+    }
+
+    @media (max-width: 400px) {
+      nav { padding: 0 14px; }
+      main { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ─────────────────────────────────────────── -->
+  <nav>
+    <a class="logo" href="showcase.html">
+      <div class="logo-icon">
+        <svg viewBox="0 0 18 11"><polyline points="0,5.5 3.5,5.5 5.5,1 7.5,10 9.5,3 11.5,8 13.5,5.5 18,5.5"/></svg>
+      </div>
+      <span class="logo-wordmark">Pulse</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="foundations.html">Foundations</a>
+      <a href="components.html">Components</a>
+      <a href="patterns.html" class="active">Patterns</a>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:8px;">
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode">
+        <svg id="icon-sun" viewBox="0 0 24 24" style="display:none;">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/>
+          <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/>
+          <line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg id="icon-moon" viewBox="0 0 24 24">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+        <svg id="menu-icon" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── Mobile nav ────────────────────────────────────── -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="foundations.html">Foundations</a>
+    <a href="components.html">Components</a>
+    <a href="patterns.html">Patterns</a>
+  </div>
+
+  <!-- ── Coming Soon ─────────────────────────────────── -->
+  <main>
+    <div class="cs-wrap">
+
+      <div class="cs-badge">
+        <div class="cs-badge-dot"></div>
+        In Progress
+      </div>
+
+      <div class="cs-illustration">
+        <div class="cs-ring"></div>
+        <div class="cs-ring-inner"></div>
+        <div class="cs-orbit-dot"></div>
+        <div class="cs-orbit-dot"></div>
+        <div class="cs-orbit-dot"></div>
+        <div class="cs-icon-wrap">
+          <div class="cs-icon-box">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="3" width="7" height="7" rx="1"/>
+              <rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/>
+              <rect x="14" y="14" width="7" height="7" rx="1"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <h1 class="cs-title">Patterns are <span>coming soon</span></h1>
+      <p class="cs-desc">
+        We're crafting reusable UI patterns — forms, navigation flows, data tables,
+        and more — built on top of the component library. Check back soon.
+      </p>
+
+    </div>
+  </main>
+
+  <script>
+    const btn  = document.getElementById('themeBtn');
+    const sun  = document.getElementById('icon-sun');
+    const moon = document.getElementById('icon-moon');
+    let dark = localStorage.getItem('ds-dark') === '1';
+    const applyTheme = () => {
+      document.documentElement.classList.toggle('dark', dark);
+      sun.style.display  = dark ? 'block' : 'none';
+      moon.style.display = dark ? 'none'  : 'block';
+    };
+    applyTheme();
+    btn.addEventListener('click', () => {
+      dark = !dark;
+      localStorage.setItem('ds-dark', dark ? '1' : '0');
+      applyTheme();
+    });
+
+    // Mobile hamburger
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    const menuIcon = document.getElementById('menu-icon');
+    menuBtn.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', open);
+      menuIcon.innerHTML = open
+        ? '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>'
+        : '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
+    });
+    document.addEventListener('click', (e) => {
+      if (!menuBtn.contains(e.target) && !mobileNav.contains(e.target)) {
+        mobileNav.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        menuIcon.innerHTML = '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
+      }
+    });
+  </script>
+
+  <!-- ── Footer ─────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-links">
+      <div class="footer-col">
+        <span class="footer-label">LinkedIn</span>
+        <a class="footer-link" href="https://www.linkedin.com/in/abhidesigns/" target="_blank" rel="noopener">
+          /in/abhidesigns
+          <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-label">Portfolio</span>
+        <a class="footer-link" href="https://designerabhishek.framer.website/" target="_blank" rel="noopener">
+          designerabhishek.framer.website
+          <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-label">Dribbble</span>
+        <a class="footer-link" href="https://dribbble.com/abhishekraj031" target="_blank" rel="noopener">
+          abhishekraj031
+          <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-label">Twitter / X</span>
+        <a class="footer-link" href="https://twitter.com/designerabhi" target="_blank" rel="noopener">
+          @designerabhi
+          <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+    </div>
+    <hr class="footer-divider" />
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Abhishek Gupta</span>
+      <span class="footer-ver"><span class="footer-ver-dot"></span>pulse &nbsp;·&nbsp; v 0.1</span>
+    </div>
+  </footer>
+</body>
+</html>
